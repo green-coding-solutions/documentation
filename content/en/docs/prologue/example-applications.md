@@ -1,13 +1,13 @@
 ---
-title : "Measuring our example applications"
-description: "Measuring our provided example applications."
+title : "Example applications"
+description: "Example applications."
 lead: ""
-date: 2022-05-06T08:48:45+00:00
-lastmod: 2020-10-06T08:48:45+00:00
+date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
 ---
 
+## Structure
 All of our example applications the same structure:
 
 ```
@@ -46,16 +46,12 @@ Replace **SERVICE** with the relevant service in the `compose.yml`
 docker build .
 ```
 
-What you get is an image in your `docker images` that can be later used in the [usage_scenario.json →]({{< relref "usage-scenario" >}})
+What you get is an image in your `docker images` that is used in the [usage_scenario.json →]({{< relref "usage-scenario" >}})
 
-## Running a measurement with a Github Repository
+ ## Measuring the example applications
 
-The easiest way to run a measurement is to use our [Green Metrics Frontend](https://metrics.green-coding.org/request.html).
+To run the measurements please refer to: [Measuring locally →]({{< relref "measuring-locally" >}})
 
-Here you can supply the link of our [easiest example application](https://github.com/green-coding-berlin/green-metric-demo-software) and wait
-for an email to arrive to view a report.
+## Containerizing and measuring own applications
 
-This example highlights, that in order to measure an application you really need to only have a repository with a
- [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
-
- ##
+Please refer to [Containerizing and measureing own applications →]({{< relref "containerizing-applications" >}})

@@ -2,8 +2,8 @@
 title: "Green Metrics API"
 description: "Green Metrics API documentation"
 lead: "Green Metrics API documentation"
-date: 2020-11-12T13:26:54+01:00
-lastmod: 2020-11-12T13:26:54+01:00
+date: 2022-06-15T08:49:15+00:00
+lastmod: 2022-06-15T08:49:15+00:00
 draft: false
 images: []
 menu:

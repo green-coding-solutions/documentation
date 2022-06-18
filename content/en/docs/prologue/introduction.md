@@ -2,8 +2,7 @@
 title: "Introduction"
 description: "The Green Metrics Tool is a wholistic framework to measure the energy / co2 of your application."
 lead: "The Green Metrics Tool is a wholistic framework to measure the energy / co2 of your application."
-date: 2020-10-06T08:48:57+00:00
-lastmod: 2020-10-06T08:48:57+00:00
+date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
 menu:
@@ -32,7 +31,7 @@ the concept of how we approach software measurement and how you could measure yo
 ## Measuring your own application
 
 If you rather want to measure your own software please read [Philosophy & Methodology →]({{< relref "philosophy-methodology" >}}) first
-and then go to [Own Applications →]({{< relref "own-applications" >}}).
+and then go to [Containerizing and measuring own applications →]({{< relref "containerizing-applications" >}}).
 
 
 ## Help: FAQ / Troubleshooting

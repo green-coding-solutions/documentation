@@ -2,8 +2,7 @@
 title: "How to Update"
 description: "Regularly pull the repository / rebuild the containers"
 lead: "Regularly pull the repository / rebuild the containers"
-date: 2020-11-12T13:26:54+01:00
-lastmod: 2020-11-12T13:26:54+01:00
+date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
 menu:
