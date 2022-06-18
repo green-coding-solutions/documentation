@@ -2,8 +2,7 @@
 title: "usage_scenario.json specification"
 description: "Specification if the usage_scenario.json"
 lead: ""
-date: 2020-10-06T08:49:15+00:00
-lastmod: 2020-10-06T08:49:15+00:00
+date: 2022-06-04T08:48:45+00:00
 draft: false
 images: []
 ---
