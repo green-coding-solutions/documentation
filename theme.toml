@@ -1,0 +1,14 @@
+name = "Green Metrics Tool Documentation"
+license = ""
+licenselink = ""
+description = "Copyright"
+
+homepage = "https://github.com/green-coding-berlin/green-metrics-tool"
+demosite = "https://metrics.green-coding.org"
+
+tags = ["landing page", "documentation", "blog", "minimal", "modern", "customizable", "search", "dark mode", "bootstrap"]
+features = ["security aware", "fast by default", "seo-ready", "development tools", "bootstrap framework", "netlify-ready", "full text search", "page layouts", "dark mode"]
+
+[author]
+  name = "Arne Tarara"
+  homepage = "https:/www.green-coding.org"
