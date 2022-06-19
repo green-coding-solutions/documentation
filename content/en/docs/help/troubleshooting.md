@@ -22,5 +22,14 @@ toc: true
 ```
 
 ## ERR_NAME_NOT_RESOLVED / DNS_PROBE_POSSIBLE
-
+TODO
 When this error occurs while trying to connecto to a container ....
+
+
+Hostname of container correct? Same network?
+
+Cann access through browser?
+
+## Debug mode
+TODO
+- Add "portmapping" to your usage_scenario.json to access containers through web interface for debugging
