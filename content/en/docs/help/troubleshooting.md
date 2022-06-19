@@ -33,3 +33,8 @@ Cann access through browser?
 ## Debug mode
 TODO
 - Add "portmapping" to your usage_scenario.json to access containers through web interface for debugging
+
+## General tips
+- Always check container logs with `docker compose logs`. Sometimes streaming logs
+does not work that well when orchestrating multiple containers
+and polling the directly gives you all logs.
