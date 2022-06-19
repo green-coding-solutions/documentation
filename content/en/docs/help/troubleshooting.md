@@ -20,3 +20,7 @@ toc: true
 ```
 127.0.0.1 metrics.green-coding.local api.green-coding.local
 ```
+
+## ERR_NAME_NOT_RESOLVED / DNS_PROBE_POSSIBLE
+
+When this error occurs while trying to connecto to a container ....
