@@ -36,4 +36,7 @@ Please do NOT use the [official wordpress container](https://hub.docker.com/_/wo
 for example applications.
 The container is a breeze when you want to start from scratch, but very picky when you want
 to overlay an exisiting filesystem.
-- We recommend using [PHP Official + Apache](https://hub.docker.com/_/php) &raquo; Please use the tag: `php:8.0-apache`
+- We recommend using [PHP Official + Apache](https://hub.docker.com/_/php) &raquo; Please use the tag: `php:8.0-apache`.
+
+To see an example where we use this container and also add some PHP modules / Apache modules have a look
+at our [PHP-Apache Example Application](https://github.com/green-coding-berlin/example-applications/tree/main/apache-mariadb-php)
