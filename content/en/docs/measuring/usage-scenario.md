@@ -41,5 +41,12 @@ Flow handles the actual load testing
 - "commands": An array of objects
 - "commands" -> "type": Only console currently supported
 - "commands" -> "command": The command to be executed. Piping or moving to background is not supported. Note: This command will block execution. If you need parallel execution supply "detach"
+    => Commands have a time-limit. The command may take currently at max 60 seconds and then the execution will be terminated and the measurement aborted.
+    => If your commands take longer you can increase this limit in the config.yml on your local installation
+    => In our Green Metrics Tool online version this limit is currently fixed. You may issue multiple commands though if you like
+    => Be aware that the whole measurement run at the moment may take no longer than 15 minutes.
 - "commands" -> "detach": Detach process True / False (optional)
+    => This functionality is meant to run processes in conjuction to other processes in the same flow. For instance when you want to stress the DB in parallel with a web request
+    => Please note that a detached process cannot be be closed through our flow mechanism. It will only be destroyed upon the end of the flow when the container is spun down or when it ends on its own.
 - "commands" -> "note": A string that will appear as note attached to the datapoint of measurement (optional)
+- "commands" -> "read-notes-stdout": Read notes from the STDOUT of the command. This is helpful if you have a long running command that does multiple steps and you want to log every step.

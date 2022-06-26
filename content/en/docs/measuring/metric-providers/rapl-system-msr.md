@@ -7,4 +7,8 @@ draft: false
 images: []
 ---
 TODO
-Reads from `/dev/cpu/%d/msr`
+- Reads from `/dev/cpu/%d/msr`
+- Code mostly pulled from SOURCE
+- Currently reads out only energy/power-pkg, which gives the whole CPU package energy of all cores
+- Could be extended to caputre DRAM, not available on all platforms => Move this to Joint Research docu project
+
