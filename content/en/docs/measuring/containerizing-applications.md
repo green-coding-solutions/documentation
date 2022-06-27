@@ -27,7 +27,7 @@ We will use wordpress as an example.
 
 Our architecture looks as the following:
 
-<img src="/img/server-architecture-banana.webp" width="509" height="438">
+<img src="/img/server-architecture-banana.webp">
 
 (Since we still had space in the picture we attached a Banana for reference)
 
