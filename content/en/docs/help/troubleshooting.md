@@ -33,8 +33,8 @@ other service serves content on that port. Check your `docker ps -a`
 - Can access the container through browser when mapping the ports to the host OS? (See also debug mode for this)
 -
 ## Debug mode
-- Add the `--debug True` switches to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
-- Add "portmapping" to your usage_scenario.json to access containers through web interface for debugging
+- Add the `--debug` switche to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
+- Add *portmapping* to your [usage_scenario.json →]({{< relref "usage-scenario" >}}) to access containers through web interface for debugging
 
 ## General tips
 - Always check container logs with `docker compose logs`. Sometimes streaming logs

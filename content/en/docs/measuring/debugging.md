@@ -7,7 +7,7 @@ draft: false
 images: []
 ---
 
-The first step in debugging a measurement workflow is to turn the `--debug True`
+The first step in debugging a measurement workflow is to turn the `--debug`
 flag of the Testrunner on.
 
 When you make your call to the `runner.py` when you measure locally
