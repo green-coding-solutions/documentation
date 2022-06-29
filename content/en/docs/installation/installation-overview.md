@@ -7,25 +7,13 @@ draft: false
 images: []
 ---
 
-
-There are two installation methods:
-
-
-
-[Manual installation →]({{< relref "manual-installation" >}})
-[Dockerfile installation →]({{< relref "dockerfile-installation" >}})
-
-In either case, you'll need to have a few things installed on your machine first. Here's a guide on how to get you started.
+First of all, we're going to set up your machine. After that you'll have the chance to choose either the manual or the Docker methods for the remainder of the installation process.
 
 ## Setting up your machine
 
-Installing the toolchain takes about 30 Minutes to 1 hour, depending on linux knowledge.
-
-Important: If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load / reload some configuration and / or daemons.
+If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load / reload some configuration and / or daemons.
 
 The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do) python3 including some packages and docker installed (rootless optional).
-
-We will directly install to /w as the tool should be run on a dedicated node anyway. This is because of the competing resource allocation when run in a shared mode and also because of security concerns.
 
 We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
 
@@ -36,7 +24,7 @@ sudo apt update
 
 sudo apt dist-upgrade -y
 
-sudo apt install postgresql python3 python3-pip gunicorn nginx libpq-dev python-dev postgresql-contrib -y
+sudo apt install python3 python3-pip libpq-dev python-dev -y
 
 sudo pip3 install psycopg2 fastapi "uvicorn[standard]" pandas pyyaml
 ```

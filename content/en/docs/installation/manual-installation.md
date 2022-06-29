@@ -10,6 +10,14 @@ images: []
 
 Having done all the steps as instructed on [Installation Overview →]({{< relref "installation-overview" >}}), you can now proceed to the manual installation of our tool.
 
+## Setting up your machine
+
+```bash
+sudo apt update
+
+sudo apt install postgresql gunicorn nginx postgresql-contrib -y
+```
+
 ## Postgres
 ```bash
 sudo -i -u postgres
