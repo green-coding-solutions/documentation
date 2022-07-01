@@ -103,7 +103,10 @@ Please set an entry in your ```/etc/hosts``` file accordingly like so:
 
 ## Configuring the command line application
 
-Create the file ```/var/www/green-metrics-tool/config.yml``` with the correct Database and SMTP credentials. A sample setup for the file can be found in ```/var/www/green-metrics-tool/config.yml.example```
+- Copy the prepared `config.yml.example` to the live file: `config.yml`.
+    + Then update with the correct Database password and credentials you have set before. In the `config.yml.example` the connections are set by default to the ones from the Dockerfile installation method
+    + SMTP mail sending is by default deactived, so for a quick-start you do not have to change that
+    + The RAPL reporter is by default deactived. Please check the [Metric Providers Documentation](https://docs.green-coding.org/docs/measuring/metric-providers) on how to active it
 
 ### Gunicorn
 

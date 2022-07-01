@@ -21,20 +21,25 @@ Please set an entry in your ```/etc/hosts``` file accordingly like so:
 
 ```bash
 127.0.0.1 api.green-coding.local metrics.green-coding.local
+127.0.0.1 green-coding-postgres-container
 ```
 
 ### Setup
 
-- Open the ```compose.yml.example``` change the default password and save the file as ```compose.yml```
-- Build and run with ```docker compose up```
-- The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: ```docker compose down -v && docker compose up```
-- To start in detached mode just use ```docker compose -d```
+- Open the `docker/compose.yml.example` change the default password and save the file as `docker/compose.yml`
+- Copy the prepared `config.yml.example` to the live file: `config.yml`.
+    + Then update with the correct Database password `docker/compose.yml`
+    + SMTP mail sending is by default deactived, so for a quick-start you do not have to change that
+    + The RAPL reporter is by default deactived. Please check the [Metric Providers Documentation](https://docs.green-coding.org/docs/measuring/metric-providers) on how to active it
+- Build and run in the `docker` directory with `docker compose up`
+- The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
+- To start in detached mode just use `docker compose -d`
 
 ### Connecting to DB
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
 The expose to the host system is not needed. If you do not want to access the db directly just remove the ```5432:5432``` entry in the ```compose.yml``` file.
 
-The database name is ```green-coding```, user is ```postgres```, and the password is what you have specified during the ```compose.yml``` file.
+The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `compose.yml` file.
 
 ### Limitations
 These Dockerfiles are not meant to be used in production. The reason for this is that the containers depend on each other and have to be started and stopped alltogether, and never on their own.
@@ -42,9 +47,9 @@ These Dockerfiles are not meant to be used in production. The reason for this is
 
 ## Architecture explanation:
 - The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
-- The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user ```www-data``` to read and write to
-a UNIX socket in ```/tmp```
+- The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to
+a UNIX socket in `/tmp`
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull / yourself
 without having to rebuild the docker image.
-- postgresql can detect changes to the structure.sql. If you issue a ```docker compose down -v``` the attached volume will be cleared and the postgres container
+- postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container
 will import the database structure fresh.
