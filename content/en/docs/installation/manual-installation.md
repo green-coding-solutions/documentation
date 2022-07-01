@@ -186,19 +186,19 @@ Run this command as the user for which docker is configured: ```crontab -e```
 Then install following cron for ```root``` to run job every 15 min:
 
 ```bash
-*/15 * * * * python3 /var/www/green-metrics-tool/tools/runner.py cron
+* * * * * python3 /var/www/green-metrics-tool/tools/runner.py cron
 ```
 
 If you have no MTA installed you can also pipe the output to a specific file like so:
 
 ```bash
-*/15 * * * * python3 /var/www/green-metrics-tool/tools/runner.py cron 2>&1 >> /var/log/cron-green-metric.log
+* * * * * python3 /var/www/green-metrics-tool/tools/runner.py cron 2>&1 >> /var/log/cron-green-metric.log
 ```
 
 If you have docker configured to run in rootless mode be sure to issue the exports for the cron command beforehand. A cronjob in the ```crontab -e``` of the non-root may look similar to this one:
 
 ```bash
-DOCKER_HOST=unix:///run/user/1000/docker.sock */5 * * * * export PATH=/home/USERNAME/bin:$PATH; python3 /var/www/green-metrics-tool/tools/runner.py cron 2>&1 >> /var/log/cron-green-metric.log
+DOCKER_HOST=unix:///run/user/1000/docker.sock * * * * * export PATH=/home/USERNAME/bin:$PATH; python3 /var/www/green-metrics-tool/tools/runner.py cron 2>&1 >> /var/log/cron-green-metric.log
 ```
 
 Also make sure that ```/var/log/cron-green-metric.log``` is writeable by the user:
@@ -214,5 +214,6 @@ Depending on how often you run the cronjob and how long your jobs are the cronjo
 On a typical Linux system you can use timeout / flock to prevent this. This example creates a exclusive lock and timeouts to 4 minutes
 
 ```bash
-DOCKER_HOST=unix:///run/user/1000/docker.sock */5 * * * * export PATH=/home/USERNAME/bin:$PATH ; timeout 240s flock -nx /var/lock/greencoding-runner python3 /var/www/green-metrics-tool/tools/runner.py cron 2>&1 >> /var/log/cron-green-metric.log
+DOCKER_HOST=unix:///run/user/1000/docker.sock
+* * * * * export PATH=/home/USERNAME/bin:$PATH ; timeout 240s flock -nx /var/lock/greencoding-runner python3 /var/www/green-metrics-tool/tools/runner.py cron 2>&1 >> /var/log/cron-green-metric.log
 ```
