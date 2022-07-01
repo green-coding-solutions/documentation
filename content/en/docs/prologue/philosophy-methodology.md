@@ -21,32 +21,6 @@ Most modern applications are already containerized or can be easily brought into
 
 Therefore the Green Metrics Tool is designed to only measure containerized applications.
 
-## Honorable mentions, Differences and USPs
-
-The Green Metrics Tool boroughs the concept of *Standard Usage Scenarios* from the [Blauer Engel](https://www.blauer-engel.de/en/productworld/resources-and-energy-efficient-software-products) / [KDE Team](https://eco.kde.org).
-We also believe that they provide the best approach to understand how an application
-would typically behave under real-world usecases.
-
-Therefore we create every measurement by providing the architecture of the software and the flow
-that the software shall execute in such a [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
-
-The difference here is that we focus on application architectures which are modular / distributed
-and provide a more wholistic apporoach in also delivering and Open Data API and Web Frontend to display the metrics in charts.
-
-### Greenframe.io
-Our tool is also inspired by [Greenframe.io](https://www.greenframe.io) with the difference of the code
-being fully free and open-source (FOSS), all data generated as Open Data and supporting terminal applications like
-ML / AI tools and also plans to support Desktop applications.
-
-Also the formulas for measurement are fully visible and to be falsified by anyone, which is not the case for Greenframe.io as they
-use a proprietetary calculation model.
-
-### Scaphandre and per-process measurement
-We also believe that per-process measurement is not the way to go to get a qualitative view of a whole application
-as the boundaries should be drawn on the container level which provide the logical abstraction level.
-
-{{< alert icon="👉" text="If you however have these needs to measure processese please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which does a better job on this use-case than our tool." />}}
-
 
 ## Architecture & Technology
 
@@ -97,3 +71,30 @@ Also the tools to measure must be free and open-source (FOSS).
 To however compare one measurement with another we believe that you cannot change the underlying hardware.
 
 Therefore we provide a central repository for all the measurements we make: [Green Metrics Frontend](https://metrics.green-coding.org)
+
+## Honorable mentions, Differences and USPs
+
+The Green Metrics Tool boroughs the concept of *Standard Usage Scenarios* from the [Blauer Engel](https://www.blauer-engel.de/en/productworld/resources-and-energy-efficient-software-products) / [KDE Team](https://eco.kde.org).
+We also believe that they provide the best approach to understand how an application
+would typically behave under real-world usecases.
+
+Therefore we create every measurement by providing the architecture of the software and the flow
+that the software shall execute in such a [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
+
+The difference here is that we focus on application architectures which are modular / distributed
+and provide a more wholistic apporoach in also delivering and Open Data API and Web Frontend to display the metrics in charts.
+
+### Greenframe.io
+Our tool is also inspired by [Greenframe.io](https://www.greenframe.io) with the difference of the code
+being fully free and open-source (FOSS), all data generated as Open Data and supporting terminal applications like
+ML / AI tools and also plans to support Desktop applications.
+
+Also the formulas for measurement are fully visible and to be falsified by anyone, which is not the case for Greenframe.io as they
+use a proprietetary calculation model.
+
+### Scaphandre and per-process measurement
+We also believe that per-process measurement is not the way to go to get a qualitative view of a whole application
+as the boundaries should be drawn on the container level which provide the logical abstraction level.
+
+{{< alert icon="👉" text="If you however have these needs to measure processese please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which does a better job on this use-case than our tool." />}}
+
