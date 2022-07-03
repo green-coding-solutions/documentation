@@ -15,17 +15,18 @@ The Dockerfiles will provide you with a running setup of the working system with
 
 It can technically be used in production, however it is designed to run on your local machine for testing purposes.
 
-The system binds in your host OS to port 8000. So it will be accessible through ```http://metrics.green-coding.local:8000```
+The system binds in your host OS to port 8000. So it will be accessible through `http://metrics.green-coding.local:8000`
 
-Please set an entry in your ```/etc/hosts``` file accordingly like so:
+
+### Setup
+
+Please set an entry in your `/etc/hosts` file accordingly like so:
 
 ```bash
 127.0.0.1 api.green-coding.local metrics.green-coding.local
 127.0.0.1 green-coding-postgres-container
 ```
-
-### Setup
-
+Then:
 - Open the `docker/compose.yml.example` change the default password and save the file as `docker/compose.yml`
 - Copy the prepared `config.yml.example` to the live file: `config.yml`.
     + Then update with the correct Database password `docker/compose.yml`
@@ -37,13 +38,41 @@ Please set an entry in your ```/etc/hosts``` file accordingly like so:
 
 ### Connecting to DB
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
-The expose to the host system is not needed. If you do not want to access the db directly just remove the ```5432:5432``` entry in the ```compose.yml``` file.
+The expose to the host system is not needed. If you do not want to access the db directly just remove the `5432:5432` entry in the `compose.yml` file.
 
 The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `compose.yml` file.
 
-### Limitations
-These Dockerfiles are not meant to be used in production. The reason for this is that the containers depend on each other and have to be started and stopped alltogether, and never on their own.
+### Restarting Docker containers on system reboot
 
+We recommend `systemd`. Please use the following service file and change the **USERNAME** and **GROUPNAME** accordingly to the ones on your system:
+
+```systemd
+[Unit]
+Description=Docker Compose for all our services
+After=network.target
+
+[Service]
+Type=simple
+User=USERNAME
+Group=GROUPNAME
+ExecStart=/home/USERNAME/startup-docker.sh
+Restart=never
+
+[Install]
+WantedBy=multi-user.target
+```
+
+As you can see *Restart* is set to never. The reason is, that the docker dameon will restart the containers by itself. The `systemd` script is only needed
+to start the container once on reboot.
+
+As you can see we also reference the `/home/USERNAME/startup-docker.sh` file which `systemd` expects to be in your home directory.
+
+Please create the following file in your home directory and change **PATH_TO_GREEN_METRICS_TOOL** accordingly:
+```bash
+#!/bin/bash
+docker context use rootless
+/home/USERNAME/bin/docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
+```
 
 ## Architecture explanation:
 - The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
@@ -53,3 +82,7 @@ a UNIX socket in `/tmp`
 without having to rebuild the docker image.
 - postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container
 will import the database structure fresh.
+
+
+## Limitations
+These Dockerfiles are not meant to be used in production. The reason for this is that the containers depend on each other and have to be started and stopped alltogether, and never on their own.
