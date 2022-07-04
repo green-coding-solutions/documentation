@@ -2,13 +2,8 @@
 title: "Introduction"
 description: "The Green Metrics Tool is a wholistic framework to measure the energy / co2 of your application."
 lead: "The Green Metrics Tool is a wholistic framework to measure the energy / co2 of your application."
-date: 2022-06-18T08:49:15+00:00
+date: 2022-06-15T08:49:15+00:00
 draft: false
-images: []
-menu:
-  docs:
-    parent: "prologue"
-weight: 100
 toc: true
 ---
 
@@ -16,6 +11,8 @@ It is comprised of:
 - An Open Data API to retrieve metrics
 - A web frontend that displays the Open Data in some nice charts
 - A Python backend that handles running the tests
+
+<img src="/img/green_metrics_dashboard.webp">
 
 
 ## Getting to know the Green Metrics Tool
@@ -28,12 +25,12 @@ of *WHAT* the tool does and *HOW*.
 
 From here you can branch off in two paths:
 
-### Measure your own app with our online measurement service
+### Measure your own app with our online hosted service
 
-[Quick Start →]({{< relref "quick-start" >}}) 
+[Measuring with our hosted service →]({{< relref "measuring-service" >}}) 
 
 This is a one page summary of how to measure a sample application.
-{{< alert icon="👉" text="The Quick Start is intended to get you up and running quickly to measure one of your example applications" />}}
+{{< alert icon="👉" text="This Quick Start is intended to give you an idea how the tool works and how a consumeable application looks like" />}}
 
 After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly consumed.
 
@@ -48,6 +45,8 @@ how to prepare your app to be consumed by the Green Metrics Tool.
 
 Then be sure to read the [usage_scenario.json →]({{< relref "usage-scenario" >}}) specification to get to know the flexibility of 
 our tool to measure your application.
+
+Then proceed to [Measuring Locally]({{< relref "measuring-locally" >}})
 
 
 ## Help: FAQ / Troubleshooting

@@ -9,7 +9,7 @@ menu:
   docs:
     parent: "help"
 weight: 610
-toc: false
+toc: true
 ---
 
 
@@ -23,6 +23,7 @@ If you run the containers without overlaying your local filesystem they will not
 {{< alert icon="💡" text="You can also go inside the container and check out the github repository manually and then restart the container, but we discourage this approach, as it would not pick up changes to the server configuration itself." />}}
 
 
-## Read our development blog
+## Read our company blog
 
-We will soon start our development blog. Stay tuned for more infos / links to this one ...
+If we introduce breaking changes or release new major versions we will post it there: [Company Blog](https://www.green-coding.org/blog)
+

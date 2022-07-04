@@ -22,6 +22,8 @@ When you are getting an unexpected result when accessing localhost / \*.local do
 
 ```
 127.0.0.1 metrics.green-coding.local api.green-coding.local
+127.0.0.1 green-coding-postgres-container
+
 ```
 - It could be that you have other containers running and the port is overloaded, so that some
 other service serves content on that port. Check your `docker ps -a`
@@ -31,11 +33,10 @@ other service serves content on that port. Check your `docker ps -a`
 - Hostname of container correct? `docker ps` tells you the container name, which is also the hostname
 - Are the containers on the same network? Check with `docker inspect CONTAINER_ID`
 - Can access the container through browser when mapping the ports to the host OS? (See also debug mode for this)
--
-## Debug mode
-- Add the `--debug` switche to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
-- Add *portmapping* to your [usage_scenario.json →]({{< relref "usage-scenario" >}}) to access containers through web interface for debugging
+
 
 ## General tips
 - Always check container logs with `docker compose logs`. Sometimes streaming logs
 does not work that well when orchestrating multiple containers and polling the directly gives you all logs.
+- Add the `--debug` switche to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
+- Add `--unsafe` to the call to `runner.py` and *portmapping* to your [usage_scenario.json →]({{< relref "usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.

@@ -1,8 +1,8 @@
 ---
-title: "usage_scenario.json specification"
-description: "Specification if the usage_scenario.json"
+title: "usage_scenario.yml"
+description: "Specification of the usage_scenario.yml file"
 lead: ""
-date: 2022-06-04T08:48:45+00:00
+date: 2022-06-17T08:48:45+00:00
 draft: false
 images: []
 ---

@@ -2,13 +2,8 @@
 title: "Philosophy & Methodology"
 description: "How we approach the measurement of softwares energy use."
 lead: "How we approach the measurement of softwares energy use."
-date: 2022-06-18T08:49:15+00:00
+date: 2022-06-14T08:49:15+00:00
 draft: false
-images: []
-menu:
-  docs:
-    parent: "prologue"
-weight: 110
 toc: true
 ---
 
