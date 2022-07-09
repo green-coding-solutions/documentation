@@ -20,18 +20,20 @@ The system binds in your host OS to port 8000. So it will be accessible through 
 
 ### Setup
 
-Please set an entry in your `/etc/hosts` file accordingly like so:
+Please run the `install.sh` script in the root folder.
 
-```bash
-127.0.0.1 api.green-coding.local metrics.green-coding.local
-127.0.0.1 green-coding-postgres-container
-```
-Then:
-- Open the `docker/compose.yml.example` change the default password and save the file as `docker/compose.yml`
-- Copy the prepared `config.yml.example` to the live file: `config.yml`.
-    + Then update with the correct Database password `docker/compose.yml`
-    + SMTP mail sending is by default deactived, so for a quick-start you do not have to change that
-    + The RAPL reporter is by default deactived. Please check the [Metric Providers Documentation](https://docs.green-coding.org/docs/measuring/metric-providers) on how to active it
+This script will:
+- Set the database password for the containers
+- Create the needed `/etc/hosts` entries for development
+- Build the binaries for the Metric Providers
+- Add entries in the `/etc/sudoers` file to start some metric reporters without prompting passwords
+    + This is needed, since some metrics can only be read as `root` and we do not want to run the whole measurement as root. Only the spawned processes for the Metric Reporters
+
+What you might want to add:
+- SMTP mail sending is by default deactived, so for a quick-start you do not have to change that in the `config.yml`
+- The RAPL reporter is by default deactived. Please check the [Metric Providers Documentation](https://docs.green-coding.org/docs/measuring/metric-providers) on how to active it
+
+After that you can start the containers:
 - Build and run in the `docker` directory with `docker compose up`
 - The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
 - To start in detached mode just use `docker compose -d`

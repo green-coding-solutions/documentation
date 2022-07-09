@@ -22,11 +22,11 @@ git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/gre
 
 sudo apt update
 
-sudo apt dist-upgrade -y
+sudo apt upgrade -y
 
-sudo apt install python3 python3-pip libpq-dev python-dev -y
+sudo apt install python3 python3-pip libpq-dev -y
 
-sudo pip3 install psycopg2 fastapi "uvicorn[standard]" pandas pyyaml
+sudo pip3 install psycopg2 pandas pyyaml
 ```
 
 The sudo in the last command is very important, as it will tell pip to install to /usr directory instead to the home directory. So we can find the package later with other users on the system. If you do not want that use a venv in Python.

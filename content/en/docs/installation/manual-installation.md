@@ -15,7 +15,7 @@ Having done all the steps as instructed on [Installation Overview →]({{< relre
 ```bash
 sudo apt update
 
-sudo apt install postgresql gunicorn nginx postgresql-contrib -y
+sudo apt install postgresql gunicorn fastapi "uvicorn[standard]" nginx postgresql-contrib -y
 ```
 
 ## Postgres
