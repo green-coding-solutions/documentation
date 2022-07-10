@@ -46,7 +46,9 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 
 ### Restarting Docker containers on system reboot
 
-We recommend `systemd`. Please use the following service file and change the **USERNAME** and **GROUPNAME** accordingly to the ones on your system:
+We recommend `systemd`. Please use the following service file and change the **USERNAME** and **GROUPNAME** accordingly to the ones on your system.
+
+The file will be installed to: `/etc/systemd/system/green-coding-service.service`
 
 ```systemd
 [Unit]
@@ -73,7 +75,7 @@ Please create the following file in your home directory and change **PATH_TO_GRE
 ```bash
 #!/bin/bash
 docker context use rootless
-/home/USERNAME/bin/docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
+docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 ```
 
 ## Architecture explanation:
