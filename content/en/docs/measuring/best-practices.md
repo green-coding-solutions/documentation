@@ -12,3 +12,5 @@ Best Practices.md
   on 10 ms resolution.
 - Keep the resolution of all metric reporters identical. This allows for easier 
   data drill-down later.
+
+  Practices: 5 secpnds idle, 1 minute burn in, Factor in idle time, measurement start is signaled in data

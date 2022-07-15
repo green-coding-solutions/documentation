@@ -31,6 +31,15 @@ These are small UNIX-style programs that typically reporty only one metric direc
 
 This keeps the profile of the measurement extremly low and makes the *Metric Reporters* versatily and reuasable.
 
+We support many different varieties of reporters like:
+- Memory per Container
+- CPU % per Container
+- CPU Time per Container
+- Energy System Wide
+- Network Traffic
+- DC Energy of System (TBD 2022)
+- ...
+
 ### Reusability of Infrastructure as Code
 
 We want to reuse infrastructure files as best as possible.
@@ -43,7 +52,7 @@ additional options to run the container, which are very helpful in terms of reus
 For instance you can run an `apt install` to install one missing tool in a standard `ubuntu` container without
 having the need to create a new image on DockerHub.
 
-However we cannot allow the full options of `docker compose` as this would allow to mount arbitrary volumes
+However we do not allow the full options of `docker compose` as this would allow to mount arbitrary volumes
 on our measurement machines or even run in `--priviledged` mode.
 
 ## Energy measurement
@@ -55,6 +64,7 @@ The interface is typically called *RAPL* (Running average power limit) and was i
 
 To falsify these measurements we also provide the option to get the DC and AC power readings from our
 measurement machines for you.
+
 
 ## Reproducibility & Open Data
 

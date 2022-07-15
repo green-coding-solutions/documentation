@@ -7,8 +7,17 @@ draft: false
 toc: true
 ---
 
+The Green Metrics Tool can orchestrate your application by consuming what we call
+the [usage_scenario.json →]({{< relref "usage-scenario" >}}).
 
-TODO
+This files includes your architecture specification as well as the flow of how to 
+interact with the application.
+
+After orchestrating all the services with their respective containers the Green Metrics Tool
+attaches the *Metric Reporters* to the containers.
+The *Metric Reporters* are to be understood as 
+<img src="/img/green-metrics-tool-orchestration.webp">
+
 
 - [usage_scenario.json →]({{< relref "usage-scenario" >}}) file is read
 - Containers are downloaded from Docker Hub or from local docker cache

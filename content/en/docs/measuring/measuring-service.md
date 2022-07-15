@@ -18,4 +18,4 @@ for an email to arrive to view a report.
 This example highlights, that in order to measure an application you really need to only have a repository with a
  [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
 
-<img src="/img/add_new_project.webp">
+<img src="/img/add-new-project.webp">
