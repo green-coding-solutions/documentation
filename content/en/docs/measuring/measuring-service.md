@@ -16,6 +16,6 @@ Here you can supply the link of our [easiest example application](https://github
 for an email to arrive to view a report.
 
 This example highlights, that in order to measure an application you really need to only have a repository with a
- [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
+ [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
 
 <img src="/img/add-new-project.webp">

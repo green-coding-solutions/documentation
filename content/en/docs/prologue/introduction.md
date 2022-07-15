@@ -34,7 +34,7 @@ This is a one page summary of how to measure a sample application.
 
 After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly consumed.
 
-Your app must conform to the [usage_scenario.json →]({{< relref "usage-scenario" >}}) specification and be [Containerized →]({{< relref "containerizing-applications" >}})
+Your app must conform to the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) specification and be [Containerized →]({{< relref "containerizing-applications" >}})
 
 
 ### Install and measure locally
@@ -43,7 +43,7 @@ Under [Installation →]({{< relref "installation-overview" >}}) you find the de
 Then proceed with [Containerizing and measuring own applications →]({{< relref "containerizing-applications" >}}) to understand
 how to prepare your app to be consumed by the Green Metrics Tool.
 
-Then be sure to read the [usage_scenario.json →]({{< relref "usage-scenario" >}}) specification to get to know the flexibility of 
+Then be sure to read the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) specification to get to know the flexibility of 
 our tool to measure your application.
 
 Then proceed to [Measuring Locally]({{< relref "measuring-locally" >}})

@@ -12,7 +12,7 @@ through the Green Metrics Tool.
 
 We provide an example for a terminal application, as well as for a web application.
 
-The result will be a `usage_scenario.json` file. ([Specification →]({{< relref "usage-scenario" >}}))
+The result will be a `usage_scenario.yml` file. ([Specification →]({{< relref "usage-scenario" >}}))
 
 ## Command line app
 

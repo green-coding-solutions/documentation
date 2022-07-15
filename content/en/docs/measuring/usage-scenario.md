@@ -9,7 +9,7 @@ images: []
 
 # TODO
 
-In the setup part of our [usage_scenario.json →]({{< relref "usage-scenario" >}}) you can however provide
+In the setup part of our [usage_scenario.yml →]({{< relref "usage-scenario" >}}) you can however provide
 additional options to run the container, which are very helpful in terms of reusing other peoples containers.
 For instance you can run an `apt install` to install one missing tool in a standard `ubuntu` container without
 having the need to create a new image on DockerHub.

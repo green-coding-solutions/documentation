@@ -174,7 +174,7 @@ Then reload all: ```sudo systemctl restart nginx```
 
 First you have to create a project through the web interface, so the cron runner will pick it up from the database.
 
-Go to [http://metrics.green-coding.local:8000/request.html](http://metrics.green-coding.local:8000/request.html) Note: You must enter a Github Repo URL with a repository that has the usage_scenario.json in a valid format. Consult [Github Repository for the Demo software](https://github.com/green-coding-berlin/green-metric-demo-software) for more info
+Go to [http://metrics.green-coding.local:8000/request.html](http://metrics.green-coding.local:8000/request.html) Note: You must enter a Github Repo URL with a repository that has the `usage_scenario.yml` in a valid format. Consult [Github Repository for the Demo software](https://github.com/green-coding-berlin/green-metric-demo-software) for more info
 
 After creating project run:
 

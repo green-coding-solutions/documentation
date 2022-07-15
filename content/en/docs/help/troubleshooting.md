@@ -39,4 +39,6 @@ other service serves content on that port. Check your `docker ps -a`
 - Always check container logs with `docker compose logs`. Sometimes streaming logs
 does not work that well when orchestrating multiple containers and polling the directly gives you all logs.
 - Add the `--debug` switche to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
-- Add `--unsafe` to the call to `runner.py` and *portmapping* to your [usage_scenario.json →]({{< relref "usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
+- Add `--unsafe` to the call to `runner.py` and *portmapping* to your [usage_scenario.yml →]({{< relref "usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
+- Rebuild the containers with `docker compose down -v` and then `docker compose up -d`
+- Re-run the `install.sh` script to get new configuration changes that you maybe have not yet applied after an update

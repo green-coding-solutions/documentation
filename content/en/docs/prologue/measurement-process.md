@@ -8,7 +8,7 @@ toc: true
 ---
 
 The Green Metrics Tool can orchestrate your application by consuming what we call
-the [usage_scenario.json →]({{< relref "usage-scenario" >}}).
+the [usage_scenario.yml →]({{< relref "usage-scenario" >}}).
 
 This files includes your architecture specification as well as the flow of how to 
 interact with the application.
@@ -19,12 +19,12 @@ The *Metric Reporters* are to be understood as
 <img src="/img/green-metrics-tool-orchestration.webp">
 
 
-- [usage_scenario.json →]({{< relref "usage-scenario" >}}) file is read
+- [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file is read
 - Containers are downloaded from Docker Hub or from local docker cache
-- Containers are orchestrated connected to each other according to the **setup** part in the [usage_scenario.json →]({{< relref "usage-scenario" >}})
+- Containers are orchestrated connected to each other according to the **setup** part in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
 - 5 Seconds Idle
 - Attaching of the [Metric Providers →]({{< relref "metric-providers-overview" >}})
-- **flow** part of the [usage_scenario.json →]({{< relref "usage-scenario" >}}) is run. This part of the [usage_scenario.json →]({{< relref "usage-scenario" >}}) contains
+- **flow** part of the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) is run. This part of the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) contains
  the commands that are executed on the containers.
     + This can be: 
         * A Webbrowser interacting with the webserver container

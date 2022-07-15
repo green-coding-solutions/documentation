@@ -47,7 +47,7 @@ We want to reuse infrastructure files as best as possible.
 Therefore our tools consumes ready-built containers and can will also be able to consume Kubernetes
 infrastructure files.
 
-In the setup part of our [usage_scenario.json →]({{< relref "usage-scenario" >}}) you can however provide
+In the setup part of our [usage_scenario.yml →]({{< relref "usage-scenario" >}}) you can however provide
 additional options to run the container, which are very helpful in terms of reusing other peoples containers.
 For instance you can run an `apt install` to install one missing tool in a standard `ubuntu` container without
 having the need to create a new image on DockerHub.
@@ -84,7 +84,7 @@ We also believe that they provide the best approach to understand how an applica
 would typically behave under real-world usecases.
 
 Therefore we create every measurement by providing the architecture of the software and the flow
-that the software shall execute in such a [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
+that the software shall execute in such a [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
 
 The difference here is that we focus on application architectures which are modular / distributed
 and provide a more wholistic apporoach in also delivering and Open Data API and Web Frontend to display the metrics in charts.

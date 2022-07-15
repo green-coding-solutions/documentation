@@ -45,9 +45,9 @@ docker compose up -d
 cd /tmp
 mkdir easiest-application
 cd easiest-application
-touch usage_scenario.json
+touch usage_scenario.yml
 ```
-Now please copy the following code inside the usage_scenario.json.
+Now please copy the following code inside the usage_scenario.yml.
 ```json
 {
     "name": "Stress Container One Core 5 Seconds",
@@ -148,10 +148,10 @@ Now you can use the `runner.py` tool to trigger a run of the tool manually.
 \
 An example call would be like so: `runner.py manual --folder /path/to/my_demo_software --name My_Name`
 
-The tool expects a `usage_scenario.json` inside of that folder. It will read it, orchestrate the containers
+The tool expects a `usage_scenario.yml` inside of that folder. It will read it, orchestrate the containers
 and give you the ID of the run.
 
-If you have questions regarding how to create a `usage_scenario.json` please see: https://github.com/green-coding-berlin/green-metric-demo-software
+If you have questions regarding how to create a `usage_scenario.yml` please see: https://github.com/green-coding-berlin/green-metric-demo-software
 
 To see a working live example with some metrics go to: https://metrics.green-coding.org/
 
@@ -167,9 +167,9 @@ This allows you to enter the containers and debug them if necessary.
 Append the `--unsafe` flag to allow:
 - Arbitrary volume bindings into the containers. They are still read-only though
 - Portmappings to the host OS. 
-    + See [usage_scenario.json →]({{< relref "usage-scenario" >}}) **portmappings** option for details
+    + See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **portmappings** option for details
 - Non-Strict ENV vars mapped into container
-     + See [usage_scenario.json →]({{< relref "usage-scenario" >}}) **env** option for details
+     + See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **env** option for details
 
 ## No File Cleanup
 Append `--no-file-cleanup` to keep the metric provider data in `/tmp/green-metrics-tool`
