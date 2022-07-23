@@ -22,6 +22,10 @@ If you run the containers without overlaying your local filesystem they will not
 
 {{< alert icon="💡" text="You can also go inside the container and check out the github repository manually and then restart the container, but we discourage this approach, as it would not pick up changes to the server configuration itself." />}}
 
+## Re-Run the install script
+
+After every new `git pull` you should run the `install.sh` script to get the newest binaries and configuration params for 
+the Green Metrics Tool.
 
 ## Read our company blog
 

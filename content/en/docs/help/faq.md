@@ -24,6 +24,14 @@ toc: true
 
 - [API](https://api.green-coding.org)
 
+## Where can I get the lastest features
+- Look at our [dev branch](https://github.com/green-coding-berlin/green-metrics-tool/tree/dev). As soon as some of our feature branches reach a "ready for developers" level we merge them into this branch.
+    + We do not recommend to check out the feature branches, as they may contain a broken state / WIP
+
+## Do you provide sample data / CSV exports
+- We do provide [sample data on Github](https://github.com/green-coding-berlin/sample-data). 
+    + Since we use postgresql, it is in this format. We co not provide CSV.
+
 ## Can I get support?
 
 Yes, please write us an email or open a Bug report on Github

@@ -1,7 +1,7 @@
 ---
 title: "Containerizing own applications"
-description: "TODO"
-lead: "TODO"
+description: ""
+lead: ""
 date: 2022-06-16T07:49:15+00:00
 draft: false
 images: []
@@ -162,21 +162,3 @@ Have a look at the tutorial on: [Interacting with application →]({{< relref "i
 Afterwards run the measurements: [Measuring locally →]({{< relref "measuring-locally" >}})
 
 To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/example-applications/tree/main/wordpress-mariadb-data)
-
-## Alternative way to containerize web app
-
-This alternative path is special to the Green Metrics Tool.
-
-The resulting container images rely on the functionality that a volume can be attached
-at runtime.
-This is NOT possible on typical docker hosting services and will impact the reusability
-of the resulting image.
-
-Nevertheless it is very helpful in development, as it saves from having too many
-images floating around.
-
-
-TODO
-Via Mounts!
-
-
