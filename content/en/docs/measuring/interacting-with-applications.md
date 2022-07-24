@@ -7,6 +7,11 @@ draft: false
 images: []
 ---
 
+
+Content: 
+- How to write a flow
+- What a flow access
+- 
 We will here guide you through the concept of interacting with the containers
 through the Green Metrics Tool.
 
@@ -18,72 +23,41 @@ The result will be a `usage_scenario.yml` file. ([Specification →]({{< relref 
 
 TODO
 
-```json
-
+```yaml
+flow:
+- name: Check Website
+  container: green-coding-puppeteer-container
+  commands:
+  - type: console
+    command: node /var/www/puppeteer-flow.js
+    note: Starting Pupeteer Flow
+    read-notes-stdout: true
+  - type: console
+    command: sleep 30
+    note: Idling
+  - type: console
+    command: node /var/www/puppeteer-flow.js
+    note: Starting Pupeteer Flow again
+    read-notes-stdout: true
 ```
 
 ## Web app
-```json
-{
-    "name": "Wordpress Data Puppeteer Scenario",
-    "author": "Arne Tarara",
-    "version": 1,
-    "architecture": "linux",
-    "setup": [
-        {
-            "type": "network",
-            "name": "my-network"
-        },
-        {
-          "name": "mariadb-container",
-          "type": "container",
-          "identifier": "wordpress-mariadb-data_db",
-          "env": {
-            "MYSQL_ROOT_PASSWORD": "somewordpress",
-            "MYSQL_DATABASE": "wordpress",
-            "MYSQL_USER": "wordpress",
-            "MYSQL_PASSWORD": "wordpress"
-          },
-          "network": "my-network"
-        },
-        {
-          "name": "green-coding-wordpress-apache-data-container",
-          "type": "container",
-          "identifier": "wordpress-mariadb-data_wordpress",
-          "env": {
-              "WORDPRESS_DB_HOST": "green-coding-wordpress-mariadb-data-container",
-              "WORDPRESS_DB_USER": "wordpress",
-              "WORDPRESS_DB_PASSWORD": "wordpress",
-              "WORDPRESS_DB_NAME": "wordpress"
-          },
-          "network": "my-network",
-          "folder-destination": "/tmp/repo",
-          "setup-commands": [
-              "cp /tmp/repo/wordpress.conf /etc/apache2/sites-enabled/wordpress.conf",
-              "cp -R /tmp/repo/html /var/www/wordpress-green-coding"
-          ]
-        },
-        {
-            "name": "green-coding-puppeteer-container",
-            "type": "container",
-            "identifier": "puppeteer_green-coding-puppeteer",
-            "setup-commands": ["cp /tmp/repo/puppeteer-flow.js /var/www/puppeteer/puppeteer-flow.js"],
-            "network": "my-network"
-        }
-    ],
-    "flow": [
-        {
-            "name": "Check Website",
-            "container": "green-coding-puppeteer-container",
-            "commands": [
-                {
-                    "type": "console",
-                    "command": "node /var/www/puppeteer/puppeteer-flow.js"
-                }
-            ]
-        }
-    ]
-}
+```yaml
+flow:
+- name: Check Website
+  container: green-coding-puppeteer-container
+  commands:
+  - type: console
+    command: node /var/www/puppeteer-flow.js
+    note: Starting Pupeteer Flow
+    read-notes-stdout: true
+  - type: console
+    command: sleep 30
+    note: Idling
+  - type: console
+    command: node /var/www/puppeteer-flow.js
+    note: Starting Pupeteer Flow again
+    read-notes-stdout: true
 ```
 
 If you came here from the [Containerizing Applications →]({{< relref "containerizing-applications" >}}) Tutorial

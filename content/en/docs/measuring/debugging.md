@@ -7,6 +7,7 @@ draft: false
 images: []
 ---
 
+## Debugging containers or runner.py itself
 The first step in debugging a measurement workflow is to turn the `--debug`
 flag of the `runner.py` on.
 
@@ -24,10 +25,17 @@ docker exec -it MY_CONTAINER_NAME bash
 Some container do not have `bash`. However `sh`, which has less capabilities though,
 should in most cases be available.
 
-## Adding unsafe mode
+## Debbuging containers via HTTP / exposed ports
 
-The `--unsafe` flag of the `runner.py` allows for:
-- Portmapping exposed ports from the container to the host OS
-    + This is helpful if you for example have a webservice container or API and would like to check with the browser if the container is correctly orchestrated
-- Allows arbitrary volume mounts
-    + On our hosted service volume mounts are blocked due to security concerns. In local mode however you can bind shared volumes to the containers
+If entering the container looks fine and you need to access them through some of their
+exposed ports (ex. via Browser through HTTP) turn on the `--unsafe` flag to bind 
+the ports specified in the `usage_scenario.yml`
+
+## Debugging metric providers
+
+To see if the [Metric Providers →]({{< relref "installation-overview" >}}) are working correctly you have two options:
+- Start them manually from their respective folder under `/tools/metric-providers/.../static-binary` and look if the output is as expected
+- Turn on the `--no-file-cleanup` switch to see if the files generated in `/tmp/green-metrics-tool/[...].log` are in expected format
+
+
+

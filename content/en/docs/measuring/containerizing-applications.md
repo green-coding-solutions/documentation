@@ -2,7 +2,7 @@
 title: "Containerizing own applications"
 description: ""
 lead: ""
-date: 2022-06-16T07:49:15+00:00
+date: 2022-06-20T07:49:15+00:00
 draft: false
 images: []
 toc: true
@@ -149,7 +149,7 @@ services:
 
 In order to simulate a client we need a container running a headless browser.
 
-We choose Puppeteer and provide an exemplary container to build here: https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer
+We choose Puppeteer and provide an exemplary container to build here: https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer and to be directly used from [Docker Hub](https://hub.docker.com/greencoding)
 
 
 ### Finish
@@ -159,6 +159,7 @@ You are now done containerizing your web application.
 All you need is a flow to interact from the Puppeteer container with the webserver.
 Have a look at the tutorial on: [Interacting with application →]({{< relref "interacting-with-applications" >}})
 
-Afterwards run the measurements: [Measuring locally →]({{< relref "measuring-locally" >}})
+Afterwards run the measurements. 
+An example how to run a measurement locally you can find here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
 To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/example-applications/tree/main/wordpress-mariadb-data)

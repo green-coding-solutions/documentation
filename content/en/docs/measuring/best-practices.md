@@ -1,4 +1,11 @@
-Best Practices.md
+---
+title: "Best practices"
+description: "Best practices for measuring with the Green Metrics Tool"
+lead: "Best practices for measuring with the Green Metrics Tool"
+date: 2022-06-14T08:49:15+00:00
+draft: false
+toc: true
+---
 
 
 - When you start a reporter it will typically put on its own thread. By doing so

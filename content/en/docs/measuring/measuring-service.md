@@ -1,7 +1,6 @@
 ---
 title: "Measuring with hosted service"
 description: "One page summary of how to measure a sample application."
-lead: "One page summary of how to measure a sample application."
 date: 2022-06-21T08:49:15+00:00
 draft: false
 images: []
@@ -19,3 +18,11 @@ This example highlights, that in order to measure an application you really need
  [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
 
 <img src="/img/add-new-project.webp">
+
+### Benefits of hosted service
+
+- Reproducible measurements from machines maintained by our team
+- DC / AC Metrics Providers are calibrated on our machines
+- Visibility of measurements on central platform
+- No installation necessary
+- Applied [best practices →]({{< relref "best-practices" >}}) for measurement configuration
