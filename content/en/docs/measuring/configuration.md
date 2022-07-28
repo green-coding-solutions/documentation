@@ -1,5 +1,5 @@
 ---
-title : "Configuration for measurements"
+title : "Configuration"
 description: ""
 lead: ""
 date: 2022-06-20T08:48:45+00:00
@@ -54,7 +54,7 @@ The `runner.py` script has multiple switches that can control the behaviour of t
         * See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **ports** option for details
     + Non-Strict ENV vars mapped into container
         * See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **environment** option for details
-- `skip-unsafe` Skip unsafe volume bindings, ports and complex env vars
+- `--skip-unsafe` Skip unsafe volume bindings, ports and complex env vars
     + This is typically done when reusing already present `compose.yml` files without the need to alter the file
 
 ## Typical calls
