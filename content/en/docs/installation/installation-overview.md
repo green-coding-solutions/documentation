@@ -173,3 +173,10 @@ You can install a cronjob on your system to periodically call:
 -  `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
 -  `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
 
+The `jobs.py` uses the python3 faulthandler mechanism and will also report to *STDERR* in case 
+of a segfault.
+When running the cronjob we advice you to append all the output combined to a log file like so:
+`* * * * * python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
+
+Be sure to give the `green-metrics-jobs.log` file write access rights.
+

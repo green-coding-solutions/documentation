@@ -25,39 +25,39 @@ TODO
 
 ```yaml
 flow:
-- name: Check Website
-  container: green-coding-puppeteer-container
-  commands:
-  - type: console
-    command: node /var/www/puppeteer-flow.js
-    note: Starting Pupeteer Flow
-    read-notes-stdout: true
-  - type: console
-    command: sleep 30
-    note: Idling
-  - type: console
-    command: node /var/www/puppeteer-flow.js
-    note: Starting Pupeteer Flow again
-    read-notes-stdout: true
+  - name: Check Website
+    container: green-coding-puppeteer-container
+    commands:
+      - type: console
+        command: node /var/www/puppeteer-flow.js
+        note: Starting Pupeteer Flow
+        read-notes-stdout: true
+      - type: console
+        command: sleep 30
+        note: Idling
+      - type: console
+        command: node /var/www/puppeteer-flow.js
+        note: Starting Pupeteer Flow again
+        read-notes-stdout: true
 ```
 
 ## Web app
 ```yaml
 flow:
-- name: Check Website
-  container: green-coding-puppeteer-container
-  commands:
-  - type: console
-    command: node /var/www/puppeteer-flow.js
-    note: Starting Pupeteer Flow
-    read-notes-stdout: true
-  - type: console
-    command: sleep 30
-    note: Idling
-  - type: console
-    command: node /var/www/puppeteer-flow.js
-    note: Starting Pupeteer Flow again
-    read-notes-stdout: true
+  - name: Check Website
+    container: green-coding-puppeteer-container
+    commands:
+      - type: console
+        command: node /var/www/puppeteer-flow.js
+        note: Starting Pupeteer Flow
+        read-notes-stdout: true
+      - type: console
+        command: sleep 30
+        note: Idling
+      - type: console
+        command: node /var/www/puppeteer-flow.js
+        note: Starting Pupeteer Flow again
+        read-notes-stdout: true
 ```
 
 If you came here from the [Containerizing Applications →]({{< relref "containerizing-applications" >}}) Tutorial

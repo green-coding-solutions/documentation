@@ -34,11 +34,15 @@ other service serves content on that port. Check your `docker ps -a`
 - Are the containers on the same network? Check with `docker inspect CONTAINER_ID`
 - Can access the container through browser when mapping the ports to the host OS? (See also debug mode for this)
 
+## Run fails because *volumes*, *environment* or *ports* are in the `usage_scenario.yml`
+- If you just copied your `docker-compose.yml` and wanted to reuse it but do not need the functionality, then consider using the `--skip-unsafe` flag.
+- If you need the functionality then consider the `--allow-unsafe` flag
+
 
 ## General tips
 - Always check container logs with `docker compose logs`. Sometimes streaming logs
 does not work that well when orchestrating multiple containers and polling the directly gives you all logs.
 - Add the `--debug` switche to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
-- Add `--unsafe` to the call to `runner.py` and *portmapping* to your [usage_scenario.yml →]({{< relref "usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
+- Add `--allow-unsafe` to the call to `runner.py` and *ports* to your [usage_scenario.yml →]({{< relref "usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
 - Rebuild the containers with `docker compose down -v` and then `docker compose up -d`
 - Re-run the `install.sh` script to get new configuration changes that you maybe have not yet applied after an update

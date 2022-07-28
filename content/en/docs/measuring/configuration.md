@@ -48,14 +48,14 @@ The `runner.py` script has multiple switches that can control the behaviour of t
 - `--no-file-cleanup` to not delete the metric provider data in `/tmp/green-metrics-tool`
 - `--debug` Activate steppable debug mode
     + This allows you to enter the containers and debug them if necessary.
-- `--unsafe` Activate unsafe volume bindings, portmappings and complex env vars
+- `--allow-unsafe` Activate unsafe volume bindings, ports and complex env vars
     + Arbitrary volume bindings into the containers. They are still read-only though
     + Portmappings to the host OS. 
-        * See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **portmappings** option for details
+        * See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **ports** option for details
     + Non-Strict ENV vars mapped into container
-        * See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **env** option for details
-
-
+        * See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **environment** option for details
+- `skip-unsafe` Skip unsafe volume bindings, ports and complex env vars
+    + This is typically done when reusing already present `compose.yml` files without the need to alter the file
 
 ## Typical calls
 ### Local app

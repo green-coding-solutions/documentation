@@ -27,41 +27,29 @@ mkdir easiest-application
 cd easiest-application
 touch usage_scenario.yml
 ```
-Now please copy the following code inside the `usage_scenario.yml`.
-```json
-{
-    "name": "Stress Container One Core 5 Seconds",
-    "author": "Arne Tarara",
-    "version": 1,
-    "architecture": "linux",
-    "setup": [
-          {
-            "name": "simple-load-container",
-            "type": "container",
-            "identifier": "alpine",
-            "setup-commands": [
-                "apk add stress-ng"
-            ]
-        }
-    ],
-    "flow": [
-        {
-            "name": "Stress",
-            "container": "simple-load-container",
-            "commands": [
 
-                {
-                    "type": "console",
-                    "command": "stress-ng -c 1 -t 5",
-                    "note": "Starting Stress"
-                }
-            ]
-        }
-    ]
-}
+Now please copy the following code inside the `usage_scenario.yml`.
+
+```yaml
+name: Stress Container One Core 5 Seconds
+author: Arne Tarara
+version: 1
+architecture: linux
+services:
+  simple-load-container:
+    image: alpine
+    setup-commands:
+      - apk add stress-ng
+ 
+ flow:
+  - name: Stress
+    container: simple-load-container
+    commands:
+      - type: console
+        command: stress-ng -c 1 -t 5
+        note: Starting Stress
 
 ```
-In the code you see the *identifier* which references the **alpine** base image.
 
 Under *flow* you see that we are just calling `stress-ng -c 1 -t 5`, which will stress our CPU for 5 seconds on one core.
 ```bash
