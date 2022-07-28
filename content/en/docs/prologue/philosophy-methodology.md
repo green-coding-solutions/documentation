@@ -1,8 +1,8 @@
 ---
 title: "Philosophy & Methodology"
-description: "How we approach the measurement of softwares energy use."
-lead: "How we approach the measurement of softwares energy use."
-date: 2022-06-18T08:49:15+00:00
+description: "How we approach the measurement of software energy use."
+lead: "How we approach the measurement of software   energy use."
+date: 2022-06-18T08:00:00+00:00
 draft: false
 images: []
 menu:
@@ -13,11 +13,9 @@ toc: true
 ---
 
 We believe in the containerization of applications.
-The benefit are that the overhead is extremely small and
-it gives the benefit of controlling the execution and also the interfaceing with the
-environment around it.
+The benefits are that the overhead is extremely small and it allows us to control the execution, interfacting, and environment around the application
 
-Most modern applications are already containerized or can be easily brought into this format (At least for the purpose of measuring).
+Most modern applications are already containerized or can be easily brought into this format (at least for the purpose of measuring).
 
 Therefore the Green Metrics Tool is designed to only measure containerized applications.
 
@@ -34,18 +32,18 @@ and then connect to every container to measure its energy use and performance me
 To measure the containers we rely on the concept of *Metric Reporters*.
 These are small UNIX-style programs that typically reporty only one metric directly to STDOUT.
 
-This keeps the profile of the measurement extremly low and makes the *Metric Reporters* versatily and reuasable.
+This keeps the profile of the measurement extremly low and makes the *Metric Reporters* versatile and reuasable.
 
 ### Reusability of Infrastructure as Code
 
 We want to reuse infrastructure files as best as possible.
 
-Therefore our tools consumes ready-built containers and can will also be able to consume Kubernetes
+Therefore our tools consumes ready-built containers and will also be able to consume Kubernetes
 infrastructure files.
 
 In the setup part of our [usage_scenario.json →]({{< relref "usage-scenario" >}}) you can however provide
 additional options to run the container, which are very helpful in terms of reusing other peoples containers.
-For instance you can run an `apt install` to install one missing tool in a standard `ubuntu` container without
+For instance you can run an `apt install` to install a missing tool from the standard `ubuntu` container without
 having the need to create a new image on DockerHub.
 
 However we cannot allow the full options of `docker compose` as this would allow to mount arbitrary volumes
@@ -63,10 +61,10 @@ measurement machines for you.
 
 ## Reproducibility & Open Data
 
-To make people energy aware when using and creating software we believe that it is essential to have
+To make people energy aware whilst using and creating software we believe that it is essential to have
 every measurement open and visible.
 
-Also the tools to measure must be free and open-source (FOSS).
+The tools used to make these measurements must also be free and open-source (FOSS).
 
 To however compare one measurement with another we believe that you cannot change the underlying hardware.
 

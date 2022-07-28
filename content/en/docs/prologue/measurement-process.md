@@ -2,13 +2,13 @@
 title: "Measurement Process"
 description: "Measurement process of the Green Metrics Tool - High level overview"
 lead: "Measurement process of the Green Metrics Tool - High level overview"
-date: 2022-06-18T08:49:15+00:00
+date: 2022-06-18T08:00:00+00:00
 draft: false
 images: []
 menu:
   docs:
     parent: "prologue"
-weight: 100
+weight: 120
 toc: true
 ---
 

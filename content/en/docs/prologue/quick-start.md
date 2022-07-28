@@ -2,13 +2,13 @@
 title: "Quick Start"
 description: "One page summary of how to measure a sample application."
 lead: "One page summary of how to measure a sample application."
-date: 2022-06-18T08:49:15+00:00
+date: 2022-06-18T08:00:00+00:00
 draft: false
 images: []
 menu:
   docs:
     parent: "prologue"
-weight: 110
+weight: 130
 toc: true
 ---
 
@@ -19,7 +19,7 @@ The easiest way to run a measurement is to use our [Green Metrics Frontend](http
 Here you can supply the link of our [easiest example application](https://github.com/green-coding-berlin/simple-example-application) and wait
 for an email to arrive to view a report.
 
-This example highlights, that in order to measure an application you really need to only have a repository with a
+This example highlights that in order to measure an application you only need a repository which includes a
  [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
 
 
