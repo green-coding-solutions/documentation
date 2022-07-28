@@ -4,6 +4,7 @@ description: "How we approach the measurement of software energy use."
 lead: "How we approach the measurement of software energy use."
 date: 2022-06-18T08:00:00+00:00
 draft: false
+weight: 110
 toc: true
 ---
 

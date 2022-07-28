@@ -6,20 +6,32 @@ date: 2022-06-01T08:49:15+00:00
 draft: false
 images: []
 ---
+### Input Parameters
 
-TODO
+- Args
+    - -s: container-ids seperated by comma
+    - -i: interval in milliseconds
 
+By default the measurement interval is 100 ms.
+
+
+### Output
+
+- Output:
+    - stdout -> `TIMESTAMP READING CONTAINER.ID` 
+     - TIMESTAMP -> linux timestamp to microseconds 
+     - READING -> container_reading * 10000 / main_cpu_reading
+       - container_reading -> reading from `"/sys/fs/cgroup/user.slice/user-%s.slice/user@%s.service/user.slice/docker-%s.scope/cpu.stat"` over interval
+            - User id is assumed to be 1000 - hardcoded for now. Will not work properly if it is different
+       - main_cpu_reading -> reading from `/proc/stat` over interval
+    - Errors to stderr
+
+### How it works
 The cgroup CPU reporters measures the time CPU utilization in terms of time for a
 given measurement interval.
 
-In default configuration this interval is 100 ms.
 
-The measurement intervel is currently hardcoded in the `runner.py`and given as a constant to the `provider.py`.
-
-Reads from `/sys/fs/cgroup/user.slice/user-%s.slice/user@%s.service/user.slice/docker-%s.scope/cpu.stat
-and from `/proc/stat` and calculates the ratio.
-
-
+```
 From `/proc/stat` We are getting *Jiffies* of the system in the first line.
 
 We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal**, **guest** (See definitions here: https://www.idnt.net/en-US/kb/941772)
