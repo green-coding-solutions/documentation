@@ -5,53 +5,88 @@ lead: ""
 date: 2022-06-16T08:48:45+00:00
 ---
 
-The `usage_scenario.yml` consists of two main blocks:
-- `setup` - Handles the orchestration of containers
+The `usage_scenario.yml` consists of three main blocks:
+- `networks` - Handles the orchestration of networks
+- `services` - Handles the orchestration of containers
 - `flow` - Handles the interaction with the containers
 
+Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/),
+ which means that we keep the same format, but disallow some options and 
+ also add some exclusive options to our tool.
+ However keys that have the same name are also identical (but maybe limited) in function.
 
-At the beginning of the file you should specify name, author, version and
-architecture.
+At the beginning of the file you should specify `name`, `author`, `version` and
+`architecture`.
 These will help you later on distinguish which version of the software was certified
 if you use the repository url multiple times in the certification process.
 
-Supported architecture for the moment is only **linux**
+Supported architecture for the moment is only **linux**.
 
-### Setup
-The setup block is the starting point of the usage scenario.
+Please note that when running the measurement you can supply an additional name,
+which can and should be different from the name in the `usage_scenario.yml`.
+
+The idea is to have a name for the `usage_scenario.yml` and one for the specific 
+measurement run.
+
+Example for start of `usage_scenario.yml`
+```bash
+---
+name: My Hugo Test
+author: Arne Tarara
+version: 1
+architecture: linux
+```
+
+When running the `runner.py` we would then set `--name` for instance to: *Hugo Test run on my Macbook*
+
+### Networks
+Example:
+```yaml
+networks:
+  name: wordpress-mariadb-data-green-coding-network
+```
+
+- `networks` **[object]**: (Object of network objects for orchestration)
+    + `[NETWORK]` **[a-zA-Z0-9_]**:
+        * The name of the network with a trailing colon. No value required.
+
+### Services
 
 Example:
 ```yaml
-- type: network
-  name: wordpress-mariadb-data-green-coding-network
-- type: container
-  name: green-coding-wordpress-mariadb-data-container
-  identifier: wordpress-official-data_mariadb
-  env:
-    MYSQL_ROOT_PASSWORD: somewordpress
-    MYSQL_DATABASE: wordpress
-    MYSQL_USER: wordpress
-    MYSQL_PASSWORD: wordpress
-  portmapping:
-  - 3306:3306
-  setup-commands:
-  - sleep 20
-  network: wordpress-mariadb-data-green-coding-network
+services:
+  green-coding-wordpress-mariadb-data-container:
+    image: wordpress-official-data_mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    ports:
+      - 3306:3306
+    setup-commands:
+      - sleep 20
+    volumes:
+      - /LOCAL/PATH:/PATH/IN/CONTAINER
+    networks: 
+      - wordpress-mariadb-data-green-coding-network
 ```
 
-- `setup` **[array]**: (Array of containers / networks for orchestration)
-    + `name` **[a-zA-Z0-9_]**:
-        * Docker container or docker network name 
-    + `type` **[network | container]**:
-        * Type of the element
-    + `identifier` **[str]**: *(only for type container)*
-        * Docker image identifier accessible locally on Docker Hub
-    + `portmapping` **[int:int]**: *(optional and only for type container)*
-        * Docker container portmapping on host OS to be used with `--unsafe` flag. 
-    + `env` **[key-value]**: *(optional and only for type container)*
-        * Key-Value pairs for ENV variables inside the container
-    + `setup-commands` **[array]**: 
-        * Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
+- `services` **[object]**: (Object of container objects for orchestration)
+    + `[CONTAINER]` **[a-zA-Z0-9_]**:
+        * The name of the container
+        * `image` **[str]**:
+            - Docker image identifier accessible locally on Docker Hub
+        * `ports` **[int:int]**: *(optional)*
+            - Docker container portmapping on host OS to be used with `--allow-unsafe` flag. 
+        * `environment` **[object]**: *(optional)*
+            - Key-Value pairs for ENV variables inside the container
+        * `setup-commands` **[array]**: *(optional)*
+            - Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
+        * `volumes` **[array]**:  *(optional)*
+            - Array of volumes to be mapped. Only read of `runner.py` is executed wiht `--allow-unsafe` flag
+        * `cmd` **[str]**: *(optional)*
+            - Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`    
 
 ### Flow
 Flow handles the actual load testing.
@@ -59,25 +94,25 @@ Flow handles the actual load testing.
 Example:
 ```yaml
 flow:
-- name: Check Website
-  container: green-coding-puppeteer-container
-  commands:
-  - type: console
-    command: node /var/www/puppeteer-flow.js
-    note: Starting Pupeteer Flow
-    read-notes-stdout: true
-  - type: console
-    command: sleep 30
-    note: Idling
-  - type: console
-    command: node /var/www/puppeteer-flow.js
-    note: Starting Pupeteer Flow again
-    read-notes-stdout: true
-- name: Shutdown DB
-  container: database-container
-  commands:
-  - type: console
-    command: killall postgres
+  - name: Check Website
+    container: green-coding-puppeteer-container
+    commands:
+    - type: console
+      command: node /var/www/puppeteer-flow.js
+      note: Starting Pupeteer Flow
+      read-notes-stdout: true
+    - type: console
+      command: sleep 30
+      note: Idling
+    - type: console
+      command: node /var/www/puppeteer-flow.js
+      note: Starting Pupeteer Flow again
+      read-notes-stdout: true
+  - name: Shutdown DB
+    container: database-container
+    commands:
+      - type: console
+      command: killall postgres
 ```
 
 - `flow` **[array]**: (Array of flows to interact with containers)

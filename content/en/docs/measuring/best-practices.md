@@ -8,6 +8,11 @@ toc: true
 ---
 
 
+- The application you want to test must run at least twice as long as the minimal resolution 
+  you have configured with your Metric Providers
+    + Also be aware that Intel RAPL has a minimum time resolution of ~10ms and CPU time resolution is typically around 1 microsecond.
+- When running tests your disk load should not go over 50%, since typically linux systems can run in congestion above 60% and also our tool needs some disk time.
+    + Check iostat iostat -xmdz if in doubt
 - When you start a reporter it will typically put on its own thread. By doing so
   you will potentially get a core out of its sleep mode. This might lead to a 
   skewed display on the System energy, as cores leaving sleep mode directly consume a lot 
@@ -19,5 +24,9 @@ toc: true
   on 10 ms resolution.
 - Keep the resolution of all metric reporters identical. This allows for easier 
   data drill-down later.
+- Optimally your tests should have in terms of energy a STDDEV of < 1% to make them resonably comparable. We understand that 
+  if you have random effects in your code this might not be achievable. In that case opt for very high repetitions to get a narrower confidence interval.
+
+  => => Show Dan my script
 
   Practices: 5 secpnds idle, 1 minute burn in, Factor in idle time, measurement start is signaled in data

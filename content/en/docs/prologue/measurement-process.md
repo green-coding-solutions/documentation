@@ -26,8 +26,9 @@ The *Metric Reporters* are to be understood as
 
 - [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file is read
 - Containers are downloaded from Docker Hub or from local docker cache
-- Containers are orchestrated connected to each other according to the **setup** part in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
-- 5 Seconds Idle
+- Networks are created according to the **networks** part in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
+- Containers are orchestrated connected to each other according to the **services** part in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
+- X Seconds Idle (5 seconds by default)
 - Attaching of the [Metric Providers →]({{< relref "metric-providers-overview" >}})
 - **flow** part of the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) is run. This part of the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) contains
  the commands that are executed on the containers.
@@ -37,6 +38,6 @@ The *Metric Reporters* are to be understood as
         * simulated clicks / keyboard entries to interact with a Desktop application in a container
         * Network simulation tests where containers are added / removed to provoke certain behaviour or failure
         * etc. 
-- 5 seconds idle
+- X seconds idle (5 seconds by default)
 - After the flow the data from the [Metric Providers →]({{< relref "metric-providers-overview" >}}) is collected and parsed
 - Saving all to the database and running formatting / aggregations

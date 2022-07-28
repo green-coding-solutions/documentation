@@ -1,0 +1,20 @@
+---
+name: Measure energy cost of HUGO build for documentation
+author: Arne Tarara
+version: 1
+architecture: linux
+
+services:
+  hugo-container:
+    image: klakegg/hugo:0.101.0-alpine
+    cmd: shell
+    setup-commands:
+      - cp -R /tmp/repo /src
+
+flow:
+  - name: Build Hugo
+    container: hugo-container
+    commands:
+      - type: console
+        command: hugo -s /src/repo
+        note: Starting HUGO build

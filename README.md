@@ -22,3 +22,10 @@ Following files have been overloaded and should be checked if they are changed o
 - HUGO_VERSION: `0.99.0`
 - NODE_VERSION: `NODE_VERSION`
 
+## Measuring energy for build
+
+If you want to measure the energy just use the `usage_scenario.yml` file inside
+which will tell you how much Joules / kWh the build will cost.
+
+You can find all the measurements on https://metrics.green-coding.org/ by searching
+for the repository URL.
