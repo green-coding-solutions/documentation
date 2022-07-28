@@ -2,7 +2,7 @@
 title : "Example applications"
 description: "Example applications."
 lead: ""
-date: 2022-06-18T08:00:00+00:00
+date: 2022-05-11T08:49:15+00:00
 draft: false
 images: []
 menu:
@@ -17,14 +17,14 @@ All of our example applications the same structure:
 
 ```
 .
-├── usage_scenario.json
+├── usage_scenario.yml
 ├── Dockerfile
 ├── compose.yml
 ├── README.md
 └── ...
 ```
 
-- `usage_scenario.json`
+- `usage_scenario.yml`
 - `Dockerfile` is needed in order for you to reproducibly build the container that will be used later in the measurement.
 - `compose.yml` is only used for development / demo purposes if you wanna see what the application does in your terminal / browser / desktop.
 - *...* is either a file, a folder or missing.
@@ -51,7 +51,7 @@ Replace **SERVICE** with the relevant service in the `compose.yml`
 docker build .
 ```
 
-What you get is an image in your `docker images` that is used in the [usage_scenario.json →]({{< relref "usage-scenario" >}})
+What you get is an image in your `docker images` that is used in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
 
  ## Measuring the example applications
 

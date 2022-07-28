@@ -1,14 +1,10 @@
 ---
 title: "Containerizing own applications"
-description: "TODO"
-lead: "TODO"
-date: 2022-06-15T07:49:15+00:00
+description: ""
+lead: ""
+date: 2022-06-20T07:49:15+00:00
 draft: false
 images: []
-menu:
-  docs:
-    parent: "prologue"
-weight: 100
 toc: true
 ---
 
@@ -153,7 +149,7 @@ services:
 
 In order to simulate a client we need a container running a headless browser.
 
-We choose Puppeteer and provide an exemplary container to build here: https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer
+We choose Puppeteer and provide an exemplary container to build here: https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer and to be directly used from [Docker Hub](https://hub.docker.com/greencoding)
 
 
 ### Finish
@@ -163,24 +159,7 @@ You are now done containerizing your web application.
 All you need is a flow to interact from the Puppeteer container with the webserver.
 Have a look at the tutorial on: [Interacting with application →]({{< relref "interacting-with-applications" >}})
 
-Afterwards run the measurements: [Measuring locally →]({{< relref "measuring-locally" >}})
+Afterwards run the measurements. 
+An example how to run a measurement locally you can find here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
 To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/example-applications/tree/main/wordpress-mariadb-data)
-
-## Alternative way to containerize web app
-
-This alternative path is special to the Green Metrics Tool.
-
-The resulting container images rely on the functionality that a volume can be attached
-at runtime.
-This is NOT possible on typical docker hosting services and will impact the reusability
-of the resulting image.
-
-Nevertheless it is very helpful in development, as it saves from having too many
-images floating around.
-
-
-TODO
-Via Mounts!
-
-

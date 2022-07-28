@@ -1,18 +1,18 @@
 ---
-title: "Debugging the measurement workflow"
-description: "Debugging the measurement workflow"
+title: "Debugging measurements"
+description: "Debugging measurements"
 lead: ""
-date: 2022-06-03T08:48:45+00:00
+date: 2022-06-15T08:48:45+00:00
 draft: false
 images: []
 ---
 
+## Debugging containers or runner.py itself
 The first step in debugging a measurement workflow is to turn the `--debug`
-flag of the Testrunner on.
+flag of the `runner.py` on.
 
-When you make your call to the `runner.py` when you measure locally
-it will turn into a stepable mode where you contine to the next step by pressing
-enter.
+When you call the `runner.py` locally it will turn into a steppable mode where 
+you contine to the next step by pressing enter.
 
 You can then enter one of the containers to see if the required services are
 running correctly.
@@ -24,3 +24,18 @@ docker exec -it MY_CONTAINER_NAME bash
 
 Some container do not have `bash`. However `sh`, which has less capabilities though,
 should in most cases be available.
+
+## Debbuging containers via HTTP / exposed ports
+
+If entering the container looks fine and you need to access them through some of their
+exposed ports (ex. via Browser through HTTP) turn on the `--unsafe` flag to bind 
+the ports specified in the `usage_scenario.yml`
+
+## Debugging metric providers
+
+To see if the [Metric Providers →]({{< relref "installation-overview" >}}) are working correctly you have two options:
+- Start them manually from their respective folder under `/tools/metric-providers/.../static-binary` and look if the output is as expected
+- Turn on the `--no-file-cleanup` switch to see if the files generated in `/tmp/green-metrics-tool/[...].log` are in expected format
+
+
+

@@ -1,14 +1,9 @@
 ---
 title: "Philosophy & Methodology"
 description: "How we approach the measurement of software energy use."
-lead: "How we approach the measurement of software   energy use."
+lead: "How we approach the measurement of software energy use."
 date: 2022-06-18T08:00:00+00:00
 draft: false
-images: []
-menu:
-  docs:
-    parent: "prologue"
-weight: 110
 toc: true
 ---
 
@@ -34,6 +29,15 @@ These are small UNIX-style programs that typically reporty only one metric direc
 
 This keeps the profile of the measurement extremly low and makes the *Metric Reporters* versatile and reuasable.
 
+We support many different varieties of reporters like:
+- Memory per Container
+- CPU % per Container
+- CPU Time per Container
+- Energy System Wide
+- Network Traffic
+- DC Energy of System (TBD 2022)
+- ...
+
 ### Reusability of Infrastructure as Code
 
 We want to reuse infrastructure files as best as possible.
@@ -41,12 +45,12 @@ We want to reuse infrastructure files as best as possible.
 Therefore our tools consumes ready-built containers and will also be able to consume Kubernetes
 infrastructure files.
 
-In the setup part of our [usage_scenario.json →]({{< relref "usage-scenario" >}}) you can however provide
+In the setup part of our [usage_scenario.yml →]({{< relref "usage-scenario" >}}) you can however provide
 additional options to run the container, which are very helpful in terms of reusing other peoples containers.
 For instance you can run an `apt install` to install a missing tool from the standard `ubuntu` container without
 having the need to create a new image on DockerHub.
 
-However we cannot allow the full options of `docker compose` as this would allow to mount arbitrary volumes
+However we do not allow the full options of `docker compose` as this would allow to mount arbitrary volumes
 on our measurement machines or even run in `--priviledged` mode.
 
 ## Energy measurement
@@ -58,6 +62,7 @@ The interface is typically called *RAPL* (Running average power limit) and was i
 
 To falsify these measurements we also provide the option to get the DC and AC power readings from our
 measurement machines for you.
+
 
 ## Reproducibility & Open Data
 
@@ -77,7 +82,7 @@ We also believe that they provide the best approach to understand how an applica
 would typically behave under real-world usecases.
 
 Therefore we create every measurement by providing the architecture of the software and the flow
-that the software shall execute in such a [usage_scenario.json →]({{< relref "usage-scenario" >}}) file.
+that the software shall execute in such a [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
 
 The difference here is that we focus on application architectures which are modular / distributed
 and provide a more wholistic apporoach in also delivering and Open Data API and Web Frontend to display the metrics in charts.

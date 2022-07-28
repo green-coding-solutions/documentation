@@ -1,0 +1,3 @@
+[data-dark-mode] body code:not(.hljs), [data-dark-mode] body .hljs, [data-dark-mode] body .form-control.is-search {
+    background-color:  #343a40;
+}

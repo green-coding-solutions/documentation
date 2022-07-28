@@ -16,7 +16,7 @@ the goal to keep measurements reproducible and comparable we provide some
 guidelines for the example applications:
 
 ## Characteristics
-- All reference images in the [usage_scenario.json →]({{< relref "usage-scenario" >}}) must be
+- All reference images in the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) must be
 available on [dockerhub](https://hub.docker.com/)
 - Containers are not allowed to require volume mounts
 
