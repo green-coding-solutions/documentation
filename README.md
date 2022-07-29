@@ -29,3 +29,5 @@ which will tell you how much Joules / kWh the build will cost.
 
 You can find all the measurements on https://metrics.green-coding.org/ by searching
 for the repository URL.
+
+<img src="https://img.shields.io/badge/Energy%20cost%20for%20build-~5%20J-orange">
