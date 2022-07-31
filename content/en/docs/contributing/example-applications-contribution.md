@@ -3,9 +3,7 @@ title: "Example Applications"
 description: "Contributing to the Example Applications 🥳🎉😍"
 lead: "Contributing to the Example Applications 🥳🎉😍"
 date: 2022-06-10T09:49:15+00:00
-draft: false
-images: []
-weight: 630
+weight: 201
 toc: true
 ---
 

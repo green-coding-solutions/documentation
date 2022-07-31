@@ -3,11 +3,15 @@ title : "Measuring locally"
 description: "Measuring locally with the runner.py"
 lead: ""
 date: 2022-06-18T08:48:45+00:00
-draft: false
-images: []
+weight: 805
 ---
 
 Before starting to measure you must first install some prerequisites: [Installation →]({{< relref "installation-overview" >}})
+
+If you came here from [interacting with applications →]({{< relref "interacting-with-applications" >}}) then you can also
+directly user your `usage_scenario.yml`
+
+We will use here for everybody that just jumped in a new sample application.
 
 ## Measuring a simple example load
 
