@@ -3,21 +3,17 @@ title: "Containerizing own applications"
 description: ""
 lead: ""
 date: 2022-06-20T07:49:15+00:00
-draft: false
-images: []
+weight: 802
 toc: true
 ---
 
-When containerizing your application we rely images either available on [dockerhub](https://hub.docker.com/)
-or being local on your system.
+When orchestrating your application we rely on images either available on [dockerhub](https://hub.docker.com/)
+or being locally available.
 
 This tutorial will walk you through the design process of containerizing a sample
-web application on Wordpress and comparing it to a static copy of the site in terms of energy.
+Wordpress web application.
 
-This tutorial assumes that your app is not already containerized. If it already is go
-to [Measuring locally →]({{< relref "measuring-locally" >}})
-
-## Containerization General
+## General
 
 When containerizing apps for the Green Metrics Tool the containers must not shut 
 down after starting them.
@@ -26,13 +22,11 @@ the container running or use the `cmd` option in the [usage_scenario.yml →]({{
 file to start a shell that keeps the container running.
 
 The reason for that is, that our tool sends the commands to the containers after they
-have all been instantiated and does not support one-off container starts with parameters.
+have all been orchestrated and does not support one-off container starts with parameters.
 
-## Containerizing web app (Wordpress)
+## Containerizing
 
-We will use wordpress as an example.
-
-Our architecture looks as the following:
+Our architecture looks like the following:
 
 <img src="/img/server-architecture-banana.webp">
 
@@ -47,18 +41,47 @@ Technically you could also measure the architecture without the client side, but
 believe that the energy consumption of software includes both sides as well as the
 network part.
 
-👉  To learn how we calculate network energy consumption [Network Metrics Provider →]({{< relref "network" >}})
+👉  To learn how we calculate network energy consumption [Network Metrics Provider →]({{< relref "network-cgroup-container" >}})
+
+### Directory structure
+
+We first prepare the directory structure and create the folder `/tmp/demo-app`. This is were our containerized app will be put into.
+
+```bash
+mkdir /tmp/demo-app
+```
+
+Here you see a list of the final files and directories that we will end up with:
+
+```ls
+.
+├── ./html
+├── usage_scenario.yml
+├── Dockerfile-wordpress
+├── wordpress.conf
+├── compose.yml
+└── ...
+```
+
+The `compose.yml` is technically not needed, but makes initial testing 
+and debugging way easier, therefore we encourage you in terms of the flow of
+containerizing your app to always start with setting all up in a `compose.yml` 
+and then migrating the contents of the file to our `usage_scenarion.yml` file
+and add the `flow` and extra attributes you need on top.
+
 
 ### Webserver
 
-We are basing the container off `wordpress:latest`, which includes our webserver as 
-well as the PHP runtime.
+We are basing the container off `wordpress:latest`, which includes an apache webserver as 
+well as a PHP runtime.
 
 In the container we want the webserver to listen on port 9875, therefore we have
 to create a new virtual host.
+
 The virtualhost should have a hostname identical to the container. We set this
 container name later, so see it as given for the moment.
 
+This is the `wordpress.conf` file we need:
 ```bash
 Listen 9875
 <VirtualHost *:9875>
@@ -79,7 +102,7 @@ Listen 9875
 </VirtualHost>
 ```
 
-We will now create the Dockerfiles as follows:
+We will now create the Dockerfile `Dockerfile-wordpress` as follows:
 ```bash
 # Dockerfile-wordpress
 FROM wordpress:latest
@@ -93,21 +116,26 @@ to deliver the website on port `9875` for host `green-coding-wordpress-apache-da
 
 {{< alert icon="💡" text="As you can see we are letting the container expose port 9875. This is usually very helpful for debugging to let internal / testing containers to be run at ports greater 1024" />}}
 
+We will also dump the filesystem of our existing Wordpress app, so we can ingest it 
+into the container:
 
-### Database
-
-We assume a [MariaDB database](https://mariadb.org/) and will base of
-their [basic image](https://hub.docker.com/_/mariadb).
-
-We pull a dump from our database and copy the wordpress filesystem:
 ```bash
-mkdir /tmp/demo-app
-mysqldump -u USERNAME -p DATABASE_NAME > /tmp/demo-app/wordpress-dump.sql
 cp -R /PATH/TO/WORDPRESS /tmp/demo-app/html
 ```
 
 
-We will now create the Dockerfiles as follows:
+### Database
+
+We assume a [MariaDB database](https://mariadb.org/) and will base of
+their [mariadb basic image](https://hub.docker.com/_/mariadb).
+
+We pull a dump from our database and copy the wordpress filesystem:
+```bash
+mysqldump -u USERNAME -p DATABASE_NAME > /tmp/demo-app/wordpress-dump.sql
+```
+
+
+We will now create the Dockerfile `Dockerfile-mariadb` as follows:
 ```bash
 # Dockerfile-mariadb
 FROM mariadb:10.6.4-focal
@@ -118,7 +146,6 @@ EXPOSE 3306
 As you can see we are copying the dump inside the database container.
 Thanks to some magic from the folks at MariaDB this container image will automatically
 pick up the dump and import it.
-
 
 
 Now for the `compose.yml`:
@@ -165,14 +192,59 @@ In order to simulate a client we need a container running a headless browser.
 We choose Puppeteer and provide an exemplary container to build here: https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer and to be directly used from [Docker Hub](https://hub.docker.com/greencoding)
 
 
+### Moving to `usage_scenario.yml`
+
+The next step, after checking that all containers orchestrate correctly and can talk to each other as expected, would 
+be to move the `compose.yml` to our `usage_scenario.yml` format.
+
+The resulting file would look like this:
+
+```yaml
+# We need an explicit networks part, as we do not auto-generate networks for containers
+networks:
+  example-network:
+
+services:
+# There is no container_name directive. All services keys act directly as container names
+  db-container:
+# If you build your file with docker compose in the example above this image name should be the one you have now locally      
+    image: demo-app_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+# networks must be explicitely stated in each service
+    networks:
+      - example-network
+  wordpress-container:
+    image: demo-app_wordpress
+    ports:
+      - 9875:9875
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+    networks:
+      - example-network
+
+flow:
+# Is dicussed in "Interacting with applications"
+...
+```
+
 ### Finish
 
 You are now done containerizing your web application.
 
 All you need is a flow to interact from the Puppeteer container with the webserver.
 Have a look at the tutorial on: [Interacting with application →]({{< relref "interacting-with-applications" >}})
+and from there create your [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file based off your `compose.yml` file.
 
 Afterwards run the measurements. 
+
 An example how to run a measurement locally you can find here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
 To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/example-applications/tree/main/wordpress-mariadb-data)

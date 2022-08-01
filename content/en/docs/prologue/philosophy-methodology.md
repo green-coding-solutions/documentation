@@ -1,43 +1,73 @@
 ---
 title: "Philosophy & Methodology"
-description: "How we approach the measurement of software energy use."
-lead: "How we approach the measurement of software energy use."
-date: 2022-06-18T08:00:00+00:00
-draft: false
-weight: 110
+description: "How we approach the measurement of softwares energy use."
+lead: "How we approach the measurement of softwares energy use."
+date: 2022-06-15T08:49:15+00:00
+weight: 1002
 toc: true
 ---
 
+Our system is designed to raise awareness and educate about the software energy use in 
+typical off-the-shelf systems.
+
+This reduces its accuary and reproducability compared to a calibrated and purely deterministic system 
+like a trimmed down real-time OS, but increases the generality and applicability.
+
+It does however give you the capability to iterate and optimize on your apps energy
+consumption on a fixed hardware setup.
+
+The result is that you get an idea of the order of magnitude the energy consumption of your softwre is in, but 
+does typically not allow you to make comparisons on exact numbers.
+
+However when running on different hardware a comparison by the order of magnitude is very helpful to judge the underlying hardware.
+
+
+## Containerization
+
 We believe in the containerization of applications.
+<<<<<<< HEAD
 The benefits are that the overhead is extremely small and it allows us to control the execution, interfacting, and environment around the application
+=======
+The benefit are that the overhead is extremely small and
+it gives the benefit of controlling the execution, isolation and also the interfacing with the
+environment around it.
+>>>>>>> main
 
 Most modern applications are already containerized or can be easily brought into this format (at least for the purpose of measuring).
 
-Therefore the Green Metrics Tool is designed to only measure containerized applications.
-
+Therefore the Green Metrics Tool is designed to primarily measure containerized applications.
 
 ## Architecture & Technology
 
-We rely on the `container` specification that is mainly implemented by [Docker](https://www.docker.com/)
+We rely on the container specification that is most dominantly implemented by [Docker](https://www.docker.com/)
 
 We orchestrate the containers in your application to get a local representation of your architecture
-and then connect to every container to measure its energy use and performance metrics.
+and then get runtime metrics from every container to measure its energy use and performance metrics.
+
+Some metrics that are not available on a container level, like CPU energy or DRAM energy are
+retrieved on a system level and optionally attributed to a level of container granularity.
 
 ### UNIX style of Metric Reporters
 
 To measure the containers we rely on the concept of *Metric Reporters*.
 These are small UNIX-style programs that typically reporty only one metric directly to STDOUT.
 
+<<<<<<< HEAD
 This keeps the profile of the measurement extremly low and makes the *Metric Reporters* versatile and reuasable.
+=======
+This keeps the profile of the measurement extremly low and makes the *Metric Reporters* versatily and reuasable, for instance when you want to use them for inline measurements in your already 
+present architecture.
+>>>>>>> main
 
 We support many different varieties of reporters like:
 - Memory per Container
 - CPU % per Container
 - CPU Time per Container
 - Energy System Wide
-- Network Traffic
-- DC Energy of System (TBD 2022)
-- ...
+- Network Traffic per Container
+- DC Energy of System (TBD 08/2022)
+- AC Energy of System (TBD 2022)
+- TDP Estimation (TBD 08/2022)
 
 ### Reusability of Infrastructure as Code
 
@@ -46,24 +76,18 @@ We want to reuse infrastructure files as best as possible.
 Therefore our tools consumes ready-built containers and will also be able to consume Kubernetes
 infrastructure files.
 
+<<<<<<< HEAD
 In the setup part of our [usage_scenario.yml →]({{< relref "usage-scenario" >}}) you can however provide
 additional options to run the container, which are very helpful in terms of reusing other peoples containers.
 For instance you can run an `apt install` to install a missing tool from the standard `ubuntu` container without
 having the need to create a new image on DockerHub.
+=======
+The format of the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) is based of the `docker-compose.yml` specification but does provide additional options to run the container, which are very helpful in terms of reusing other peoples containers.
+For instance you can run an `apt install` to install one missing tool in a standard `ubuntu` container without having the need to create a new image on DockerHub.
+>>>>>>> main
 
 However we do not allow the full options of `docker compose` as this would allow to mount arbitrary volumes
 on our measurement machines or even run in `--priviledged` mode.
-
-## Energy measurement
-
-To measure the container we use a *Metrics Reporter* that queries the Energy Registers
-of modern processors.
-
-The interface is typically called *RAPL* (Running average power limit) and was introduced by Intel.
-
-To falsify these measurements we also provide the option to get the DC and AC power readings from our
-measurement machines for you.
-
 
 ## Reproducibility & Open Data
 
@@ -72,9 +96,12 @@ every measurement open and visible.
 
 The tools used to make these measurements must also be free and open-source (FOSS).
 
-To however compare one measurement with another we believe that you cannot change the underlying hardware.
+To however compare one measurement with another we believe that energy comparisons between
+different softwares running on hardware setups is not feasible.
+All measurements should be compared only for the exact same machine, not even machines with 
+identical components.
 
-Therefore we provide a central repository for all the measurements we make: [Green Metrics Frontend](https://metrics.green-coding.org)
+Therefore we provide a central repository for all the measurements we make to compare measurements on prepared fixed machine we provide: [Green Metrics Frontend](https://metrics.green-coding.org)
 
 ## Honorable mentions, Differences and USPs
 
@@ -97,8 +124,13 @@ Also the formulas for measurement are fully visible and to be falsified by anyon
 use a proprietetary calculation model.
 
 ### Scaphandre and per-process measurement
-We also believe that per-process measurement is not the way to go to get a qualitative view of a whole application
-as the boundaries should be drawn on the container level which provide the logical abstraction level.
+Scaphandre is one of the major open source tools currently available to measure the energy consumption of software.
 
-{{< alert icon="👉" text="If you however have these needs to measure processese please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which does a better job on this use-case than our tool." />}}
+We however believe that for the job of pure energy measurement it is too complex in terms of the size of the tool. Having smaller reporters that only spit out one metric and can be technically used everywhere inline is the better way to go.
+
+Also that Scaphandre does not handle the reproducible orchestration part to falsify the measurements is not the approach we believe is best to go. 
+
+Therefore we decided to pursue a different path with our tool and not reuse Scaphandre.
+
+{{< alert icon="👉" text="If you however have more the need for observability and measuring on a process level please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which may fit your needs better than our tool." />}}
 

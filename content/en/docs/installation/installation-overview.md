@@ -3,8 +3,7 @@ title: "Installation Overview"
 description: "Installation Overview"
 lead: ""
 date: 2022-06-15T01:49:15+00:00
-draft: false
-images: []
+weight: 901
 ---
 
 First of all, we're going to set up your machine. After that you'll have the chance to choose either the manual or the Docker methods for the remainder of the installation process.

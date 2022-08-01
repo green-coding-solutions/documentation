@@ -1,17 +1,18 @@
 ---
 title: "Measuring with hosted service"
-description: "One page summary of how to measure a sample application."
+description: "User our hosted service to measure applications on Github."
 date: 2022-06-21T08:49:15+00:00
-draft: false
-images: []
+weight: 806
 toc: true
 ---
 
-## Running a measurement with a Github Repository
+In order to use our hosted service your application must already be on Github, be [containerized →]({{< relref "containerizing-applications" >}}) and contain a [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
 
-The easiest way to run a measurement is to use our [Hosted Service](https://metrics.green-coding.org/request.html).
+If you do not have that check out the relevant links given.
 
-Here you can supply the link of our [easiest example application](https://github.com/green-coding-berlin/simple-example-application) and wait
+## Trying out the hosted service with an example application
+
+You can supply the Github link to our provided [easy example application](https://github.com/green-coding-berlin/simple-example-application) and wait
 for an email to arrive to view a report.
 
 This example highlights, that in order to measure an application you really need to only have a repository with a

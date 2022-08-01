@@ -3,6 +3,7 @@ title: "usage_scenario.yml"
 description: "Specification of the usage_scenario.yml file"
 lead: ""
 date: 2022-06-16T08:48:45+00:00
+weight: 804
 ---
 
 The `usage_scenario.yml` consists of three main blocks:
@@ -72,6 +73,7 @@ services:
       - wordpress-mariadb-data-green-coding-network
 ```
 
+
 - `services` **[object]**: (Object of container objects for orchestration)
     + `[CONTAINER]` **[a-zA-Z0-9_]**:
         * The name of the container
@@ -84,12 +86,17 @@ services:
         * `setup-commands` **[array]**: *(optional)*
             - Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
         * `volumes` **[array]**:  *(optional)*
-            - Array of volumes to be mapped. Only read of `runner.py` is executed wiht `--allow-unsafe` flag
+            - Array of volumes to be mapped. Only read of `runner.py` is executed with `--allow-unsafe` flag
         * `cmd` **[str]**: *(optional)*
             - Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`    
 
+Please note that every key below `services` will also serve as the name of the 
+container later on.
+
+The Green Metrics Tool does not create auto-generated container names and does
+not support the `container_name` key.
+
 ### Flow
-Flow handles the actual load testing.
 
 Example:
 ```yaml

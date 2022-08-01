@@ -3,18 +3,17 @@ title: "Introduction"
 description: "The Green Metrics Tool is a wholistic framework to measure the energy / co2 of your application."
 lead: "The Green Metrics Tool is a holistic framework to measure the energy / co2 of your application."
 date: 2022-06-15T08:49:15+00:00
-draft: false
 toc: true
-weight: 100
+weight: 1001
 ---
 
 It is comprised of:
-- An Open Data API to retrieve metrics
-- A web frontend that displays the Open Data in some nice charts
-- A Python backend that handles running the tests
+- A Python backend that handles the infrastructure orchestration
+- C UNIX-style reporters that generate energy and resource consumption metrics
+- A Python API to retrieve metrics
+- A native javascript web frontend that visalizes the data from the API in some nice charts
 
 <img src="/img/green_metrics_dashboard.webp">
-
 
 ## Getting to know the Green Metrics Tool
 
