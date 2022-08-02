@@ -19,8 +19,8 @@ This metric provider calculates an estimate of the % total CPU usage based on th
 
 By default the measurement interval is 100 ms.
 
-```
-Screenshot usage example << FREE ME FROM THE TORMENT OF NON-EXISTANCE >>
+```bash
+> sudo ./static-binary -i 100 -s 7f38a4c25fb8f9d5f8651d6ed986b3658dba20d1f5fec98a1f71c141c2b48f4b,c3592e1385d63f9c7810470b12aa00f7d6f7c0e2b9981ac2bdb4371126a0660a
 ```
 
 
@@ -34,11 +34,6 @@ Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The estimated % CPU used
 - `CONTAINER.ID`: The container ID that this reading is for
-
-Example output:
-```
-screenshot example
-```
 
 Any errors are printed to Stderr.
 

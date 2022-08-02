@@ -5,26 +5,19 @@ lead: ""
 date: 2022-06-15T01:49:15+00:00
 weight: 901
 ---
-
-First of all, we're going to set up your machine. After that you'll have the chance to choose either the manual or the Docker methods for the remainder of the installation process.
-
 ## Setting up your machine
 
-If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load / reload some configuration and / or daemons.
+If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 
-The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do) python3 including some packages and docker installed (rootless optional).
+The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional).
 
 We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
 
 ```bash
-git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/green-metrics-tool
-
-sudo apt update
-
-sudo apt upgrade -y
-
-sudo apt install python3 python3-pip libpq-dev -y
-
+git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/green-metrics-tool && \
+sudo apt update && \
+sudo apt upgrade -y && \
+sudo apt install python3 python3-pip libpq-dev -y && \
 sudo pip3 install psycopg2 pandas pyyaml
 ```
 
@@ -32,46 +25,39 @@ The sudo in the last command is very important, as it will tell pip to install t
 
 ## Docker
 
-Docker provides a great installation help on their website that will probably be more up2date than this readme: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
-However, we provide here what we typed in on our Ubuntu system, but be sure to double check on the official website. Especially if you are not running Ubuntu.
+However, we provide here what we used in on our Ubuntu system, but be sure to double check on the official website. Especially if you are not running Ubuntu.
 
 ### Base install
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt update
-
-sudo apt remove docker docker-engine docker.io containerd runc
-
-sudo apt-get install ca-certificates curl gnupg lsb-release
-
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+sudo apt update && \
+sudo apt remove docker docker-engine docker.io containerd runc && \
+sudo apt-get install ca-certificates curl gnupg lsb-release && \
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-You can check if all is working fine by running ```docker stats```. It should connect to the docker daemon and output a "top" like view, which is empty for now.
+You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now.
 
 ### Rootless mode (strongly recommended)
-If you want rootless mode however be sure to follow the instructions here: [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/) After running the dockerd-rootless-setuptool.sh script, you may need to add some lines to your .bashrc file. Also you need to have a non-root user in place before you go through this process :)
+If you want rootless mode however be sure to follow the instructions here (make sure you have a non-root user in place first): [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/) 
+
+After running the dockerd-rootless-setuptool.sh script, you may need to add some lines to your .bashrc file.
 
 The process may pose some challenges, as depending on your system some steps might fail. We created a small summary of our commands, but these are subject to change.
 
-### Important:
-Before doing these steps be sure to relog into your system (either through relogging, or doing a new ssh login) with the non-root user.
+#### Important:
+Before doing these steps be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user.
 
-A switch with "su my_user" will break and make install impossible.
+A switch with just "su my_user" will break and make install impossible.
 
 ```bash
-sudo systemctl disable --now docker.service docker.socket
-
-sudo apt install uidmap
-
-sudo apt update
-
-sudo apt-get install -y docker-ce-rootless-extras dbus-user-session
-
+sudo systemctl disable --now docker.service docker.socket && \
+sudo apt install uidmap && \
+sudo apt update && \
+sudo apt-get install -y docker-ce-rootless-extras dbus-user-session && \
 dockerd-rootless-setuptool.sh install
 ```
 
@@ -79,11 +65,10 @@ Be sure now to add the export commands that are outputted to your .bashrc or sim
 
 ```bash
 systemctl --user enable docker
-
 sudo loginctl enable-linger $(whoami)
 ```
 
-And you must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/) Make sure to also enable the CPU, CPUTSET, and I/O delegation.
+You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/) Make sure to also enable the CPU, CPUTSET, and I/O delegation.
 
 ## Dockerfiles
 
@@ -91,7 +76,7 @@ The Dockerfiles will provide you with a running setup of the working system with
 
 It can technically be used in production, however it is designed to run on your local machine for testing purposes.
 
-The system binds in your host OS to port 8000. So it will be accessible through `http://metrics.green-coding.local:8000`
+The system binds in your host OS to port 8000. So the web view will be accessible through `http://metrics.green-coding.local:8000`
 
 
 ### Setup
@@ -100,6 +85,7 @@ Please run the `install.sh` script in the root folder.
 
 This script will:
 - Set the database password for the containers
+    - By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Create the needed `/etc/hosts` entries for development
 - Build the binaries for the Metric Providers
 - Add entries in the `/etc/sudoers` file to start some metric reporters without prompting passwords
@@ -116,9 +102,9 @@ After that you can start the containers:
 
 ### Connecting to DB
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
-The expose to the host system is not needed. If you do not want to access the db directly just remove the `5432:5432` entry in the `compose.yml` file.
+This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `5432:5432` entry in the `compose.yml` file.
 
-The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `compose.yml` file.
+The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install.sh` run, and can be found in the `compose.yml` file.
 
 ### Restarting Docker containers on system reboot
 
@@ -142,8 +128,7 @@ Restart=never
 WantedBy=multi-user.target
 ```
 
-As you can see *Restart* is set to never. The reason is, that the docker dameon will restart the containers by itself. The `systemd` script is only needed
-to start the container once on reboot.
+As you can see *Restart* is set to never. The reason is that the docker dameon will restart the containers by itself. The `systemd` script is only needed to start the container once on reboot.
 
 As you can see we also reference the `/home/USERNAME/startup-docker.sh` file which `systemd` expects to be in your home directory.
 
@@ -156,12 +141,9 @@ docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 
 ### Dockerfiles architecture explanation:
 - The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
-- The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to
-a UNIX socket in `/tmp`
-- all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull / yourself
-without having to rebuild the docker image.
-- postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container
-will import the database structure fresh.
+- The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to a UNIX socket in `/tmp`
+- all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
+- postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container will import the database structure fresh.
 
 
 ## Cronjob
@@ -178,4 +160,3 @@ When running the cronjob we advice you to append all the output combined to a lo
 `* * * * * python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
 
 Be sure to give the `green-metrics-jobs.log` file write access rights.
-

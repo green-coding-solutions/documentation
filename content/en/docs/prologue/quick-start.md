@@ -49,16 +49,16 @@ We will make the most basic example our tool can handle:
 
 So let's start:
 ```bash
-git pull https://www.github.com/green-coding-berlin/green-metrics-tool /tmp/green-metrics-tool
-cd /tmp/green-metrics-tool/Docker
+git pull https://www.github.com/green-coding-berlin/green-metrics-tool /tmp/green-metrics-tool && \
+cd /tmp/green-metrics-tool/Docker && \
 cp compose.yml.example compose.yml
 ```
 Please now change the default password for your database. In our example we will use `superstar`
 ```bash
-docker compose up -d
-cd /tmp
-mkdir easiest-application
-cd easiest-application
+docker compose up -d && \
+cd /tmp && \
+mkdir easiest-application && \
+cd easiest-application && \
 touch usage_scenario.json
 ```
 Now please copy the following code inside the usage_scenario.json.
@@ -100,7 +100,7 @@ In the code you see the *identifier* which references the **Ubuntu** base image.
 
 Under *flow* you see that we are just calling `stress -c 1 -t 5`, which will stress our CPU for 5 seconds on one core.
 ```bash
-cd /tmp/green-metrics-tool/tools
+cd /tmp/green-metrics-tool/tools && \
 python3 runner.py manual --folder /tmp/easiest-application --name testing-my-demo
 ````
 

@@ -21,8 +21,8 @@ An example call would be:
 docker exec -it MY_CONTAINER_NAME bash
 ```
 
-Some container do not have `bash`. However `sh`, which has less capabilities though,
-should in most cases be available.
+Some container do not have `bash`. However `sh`, which has less capabilities,
+should be available in most cases.
 
 ## Debbuging containers via HTTP / exposed ports
 

@@ -7,11 +7,9 @@ weight: 802
 toc: true
 ---
 
-When orchestrating your application we rely on images either available on [dockerhub](https://hub.docker.com/)
-or being locally available.
+When orchestrating your application we rely on images either available on [dockerhub](https://hub.docker.com/) or locally.
 
-This tutorial will walk you through the design process of containerizing a sample
-Wordpress web application.
+This tutorial will walk you through the design process of containerizing a web application, using Wordpress as an example.
 
 ## General
 
@@ -21,8 +19,7 @@ So you either must have a daemon / process running inside the container that kee
 the container running or use the `cmd` option in the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) 
 file to start a shell that keeps the container running.
 
-The reason for that is, that our tool sends the commands to the containers after they
-have all been orchestrated and does not support one-off container starts with parameters.
+This is because our tool sends the commands to the containers after they have all been orchestrated and does not support one-off container starts with parameters.
 
 ## Containerizing
 
@@ -30,22 +27,19 @@ Our architecture looks like the following:
 
 <img src="/img/server-architecture-banana.webp">
 
-(Since we still had space in the picture we attached a Banana for reference)
 
-We will now containerize the webserver, the database and also the client inside in a separate container.
+We will now containerize the webserver, database, and client inside seperate containers.
 
 The reason for this scoping is that the Green Metrics Tool reports on a container level
-and we are interested in showing these metrics separately.
+and we are interested in showing all these metrics separately.
 
 Technically you could also measure the architecture without the client side, but we
-believe that the energy consumption of software includes both sides as well as the
-network part.
-
-👉  To learn how we calculate network energy consumption [Network Metrics Provider →]({{< relref "network-cgroup-container" >}})
+believe that the energy consumption of software includes both sides, as well as the
+network usage.
 
 ### Directory structure
 
-We first prepare the directory structure and create the folder `/tmp/demo-app`. This is were our containerized app will be put into.
+We first prepare the directory structure and create the folder `/tmp/demo-app`. This is where our containerized app will be put into.
 
 ```bash
 mkdir /tmp/demo-app
@@ -64,15 +58,14 @@ Here you see a list of the final files and directories that we will end up with:
 ```
 
 The `compose.yml` is technically not needed, but makes initial testing 
-and debugging way easier, therefore we encourage you in terms of the flow of
-containerizing your app to always start with setting all up in a `compose.yml` 
-and then migrating the contents of the file to our `usage_scenarion.yml` file
-and add the `flow` and extra attributes you need on top.
+and debugging far easier. We encourage you to always start with setting up a `compose.yml` 
+and then migrating the contents of the file to our `usage_scenarion.yml` file,
+adding the `flow` and extra attributes you need on top. We have found this to be the easiest workflow in regards to containerizing your application.
 
 
 ### Webserver
 
-We are basing the container off `wordpress:latest`, which includes an apache webserver as 
+We are basing the container off of `wordpress:latest`, which includes an apache webserver as 
 well as a PHP runtime.
 
 In the container we want the webserver to listen on port 9875, therefore we have
@@ -81,7 +74,7 @@ to create a new virtual host.
 The virtualhost should have a hostname identical to the container. We set this
 container name later, so see it as given for the moment.
 
-This is the `wordpress.conf` file we need:
+Setup your `wordpress.conf` file as follows:
 ```bash
 Listen 9875
 <VirtualHost *:9875>
@@ -114,7 +107,7 @@ COPY ./wordpress.conf /etc/apache2/sites-enabled/wordpress.conf
 By copying the `wordpress.conf` to the apache vhost directory we let webserver know
 to deliver the website on port `9875` for host `green-coding-wordpress-apache-data-container`
 
-{{< alert icon="💡" text="As you can see we are letting the container expose port 9875. This is usually very helpful for debugging to let internal / testing containers to be run at ports greater 1024" />}}
+{{< alert icon="💡" text="As you can see we are letting the container expose port 9875. This is usually very helpful for debugging to let internal/testing containers be run at ports greater 1024" />}}
 
 We will also dump the filesystem of our existing Wordpress app, so we can ingest it 
 into the container:
@@ -126,7 +119,7 @@ cp -R /PATH/TO/WORDPRESS /tmp/demo-app/html
 
 ### Database
 
-We assume a [MariaDB database](https://mariadb.org/) and will base of
+We assume a [MariaDB database](https://mariadb.org/) and will base off
 their [mariadb basic image](https://hub.docker.com/_/mariadb).
 
 We pull a dump from our database and copy the wordpress filesystem:
@@ -189,13 +182,12 @@ services:
 
 In order to simulate a client we need a container running a headless browser.
 
-We choose Puppeteer and provide an exemplary container to build here: https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer and to be directly used from [Docker Hub](https://hub.docker.com/greencoding)
+We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-chrome](https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-chrome)
 
 
 ### Moving to `usage_scenario.yml`
 
-The next step, after checking that all containers orchestrate correctly and can talk to each other as expected, would 
-be to move the `compose.yml` to our `usage_scenario.yml` format.
+The next step, after checking that all containers orchestrate correctly and can talk to each other as expected, would be to move the `compose.yml` to our `usage_scenario.yml` format.
 
 The resulting file would look like this:
 
@@ -231,7 +223,7 @@ services:
       - example-network
 
 flow:
-# Is dicussed in "Interacting with applications"
+# Is discussed in "Interacting with applications"
 ...
 ```
 
@@ -247,4 +239,4 @@ Afterwards run the measurements.
 
 An example how to run a measurement locally you can find here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
-To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/example-applications/tree/main/wordpress-mariadb-data)
+To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/example-applications/tree/main/wordpress-official-data)

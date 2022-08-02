@@ -8,16 +8,19 @@ images: []
 weight: 120
 ---
 ### What it does
-This metric provider reads from the RAPL (Running Average Power Limits) MSR registeries that appear on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/running-average-power-limit-energy-reporting.html)
+This metric provider reads from the RAPL (Running Average Power Limits) MSR registeries that appear on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
-This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-cores` domain, which gives you the energy used by the CPU.
+
+This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
 
 ### Input Parameters
 - Args:
-    - c: specifies which core to measure
-        - Currently this is unimplemented, and will read the energy used by all cores on a system
     - i: specifies interval in milliseconds between measurements
         - from RAPL documentation: RAPL can only measure until 1ms resolution 
+
+```
+> sudo ./static-binary -i 100
+```
 
 ### Output
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
