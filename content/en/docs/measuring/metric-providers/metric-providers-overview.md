@@ -24,11 +24,14 @@ Each metric providers to be attached and used during a run are defined in our `c
 ```yaml
 measurement:
   metric-providers:
-    cpu.cgroup.container.provider.CpuCgroupContainerProvider: 100
-    energy.RAPL.MSR.system.provider.EnergyRaplMsrSystemProvider: 100
-    memory.cgroup.container.provider.MemoryCgroupContainerProvider: 100
-    time.cgroup.container.provider.TimeCgroupContainerProvider: 100
-    time.proc.system.provider.TimeProcSystemProvider: 100
+    cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider: 100
+    cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider: 100
+    memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider: 100
+    cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider: 100
+    cpu.time.cgroup.system.provider.CpuTimeCgroupSystemProvider: 100
+    cpu.time.system.provider.CpuTimeSystemProvider: 100
+    network.io.cgroup.container.provider.NetworkIoCgroupContainerProvider: 100
+    ram.energy.RAPL.MSR.system.provider.RamEnergyRaplMsrSystemProvider: 100
 ```
 
 The number specified refers to the integer resolution in milliseconds. Change this number to have a smaller or larger time window between measurements for that specific provider.
