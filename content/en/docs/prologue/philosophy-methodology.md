@@ -24,12 +24,7 @@ However when running on different hardware a comparison by the order of magnitud
 
 ## Containerization
 
-We believe in the containerization of applications.
-The benefit are that the overhead is extremely small and
-it gives the benefit of controlling the execution, isolation and also the interfacing with the
-environment around it.
-
-Most modern applications are already containerized or can be easily brought into this format (At least for the purpose of measuring).
+We believe in the containerization of applications. The benefits are that the overhead is extremely small and it allows us to control the execution, interfacting, and environment around the application. Most modern applications are already containerized or can be easily brought into this format (at least for the purpose of measuring).
 
 Therefore the Green Metrics Tool is designed to primarily measure containerized applications.
 
@@ -48,8 +43,7 @@ retrieved on a system level and optionally attributed to a level of container gr
 To measure the containers we rely on the concept of *Metric Reporters*.
 These are small UNIX-style programs that typically reporty only one metric directly to STDOUT.
 
-This keeps the profile of the measurement extremly low and makes the *Metric Reporters* versatily and reuasable, for instance when you want to use them for inline measurements in your already 
-present architecture.
+This keeps the profile of the measurement extremely low and makes the *Metric Reporters* versatile and reuasable.
 
 We support many different varieties of reporters like:
 - Memory per Container
@@ -65,21 +59,20 @@ We support many different varieties of reporters like:
 
 We want to reuse infrastructure files as best as possible.
 
-Therefore our tools consumes ready-built containers and can will also be able to consume Kubernetes
+Therefore our tools consumes ready-built containers and will also be able to consume Kubernetes
 infrastructure files.
 
 The format of the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) is based of the `docker-compose.yml` specification but does provide additional options to run the container, which are very helpful in terms of reusing other peoples containers.
 For instance you can run an `apt install` to install one missing tool in a standard `ubuntu` container without having the need to create a new image on DockerHub.
 
-However we do not allow the full options of `docker compose` as this would allow to mount arbitrary volumes
-on our measurement machines or even run in `--priviledged` mode.
+However we do not allow the full options of `docker compose` as this would allow to mount arbitrary volumes on our measurement machines or even run in `--priviledged` mode.
 
 ## Reproducibility & Open Data
 
-To make people energy aware when using and creating software we believe that it is essential to have
+To make people energy aware whilst using and creating software we believe that it is essential to have
 every measurement open and visible.
 
-Also the tools to measure must be free and open-source (FOSS).
+The tools used to make these measurements must also be free and open-source (FOSS).
 
 To however compare one measurement with another we believe that energy comparisons between
 different softwares running on hardware setups is not feasible.

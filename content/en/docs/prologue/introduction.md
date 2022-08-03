@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 description: "The Green Metrics Tool is a wholistic framework to measure the energy / co2 of your application."
-lead: "The Green Metrics Tool is a wholistic framework to measure the energy / co2 of your application."
+lead: "The Green Metrics Tool is a holistic framework to measure the energy / co2 of your application."
 date: 2022-06-15T08:49:15+00:00
 toc: true
 weight: 1001
@@ -43,8 +43,7 @@ Under [Installation →]({{< relref "installation-overview" >}}) you find the de
 Then proceed with [Containerizing and measuring own applications →]({{< relref "containerizing-applications" >}}) to understand
 how to prepare your app to be consumed by the Green Metrics Tool.
 
-Then be sure to read the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) specification to get to know the flexibility of 
-our tool to measure your application.
+Be sure to read the [usage_scenario.json →]({{< relref "usage-scenario" >}}) specification to get to know the flexibility of our tool to measure your application.
 
 Then proceed to [Measuring Locally]({{< relref "measuring-locally" >}})
 

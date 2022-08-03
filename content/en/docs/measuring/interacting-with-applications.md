@@ -6,8 +6,8 @@ date: 2022-06-18T08:48:45+00:00
 weight: 803
 ---
 
-When your application is prepared in containers you need to somehow provide a starting
-point or flow of interactions that the application is going to process.
+When your application is prepared in containers you need to provide a starting
+point or set of actions that the application is going to process whilst our metric providers measure and read the metrics during this lifecycle.
 
 In our terminolgy we call this a `flow`.
 
@@ -17,8 +17,8 @@ in one or more of the containers.
 In a more complex form it is some kind of representation of a *standard usage scenario* 
 that the application will experience in production. 
 
-We will here guide you through one simple example with only one container that 
-executes a terminal command and one more complex example with an orchestration of
+Here we will guide you through one simple example with only one container that 
+executes a terminal command. Then we will show you one more complex example with an orchestration of
 three containers, where we simulate a user that accesses a web application.
 
 The result will be a `usage_scenario.yml` file. ([Specification →]({{< relref "usage-scenario" >}}))
@@ -26,7 +26,7 @@ The result will be a `usage_scenario.yml` file. ([Specification →]({{< relref 
 ## Command line app
 
 We will make the most basic example our tool can handle:
-- Base of **alpine** base container.
+- Base off of **alpine** base container.
 - Add the package `stress-ng` from `apk`
 - Just run a 5 seconds stress run with default metrics providers
 
@@ -56,11 +56,11 @@ services:
 The orchestration in the `services` part uses the standard alpine image and just installs
 an additional package into it: `stress-ng`
 
-In the `flow` part we teill the container in the `commands` array that it shall
+In the `flow` part we tell the container in the `commands` array that it shall
 run a command of type `console` and then provide the same string that we would type
 in directly if we were running a bash shell (or similar).
 
-This example is very representativ for machine learning applications where you typically
+This example is representative of machine learning applications where you typically
 fire off one command (either train or infer) and then the applications runs one time
 until it finishes.
 
@@ -125,15 +125,15 @@ flow:
         read-notes-stdout: true
 ```
 
-Let's drill down what is happeing in this `usage_scenario.yml`:
+Let's drill down on what is happeing in this `usage_scenario.yml`:
 
 - First the network is set up
 - Then all services are defined and on which network they can communicate
     + This results in three services:
-        * db-container: Our mariadb database based of a local image (Server side)
-        * wordpress-container: Our Wordpress based of a local image (Server side)
-        * puppeteer-container: Our headless chrome browser based of our custom image on docker hub (Client side)
-- Then a flow is defined which triggers node to run a sequential flow to be executed by the headless Chrome
+        * db-container: Our mariadb database based off a local image (Server side)
+        * wordpress-container: Our Wordpress based off a local image (Server side)
+        * puppeteer-container: Our headless chrome browser based off our custom image on docker hub (client side)
+- Then a flow is defined which triggers Node to run a sequential flow to be executed by the headless Chrome
     + The flow runs one time, then a 30 second sleep occurs and then the flow is executed again
         * The reason being that this simulates a user more typically. You browse, you read, your browse again ... etc.
 
@@ -150,7 +150,7 @@ In our example we also let it listen on port 9875 and it only accepts HTTP traff
 
 A connect call would therefore be needed to be issued to: `http://wordpress-container:9875`
 
-Here is an exceprt of an example `puppeteer-flow.js`:
+Here is an excerpt of an example `puppeteer-flow.js`:
 
 ```javascript
 ...

@@ -6,17 +6,14 @@ date: 2022-06-18T08:48:45+00:00
 weight: 805
 ---
 
-Before starting to measure you must first install some prerequisites: [Installation →]({{< relref "installation-overview" >}})
+Before starting to measure you must first install some prerequisites: [Installation →]({{< relref "installation-overview" >}}) Make sure your docker containers are up and running. If they are not, you can start them by running `docker compose up` whilst in the green metrics docker subfolder. 
 
-If you came here from [interacting with applications →]({{< relref "interacting-with-applications" >}}) then you can also
-directly user your `usage_scenario.yml`
-
-We will use here for everybody that just jumped in a new sample application.
+If you came here from [interacting with applications →]({{< relref "interacting-with-applications" >}}) then you can also directly use your `usage_scenario.yml` Otherwise we will set it up here.
 
 ## Measuring a simple example load
 
 We will make the most basic example our tool can handle:
-- Base of **alpine** base container.
+- Using **alpine** base container.
 - Add the package `stress-ng` from `apk`
 - Just run a 5 seconds stress run with default metrics providers
 
@@ -83,4 +80,4 @@ If you have [installed a cronjob →]({{< relref "installation-overview" >}}) yo
 
 It will be automatically picked up and you will get sent an email with the link to the results.
 
-In order for the email to work correctly you must set the configuration in your used `config.yml`.
+In order for the email to work correctly you must set the configuration in your `config.yml`.

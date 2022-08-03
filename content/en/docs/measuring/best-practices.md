@@ -9,15 +9,14 @@ toc: true
 
 One very important note, that serves as a general rule for all usage of the Green Metrics Tool:
 
-All energy measurements and / or benchmarks on a normal operating system are by nature error prone and uncomparable. 
-Please never compare our values with values on your system. Measurements of software can only ever be compared on the exact same system. 
+All energy measurements and / or benchmarks on a normal operating system are by nature error prone and uncomparable with different systems. Please never compare our values with values on your system. Measurements of software can only ever be compared on the exact same system. 
 
 Also measurements should never be seen as ground truth, but only as indicator of the order of magnitude.
 
 Our system is designed to raise awareness and educate about the software energy use in 
 typical off-the-shelf systems.
 
-This reduces its accuary and reproducability, but increases the generality.
+This reduces its accuracy and reproducibility, but increases its general applicability.
 
 The result is that you get an idea of the order of magnitude the energy consumption is in, but 
 does typically not allow you to make comparisons on exact numbers.
@@ -27,8 +26,8 @@ does typically not allow you to make comparisons on exact numbers.
 - Never compare between machines to judge your software
     + At least not within small margins. Energy measurements on multi-task operating systems do always have noise and variance. 
     + However a comparison by the order of magnitude is very helpful to judge the underlying hardware
-        * In order to judge software on different hardwarre your systems must be calibrated and run no non-deterministic componentes like schedulers (realtime linux kernel for instance)
-    + Even systems with identical hardware components can have variations that you cannot easily account for, cause it is unknown if you don't measure it ahead (component energy consumption variance etc.)
+        * In order to judge software on different hardware your systems must be calibrated and run no non-deterministic componentes like schedulers (realtime linux kernel for instance)
+    + Even systems with identical hardware components can have variations that you cannot easily account for, as there are unknown varaibles unless you measure them ahead (component energy consumption variance etc.)
 - An application should NEVER come to the bounds of its resources. 
     + Analyze the peak load of your application. If the sytem runs at >80% typically scheduling and queuing problems can kick in.
 - The application you want to test must run at least twice as long as the minimal resolution 
@@ -47,4 +46,4 @@ does typically not allow you to make comparisons on exact numbers.
     + Factor in the idle time that your app has. Typically a web browser for instance is mostly idle, as users read. 
     + Nevertheless the browser does use the CPU during that time and consumes energy. Therefore it is an important part to have in your `flow`
 - Use notes to make `flows` better understandable
-- Use our measurement service for reproducability and visibility of your measurements
+- Use our measurement service for reproducibility and visibility of your measurements
