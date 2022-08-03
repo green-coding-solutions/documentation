@@ -30,7 +30,7 @@ toc: true
 
 ## Do you provide sample data / CSV exports
 - We do provide [sample data on Github](https://github.com/green-coding-berlin/sample-data). 
-    + Since we use postgresql, it is in this format. We co not provide CSV.
+    + Since we use postgresql, it is in this format. We do not provide CSV.
 
 ## Can I get support?
 

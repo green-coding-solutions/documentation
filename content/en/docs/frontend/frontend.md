@@ -8,13 +8,12 @@ draft: false
 images: []
 ---
 
-The Green Metrics Frontend is the part of our tool that actually displays 
-the raw and unprocessed data from the API in a nice visual form.
+The Green Metrics Frontend is the part of our tool that displays the raw and unprocessed data from the API in a nice visual form.
 
 The frontend relies on a [Fomantic UI Template](https://fomantic-ui.com/) and uses [Dygraphs](https://dygraphs.com/)
 for charting.
 
-Apart from that we use no Javascript Framework, as we merly do fetch-requests
+Apart from that we use no Javascript Framework, as we merely do fetch-requests
 and then a bit of reformatting.
 
 We leave React and similar for the more fancy folks out there :)

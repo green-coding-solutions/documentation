@@ -9,7 +9,7 @@ toc: true
 
 One very important note, that serves as a general rule for all usage of the Green Metrics Tool:
 
-All energy measurements and / or benchmarks on a normal operating system are by nature error prone and uncomparable with different systems. Please never compare our values with values on your system. Measurements of software can only ever be compared on the exact same system. 
+All energy measurements and / or benchmarks on a normal operating system are by nature error prone and uncomparable with different systems. Please never compare our values with values on your system. Measurements of software can only be compared on the exact same system. 
 
 Also measurements should never be seen as ground truth, but only as indicator of the order of magnitude.
 
@@ -27,7 +27,11 @@ does typically not allow you to make comparisons on exact numbers.
     + At least not within small margins. Energy measurements on multi-task operating systems do always have noise and variance. 
     + However a comparison by the order of magnitude is very helpful to judge the underlying hardware
         * In order to judge software on different hardware your systems must be calibrated and run no non-deterministic componentes like schedulers (realtime linux kernel for instance)
+<<<<<<< HEAD
     + Even systems with identical hardware components can have variations that you cannot easily account for, as there are unknown varaibles unless you measure them ahead (component energy consumption variance etc.)
+=======
+    + Even systems with identical hardware components can have variations that you cannot easily account for, as there are unknown variables unless you measure them ahead (component energy consumption variance etc.)
+>>>>>>> metric-provider-documentation
 - An application should NEVER come to the bounds of its resources. 
     + Analyze the peak load of your application. If the sytem runs at >80% typically scheduling and queuing problems can kick in.
 - The application you want to test must run at least twice as long as the minimal resolution 
