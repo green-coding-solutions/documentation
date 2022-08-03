@@ -8,7 +8,7 @@ images: []
 weight: 120
 ---
 ### What it does
-This metric provider reads from the RAPL (Running Average Power Limits) MSR registeries that appear on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
+This metric provider reads from the RAPL (Running Average Power Limits) MSR registries that appear on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
 
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
