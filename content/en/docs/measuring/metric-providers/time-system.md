@@ -9,7 +9,7 @@ weight: 150
 ---
 ### What it does
 
-This metric provider calculates an estimate of the total time spent in the CPU based on the system /`proc/stat` file.
+This metric provider reads the total time spent in the CPU based on the system /`proc/stat` file.
 
 ### Input Parameters
 
@@ -26,12 +26,12 @@ By default the measurement interval is 100 ms.
 
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
 
-`TIMESTAMP READING CONTAINER.ID`
+`TIMESTAMP READING CONTAINER-ID`
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`:The time spent, in microseconds, by this container in the CPU
-- `CONTAINER.ID`: The container ID that this reading is for
+- `CONTAINER-ID`: The container ID that this reading is for
 
 Any errors are printed to Stderr.
 

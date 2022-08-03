@@ -28,12 +28,12 @@ By default the measurement interval is 100 ms.
 
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
 
-`TIMESTAMP READING CONTAINER.ID`
+`TIMESTAMP READING CONTAINER-ID`
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The estimated % CPU used
-- `CONTAINER.ID`: The container ID that this reading is for
+- `CONTAINER-ID`: The container ID that this reading is for
 
 Any errors are printed to Stderr.
 
@@ -43,7 +43,7 @@ The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-p
 The provider reads from two files. To get the number of microseconds spent in the CPU by the container, during the interval, it reads from:
 
 ```
-/sys/fs/cgroup/user.slice/user-<USER_ID>.slice/user@<USER_ID>.service/user.slice/docker-<USER_ID>.scope/cpu.stat
+/sys/fs/cgroup/user.slice/user-<USER-ID>.slice/user@<USER-ID>.service/user.slice/docker-<CONTAINER-ID>.scope/cpu.stat
 ```
 
 To get the total time spent by the cpu during that time interval, in Jiffies, you read from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal**, **guest** (see definitions [here](https://www.idnt.net/en-US/kb/941772)), add them together, divide by _SC_CLK_TCK_ (typically 100 Hz). The percentage of the cgroup time divided by this sum is the total percentage of CPU time spent by the container.
