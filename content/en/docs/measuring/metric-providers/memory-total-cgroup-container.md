@@ -1,6 +1,6 @@
 ---
-title: "Memory - Control Groups"
-description: "cgroup memory provider"
+title: "Memory Total - cgroup - container"
+description: "Documentation for MemoryTotalCgroupContainerProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-06-01T08:49:15+00:00
 draft: false
@@ -10,6 +10,9 @@ weight: 130
 
 ### What it does
 It reads the total amount of memory, in bytes, used by the cgroup of a container. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+
+### Classname
+- MemoryTotalCgroupContainerProvider
 
 ### Input Parameters
 

@@ -1,6 +1,6 @@
 ---
-title: "CPU - Control Groups"
-description: "cgroup cpu provider"
+title: "CPU % - cgroup - container"
+description: "Documentation for CpuUtilizationCgroupContainerProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-06-01T08:49:15+00:00
 draft: false
@@ -10,6 +10,9 @@ weight: 110
 ### What it does
 
 This metric provider calculates an estimate of the % total CPU usage based on the cgroups stats file of your docker containers. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+
+### Classname
+- CpuUtilizationCgroupContainerProvider
 
 ### Input Parameters
 

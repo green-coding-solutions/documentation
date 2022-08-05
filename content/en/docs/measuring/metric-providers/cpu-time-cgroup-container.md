@@ -1,6 +1,6 @@
 ---
-title: "CPU Time - Control Groups"
-description: "cgroup cpu time provider"
+title: "CPU Time - cgroup - container"
+description: "Documentation of CpuTimeCgroupContainerProvider for the Green Metrics Tool"
 lead: ""
 date: 2022-06-01T08:49:15+00:00
 draft: false
@@ -10,6 +10,9 @@ weight: 140
 ### What it does
 
 This metric provider reads time spent in the CPU based on the cgroups stats file of your docker containers. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+
+### Classname
+- CpuTimeCgroupContainerProvider
 
 ### Input Parameters
 

@@ -1,6 +1,6 @@
 ---
 title: "CPU Time - System"
-description: "cpu system time provider"
+description: "Documentation of CpuTimeSystemProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-06-01T08:49:15+00:00
 draft: false
@@ -10,6 +10,9 @@ weight: 150
 ### What it does
 
 This metric provider reads the total time spent in the CPU based on the system /`proc/stat` file.
+
+### Classname
+- CpuTimeSystemProvider
 
 ### Input Parameters
 
