@@ -58,6 +58,4 @@ In order to work in rootless cgroup delegation must be enabled here:
 
 Currently, `<USER-ID>` is assumed to be the default unix user-id of 1000
 
-### Future Plans
 
-In our testing, we've found that Jiffies increase by about 100 per second. This gives us a granularity of 10ms when using `/proc/stat` to read the total CPU time. This can be further improved by getting the total cpu time via cgroups as well. You can see the structure of your cgroups with the command: `cd / && systemd-cgls`. There you can see that there are three main domains: *user.slice*, *init.scope* and *system.slice*. Enumerating all directories in `/sys/fs/cgroup`, which are the root cgroups, and getting the stats from there would give us a more accurate total reading.
