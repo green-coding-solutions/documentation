@@ -47,3 +47,4 @@ does typically not allow you to make comparisons on exact numbers.
     + Nevertheless the browser does use the CPU during that time and consumes energy. Therefore it is an important part to have in your `flow`
 - Use notes to make `flows` better understandable
 - Use our measurement service for reproducibility and visibility of your measurements
+- Never move your mouse or type something on your keyboard while measuring, because the interrupts of the CPU will interfere with the measurement.
