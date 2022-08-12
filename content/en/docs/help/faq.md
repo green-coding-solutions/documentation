@@ -12,14 +12,6 @@ weight: 630
 toc: true
 ---
 
-
-## Keyboard shortcuts for search?
-
-- focus: `Ctrl + /`
-- select: `↓` and `↑`
-- open: `Enter`
-- close: `Esc`
-
 ## Other documentation?
 
 - [API](https://api.green-coding.org)
