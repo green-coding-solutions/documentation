@@ -241,4 +241,4 @@ Afterwards run the measurements.
 
 An example how to run a measurement locally you can find here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
-To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/example-applications/tree/main/wordpress-official-data)
+To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/simple-example-application)
