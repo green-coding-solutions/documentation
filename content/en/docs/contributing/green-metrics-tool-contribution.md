@@ -9,6 +9,6 @@ toc: true
 
 ## We are very happy to accept any contributions to the framework! 🥳🎉😍
 
-Please send us a Pull-Request on [Github](https://github.com/green-coding-berlin/green-metrics-tool).
+Please send all pull requests to our [`dev` branch](https://github.com/green-coding-berlin/green-metrics-tool/tree/dev).
 
 If you have any questions to not hesitate to send us an email: [info@green-coding.org](mailto:info@green-coding.org)

@@ -29,5 +29,5 @@ the Green Metrics Tool.
 
 ## Read our company blog
 
-If we introduce breaking changes or release new major versions we will post it there: [Company Blog](https://www.green-coding.org/blog)
+If we release a new major version, or introduce breaking changes, we will post it there: [Company Blog](https://www.green-coding.org/blog)
 
