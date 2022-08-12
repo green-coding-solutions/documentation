@@ -19,10 +19,16 @@ This example highlights that in order to measure an application you really need 
 
 <img src="/img/add-new-project.webp">
 
-### Benefits of hosted service
+## Measuring your applications
 
+The hosted service can really helpful when you want to measure your application a 
+reference machine and see if the values you are getting are in the same order of magnitude.
+
+The hosted service is free to use and makes your measurement data visible and reproducible for other people.
+
+### Benefits of hosted service
+- No need to setup local linux environment
 - Reproducible measurements from machines maintained by our team
 - DC / AC Metrics Providers are calibrated on our machines
 - Visibility of measurements on central platform
-- No installation necessary
 - Applied [best practices →]({{< relref "best-practices" >}}) for measurement configuration
