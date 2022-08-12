@@ -163,3 +163,4 @@ Be sure to give the `green-metrics-jobs.log` file write access rights.
 
 Also be aware that our example for the cronjob assumes your crontab is using `bash`.
 Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
+>>>>>>> main
