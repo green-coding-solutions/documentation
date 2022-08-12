@@ -49,5 +49,5 @@ After having entered the namespace the provider reads from `/proc/net/dev` and:
 - parses the output
 - skips all `lo` interfaces
 - sums up the `r_bytes` and `t_bytes` of all other interfaces
-- does NOT coupt dropped packets (we assume since most of the traffic is internal, that a dropped received packet shows up in another interface as sent anyway and a dropped sent packet does not attribute much to the energy consumption).
+- does NOT count dropped packets (we assume since most of the traffic is internal, that a dropped received packet shows up in another interface as sent anyway and a dropped sent packet does not attribute much to the energy consumption).
 
