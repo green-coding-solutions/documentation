@@ -3,11 +3,7 @@ title: "Quick Start"
 description: "One page summary of how to measure a sample application."
 lead: "One page summary of how to measure a sample application."
 date: 2022-06-18T08:00:00+00:00
-<<<<<<< HEAD
-draft: false
-=======
 draft: true
->>>>>>> main
 images: []
 menu:
   docs:
