@@ -184,6 +184,8 @@ In order to simulate a client we need a container running a headless browser.
 
 We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-chrome](https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-chrome)
 
+You can also download the container directly from docker hub here: [Docker Hub](https://hub.docker.com/r/greencoding/puppeteer-chrome)
+
 
 ### Moving to `usage_scenario.yml`
 
