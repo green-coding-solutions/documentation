@@ -9,7 +9,7 @@ toc: true
 
 One very important note, that serves as a general rule for all usage of the Green Metrics Tool:
 
-All energy measurements and / or benchmarks on a normal operating system are by nature error prone and uncomparable with different systems. Please never compare our values with values on your system. Measurements of software can only ever be compared on the exact same system. 
+All energy measurements and / or benchmarks on a normal operating system are by nature error prone and uncomparable with different systems. Please never compare our values with values on your system. Measurements of software can only be compared on the exact same system. 
 
 Also measurements should never be seen as ground truth, but only as indicator of the order of magnitude.
 
