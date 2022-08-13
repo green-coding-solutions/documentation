@@ -54,11 +54,7 @@ If you wish to run them independently however, you can do so as a c program or w
 
 
 #### C
-<<<<<<< HEAD
-After building the metric provider binary via the makefile or install script, simply run it with sudo privelages. It will begin reading the metrics and printing them to Stdout. 
-=======
 After building the metric provider binary via the makefile or install script, simply run it with sudo privileges. It will begin reading the metrics and printing them to Stdout. 
->>>>>>> main
 
 If the metric provider has specific or needed flags (such as container-id), you may provide them. Some metrics gather their data from container-level information, while others read system-wide metrics. Those that read at a container-level will need the container-ids passed in as an input parameter with the -s flag, with each container-id seperated with a comma. See the specific Metric Provider's documentation for more information.
 
