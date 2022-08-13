@@ -1,25 +1,25 @@
 ---
-title: "Energy RAM - RAPL System"
-description: "Documentation for RamEnergyRaplMsrSystemProvider of the Green Metrics Tool"
+title: "Memory Energy - RAPL System"
+description: "Documentation for MemoryEnergyRaplMsrSystemProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-06-02T08:49:15+00:00
 draft: false
 images: []
-weight: 121
+weight: 120
 ---
 ### What it does
-This metric provider reads the RAM energy from the Running Average Power Limit (RAPL) interface via a machine specific registers (MSR) that is present on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
+This metric provider reads the DRAM energy from the Running Average Power Limit (RAPL) interface via a machine specific registers (MSR) that is present on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
 
 ### Classname
-- RamEnergyRaplMsrSystemProvider
+- MemoryEnergyRaplMsrSystemProvider
 
 ### Input Parameters
 - Args:
     - i: specifies interval in milliseconds between measurements
         - from RAPL documentation: RAPL can only measure until 1ms resolution 
-    - d: Must be set to activate the RAM reading mode.
+    - d: Must be set to activate the DRAM reading mode.
 
 ```
 > sudo ./static-binary -i 100 -d

@@ -5,7 +5,7 @@ lead: ""
 date: 2022-06-02T08:49:15+00:00
 draft: false
 images: []
-weight: 120
+weight: 114
 ---
 ### What it does
 This metric provider reads the energy of the CPU Package from the Running Average Power Limit (RAPL) interface via a machine specific register (MSR) that is present on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
