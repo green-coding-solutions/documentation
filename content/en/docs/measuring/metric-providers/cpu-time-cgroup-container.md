@@ -51,4 +51,4 @@ The provider reads from the cpu.stat file used by your container here:
 In order to work in rootless cgroup delegation must be enabled here:
 `/etc/systemd/system/user@.service.d/delegate.conf`
 
-Currently, `<USER-ID>` is assumed to be the default unix user-id of 1000
+Currently, `<USER-ID>` is set to the calling user.

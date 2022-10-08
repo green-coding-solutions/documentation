@@ -43,4 +43,4 @@ Any errors are printed to Stderr.
 ### How it works
 The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-pages/man7/cgroups.7.html) enabled on your system. It reads from the `memory.current` file under `sys/fs/cgroup/user.slice/user-<USER-ID>.slice/user@<USER-ID>.service/user.slice/docker-<CONTAINER-ID>.scope/`
 
-Currently, `<USER-ID>` is assumed to be the default unix user-id of 1000
+Currently, `<USER-ID>` is set to the calling user.

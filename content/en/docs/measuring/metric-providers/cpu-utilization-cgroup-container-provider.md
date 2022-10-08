@@ -56,6 +56,5 @@ Then it calculates the % cpu used via this formula: `container_reading * 10000 /
 In order to work in rootless cgroup delegation must be enabled here:
 `/etc/systemd/system/user@.service.d/delegate.conf`
 
-Currently, `<USER-ID>` is assumed to be the default unix user-id of 1000
-
+Currently, `<USER-ID>` is set to the calling user.
 
