@@ -41,18 +41,16 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now.
 
-### Rootless mode (strongly recommended)
-If you want rootless mode however be sure to follow the instructions here (make sure you have a non-root user in place first): [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/) 
+### Rootless mode
+The Green Metrics Tool is currently designed to work only with Docker in rootless mode.
 
-After running the dockerd-rootless-setuptool.sh script, you may need to add some lines to your .bashrc file.
+If your docker daemon currently does not run in rootless mode please follow the heregiven instructions.
 
-The process may pose some challenges, as depending on your system some steps might fail. We created a small summary of our commands, but these are subject to change.
+In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/) 
 
-#### Important:
-Before doing these steps be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user.
+**Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user`not work.**
 
-A switch with just "su my_user" will break and make install impossible.
-
+The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 ```bash
 sudo systemctl disable --now docker.service docker.socket && \
 sudo apt install uidmap && \
@@ -61,14 +59,18 @@ sudo apt-get install -y docker-ce-rootless-extras dbus-user-session && \
 dockerd-rootless-setuptool.sh install
 ```
 
-Be sure now to add the export commands that are outputted to your .bashrc or similar.
+After the installation the install script will tell you to add some `export` statements to your `.bashrc` file.
+Please do so to always have the correct paths referenced if you open a new terminal.
 
+Lastly please run the following commands to have the docker daemon always lingering:
 ```bash
 systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
 
-You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/) Make sure to also enable the CPU, CPUTSET, and I/O delegation.
+You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/).
+
+Make sure to also enable the CPU, CPUSET, and I/O delegation as instructed there.
 
 ## Dockerfiles
 
@@ -163,4 +165,3 @@ Be sure to give the `green-metrics-jobs.log` file write access rights.
 
 Also be aware that our example for the cronjob assumes your crontab is using `bash`.
 Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
->>>>>>> main
