@@ -24,7 +24,7 @@ All of our example applications the same structure:
 - *...* is either a file, a folder or missing.
     - It contains supplemental files that are needed to build the `Dockerfile` and / or to make a bind-volume for the `compose.yml` be missing /will be a file / will be a folder. This contains the supplemental Code that the
 
-Please check out our repository of example applications on Github: [Example Applications Repo](https://www.github.com/green-coding-berlin/green-metrics-tool/demo-containers)
+Please check out our repository of example applications on Github: [Example Applications Repo](https://github.com/green-coding-berlin/example-applications)
 
 ## Demoing the example application (optional)
 

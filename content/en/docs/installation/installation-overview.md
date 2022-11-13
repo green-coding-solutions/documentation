@@ -9,7 +9,7 @@ weight: 901
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 
-The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional).
+The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
 We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
 
@@ -46,9 +46,9 @@ The Green Metrics Tool is currently designed to work only with Docker in rootles
 
 If your docker daemon currently does not run in rootless mode please follow the heregiven instructions.
 
-In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/) 
+In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/)
 
-**Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user`not work.**
+**Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user` will not work.**
 
 The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 ```bash
@@ -90,8 +90,6 @@ This script will:
     - By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Create the needed `/etc/hosts` entries for development
 - Build the binaries for the Metric Providers
-- Add entries in the `/etc/sudoers` file to start some metric reporters without prompting passwords
-    + This is needed, since some metrics can only be read as `root` and we do not want to run the whole measurement as root. Only the spawned processes for the Metric Reporters
 
 What you might want to add:
 - SMTP mail sending is by default deactived, so for a quick-start you do not have to change that in the `config.yml`
@@ -156,7 +154,7 @@ You can install a cronjob on your system to periodically call:
 -  `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
 -  `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
 
-The `jobs.py` uses the python3 faulthandler mechanism and will also report to *STDERR* in case 
+The `jobs.py` uses the python3 faulthandler mechanism and will also report to *STDERR* in case
 of a segfault.
 When running the cronjob we advice you to append all the output combined to a log file like so:
 `* * * * * python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
