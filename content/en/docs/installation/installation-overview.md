@@ -101,18 +101,6 @@ After that you can start the containers:
 - The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
 - To start in detached mode just use `docker compose -d`
 
-#### LM-Sensors
-
-If you want the temperature metric provider to work you need to run the sensor detector
-```bash
-sudo sensors-detect
-```
-in order to detect all the sensors in your system. One you have run this you should be able to run the
-```bash
-sensors
-```
-command and see your CPU temp.
-
 ### Connecting to DB
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
 This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `5432:5432` entry in the `compose.yml` file.
@@ -158,6 +146,32 @@ docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
 - postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container will import the database structure fresh.
 
+## Metric providers
+
+Some metric providers need extra setup before they work. 
+
+### LM-Sensors
+
+If you want the temperature metric provider to work you need to run the sensor detector
+```bash
+sudo sensors-detect
+```
+in order to detect all the sensors in your system. One you have run this you should be able to run the
+```bash
+sensors
+```
+command and see your CPU temp.
+
+### RAPL
+
+On kernels > 2.6 all the kernel modules should automatically be loaded.
+
+However just in case run:
+```
+sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
+sudo modprobe intel_rapl_msr
+sudo modprobe rapl
+```
 
 ## Cronjob
 
