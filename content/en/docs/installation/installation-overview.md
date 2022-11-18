@@ -18,6 +18,7 @@ git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/gre
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install python3 python3-pip libpq-dev -y && \
+sudo apt install lm-sensors libsensors-dev && \ # To read temperature metrics
 sudo pip3 install psycopg2 pandas pyyaml
 ```
 
@@ -99,6 +100,18 @@ After that you can start the containers:
 - Build and run in the `docker` directory with `docker compose up`
 - The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
 - To start in detached mode just use `docker compose -d`
+
+#### LM-Sensors
+
+If you want the temperature metric provider to work you need to run the sensor detector
+```bash
+sudo sensors-detect
+```
+in order to detect all the sensors in your system. One you have run this you should be able to run the
+```bash
+sensors
+```
+command and see your CPU temp.
 
 ### Connecting to DB
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
