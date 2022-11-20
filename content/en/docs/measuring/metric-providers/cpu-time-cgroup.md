@@ -22,7 +22,7 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 By default the measurement interval is 100 ms.
 
 ```bash
-> sudo ./static-binary -i 100 
+> ./metric-provider-binary -i 100 
 ```
 
 ### Output

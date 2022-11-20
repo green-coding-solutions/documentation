@@ -162,6 +162,23 @@ sensors
 ```
 command and see your CPU temp.
 
+### XGBoost
+
+The XGBoost metrics provider can estimate the power consumption of the total 
+system (AC-Energy).
+
+It must be supplied with the machine params in the `config.yml` file:
+- CPUChips
+- HW_CPUFreq
+- CPUCores
+- TDP
+- HW_MemAmountGB
+
+Please look at the always current documentation here to understand what values to 
+plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
+
+Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyXgboostSystemProvider*
+
 ### RAPL
 
 On kernels > 2.6 all the kernel modules should automatically be loaded.

@@ -22,7 +22,7 @@ This metric provider calculates an estimate of the % total CPU usage based of th
 By default the measurement interval is 100 ms.
 
 ```bash
-> sudo ./static-binary -i 100
+> ./metric-provider-binary -i 100
 ```
 
 ### Output

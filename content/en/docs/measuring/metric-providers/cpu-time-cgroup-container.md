@@ -23,7 +23,7 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 By default the measurement interval is 100 ms.
 
 ```bash
-> sudo ./static-binary -i 100 -s 7f38a4c25fb8f9d5f8651d6ed986b3658dba20d1f5fec98a1f71c141c2b48f4b,c3592e1385d63f9c7810470b12aa00f7d6f7c0e2b9981ac2bdb4371126a0660a
+> ./metric-provider-binary -i 100 -s 7f38a4c25fb8f9d5f8651d6ed986b3658dba20d1f5fec98a1f71c141c2b48f4b,c3592e1385d63f9c7810470b12aa00f7d6f7c0e2b9981ac2bdb4371126a0660a
 ```
 
 ### Output
@@ -42,7 +42,7 @@ Any errors are printed to Stderr.
 ### How it works
 The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-pages/man7/cgroups.7.html) enabled on your system
 
-The provider reads from the cpu.stat file used by your container here:
+The provider reads from the `cpu.stat` file used by your container here:
 
 ```
 /sys/fs/cgroup/user.slice/user-<USER-ID>.slice/user@<USER-ID>.service/user.slice/docker-<CONTAINER-ID>.scope/cpu.stat

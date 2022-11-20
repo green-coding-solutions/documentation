@@ -22,7 +22,7 @@ This MSR keeps a running count of the energy used in a specified domain in micro
     - d: Must be set to activate the DRAM reading mode.
 
 ```
-> sudo ./static-binary -i 100 -d
+> ./metric-provider-binary -i 100 -d
 ```
 
 ### Output

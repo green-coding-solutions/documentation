@@ -22,7 +22,7 @@ This metric provider reads the total time spent in the CPU based on the system /
 By default the measurement interval is 100 ms.
 
 ```bash
-> sudo ./static-binary -i 100
+> ./metric-provider-binary -i 100
 ```
 
 ### Output
@@ -39,4 +39,4 @@ Where:
 Any errors are printed to Stderr.
 
 ### How it works
-The provider reads from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal**, **guest** (see definitions [here](https://www.idnt.net/en-US/kb/941772)), and add them together over the measurement period.
+The provider reads from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal** (see definitions [here](https://www.idnt.net/en-US/kb/941772)), and add them together over the measurement period.

@@ -7,6 +7,9 @@ draft: false
 images: []
 weight: 150
 ---
+# ⚠️Warning - LEGACY PROVIDER⚠️
+This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
+
 ### What it does
 This metric provider reads the the voltage from the DC channels of the ATX connector
 on the mainboard through shunt resistors and converts the voltage to an energy reading.

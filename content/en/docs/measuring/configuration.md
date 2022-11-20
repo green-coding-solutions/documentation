@@ -27,12 +27,22 @@ measurement:
   idle-time-end: 5
   flow-process-runtime: 60
   metric-providers:
-    cpu.cgroup.container.provider.CpuCgroupContainerProvider: 100
-    energy.RAPL.MSR.system.provider.EnergyRaplMsrSystemProvider: 100
-    memory.cgroup.container.provider.MemoryCgroupContainerProvider: 100
-    time.cgroup.container.provider.TimeCgroupContainerProvider: 100
-    time.proc.system.provider.TimeProcSystemProvider: 100
-    network.cgroup.container.provider.NetworkCgroupContainerProvider: 100
+    cpu.cgroup.container.provider.CpuCgroupContainerProvider:
+      resolution: 100
+    energy.RAPL.MSR.system.provider.EnergyRaplMsrSystemProvider:
+      resolution: 100
+    memory.cgroup.container.provider.MemoryCgroupContainerProvider:
+      resolution: 100
+    time.cgroup.container.provider.TimeCgroupContainerProvider:
+      resolution: 100
+#    psu.energy.xgboost.system.provider.PsuEnergyXgboostSystemProvider:
+#      resolution: 100
+       # This is a default configuration. Please change this to your system!
+#      CPUChips: 1
+#      HW_CPUFreq: 3100
+#      CPUCores: 28
+#      TDP: 150
+#      HW_MemAmountGB: 16
 
 admin:
   # This address will get an email, when a new project was added through the frontend
@@ -50,7 +60,19 @@ We will this only focus on the `measurement` key:
 - `idle-time-end` **[integer]**: Seconds to idle containers after measurement
 - `flow-process-runtime` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
 - `metric-providers`:
-    + `METRIC_PROVIDER_NAME` **[interger]**: Key specifies the Metric Provider and the integer the resolution in milliseconds. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
+    + `METRIC_PROVIDER_NAME`: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
+    + `METRIC_PROVIDER_NAME.resolution`: **[integer]** sampling resolution in ms
+
+Some metric providers have unique configuration params:
+- PsuEnergyXgboostSystemProvider
+    + Please look at the always current documentation here to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
+
+Also note that some providers are deactivated by default, because they either need a
+additional configuration parameters, extra hardware or a specially configured system.
+
+Once you have set them up you can uncomment the line. In this example for instance 
+the line `psu.energy.xgboost.system.provider.PsuEnergyXgboostSystemProvider` and all 
+the lines directly below it.
 
 
 ### admin

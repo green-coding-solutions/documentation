@@ -21,7 +21,7 @@ This MSR keeps a running count of the energy used in a specified domain in micro
         - from RAPL documentation: RAPL can only measure until 1ms resolution 
 
 ```
-> sudo ./static-binary -i 100
+> ./metric-provider-binary -i 100
 ```
 
 ### Output
