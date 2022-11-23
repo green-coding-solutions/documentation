@@ -18,7 +18,6 @@ git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/gre
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install python3 python3-pip libpq-dev -y && \
-sudo apt install lm-sensors libsensors-dev && \ # To read temperature metrics
 sudo pip3 install psycopg2 pandas pyyaml
 ```
 
@@ -153,6 +152,12 @@ docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 Some metric providers need extra setup before they work. 
 
 ### LM-Sensors
+
+Install the required libraries to read the temperature metrics:
+
+```bash
+sudo apt install lm-sensors libsensors-dev
+```
 
 If you want the temperature metric provider to work you need to run the sensor detector
 ```bash
