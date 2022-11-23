@@ -192,6 +192,9 @@ sudo modprobe rapl
 
 ## Cronjob
 
+**ℹ️ If you just want to run the Green Metrics Tool manually the cronjob is not needed. \
+ℹ️ It is only to have it pick up jobs entered through the web interface when it is running autonomous on a testing server.**
+
 The Green Metrics Tool comes with an implemented queuing and locking mechanism.
 
 You can install a cronjob on your system to periodically call:
