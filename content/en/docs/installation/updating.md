@@ -9,7 +9,7 @@ weight: 902
 The standard way of updating the Green Metrics Tool is to run:
 ```bash
 git pull # update the base files
-git submodule update --recursive --depth=1 # update all the submodules
+git submodule update --remote --recursive --depth=1 # update all the submodules
 ```
 
 This will give you all the updated files. 

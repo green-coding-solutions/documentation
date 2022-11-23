@@ -178,6 +178,7 @@ It is included as a submodule in the Green Metrics Tool and must be separately c
 
 ```bash
 git submodule update --init --recursive --depth=1
+git submodule update --remote --recursive --depth=1
 ```
 
 It must be supplied with the machine params in the `config.yml` file:
