@@ -1,6 +1,6 @@
 ---
-title: "Installation Overview"
-description: "Installation Overview"
+title: "Installation"
+description: "Installation"
 lead: ""
 date: 2022-06-15T01:49:15+00:00
 weight: 901
@@ -168,6 +168,12 @@ command and see your CPU temp.
 
 The XGBoost metrics provider can estimate the power consumption of the total 
 system (AC-Energy).
+
+It is included as a submodule in the Green Metrics Tool and must be separately checked out via:
+
+```bash
+git submodule update --init --recursive --depth=1
+```
 
 It must be supplied with the machine params in the `config.yml` file:
 - CPUChips
