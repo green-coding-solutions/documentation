@@ -193,6 +193,11 @@ plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-c
 
 Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyXgboostSystemProvider*
 
+Lastly, if you don't have them already, you need to install some python libraries:
+```bash
+python3 -m pip install xgboost statsmodels scipy numpy pandas scikit-learn
+```
+
 ### RAPL
 
 On kernels > 2.6 all the kernel modules should automatically be loaded.
