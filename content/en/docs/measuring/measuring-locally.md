@@ -42,12 +42,12 @@ services:
     setup-commands:
       - apk add stress-ng
  
- flow:
+flow:
   - name: Stress
     container: simple-load-container
     commands:
       - type: console
-        command: stress-ng -c 1 -t 5
+        command: stress-ng -c 1 -t 5 -q
         note: Starting Stress
 
 ```
