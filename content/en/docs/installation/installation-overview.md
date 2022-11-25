@@ -198,6 +198,13 @@ Lastly, if you don't have them already, you need to install some python librarie
 python3 -m pip install xgboost statsmodels scipy numpy pandas scikit-learn
 ```
 
+### DC Metrics Provider
+
+This providers needs a custom piece of hardware to work:
+- [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
+
+Please look for details in the provider documentation at [PsuEnergyDcSystemProvider →]({{< relref "psu-energy-dc-system" >}})
+
 ### RAPL
 
 On kernels > 2.6 all the kernel modules should automatically be loaded.
