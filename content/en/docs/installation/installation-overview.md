@@ -17,7 +17,7 @@ We recommend to fully reset the node after every run, so no data from the previo
 git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/green-metrics-tool && \
 sudo apt update && \
 sudo apt upgrade -y && \
-sudo apt install python3 python3-pip libpq-dev -y && \
+sudo apt install make gcc python3 python3-pip libpq-dev -y && \
 sudo pip3 install psycopg2 pandas pyyaml
 ```
 
@@ -34,9 +34,9 @@ However, we provide here what we used in on our Ubuntu system, but be sure to do
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
 sudo apt update && \
-sudo apt remove docker docker-engine docker.io containerd runc && \
-sudo apt-get install ca-certificates curl gnupg lsb-release && \
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt remove docker docker-engine docker.io containerd runc -y && \
+sudo apt install ca-certificates curl gnupg lsb-release -y && \
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 ```
 
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now.
