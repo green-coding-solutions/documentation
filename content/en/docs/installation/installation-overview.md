@@ -48,7 +48,7 @@ If your docker daemon currently does not run in rootless mode please follow the 
 
 In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/)
 
-👉 Typically a normal installation of ubuntu has at least one non-root user setup during installation. 
+👉 Typically a normal installation of ubuntu has at least one non-root user setup during installation.
 
 **Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user` will not work.**
 
@@ -149,29 +149,56 @@ docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 
 ## Metric providers
 
-Some metric providers need extra setup before they work. 
+Some metric providers need extra setup before they work.
 
 ### LM-Sensors
 
 Install the required libraries to read the temperature metrics:
 
 ```bash
-sudo apt install lm-sensors libsensors-dev
+sudo apt install lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
 ```
 
 If you want the temperature metric provider to work you need to run the sensor detector
+
 ```bash
 sudo sensors-detect
 ```
+
 in order to detect all the sensors in your system. One you have run this you should be able to run the
+
 ```bash
 sensors
 ```
-command and see your CPU temp.
+
+command and see your CPU temp. You can then use this output to look for the parameters you need to set in the `config.yml`.
+For example if sensors gives you:
+
+```bash
+coretemp-isa-0000
+Adapter: ISA adapter
+Package id 0:  +29.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 0:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 1:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 2:        +28.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 3:        +29.0°C  (high = +100.0°C, crit = +100.0°C)
+```
+
+Your config could be:
+
+```bash
+lm_sensors.temperature.provider.LmTempSenorsProvider:
+    resolution: 100
+    chips: ['coretemp-isa-0000']
+    features: ['Package id 0', 'Core 0', 'Core 1', 'Core 2', 'Core 3']
+```
+
+As the matching is open ended you could also only use `'Core'` instead of naming each feature.
+
 
 ### XGBoost
 
-The XGBoost metrics provider can estimate the power consumption of the total 
+The XGBoost metrics provider can estimate the power consumption of the total
 system (AC-Energy).
 
 It is included as a submodule in the Green Metrics Tool and must be separately checked out via:
@@ -188,7 +215,7 @@ It must be supplied with the machine params in the `config.yml` file:
 - TDP
 - HW_MemAmountGB
 
-Please look at the always current documentation here to understand what values to 
+Please look at the always current documentation here to understand what values to
 plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
 
 Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyXgboostSystemProvider*
