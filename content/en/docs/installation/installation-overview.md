@@ -204,8 +204,7 @@ system (AC-Energy).
 It is included as a submodule in the Green Metrics Tool and must be separately checked out via:
 
 ```bash
-git submodule update --init --recursive --depth=1
-git submodule update --remote --recursive --depth=1
+git submodule update --init
 ```
 
 It must be supplied with the machine params in the `config.yml` file:

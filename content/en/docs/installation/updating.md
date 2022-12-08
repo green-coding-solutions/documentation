@@ -9,7 +9,7 @@ weight: 902
 The standard way of updating the Green Metrics Tool is to run:
 ```bash
 git pull # update the base files
-git submodule update --remote --recursive --depth=1 # update all the submodules
+git submodule update --init # update all the submodules
 ```
 
 This will give you all the updated files. 
@@ -50,3 +50,15 @@ you need to replay them afterwards.
 If we release a new major version, or introduce breaking changes, we will post it there and also often on our [Company Blog](https://www.green-coding.org/blog)
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
+
+
+# Maintainer section
+
+## Submodules
+If you are a maintainer and want to push submodule changes please only push the latest version with a depth=1:
+```bash
+git submodule update --remote
+git add FOLDER 
+git commit -m "Submodule update"
+git push
+```

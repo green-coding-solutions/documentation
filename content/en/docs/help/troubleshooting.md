@@ -37,6 +37,15 @@ other service serves content on that port. Check your `docker ps -a`
 - If you just copied your `docker-compose.yml` and wanted to reuse it but do not need the functionality, then consider using the `--skip-unsafe` flag.
 - If you need the functionality then consider the `--allow-unsafe` flag
 
+## Submodule issues
+
+If you run into any conflicts just deinit and reinit the submodule in question:
+```bash
+git submodule deinit FOLDER -f
+git submodule update --init FOLDER
+git submodule init FOLDER
+```
+
 
 ## General tips
 - Always check container logs with `docker compose logs`. Sometimes streaming logs
