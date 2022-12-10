@@ -42,7 +42,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now.
 
 ### Rootless mode
-The Green Metrics Tool is currently designed to work only with Docker in rootless mode.
+The Green Metrics Tool (GMT) is currently designed to work only with Docker in rootless mode.
 
 If your docker daemon currently does not run in rootless mode please follow the heregiven instructions.
 
@@ -262,3 +262,28 @@ Be sure to give the `green-metrics-jobs.log` file write access rights.
 
 Also be aware that our example for the cronjob assumes your crontab is using `bash`.
 Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
+
+## Live system
+**ℹ️ If you just want to run the Green Metrics Tool locally this step can be skipped \
+ℹ️ It is only if you want to host the Green Metrics Tool on a live server.**
+
+### Updating port to 80
+
+The development setup of the GMT binds on port 8000. For a normal setup on a live 
+server we recommend binding it to port 80.
+
+The change is done in the `/docker/compose.yml` file.
+
+```yml
+green-coding-nginx:
+    [...]
+    ports:
+      - 8000:80 # change this to 80:80      
+```
+
+### SSL
+TODO!
+
+No throrough documentation on this yet! However you have to configure NGINX
+accordingly so that it finds the SSL credentials and certificate.
+This is done in the `/docker/nginx/frontend.conf`.
