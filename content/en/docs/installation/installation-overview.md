@@ -141,6 +141,12 @@ docker context use rootless
 docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 ```
 
+Now you can reload and enable the daemon:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable green-coding-service
+```
+
 ### Dockerfiles architecture explanation:
 - The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
 - The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to a UNIX socket in `/tmp`
