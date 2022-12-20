@@ -227,7 +227,7 @@ Also the model must be activated by uncommenting the appropriate line with *...P
 
 Lastly, if you don't have them already, you need to install some python libraries:
 ```bash
-python3 -m pip install xgboost statsmodels scipy numpy pandas scikit-learn
+python3 -m pip install -r /var/www/green-metrics-tool/tools/metric_providers/psu/energy/xgboost/system/model/requirements.txt
 ```
 
 ### DC Metrics Provider
