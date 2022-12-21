@@ -84,3 +84,14 @@ Any errors are printed to Stderr.
 If you cannot get a reading from the PicoLog HRDL ADC-24 try disconnecting the USB
 and reconnecting. It is very prone to getting stuck in the capture loop and then
 does not accept connections anymore.
+
+### Overhead warning
+The provider has a significant energy overhead when used as it draws power
+from the USB port of the system.
+
+In our test system the PicoLog HRDL ADC-24 draws about **0.5 W on Stand-By** and
+about **6 W when used with a 61 ms capture resolution**.
+
+If you are using a AC reporter in conjuction this will heavily skew your signal.
+Please either use only an AC or DC reporter, or correct the output data 
+accordingly afterwards.
