@@ -18,7 +18,7 @@ git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/gre
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install make gcc python3 python3-pip libpq-dev -y && \
-sudo pip3 install psycopg2 pandas pyyaml
+sudo python3 -m pip install -r /var/www/green-metrics-tool/requirements.txt
 ```
 
 The sudo in the last command is very important, as it will tell pip to install to /usr directory instead to the home directory. So we can find the package later with other users on the system. If you do not want that use a venv in Python.
@@ -227,7 +227,7 @@ Also the model must be activated by uncommenting the appropriate line with *...P
 
 Lastly, if you don't have them already, you need to install some python libraries:
 ```bash
-python3 -m pip install xgboost statsmodels scipy numpy pandas scikit-learn
+python3 -m pip install -r /var/www/green-metrics-tool/tools/metric_providers/psu/energy/xgboost/system/model/requirements.txt
 ```
 
 ### DC Metrics Provider
