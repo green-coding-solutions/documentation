@@ -47,7 +47,7 @@ you need to replay them afterwards.
 
 ## Read the Github release notes
 
-If we release a new major version, or introduce breaking changes, we will post it there and also often on our [Company Blog](https://www.green-coding.org/blog)
+If we release a new major version, or introduce breaking changes, we will post it there and also often on our [Company Blog](https://www.green-coding.berlin/blog)
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 

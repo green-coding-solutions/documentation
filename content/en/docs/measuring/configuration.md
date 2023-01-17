@@ -20,7 +20,7 @@ smtp:
  ...
 project:
   name: My test project
-  url: https://metrics.green-coding.org/
+  url: https://metrics.green-coding.berlin/
 
 measurement:
   idle-time-start: 5

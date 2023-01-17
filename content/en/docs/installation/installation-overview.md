@@ -95,7 +95,7 @@ This script will:
 
 What you might want to add:
 - SMTP mail sending is by default deactived, so for a quick-start you do not have to change that in the `config.yml`
-- The RAPL reporter is by default deactived. Please check the [Metric Providers Documentation](https://docs.green-coding.org/docs/measuring/metric-providers) on how to active it
+- The RAPL reporter is by default deactived. Please check the [Metric Providers Documentation](https://docs.green-coding.berlin/docs/measuring/metric-providers) on how to active it
 
 After that you can start the containers:
 - Build and run in the `docker` directory with `docker compose up`

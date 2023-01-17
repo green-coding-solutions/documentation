@@ -56,8 +56,8 @@ Currently all incoming and outgoing traffic is attributed to every container tha
 
 This may lead to unexpected results when you process the results, but is a design decision.
 
-In our [Green Metrics Dashboard](https://metrics.green-coding.org) we simply accumulate all the network traffic of all containers and then 
-apply the [CO2-Formula](https://www.green-coding.org/co2-formulas) on top.
+In our [Green Metrics Dashboard](https://metrics.green-coding.berlin) we simply accumulate all the network traffic of all containers and then 
+apply the [CO2-Formula](https://www.green-coding.berlin/co2-formulas) on top.
 
 This however assumes that all traffic is with external services. If your containers are however only
 communicating with each other and are in production all on one machine, this number will not 

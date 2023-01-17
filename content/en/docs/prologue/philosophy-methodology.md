@@ -75,7 +75,7 @@ The tools used to make these measurements must also be free and open-source (FOS
 
 However, we believe that energy comparisons between software  running on different hardware setups is not feasible. All measurements should be compared only for the exact same machine, not even machines with identical components.
 
-Therefore we provide a central repository for all the measurements we make to compare measurements on prepared fixed machine we provide: [Green Metrics Frontend](https://metrics.green-coding.org)
+Therefore we provide a central repository for all the measurements we make to compare measurements on prepared fixed machine we provide: [Green Metrics Frontend](https://metrics.green-coding.berlin)
 
 ## Honorable mentions, Differences, and USPs
 

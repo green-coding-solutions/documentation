@@ -1,4 +1,4 @@
-baseurl = "https://docs.green-coding.org/"
+baseurl = "https://docs.green-coding.berlin/"
 canonifyURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true

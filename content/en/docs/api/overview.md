@@ -14,13 +14,13 @@ toc: true
 
 ## Live documentation
 
-Got to: [https://api.green-coding.org/doc](https://api.green-coding.org/docs)
+Got to: [https://api.green-coding.berlin/doc](https://api.green-coding.berlin/docs)
 
 {{< alert icon="💡" text="The FastAPI is self-documenting and thus will always be most up to date. It even contains a playground to try out requests." />}}
 
 ## Playbooks
 
-To see some examples what you can to with our API be sure to check out the playbooks at: [https://metrics.green-coding.org/data-analysis.html](https://metrics.green-coding.org/data-analysis.html)
+To see some examples what you can to with our API be sure to check out the playbooks at: [https://metrics.green-coding.berlin/data-analysis.html](https://metrics.green-coding.berlin/data-analysis.html)
 
 They provide Jupyter Notebooks (Deepnote) that query our API and provide some examples for Data Analysis like:
 - Comparing partions of a timeseries
