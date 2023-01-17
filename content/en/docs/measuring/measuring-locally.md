@@ -67,12 +67,12 @@ Having usage scenario ....
 Please access your report with the ID: XXXX-XXXX ...
 ```
 
-Now you can view the report as the first item in your metrics dashbard at [http://metrics.green-coding.local:8000/request.html](http://metrics.green-coding.local:8000/request.html)
+Now you can view the report as the first item in your metrics dashbard at [http://metrics.green-coding.local:9142/request.html](http://metrics.green-coding.local:9142/request.html)
 
 
 ## Cron mode
 
-If you have [installed a cronjob →]({{< relref "installation-overview" >}}) you can insert a new job at [http://metrics.green-coding.local:8000/request.html](http://metrics.green-coding.local:8000/request.html)
+If you have [installed a cronjob →]({{< relref "installation-overview" >}}) you can insert a new job at [http://metrics.green-coding.local:9142/request.html](http://metrics.green-coding.local:9142/request.html)
 
 <p align="center">
   <img src="/img/add-new-project.webp" width="80%" title="Cron mode job insertion for green metrics tool">

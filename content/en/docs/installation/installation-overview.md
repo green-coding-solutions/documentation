@@ -80,7 +80,7 @@ The Dockerfiles will provide you with a running setup of the working system with
 
 It can technically be used in production, however it is designed to run on your local machine for testing purposes.
 
-The system binds in your host OS to port 8000. So the web view will be accessible through `http://metrics.green-coding.local:8000`
+The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.local:9142`
 
 
 ### Setup
@@ -275,7 +275,7 @@ Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
 
 ### Updating port to 80
 
-The development setup of the GMT binds on port 8000. For a normal setup on a live 
+The development setup of the GMT binds on port 9142. For a normal setup on a live 
 server we recommend binding it to port 80.
 
 The change is done in the `/docker/compose.yml` file.
@@ -284,7 +284,7 @@ The change is done in the `/docker/compose.yml` file.
 green-coding-nginx:
     [...]
     ports:
-      - 8000:80 # change this to 80:80      
+      - 9142:80 # change this to 80:80      
 ```
 
 ### SSL

@@ -23,7 +23,7 @@ When you are getting an unexpected result when accessing localhost / \*.local do
 127.0.0.1 green-coding-postgres-container
 
 ```
-- Not accessing the Green Metrics Tool with the additional supplied port: `http://metrics.green-coding.local:8000`
+- Not accessing the Green Metrics Tool with the additional supplied port: `http://metrics.green-coding.local:9142`
 - It could be that you have other containers running and the port is overloaded, so that some
 other service serves content on that port. Check your `docker ps -a`
 - Also check `lsof -i | grep PORTNUMBER` to look if something on your host OS is serving content on that port
