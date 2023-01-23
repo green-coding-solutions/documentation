@@ -81,7 +81,7 @@ networks:
   example-network:
 services:
   db-container:
-    image: demo-app_db
+    image: demo_app_db
     environment:
       - MYSQL_ROOT_PASSWORD=somewordpress
       - MYSQL_DATABASE=wordpress
@@ -90,7 +90,7 @@ services:
     networks:
       - example-network
   wordpress-container:
-    image: demo-app_wordpress
+    image: demo_app_wordpress
     ports:
       - 9875:9875
     restart: always
