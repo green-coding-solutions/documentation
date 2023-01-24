@@ -53,8 +53,7 @@ Example:
 ```yaml
 services:
   gcb-wordpress-mariadb:
-    image: gcb_wordpress-mariadb
-    container_name: gcb-wordpress-mariadb
+    image: gcb_wordpress_mariadb
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress
