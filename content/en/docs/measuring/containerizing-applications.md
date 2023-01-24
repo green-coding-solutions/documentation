@@ -28,7 +28,7 @@ Our architecture looks like the following:
 <img src="/img/server-architecture-banana.webp">
 
 
-We will now containerize the webserver, database, and client inside seperate containers.
+We will now containerize the webserver, database, and client inside separate containers.
 
 The reason for this scoping is that the Green Metrics Tool reports on a container level
 and we are interested in showing all these metrics separately.
@@ -148,7 +148,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-mariadb
-    container_name: green-coding-wordpress-mariadb-data-container
+    container_name: gcb-wordpress-mariadb
+    image: gcb_wordpress_mariadb
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=somewordpress
@@ -161,7 +162,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-wordpress
-    container_name: green-coding-wordpress-apache-data-container
+    container_name: gcb-wordpress-apache
+    image: gcb_wordpress_apache
     expose:
       - 9875
     ports:
@@ -182,7 +184,7 @@ services:
 
 In order to simulate a client we need a container running a headless browser.
 
-We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-chrome](https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-chrome)
+We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-firefox-chrome](https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-firefox-chrome)
 
 You can also download the container directly from docker hub here: [Docker Hub](https://hub.docker.com/r/greencoding/puppeteer-chrome)
 
@@ -202,7 +204,8 @@ services:
 # There is no container_name directive. All services keys act directly as container names
   db-container:
 # If you build your file with docker compose in the example above this image name should be the one you have now locally      
-    image: demo-app_db
+    image: demo_app_db
+    container_name: demo-app-db
     environment:
       - MYSQL_ROOT_PASSWORD=somewordpress
       - MYSQL_DATABASE=wordpress
@@ -212,7 +215,8 @@ services:
     networks:
       - example-network
   wordpress-container:
-    image: demo-app_wordpress
+    image: demo_app_wordpress
+    container_name: demo-app-wordpress
     ports:
       - 9875:9875
     restart: always

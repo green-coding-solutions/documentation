@@ -52,8 +52,8 @@ networks:
 Example:
 ```yaml
 services:
-  green-coding-wordpress-mariadb-data-container:
-    image: wordpress-official-data_mariadb
+  gcb-wordpress-mariadb:
+    image: gcb_wordpress_mariadb
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress
