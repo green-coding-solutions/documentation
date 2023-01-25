@@ -1,6 +1,6 @@
 ---
 title: "LM Sensors - temp - fanspeed"
-description: "Documentation for LmSenorsProvider of the Green Metrics Tool"
+description: "Documentation for LmSensorsProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-12-29T20:16:35+0000
 draft: false
@@ -20,10 +20,10 @@ the detect program first `sudo sensors-detect` which looks at all the chips in y
 file.
 
 ### Classname
-- LmFanSenorsProvider
-- LmTempSenorsProvider
+- LmSensorsFanProvider
+- LmSensorsTempProvider
 
-these both extend the `LmSenorsProvider` which makes it very easy to add new specific providers. We need to separate
+these both extend the `LmSensorsProvider` which makes it very easy to add new specific providers. We need to separate
 fan and temperature because they both come in different units. Temp in °C or °F and fan speeds in RPM.
 
 ### Input Parameters
