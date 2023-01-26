@@ -29,11 +29,11 @@ By default the measurement interval is 100 ms.
 
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
 
-`TIMESTAMP READING CONTAINER-ID`
+`TIMESTAMP READING`
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`:The time spent, in microseconds, by this container in the CPU
+- `READING`:The time spent in the CPU, in microseconds, by all cgroup containers
 
 Any errors are printed to Stderr.
 

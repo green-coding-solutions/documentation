@@ -61,7 +61,9 @@ It will begin reading the metrics and printing them to Stdout.
 
 If the metric provider has specific or needed flags (such as container-id), you may provide them. Some metrics gather their data from container-level information, while others read system-wide metrics. Those that read at a container-level will need the container-ids passed in as an input parameter with the `-s` flag, with each container-id seperated with a comma. See the specific Metric Provider's documentation for more information.
 
-The format of the output will always be: `<timestamp> <metric_reading> <optional: container-id>`:
+The format of the output will be: `<timestamp> <metric_reading> <optional: container-id>`:
+
+Some special providers may register additional output fields, that are considered internal atm.
 
 ```bash
 > sudo ./metric-provider-binary -i 100 -s 7f38a4c25fb8f9d5f8651d6ed986b3658dba20d1f5fec98a1f71c141c2b48f4b,c3592e1385d63f9c7810470b12aa00f7d6f7c0e2b9981ac2bdb4371126a0660a

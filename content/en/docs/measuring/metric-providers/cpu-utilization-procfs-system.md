@@ -29,7 +29,7 @@ By default the measurement interval is 100 ms.
 
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
 
-`TIMESTAMP READING CONTAINER-ID`
+`TIMESTAMP READING`
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
