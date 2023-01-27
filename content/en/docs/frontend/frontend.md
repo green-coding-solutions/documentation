@@ -10,7 +10,7 @@ images: []
 
 The Green Metrics Frontend is the part of our tool that displays the raw and unprocessed data from the API in a nice visual form.
 
-The frontend relies on a [Fomantic UI Template](https://fomantic-ui.com/) and uses [Dygraphs](https://dygraphs.com/)
+The frontend relies on a [Fomantic UI Template](https://fomantic-ui.com/) and uses [eCharts](https://echarts.apache.org/en/index.html)
 for charting.
 
 Apart from that we use no Javascript Framework, as we merely do fetch-requests
@@ -33,9 +33,11 @@ The sidebar is done in flexbox.
 
 - All custom JS files we did live in `/frontend/js`.
 - All custom CSS files we did live in `/frontend/css`
-- All library files which are 99% unchanged live in `/frontend/dist/`
-    + The only change was made to the `/frontend/dist/css/site.min.css` from Fomantic UI where we removed the @import statement for the *Lato* font.
-- The CSS and JS files from Fomantic UI are all included separately, since we don't need most of the components
+- All library files whichlive in `/frontend/dist/`
+    + In the `site.min.css` from Fomantic UI where we removed the @import statement for the *Lato* font.
+    + We removed the `emoji.min.css`
+    + We then concated all the minified file into a `semantic_reduced.min.css`
+- The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
 
 ## HUGO
