@@ -91,7 +91,9 @@ This script will:
 - Set the database password for the containers
     - By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Create the needed `/etc/hosts` entries for development
+- Install needed development libraries via `apt` for metric providers to build
 - Build the binaries for the Metric Providers
+- Set needed `/etc/sudoers` entry for requesting kernel scheduler info
 
 What you might want to add:
 - SMTP mail sending is by default deactived, so for a quick-start you do not have to change that in the `config.yml`
@@ -159,7 +161,8 @@ Some metric providers need extra setup before they work.
 
 ### LM-Sensors
 
-Install the required libraries to read the temperature metrics:
+The required libraries are installed automatically via the `install.sh` call. However for completeness, these
+are the libraries installed:
 
 ```bash
 sudo apt install lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
