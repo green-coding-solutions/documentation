@@ -15,6 +15,8 @@ We recommend to fully reset the node after every run, so no data from the previo
 
 ```bash
 git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/green-metrics-tool && \
+cd /var/www/green-metrics-tool && \
+git submodule update --init && \
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install make gcc python3 python3-pip libpq-dev -y && \
@@ -210,7 +212,8 @@ As the matching is open ended you could also only use `'Core'` instead of naming
 The XGBoost metrics provider can estimate the power consumption of the total
 system (AC-Energy).
 
-It is included as a submodule in the Green Metrics Tool and must be separately checked out via:
+It is included as a submodule in the Green Metrics Tool and should have been checked out with the 
+initial install command of this manual. If not run:
 
 ```bash
 git submodule update --init
