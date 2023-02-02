@@ -92,7 +92,9 @@ with the `runner.py`.
 - `--uri` The URI to get the usage_scenario.yml from.
   + If given a URL starting with `http(s)` the tool will try to clone a remote repository to `/tmp/green-metrics-tool/repo`
   + If given a local directory starting with `/`, this will be used instead.
+- `--branch` When providing a git repository, optionally specify a branch
 - `--name` A name which will be stored to the database to discern this run from others
+- `--filename` An optional alternative filename if you do not want to use "usage_scenario.yml"
 - `--no-file-cleanup` flag to not delete the metric provider data in `/tmp/green-metrics-tool`
 - `--debug` flag to activate steppable debug mode
   + This allows you to enter the containers and debug them if necessary.
@@ -106,6 +108,7 @@ with the `runner.py`.
   + This is typically done when reusing already present `compose.yml` files without the need to alter the file
 - `--verbose-provider-boot` flag to boot metric providers gradually
   + This will enable the user to see the impact of each metric provider more clearly
+  + There will be a two second sleep for two seconds after each provider boot
   + `RAPL` metric providers will be prioritized to start first, if enabled
 
 These options are not available when doing cron runs.
