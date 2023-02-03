@@ -130,6 +130,9 @@ flow:
             - A string that will appear as note attached to the datapoint of measurement (optional)
         * `read-notes-stdout:` **[bool]** *(optional)*
             - Read notes from the STDOUT of the command. This is helpful if you have a long running command that does multiple steps and you want to log every step.
+        * `ignore-errors` **[bool]** *(optional)*
+            - If set to `true` the run will not fail if the process in `cmd` has a different exit code than `0`. Useful
+           if you execute a command that you know will always fail like `timeout 0.1 stress -c 1`
 
 ### read-notes-stdout format specification
 
