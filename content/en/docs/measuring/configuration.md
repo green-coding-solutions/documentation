@@ -108,7 +108,7 @@ with the `runner.py`.
   + This is typically done when reusing already present `compose.yml` files without the need to alter the file
 - `--verbose-provider-boot` flag to boot metric providers gradually
   + This will enable the user to see the impact of each metric provider more clearly
-  + There will be a two second sleep for two seconds after each provider boot
+  + There will be a 10 second sleep for two seconds after each provider boot
   + `RAPL` metric providers will be prioritized to start first, if enabled
 
 These options are not available when doing cron runs.
