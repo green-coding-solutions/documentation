@@ -48,7 +48,7 @@ if you are on a shared machine!
 
 ### Classname
 
-- PowerSpy2Provider
+- PsuEnergyAcPowerspy2SystemProvider
 
 ### Input Parameters
 
@@ -58,12 +58,11 @@ To make the tool as useful as possible it takes multiple filter parameters:
 - `--device`: The filesystem endpoint that should be used for communication. Please make sure it is readable and
   writeable by the calling process.
 - `--interval`: Measurement interval in number of ms. Defaults to 1 second.
-- `--mjoule`: Outputs the value in milli Joule (mJ) and sets the interval to 100 ms
 - `--unit`: Specify the unit, which should be one of: mW, W, mJ, J. Defaults to mW
 
 
 ```bash
-> ./metric-provider-binary --unit mj --interval 250
+> python3 metric-provider.py --unit mj --interval 250
 ```
 
 ### Output
@@ -71,7 +70,7 @@ To make the tool as useful as possible it takes multiple filter parameters:
 This metric provider prints to stdout a continuous stream of data every `interval` milliseconds till it is stopped with
 `sigkill` or `sigint` (Ctrl-c). The format of the data is as follows:
 
-`TIMESTAMP POWER`
+`TIMESTAMP READING`
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
