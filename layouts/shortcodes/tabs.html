@@ -1,0 +1,14 @@
+{{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
+{{ $groupId := default "default" (.Get "groupId") }}
+<ul class="nav nav-tabs" id="{{$groupId}}" role="tablist">
+    {{ range $idx, $tab := .Scratch.Get "tabs" }}
+    <li class="nav-item" role="presentation">
+      <button class="nav-link {{ cond (eq $idx 0) "active" ""}}" id="{{ .name }}-tab" data-bs-toggle="tab" data-bs-target="#{{$groupId}}-{{ .name }}" type="button" role="tab" aria-controls="{{ .name }}" aria-selected="true">{{ .name }}</button>
+    </li>
+    {{ end }}
+</ul>
+<div class="tab-content" id="{{$groupId}}Content">
+    {{ range $idx, $tab := .Scratch.Get "tabs" }}
+        <div class="tab-pane fade {{ cond (eq $idx 0) "show active" ""}}" id="{{ $groupId }}-{{ .name }}" role="tabpanel" aria-labelledby="{{ .name }}-tab">{{ .content }}</div>
+    {{ end }}
+</div>

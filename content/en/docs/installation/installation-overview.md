@@ -9,19 +9,38 @@ weight: 901
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 
-The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
+The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional).
 
 We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
 
+For the sake of this manual we put the green metrics tool into your home directory. Of course you can place it anywhere.
+Please modify the commands accordingly.
+
+{{< tabs >}}
+{{% tab name="Ubuntu" %}}
 ```bash
-git clone https://github.com/green-coding-berlin/green-metrics-tool /var/www/green-metrics-tool && \
-cd /var/www/green-metrics-tool && \
+git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+cd ~/green-metrics-tool && \
 git submodule update --init && \
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install make gcc python3 python3-pip libpq-dev -y && \
-sudo python3 -m pip install -r /var/www/green-metrics-tool/requirements.txt
+sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 ```
+{{% /tab %}}
+{{% tab name="Fedora" %}}
+```bash
+git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+cd ~/green-metrics-tool && \
+git submodule update --init && \
+sudo dnf upgrade -y && \
+sudo dnf install -y make gcc python3 python3-devel libpq-devel
+sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 The sudo in the last command is very important, as it will tell pip to install to /usr directory instead to the home directory. So we can find the package later with other users on the system. If you do not want that use a venv in Python.
 
@@ -29,9 +48,12 @@ The sudo in the last command is very important, as it will tell pip to install t
 
 Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
-However, we provide here what we used in on our Ubuntu system, but be sure to double check on the official website. Especially if you are not running Ubuntu.
+However, we provide here what we used in on our systems, but be sure to double check on the official website. Especially if you are running a different ~~distribution~~.
 
 ### Base install
+
+{{< tabs groupId="docker">}}
+{{% tab name="Ubuntu" %}}
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
@@ -40,8 +62,33 @@ sudo apt remove docker docker-engine docker.io containerd runc -y && \
 sudo apt install ca-certificates curl gnupg lsb-release -y && \
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 ```
+{{% /tab %}}
+{{% tab name="Fedora" %}}
+```bash
+sudo dnf remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager \
+    --add-repo \
+    https://download.docker.com/linux/fedora/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo systemctl start docker
+```
+{{% /tab %}}
+{{< /tabs >}}
 
-You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now.
+
+
+You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now. You can also run
+`sudo docker run hello-world` which will run a little welcome container.
 
 ### Rootless mode
 The Green Metrics Tool (GMT) is currently designed to work only with Docker in rootless mode.
@@ -50,10 +97,12 @@ If your docker daemon currently does not run in rootless mode please follow the 
 
 In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/)
 
-👉 Typically a normal installation of ubuntu has at least one non-root user setup during installation.
+👉 Typically a normal installation of Ubuntu/ Fedora has at least one non-root user setup during installation.
 
 **Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user` will not work.**
 
+{{< tabs groupId="rootless">}}
+{{% tab name="Ubuntu" %}}
 The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 ```bash
 sudo systemctl disable --now docker.service docker.socket && \
@@ -71,6 +120,27 @@ Lastly please run the following commands to have the docker daemon always linger
 systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
+{{% /tab %}}
+{{% tab name="Fedora" %}}
+The `docker-ce-rootless-extras` package on Fedora provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
+```bash
+sudo systemctl disable --now docker.service docker.socket && \
+sudo dnf install -y shadow-utils fuse-overlayfs iptables && \
+sudo dnf install -y docker-ce-rootless-extras && \
+dockerd-rootless-setuptool.sh install
+```
+
+After the installation the install script will tell you to add some `export` statements to your `.bashrc` file.
+Please do so to always have the correct paths referenced if you open a new terminal.
+
+Lastly please run the following commands to have the docker daemon always lingering:
+```bash
+systemctl --user enable docker
+sudo loginctl enable-linger $(whoami)
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/).
 
@@ -127,7 +197,7 @@ After=network.target
 Type=simple
 User=USERNAME
 Group=GROUPNAME
-ExecStart=/home/USERNAME/startup-docker.sh
+ExecStart=/home/USERNAME/green-metrics-tool/startup-docker.sh
 Restart=never
 
 [Install]
@@ -136,7 +206,7 @@ WantedBy=multi-user.target
 
 As you can see *Restart* is set to never. The reason is that the docker dameon will restart the containers by itself. The `systemd` script is only needed to start the container once on reboot.
 
-As you can see we also reference the `/home/USERNAME/startup-docker.sh` file which `systemd` expects to be in your home directory.
+As you can see we also reference the `/home/USERNAME/green-metrics-tool/startup-docker.sh` file which `systemd` expects to be in your green metrics tool directory.
 
 Please create the following file in your home directory and change **PATH_TO_GREEN_METRICS_TOOL** accordingly:
 ```bash
@@ -166,9 +236,19 @@ Some metric providers need extra setup before they work.
 The required libraries are installed automatically via the `install.sh` call. However for completeness, these
 are the libraries installed:
 
+{{< tabs groupId="sensors">}}
+{{% tab name="Ubuntu" %}}
 ```bash
-sudo apt install lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
+sudo apt install -y lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
 ```
+{{% /tab %}}
+{{% tab name="Fedora" %}}
+```bash
+sudo dnf -y install lm_sensors lm_sensors-devel glib2 glib2-devel
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 If you want the temperature metric provider to work you need to run the sensor detector
 
@@ -212,7 +292,7 @@ As the matching is open ended you could also only use `'Core'` instead of naming
 The XGBoost metrics provider can estimate the power consumption of the total
 system (AC-Energy).
 
-It is included as a submodule in the Green Metrics Tool and should have been checked out with the 
+It is included as a submodule in the Green Metrics Tool and should have been checked out with the
 initial install command of this manual. If not run:
 
 ```bash
@@ -281,7 +361,7 @@ Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
 
 ### Updating port to 80
 
-The development setup of the GMT binds on port 9142. For a normal setup on a live 
+The development setup of the GMT binds on port 9142. For a normal setup on a live
 server we recommend binding it to port 80.
 
 The change is done in the `/docker/compose.yml` file.
@@ -290,7 +370,7 @@ The change is done in the `/docker/compose.yml` file.
 green-coding-nginx:
     [...]
     ports:
-      - 9142:80 # change this to 80:80      
+      - 9142:80 # change this to 80:80
 ```
 
 ### SSL
