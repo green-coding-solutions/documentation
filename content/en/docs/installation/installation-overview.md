@@ -48,7 +48,7 @@ The sudo in the last command is very important, as it will tell pip to install t
 
 Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
-However, we provide here what we used in on our systems, but be sure to double check on the official website. Especially if you are running a different ~~distribution~~.
+However, we provide here what we used in on our systems, but be sure to double check on the official website. Especially if you are running a different distribution.
 
 ### Base install
 
