@@ -89,3 +89,6 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
   SMTP or eMail services.
 - While we support MacOS features are still experimental and shouldn't be used in production. Please use the more stable
   Linux version here.
+- There is a problem in the way the `powermetrics` tool reports time in that the resolution of the timestamp is
+  seconds with a delta given in ns. The problem is that we don't know when in this initial second the process has started.
+  So when looking at the results the "Start of measurement" and "End of measurement" can be shifted by max 1 second.
