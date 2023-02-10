@@ -64,7 +64,7 @@ include more providers but for now you only need to use the one.
 
 You will need to disable all providers and enable the:
 ```
-macos.powermetrics.provider.PowermetricsProvider:
+powermetrics.provider.PowermetricsProvider:
     resolution: 100
 ```
 in the `config.yml`.
@@ -83,8 +83,10 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
 - postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container will import the database structure fresh.
 
-### Notes
+### Notes / Caveats
 
+- The macOS tooling was mainly developed to create `usage_scenario` files conveniently on the Mac. However it provides\
+  no validated accuracy or open source code as the `powermetrics` tool used is quite opaque and undocumented.
 - As it is not recommended to run the GMT on MacOS as a service we don't document this here. There is no need to configure
   SMTP or eMail services.
 - While we support MacOS features are still experimental and shouldn't be used in production. Please use the more stable
