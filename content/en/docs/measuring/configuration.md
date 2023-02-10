@@ -52,7 +52,7 @@ admin:
 
 ```
 
-The `postgresql` and `smtp` key were already discussed in the [installation →]({{< relref "installation-overview" >}}) part.
+The `postgresql` and `smtp` key were already discussed in the [installation →]({{< relref "installation-linux" >}}) part.
 
 We will this only focus on the `measurement` key:
 

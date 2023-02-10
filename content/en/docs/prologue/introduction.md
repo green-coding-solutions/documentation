@@ -38,7 +38,7 @@ Your app must conform to the [usage_scenario.yml →]({{< relref "usage-scenario
 
 
 ### Install and measure locally
-Under [Installation →]({{< relref "installation-overview" >}}) you find the detailed installation instructions.
+Under [Installation on Linux →]({{< relref "installation-linux" >}}) / [Installation on macOS →]({{< relref "installation-macos" >}}) you find the detailed installation instructions.
 
 Then proceed with [Containerizing and measuring own applications →]({{< relref "containerizing-applications" >}}) to understand
 how to prepare your app to be consumed by the Green Metrics Tool.

@@ -6,7 +6,9 @@ date: 2022-06-18T08:48:45+00:00
 weight: 805
 ---
 
-Before starting to measure you must first install some prerequisites: [Installation →]({{< relref "installation-overview" >}}) Make sure your docker containers are up and running. If they are not, you can start them by running `docker compose up` whilst in the green metrics docker subfolder. 
+Before starting to measure you must first install some prerequisites. See [Installation on Linux →]({{< relref "installation-linux" >}}) or [Installation on macOS →]({{< relref "installation-macos" >}})
+
+Make sure your docker containers are up and running. If they are not, you can start them by running `docker compose up` whilst in the green metrics docker subfolder. 
 
 If you came here from [interacting with applications →]({{< relref "interacting-with-applications" >}}) then you can also directly use your `usage_scenario.yml` Otherwise we will set it up here.
 
@@ -72,7 +74,7 @@ Now you can view the report as the first item in your metrics dashbard at [http:
 
 ## Cron mode
 
-If you have [installed a cronjob →]({{< relref "installation-overview" >}}) you can insert a new job at [http://metrics.green-coding.local:9142/request.html](http://metrics.green-coding.local:9142/request.html)
+If you have [installed a cronjob →]({{< relref "installation-linux" >}}) you can insert a new job at [http://metrics.green-coding.local:9142/request.html](http://metrics.green-coding.local:9142/request.html)
 
 <p align="center">
   <img src="/img/add-new-project.webp" width="80%" title="Cron mode job insertion for green metrics tool">

@@ -11,7 +11,7 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 
 To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
-{{< alert icon="💡" text="If you want to develop on Mac OSX please use this installation description: <a href='/docs/installation/installation-mac/'>Installation on Mac</a>" />}}
+{{< alert icon="💡" text="If you want to develop on macOS please use this installation description: <a href='/docs/installation/installation-mac/'>Installation on Mac</a>" />}}
 
 We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
 
@@ -315,7 +315,7 @@ Also the model must be activated by uncommenting the appropriate line with *...P
 
 Lastly, if you don't have them already, you need to install some python libraries:
 ```bash
-python3 -m pip install -r /var/www/green-metrics-tool/tools/metric_providers/psu/energy/xgboost/system/model/requirements.txt
+python3 -m pip install -r ~/green-metrics-tool/tools/metric_providers/psu/energy/xgboost/system/model/requirements.txt
 ```
 
 ### DC Metrics Provider
