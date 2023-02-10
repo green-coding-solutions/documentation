@@ -1,5 +1,5 @@
 ---
-title: "Installation"
+title: "Installation on Linux"
 description: "Installation"
 lead: ""
 date: 2022-06-15T01:49:15+00:00
@@ -9,7 +9,9 @@ weight: 901
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 
-The tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional).
+To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
+
+{{< alert icon="💡" text="If you want to develop on Mac OSX please use this installation description: <a href='/docs/installation/installation-mac/'>Installation on Mac</a>" />}}
 
 We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
 
@@ -146,7 +148,7 @@ You must also enable the cgroup2 support with the metrics granted for the user: 
 
 Make sure to also enable the CPU, CPUSET, and I/O delegation as instructed there.
 
-## Dockerfiles
+### Dockerfiles
 
 The Dockerfiles will provide you with a running setup of the working system with just a few commands.
 
@@ -155,9 +157,9 @@ It can technically be used in production, however it is designed to run on your 
 The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.local:9142`
 
 
-### Setup
+## Setup
 
-Please run the `install.sh` script in the root folder.
+Please run the `install_linux.sh` script in the root folder.
 
 This script will:
 - Set the database password for the containers
