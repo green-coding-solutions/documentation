@@ -1,6 +1,6 @@
 ---
 title: "Overhead of Measurement Providers"
-description: "How much CPU % and energy doe the metric providers itself draw"
+description: "How much CPU % and energy does the metric providers itself draw"
 lead: ""
 date: 2022-08-04T08:49:15+00:00
 weight: 102
@@ -9,10 +9,10 @@ weight: 102
 The Green Metrics Tools measurement providers run on the same system as the software
 to be measured.
 
-This allows for easyness of testing, but poses the risk of skewing the measured 
+This allows for easiness of testing, but poses the risk of skewing the measured 
 results.
 
-The reporters are designed to have negligeable impact on their own.
+The reporters are designed to have negligible impact on their own.
 
 ## Results for one measurement provider
 

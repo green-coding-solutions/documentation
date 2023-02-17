@@ -56,7 +56,7 @@ flow:
 
 Under *flow* you see that we are just calling `stress-ng -c 1 -t 5`, which will stress our CPU for 5 seconds on one core.
 ```bash
-cd PATH_TO_GREEN_METRICS_TOOL/tools
+cd PATH_TO_GREEN_METRICS_TOOL
 python3 runner.py --uri /tmp/easiest-application --name testing-my-demo
 ````
 

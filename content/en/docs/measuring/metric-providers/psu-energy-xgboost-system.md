@@ -1,6 +1,6 @@
 ---
-title: "PSU Energy - XGBoost - System"
-description: "Documentation for PsuEnergyXgboostSystemProvider of the Green Metrics Tool"
+title: "PSU Energy - AC - XGBoost - System"
+description: "Documentation for PsuEnergyAcXgboostSystemProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-08-04T08:49:15+00:00
 weight: 160
@@ -12,15 +12,15 @@ data from the [SPECPower database](https://www.spec.org/power_ssj2008).
 The underlying XGBoost model can be found [on our Github](https://github.com/green-coding-berlin/spec-power-model)
 
 ### Classname
-- PsuEnergyXgboostSystemProvider
+- PsuEnergyAcXgboostSystemProvider
 
 ### Prerequisites
 
 The provider must be configured in the `config.yml`. Please see [Configuration →]({{< relref "configuration" >}})
-for futher info.
+for further info.
 
 In the `config.yml` file also the *CpuUtilizationProcfsSystemProvider* must be activated
- for the *PsuEnergyXgboostSystemProvider* to work.
+ for the *PsuEnergyAcXgboostSystemProvider* to work.
 
 ### Input Parameters
 

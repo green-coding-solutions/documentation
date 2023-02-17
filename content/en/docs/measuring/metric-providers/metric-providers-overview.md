@@ -11,7 +11,11 @@ toc: true
 
 
 ### What is a Metric Provider?
-A metric provider is a standalone module that can be used to measure a specific measuremenent metric using a unique method. Whilst they are all used in our `runner.py` module to fully measure an application, each of them can also be run independently.
+A metric provider is a standalone module that can be used to measure a specific measurement metric using a unique method. Whilst they are all used in our `runner.py` module to fully measure an application, each of them can also be run independently.
+
+### Naming convention
+Metric providers should follow the naming convention of: Where, What, How, Scope
+ie. `cpu.utilization.cgroup.container`
 
 ### Setup and Structure
 To use the metrics provider, the C source must be compiled. This can be done easily for all metrics providers by running the `install.sh` script in the project's root directory, or individually by running the `Makefile` in each provider's subdirectory. This will create a binary file in each metric's subdirectory.
@@ -21,11 +25,11 @@ Each metric providers to be attached and used during a run are defined in our `c
 ```yaml
 measurement:
   metric-providers:
-    cpu.cgroup.container.provider.CpuCgroupContainerProvider:
+    cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
       resolution: 100
-    energy.RAPL.MSR.system.provider.EnergyRaplMsrSystemProvider:
+    cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
       resolution: 100
-#    psu.energy.xgboost.system.provider.PsuEnergyXgboostSystemProvider:
+#    psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
 #      resolution: 100
        # This is a default configuration. Please change this to your system!
 #      CPUChips: 1
@@ -37,7 +41,7 @@ measurement:
 
 The dimension of the resolution is milliseconds. Change this number to have a smaller or larger time window between measurements for that specific provider.
 
-The metric providers are written as C programs with a Python wrapper, and live under `tools/metric_providers/` in the subdirectory that matches the `config.yml`. The directory contains the following files:
+The metric providers are written as C programs with a Python wrapper, and live under `metric_providers/` in the subdirectory that matches the `config.yml`. The directory contains the following files:
 
 ```
 - <metric-providers-path>:
@@ -59,7 +63,7 @@ After building the metric provider binary via the `Makefile` or `install.sh` scr
 
 It will begin reading the metrics and printing them to Stdout. 
 
-If the metric provider has specific or needed flags (such as container-id), you may provide them. Some metrics gather their data from container-level information, while others read system-wide metrics. Those that read at a container-level will need the container-ids passed in as an input parameter with the `-s` flag, with each container-id seperated with a comma. See the specific Metric Provider's documentation for more information.
+If the metric provider has specific or needed flags (such as container-id), you may provide them. Some metrics gather their data from container-level information, while others read system-wide metrics. Those that read at a container-level will need the container-ids passed in as an input parameter with the `-s` flag, with each container-id separated with a comma. See the specific Metric Provider's documentation for more information.
 
 The format of the output will be: `<timestamp> <metric_reading> <optional: container-id>`:
 
@@ -79,4 +83,4 @@ The timestamp will always be a UNIX timestamp, down to the microsecond. The metr
 #### Python
 To use the Python wrapper, call the `start_profiling` method when you wish to begin the profiling, and then `stop_profiling` when you wish to stop. 
 
-You may pass in a container-id into `start_profiling` if needed. It writes the output of the metrics to `/tmp/green-metrics-tool/{self._metric_name}.log"`, which can be read programatically with the `read_metrics function`.
+You may pass in a container-id into `start_profiling` if needed. It writes the output of the metrics to `/tmp/green-metrics-tool/{self._metric_name}.log"`, which can be read programmatically with the `read_metrics function`.

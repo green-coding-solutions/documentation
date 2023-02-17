@@ -1,6 +1,6 @@
 ---
 title: "PSU Energy - DC - System"
-description: "Documentation for PsuEnergyDcSystemProvider of the Green Metrics Tool"
+description: "Documentation for PsuEnergyDcPicologSystemProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-08-04T08:49:15+00:00
 weight: 160
@@ -11,7 +11,7 @@ It measures the DC energy by intercepting the cable pathway from the PSU
 to the ATX mainboard connector.
 
 ### Classname
-- PsuEnergyDcSystemProvider
+- PsuEnergyDcPicologSystemProvider
 
 ### Prerequisites
 

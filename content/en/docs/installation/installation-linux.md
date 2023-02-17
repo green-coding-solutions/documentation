@@ -311,7 +311,7 @@ It must be supplied with the machine params in the `config.yml` file:
 Please look at the always current documentation here to understand what values to
 plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
 
-Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyXgboostSystemProvider*
+Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyAcXgboostSystemProvider*
 
 Lastly, if you don't have them already, you need to install some python libraries:
 ```bash
@@ -323,7 +323,7 @@ python3 -m pip install -r ~/green-metrics-tool/tools/metric_providers/psu/energy
 This providers needs a custom piece of hardware to work:
 - [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 
-Please look for details in the provider documentation at [PsuEnergyDcSystemProvider →]({{< relref "psu-energy-dc-system" >}})
+Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "psu-energy-dc-system" >}})
 
 ### RAPL
 
