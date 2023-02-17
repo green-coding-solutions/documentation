@@ -45,8 +45,12 @@ The system binds in your host OS to port 9142. So the web view will be accessibl
 Please run the `install_mac.sh` script in the root folder.
 
 This script will:
+- Ask for the URLs of where to deploy the frontend and API
+    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.local:9142` and `http://api.green-coding.local:9142`. All other local domains are not supported out of the box.
+    + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
+is running on port `80` or `443`
 - Set the database password for the containers
-    - By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+    + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Create the needed `/etc/hosts` entries for development
 - Set needed `/etc/sudoers` entry for running/ killing the `powermetrics` tool
 

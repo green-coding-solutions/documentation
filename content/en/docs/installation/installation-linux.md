@@ -163,9 +163,11 @@ Please run the `install_linux.sh` script in the root folder.
 
 This script will:
 - Ask for the URLs of where to deploy the frontend and API
-    - These can default to `http://metrics.green-coding.local:9142` and `http://api.green-coding.local:9142`
+    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.local:9142` and `http://api.green-coding.local:9142`. All other local domains are not supported out of the box.
+    + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
+is running on port `80` or `443`
 - Set the database password for the containers
-    - By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+    + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Create the needed `/etc/hosts` entries for development
 - Install needed development libraries via `apt` for metric providers to build
 - Build the binaries for the Metric Providers
