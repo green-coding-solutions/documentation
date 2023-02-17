@@ -162,6 +162,8 @@ The system binds in your host OS to port 9142. So the web view will be accessibl
 Please run the `install_linux.sh` script in the root folder.
 
 This script will:
+- Ask for the URLs of where to deploy the frontend and API
+    - These can default to `http://metrics.green-coding.local:9142` and `http://api.green-coding.local:9142`
 - Set the database password for the containers
     - By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Create the needed `/etc/hosts` entries for development
@@ -170,8 +172,8 @@ This script will:
 - Set needed `/etc/sudoers` entry for requesting kernel scheduler info
 
 What you might want to add:
-- SMTP mail sending is by default deactived, so for a quick-start you do not have to change that in the `config.yml`
-- The RAPL reporter is by default deactived. Please check the [Metric Providers Documentation](https://docs.green-coding.berlin/docs/measuring/metric-providers) on how to active it
+- SMTP mail sending is by default deactivated, so for a quick-start you do not have to change that in the `config.yml`
+- The RAPL reporter is by default deactivated. Please check the [Metric Providers Documentation](https://docs.green-coding.berlin/docs/measuring/metric-providers) on how to active it
 
 After that you can start the containers:
 - Build and run in the `docker` directory with `docker compose up`
@@ -182,7 +184,7 @@ After that you can start the containers:
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
 This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `5432:5432` entry in the `compose.yml` file.
 
-The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install.sh` run, and can be found in the `compose.yml` file.
+The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install_linux.sh` run, and can be found in the `compose.yml` file.
 
 ### Restarting Docker containers on system reboot
 
@@ -311,11 +313,11 @@ It must be supplied with the machine params in the `config.yml` file:
 Please look at the always current documentation here to understand what values to
 plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
 
-Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyXgboostSystemProvider*
+Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyAcXgboostSystemProvider*
 
 Lastly, if you don't have them already, you need to install some python libraries:
 ```bash
-python3 -m pip install -r ~/green-metrics-tool/tools/metric_providers/psu/energy/xgboost/system/model/requirements.txt
+python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xgboost/system/model/requirements.txt
 ```
 
 ### DC Metrics Provider
@@ -323,7 +325,7 @@ python3 -m pip install -r ~/green-metrics-tool/tools/metric_providers/psu/energy
 This providers needs a custom piece of hardware to work:
 - [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 
-Please look for details in the provider documentation at [PsuEnergyDcSystemProvider →]({{< relref "psu-energy-dc-system" >}})
+Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "psu-energy-dc-system" >}})
 
 ### RAPL
 

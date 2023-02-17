@@ -1,12 +1,14 @@
 ---
-title: "PSU Energy - AC - Powerspy"
-description: "Documentation for PowerSpy2Provider of the Green Metrics Tool"
+title: "PSU Energy - AC - Powerspy2"
+description: "Documentation for PsuEnergyAcPowerspy2SystemProvider of the Green Metrics Tool"
 lead: ""
 date: 2023-01-03T20:16:35+0000
 draft: false
 images: []
 weight: 160
 ---
+
+
 ### What it does
 
 This metric provider uses the [PowerSpy2](https://www.alciom.com/en/our-trades/products/powerspy2/)

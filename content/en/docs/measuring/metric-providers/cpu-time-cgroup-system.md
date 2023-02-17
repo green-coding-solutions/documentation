@@ -1,6 +1,6 @@
 ---
-title: "CPU Time - cgroup"
-description: "Documentation of CpuTimeCgroupProvider for the Green Metrics Tool"
+title: "CPU Time - cgroup - system"
+description: "Documentation of CpuTimeCgroupSystemProvider for the Green Metrics Tool"
 lead: ""
 date: 2022-06-01T08:49:15+00:00
 draft: false
@@ -12,7 +12,7 @@ weight: 112
 This metric provider reads time spent in the CPU based on the cgroups stats file for all your cgroups. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
-- CpuTimeCgroupProvider
+- CpuTimeCgroupSystemProvider
 
 ### Input Parameters
 

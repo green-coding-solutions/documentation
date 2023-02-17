@@ -27,15 +27,15 @@ measurement:
   idle-time-end: 5
   flow-process-runtime: 60
   metric-providers:
-    cpu.cgroup.container.provider.CpuCgroupContainerProvider:
+    cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
       resolution: 100
-    energy.RAPL.MSR.system.provider.EnergyRaplMsrSystemProvider:
+    cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
       resolution: 100
-    memory.cgroup.container.provider.MemoryCgroupContainerProvider:
+    memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider:
       resolution: 100
-    time.cgroup.container.provider.TimeCgroupContainerProvider:
+    cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider:
       resolution: 100
-#    psu.energy.xgboost.system.provider.PsuEnergyXgboostSystemProvider:
+#    psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
 #      resolution: 100
        # This is a default configuration. Please change this to your system!
 #      CPUChips: 1
@@ -65,14 +65,14 @@ We will this only focus on the `measurement` key:
 
 Some metric providers have unique configuration params:
 
-- PsuEnergyXgboostSystemProvider
+- PsuEnergyAcXgboostSystemProvider
   + Please look at the always current documentation here to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
 
 Also note that some providers are deactivated by default, because they either need a
 additional configuration parameters, extra hardware or a specially configured system.
 
 Once you have set them up you can uncomment the line. In this example for instance
-the line `psu.energy.xgboost.system.provider.PsuEnergyXgboostSystemProvider` and all
+the line `psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider` and all
 the lines directly below it.
 
 ### admin
