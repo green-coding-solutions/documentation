@@ -1,5 +1,5 @@
 ---
-title: "PSU Energy - AC - Powerspy"
+title: "PSU Energy - AC - Powerspy2"
 description: "Documentation for PsuEnergyAcPowerspy2SystemProvider of the Green Metrics Tool"
 lead: ""
 date: 2023-01-03T20:16:35+0000
@@ -8,9 +8,6 @@ images: []
 weight: 160
 ---
 
-## ⚠️Warning - LEGACY PROVIDER⚠️
-
-This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
 
 ### What it does
 

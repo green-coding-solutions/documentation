@@ -1,5 +1,5 @@
 ---
-title: "PSU Energy - DC - System"
+title: "PSU Energy - DC - Picolog - System"
 description: "Documentation for PsuEnergyDcPicologSystemProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-08-04T08:49:15+00:00
