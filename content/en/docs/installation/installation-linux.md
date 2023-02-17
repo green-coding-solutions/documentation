@@ -315,7 +315,7 @@ Also the model must be activated by uncommenting the appropriate line with *...P
 
 Lastly, if you don't have them already, you need to install some python libraries:
 ```bash
-python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/xgboost/system/model/requirements.txt
+python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xgboost/system/model/requirements.txt
 ```
 
 ### DC Metrics Provider
