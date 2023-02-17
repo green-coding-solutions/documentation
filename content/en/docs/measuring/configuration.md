@@ -21,28 +21,31 @@ smtp:
 project:
   name: My test project
   url: https://metrics.green-coding.berlin/
+config:
+  ...
 
 measurement:
   idle-time-start: 5
   idle-time-end: 5
   flow-process-runtime: 60
   metric-providers:
-    cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
-      resolution: 100
-    cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
-      resolution: 100
-    memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider:
-      resolution: 100
-    cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider:
-      resolution: 100
-#    psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
-#      resolution: 100
-       # This is a default configuration. Please change this to your system!
-#      CPUChips: 1
-#      HW_CPUFreq: 3100
-#      CPUCores: 28
-#      TDP: 150
-#      HW_MemAmountGB: 16
+    linux:
+      cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
+        resolution: 100
+      cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
+        resolution: 100
+      memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider:
+        resolution: 100
+      cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider:
+        resolution: 100
+  #    psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
+  #      resolution: 100
+        # This is a default configuration. Please change this to your system!
+  #      CPUChips: 1
+  #      HW_CPUFreq: 3100
+  #      CPUCores: 28
+  #      TDP: 150
+  #      HW_MemAmountGB: 16
 
 admin:
   # This address will get an email, when a new project was added through the frontend
@@ -52,7 +55,7 @@ admin:
 
 ```
 
-The `postgresql` and `smtp` key were already discussed in the [installation →]({{< relref "installation-linux" >}}) part.
+The `postgresql`, `smtp` and `config` key were already discussed in the [installation →]({{< relref "installation-linux" >}}) part.
 
 We will this only focus on the `measurement` key:
 
@@ -60,8 +63,9 @@ We will this only focus on the `measurement` key:
 - `idle-time-end` **[integer]**: Seconds to idle containers after measurement
 - `flow-process-runtime` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
 - `metric-providers`:
-  + `METRIC_PROVIDER_NAME`: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
-  + `METRIC_PROVIDER_NAME.resolution`: **[integer]** sampling resolution in ms
+  + system: `linux`/`macos`/`common` - specifies under what system the metric provider can run. Common implies it could run on either.
+    * `METRIC_PROVIDER_NAME`: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
+    * `METRIC_PROVIDER_NAME.resolution`: **[integer]** sampling resolution in ms
 
 Some metric providers have unique configuration params:
 
