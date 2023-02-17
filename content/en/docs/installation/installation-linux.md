@@ -327,7 +327,7 @@ python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xg
 This providers needs a custom piece of hardware to work:
 - [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 
-Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "psu-energy-dc-system" >}})
+Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "psu-energy-dc-picolog-system" >}})
 
 ### RAPL
 
