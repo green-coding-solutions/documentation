@@ -25,18 +25,19 @@ Each metric providers to be attached and used during a run are defined in our `c
 ```yaml
 measurement:
   metric-providers:
-    cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
-      resolution: 100
-    cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
-      resolution: 100
-#    psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
-#      resolution: 100
-       # This is a default configuration. Please change this to your system!
-#      CPUChips: 1
-#      HW_CPUFreq: 3100
-#      CPUCores: 28
-#      TDP: 150
-#      HW_MemAmountGB: 16
+    linux:
+      cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
+        resolution: 100
+      cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
+        resolution: 100
+#      psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
+#        resolution: 100
+         # This is a default configuration. Please change this to your system!
+#        CPUChips: 1
+#        HW_CPUFreq: 3100
+#        CPUCores: 28
+#        TDP: 150
+#        HW_MemAmountGB: 16
 ```
 
 The dimension of the resolution is milliseconds. Change this number to have a smaller or larger time window between measurements for that specific provider.
