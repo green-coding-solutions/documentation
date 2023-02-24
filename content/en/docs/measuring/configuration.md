@@ -63,9 +63,9 @@ We will this only focus on the `measurement` key:
 - `idle-time-end` **[integer]**: Seconds to idle containers after measurement
 - `flow-process-runtime` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
 - `metric-providers`:
-  + system: `linux`/`macos`/`common` - specifies under what system the metric provider can run. Common implies it could run on either.
-    * `METRIC_PROVIDER_NAME`: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
-    * `METRIC_PROVIDER_NAME.resolution`: **[integer]** sampling resolution in ms
+  + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
+    * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
+    * `METRIC_PROVIDER_NAME.resolution` **[integer]**: sampling resolution in ms
 
 Some metric providers have unique configuration params:
 
