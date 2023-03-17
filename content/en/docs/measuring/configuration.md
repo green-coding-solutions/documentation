@@ -49,7 +49,7 @@ measurement:
 
 admin:
   # This address will get an email, when a new project was added through the frontend
-  email: myemail@dev.local
+  email: myemail@dev.internal
   # no_emails: True will suppress all emails. Helpful in development servers
   no_emails: True
 

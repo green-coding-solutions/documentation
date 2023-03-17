@@ -14,16 +14,16 @@ toc: true
 
 ## Browser cannot open Green Metrics Tool Frontend / ERR_CONNECTION_REFUSED
 
-When you are getting an unexpected result when accessing localhost / \*.local domain or a different website gets served / 404 / 403 check:
+When you are getting an unexpected result when accessing localhost / \*.internal domain or a different website gets served / 404 / 403 check:
 
 - Caching problem, please open Developer tools in your browser and check the *Disable Cache* option under *Network*
 - Not having the hostname set correctly in `/etc/hosts` for development:
 ```
-127.0.0.1 metrics.green-coding.local api.green-coding.local
+127.0.0.1 metrics.green-coding.internal api.green-coding.internal
 127.0.0.1 green-coding-postgres-container
 
 ```
-- Not accessing the Green Metrics Tool with the additional supplied port: `http://metrics.green-coding.local:9142`
+- Not accessing the Green Metrics Tool with the additional supplied port: `http://metrics.green-coding.internal:9142`
 - It could be that you have other containers running and the port is overloaded, so that some
 other service serves content on that port. Check your `docker ps -a`
 - Also check `lsof -i | grep PORTNUMBER` to look if something on your host OS is serving content on that port
