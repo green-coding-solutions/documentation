@@ -38,7 +38,7 @@ If you currently do not have these packages already available please refer to [I
 
 If you already have that and want to skip the installation, please only add one entry to your `/etc/hosts`:
 
-`127.0.0.1 metrics.green-coding.local api.green-coding.local`
+`127.0.0.1 metrics.green-coding.internal api.green-coding.internal`
 
 ### Setting up a sample measurement run
 
@@ -112,4 +112,4 @@ Having usage scenario ....
 Please access your report with the ID: XXXX-XXXX ...
 ```
 
-Now you can view the report as the first item in your metrics dashbard at `http://metrics.green-coding.local:9142`
+Now you can view the report as the first item in your metrics dashboard at `http://metrics.green-coding.internal:9142`

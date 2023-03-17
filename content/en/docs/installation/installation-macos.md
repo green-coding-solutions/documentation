@@ -37,7 +37,7 @@ The Dockerfiles, found in the `docker` directory, will provide you with a runnin
 
 It can technically be used in production, however it is designed to run on your local machine for testing purposes.
 
-The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.local:9142`
+The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.internal:9142`
 
 
 ## Setup
@@ -46,7 +46,7 @@ Please run the `install_mac.sh` script in the root folder.
 
 This script will:
 - Ask for the URLs of where to deploy the frontend and API
-    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.local:9142` and `http://api.green-coding.local:9142`. All other local domains are not supported out of the box.
+    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
     + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
 is running on port `80` or `443`
 - Set the database password for the containers
