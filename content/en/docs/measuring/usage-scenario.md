@@ -85,6 +85,9 @@ services:
             - Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
         * `volumes:` **[array]**  *(optional)*
             - Array of volumes to be mapped. Only read of `runner.py` is executed with `--allow-unsafe` flag
+        * `folder-destination`: **[str]** *(optional)*
+            - Specify where the project that is being measured will be mounted inside of the container
+            - Defaults to `/tmp/repo`
         * `cmd:` **[str]** *(optional)*
             - Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`
 
