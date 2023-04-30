@@ -83,4 +83,40 @@ that we have a lot of headroom by just running one reporter.
 
 
 ## Running multiple reporters / Full Green Metrics Tool
-TODO
+
+We have done measurements on two machines with a standard setup:
+
+### Quanta Leopard-DDR3 48-Core
+- Normal Idle without GMT: **60 W**
+- Full load: **300 W**
+
+then we activated the following reporters:
+- psu.energy.ac.ipmi.machine.provider.PsuEnergyAcIpmiMachineProvider: 100 ms resolution
+- network.io.cgroup.container.provider.NetworkIoCgroupContainerProvider: 100 ms resolution
+- cpu.energy.RAPL.MSR.component.provider.CpuEnergyRaplMsrComponentProvider: 100 ms resolution
+- cpu.utilization.procfs.system.provider.CpuUtilizationProcfsSystemProvider: 100 ms resolution
+- memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider: 100 ms resolution
+- memory.energy.RAPL.MSR.component.provider.MemoryEnergyRaplMsrComponentProvider: 100 ms resolution
+- cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider: 100 ms resolution
+
+The power draw is now **63-66 W**
+
+This means the GMT reporters have around a *1-2 % overhead* regarding the full power draw.
+
+
+### Fujitsu TX1330 M2
+- Normal Idle without GMT: **15.8 W**
+- Full load: **50 W**
+
+then we activated the following reporters
+- network.io.cgroup.container.provider.NetworkIoCgroupContainerProvider: 100 ms resolution
+- cpu.energy.RAPL.MSR.component.provider.CpuEnergyRaplMsrComponentProvider: 100 ms resolution
+- cpu.utilization.procfs.system.provider.CpuUtilizationProcfsSystemProvider: 100 ms resolution
+- memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider: 100 ms resolution
+- psu.energy.ac.powerspy2.machine.provider.PsuEnergyAcPowerspy2MachineProvider: 250 ms resolution
+- memory.energy.RAPL.MSR.component.provider.MemoryEnergyRaplMsrComponentProvider: 100 ms resolution
+- cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider: 100 ms resolution
+
+The power draw is now **16.3 W**
+
+This means the GMT reporters have around a *1 % overhead* regarding the full power draw.
