@@ -18,16 +18,19 @@ postgresql:
  ...
 smtp:
  ...
-project:
-  name: My test project
-  url: https://metrics.green-coding.berlin/
-config:
-  ...
+cluster:
+  api_url: http://api.green-coding.internal:9142
+  metrics_url: http://metrics.green-coding.internal:9142
+
+machine:
+  id: 1
+  description: "Development machine for testing"
 
 measurement:
-  idle-time-start: 5
+  idle-time-start: 10
   idle-time-end: 5
-  flow-process-runtime: 60
+  flow-process-runtime: 1800
+  phase-transition-time: 1
   metric-providers:
     linux:
       cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
@@ -55,13 +58,16 @@ admin:
 
 ```
 
-The `postgresql`, `smtp` and `config` key were already discussed in the [installation →]({{< relref "installation-linux" >}}) part.
+The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "installation-linux" >}}) part.
+
+The `machine` key has `id` and `description` that are mandatory fields and will be registered in the DB on first run.
 
 We will this only focus on the `measurement` key:
 
 - `idle-time-start` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
 - `idle-time-end` **[integer]**: Seconds to idle containers after measurement
 - `flow-process-runtime` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
+- `phase-transition-time` **[integer]**: Seconds to idle between phases
 - `metric-providers`:
   + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
     * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
