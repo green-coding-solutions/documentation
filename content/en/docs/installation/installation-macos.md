@@ -22,7 +22,6 @@ sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 
 The sudo in the last command is very important, as it will tell pip to install to /usr directory instead to the home directory. So we can find the package later with other users on the system. If you do not want that use a venv in Python.
 
-
 ## Docker
 
 Docker provides a great installation help on their website: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/). You can just use the docker desktop bundle that should come with everything you will need.
@@ -39,26 +38,27 @@ It can technically be used in production, however it is designed to run on your 
 
 The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.internal:9142`
 
-
 ## Setup
 
 Please run the `install_mac.sh` script in the root folder.
 
 This script will:
+
 - Ask for the URLs of where to deploy the frontend and API
-    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
-    + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
+  + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
+  + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
 is running on port `80` or `443`
 - Set the database password for the containers
-    + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+  + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+- Initialize and update git submodules
 - Create the needed `/etc/hosts` entries for development
 - Set needed `/etc/sudoers` entry for running/ killing the `powermetrics` tool
 
 After that you can start the containers:
+
 - Build and run in the `docker` directory with `docker compose up`
 - The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
 - To start in detached mode just use `docker compose -d`
-
 
 ### Metric Providers
 
@@ -67,21 +67,23 @@ values are not to come by so we use the `powermetrics` tool to get some relevant
 include more providers but for now you only need to use the one.
 
 You will need to disable all providers and enable the:
-```
+
+```yml
 powermetrics.provider.PowermetricsProvider:
     resolution: 100
 ```
+
 in the `config.yml`.
 
-
 ### Connecting to DB
+
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
 This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `5432:5432` entry in the `compose.yml` file.
 
 The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install.sh` run, and can be found in the `compose.yml` file.
 
-
 ### Dockerfiles architecture explanation:
+
 - The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
 - The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to a UNIX socket in `/tmp`
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
