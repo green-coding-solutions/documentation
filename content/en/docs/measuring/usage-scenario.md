@@ -37,6 +37,7 @@ Example for the start of a `usage_scenario.yml`
 name: My Hugo Test
 author: Arne Tarara
 version: 1
+description: This is just an example usage_scenario ...
 ```
 
 When running the `runner.py` we would then set `--name` for instance to: *Hugo Test run on my Macbook*

@@ -29,15 +29,19 @@ cd /tmp
 mkdir easiest-application
 cd easiest-application
 touch usage_scenario.yml
+git init .
+git add .
+git commit -m "All prepared for the energy test"
 ```
 
 Now please copy the following code inside the `usage_scenario.yml`.
 
 ```yaml
-name: Stress Container One Core 5 Seconds
+name: Stress Example
 author: Arne Tarara
 version: 1
-architecture: linux
+description: Stress container on one core for 5 seconds
+
 services:
   simple-load-container:
     image: alpine
