@@ -37,6 +37,16 @@ other service serves content on that port. Check your `docker ps -a`
 - If you just copied your `docker-compose.yml` and wanted to reuse it but do not need the functionality, then consider using the `--skip-unsafe` flag.
 - If you need the functionality then consider the `--allow-unsafe` flag
 
+## Run on macOS fails
+
+Either with the error `Base exception occured in runner.py:  no element found` or `xml.parsers.expat.ExpatError`
+
+This is due to a current bug with the reading of the XML output of the powermetrics reporter.
+
+Easiest fix: Just try the run again. The error happens seldomly and is random. 
+
+[Please consult this ticket for current status of the bugfix](https://github.com/green-coding-berlin/green-metrics-tool/issues/286)
+
 ## Submodule issues
 
 If you run into any conflicts just deinit and reinit the submodule in question:
