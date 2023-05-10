@@ -6,6 +6,10 @@ date: 2022-08-04T08:49:15+00:00
 weight: 160
 ---
 
+# ⚠️Warning - LEGACY PROVIDER⚠️
+This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
+
+
 ### What it does
 It measures the DC energy by intercepting the cable pathway from the PSU
 to the ATX mainboard connector.
