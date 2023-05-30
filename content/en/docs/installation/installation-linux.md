@@ -26,7 +26,7 @@ git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metr
 cd ~/green-metrics-tool && \
 sudo apt update && \
 sudo apt upgrade -y && \
-sudo apt install make gcc python3 python3-pip libpq-dev -y && \
+sudo apt install make gcc python3 python3-pip libpq-dev libglib2.0-dev -y && \
 sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 ```
 
@@ -37,7 +37,7 @@ sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool && \
 sudo dnf upgrade -y && \
-sudo dnf install -y make gcc python3 python3-devel libpq-devel
+sudo dnf install -y make gcc python3 python3-devel libpq-devel glib2-devel
 sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 ```
 
