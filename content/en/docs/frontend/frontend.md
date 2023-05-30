@@ -33,10 +33,10 @@ The sidebar is done in flexbox.
 
 - All custom JS files we did live in `/frontend/js`.
 - All custom CSS files we did live in `/frontend/css`
-- All library files whichlive in `/frontend/dist/`
+- All library files which live in `/frontend/dist/`
     + In the `site.min.css` from Fomantic UI where we removed the @import statement for the *Lato* font.
     + We removed the `emoji.min.css`
-    + We then concated all the minified file into a `semantic_reduced.min.css`
+    + We then concatenated all the minified file into a `semantic_reduced.min.css`
 - The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
 
@@ -66,10 +66,10 @@ In the old 0.1-beta version of our tool we used:
 - [Material Dash from Bootstrap Dash](https://www.bootstrapdash.com/product/material-design-template-free/)
 - [Apex Charts](https://apexcharts.com/)
 
-We decided to not continue with Boostrap Dash, cause the template was just too 
+We decided to not continue with Bootstrap Dash, cause the template was just too 
 convoluted with CSS classes and was just not clear and expressive enough to work with.
 
-ApexCharts could not handle the amout of datapoints we wanted to process, although
+ApexCharts could not handle the amount of datapoints we wanted to process, although
 it looked way nicer.
 
 So if you plan on measurements < 30 Minutes than ApexCharts might be a good choice for a frontend charting library.

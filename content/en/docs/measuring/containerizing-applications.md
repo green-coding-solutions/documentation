@@ -59,7 +59,7 @@ Here you see a list of the final files and directories that we will end up with:
 
 The `compose.yml` is technically not needed, but makes initial testing 
 and debugging far easier. We encourage you to always start with setting up a `compose.yml` 
-and then migrating the contents of the file to our `usage_scenarion.yml` file,
+and then migrating the contents of the file to our `usage_scenario.yml` file,
 adding the `flow` and extra attributes you need on top. We have found this to be the easiest workflow in regards to containerizing your application.
 
 
@@ -211,7 +211,7 @@ services:
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=wordpress
       - MYSQL_PASSWORD=wordpress
-# networks must be explicitely stated in each service
+# networks must be explicitly stated in each service
     networks:
       - example-network
   wordpress-container:

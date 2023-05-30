@@ -11,7 +11,7 @@ The first step in debugging a measurement workflow is to turn the `--debug`
 flag of the `runner.py` on.
 
 When you call the `runner.py` locally it will turn into a steppable mode where 
-you contine to the next step by pressing enter.
+you continue to the next step by pressing enter.
 
 You can then enter one of the containers to see if the required services are
 running correctly.
@@ -24,7 +24,7 @@ docker exec -it MY_CONTAINER_NAME bash
 Some container do not have `bash`. However `sh`, which has less capabilities,
 should be available in most cases.
 
-## Debbuging containers via HTTP / exposed ports
+## Debugging containers via HTTP / exposed ports
 
 If entering the container looks fine and you need to access them through some of their
 exposed ports (ex. via Browser through HTTP) turn on the `--allow-unsafe` flag to bind 

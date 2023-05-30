@@ -9,7 +9,7 @@ weight: 803
 When your application is prepared in containers you need to provide a starting
 point or set of actions that the application is going to process whilst our metric providers measure and read the metrics during this lifecycle.
 
-In our terminolgy we call this a `flow`.
+In our terminology we call this a `flow`.
 
 In the simplest case this is just a start command that will kick of some workload
 in one or more of the containers.
@@ -74,7 +74,7 @@ some sample subsites of the web application.
 It is important to note that the image names we use here in this example are local docker
 images on our system, therefore the names can be different on your system and application.
 
-The names in this example follow the naming in the example from [containerzing applications →]({{< relref "containerizing-applications" >}})
+The names in this example follow the naming in the example from [containerizing applications →]({{< relref "containerizing-applications" >}})
 
 ```yaml
 networks:
@@ -125,7 +125,7 @@ flow:
         read-notes-stdout: true
 ```
 
-Let's drill down on what is happeing in this `usage_scenario.yml`:
+Let's drill down on what is happening in this `usage_scenario.yml`:
 
 - First the network is set up
 - Then all services are defined and on which network they can communicate

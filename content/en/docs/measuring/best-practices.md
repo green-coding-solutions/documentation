@@ -9,7 +9,7 @@ toc: true
 
 One very important note, that serves as a general rule for all usage of the Green Metrics Tool:
 
-{{< alert icon="❗️" text="All energy measurements and / or benchmarks on a normal operating system are by nature error prone and uncomparable with different systems. Please never compare our values with values on your system. Measurements of software can only be compared on the exact same system." />}}
+{{< alert icon="❗️" text="All energy measurements and / or benchmarks on a normal operating system are by nature error prone and incomparable with different systems. Please never compare our values with values on your system. Measurements of software can only be compared on the exact same system." />}}
 
 Having said that: If you have a proper transfer function between systems or just want to estimate the general **overhead** a 100-core machine compared to an Arduino for just running an email server you can still do a comparison ... just keep in mind, it will have caveats and can only provide guidance.
 
@@ -31,7 +31,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 ### 1. Never compare between machines to judge your software
 - At least not within small margins. Energy measurements on multi-task operating systems do always have noise and variance. 
 - However a comparison by the order of magnitude is very helpful to judge the underlying hardware
-    + In order to judge software on different hardware your systems must be calibrated and run no non-deterministic componentes like schedulers (realtime linux kernel for instance)
+    + In order to judge software on different hardware your systems must be calibrated and run no non-deterministic components like schedulers (realtime linux kernel for instance)
 - Even systems with identical hardware components can have variations that you cannot easily account for, as there are unknown variables unless you measure them ahead (component energy consumption variance etc.)
 - Some comparisons make sense though if you have a tuned [Measurement Cluster]({{< relref "measurement-cluster" >}})
 
@@ -65,7 +65,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - If you build Docker containers be sure to always specify hashes / versions in the `apt-get install` commands and also in the `FROM` commands if you ingest images. By versions we mean here something like `FROM alpine@sha256:be746ab119f2c7bb2518d67fbe3c511c0ea4c9c0133878a596e25e5a68b0d9f3` instead of just `FROM alpine`. If that is not an option be sure to use at least double-dotted semantic versioning like `FROM alpine:1.2.3`
 - For dependencies in `npm`, `pip` or any other package manager also pin the versions
 - Same goes for `docker-compose.yml` /  `compose.yml` files etc.
-- This practice helps you spot changes to the software infrastructure your code is running on and undestand changes that have been made by third parties, which influence your energy results.
+- This practice helps you spot changes to the software infrastructure your code is running on and understand changes that have been made by third parties, which influence your energy results.
 
 ### 9. Use a tuned Measurement Cluster or our Hosted Service for reproducability and visiblity
 - Use our measurement service for reproducibility and visibility of your measurements
@@ -77,7 +77,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
     + Do not touch the keyboard or the mouse
         * Never move your mouse or type something on your keyboard while measuring, because the interrupts of the CPU will interfere with the measurement.
     + Do not have dimming or monitor-sleep active as this will cost CPU cycles to trigger
-    + Turn off any cronjobs / updates / houskeeping jobs on the system
+    + Turn off any cronjobs / updates / housekeeping jobs on the system
     + Turn off any processes you do not need atm.
 - Or put more loosely: Listening to spotify while running an energy test is a bad idea :)
 
