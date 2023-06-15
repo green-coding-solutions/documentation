@@ -10,7 +10,7 @@ The `usage_scenario.yml` consists of these main blocks:
 - `networks` - Handles the orchestration of networks
 - `services` - Handles the orchestration of containers
 - `flow` - Handles the interaction with the containers
-- `builds*` - Specifies which docker images should be build.
+- `build*` - Specifies which docker images should be build.
 - `compose-file*` - A compose file to include.
 
 `*`: means these values are optional.
@@ -150,7 +150,7 @@ key being the name of the container. We will always append `:latest` except if y
 Example:
 
 ```yml
-builds:
+build:
   gcb_stress: Dockerfile
 ```
 
