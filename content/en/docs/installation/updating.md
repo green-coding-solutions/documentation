@@ -34,6 +34,13 @@ docker compose down -v # optional!!! This will rebuild the database
 docker compose up -d
 ```
 
+## Re-install dependencies if needed
+
+If python dependencies has been updated, e.g. `requirements.txt` has been
+changed, then they need to be installed.
+
+    sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+
 ## Re-Run the install script
 
 After every new `git pull` you should run the `install.sh` script to get the newest binaries and configuration params for 
