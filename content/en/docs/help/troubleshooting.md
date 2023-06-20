@@ -33,6 +33,10 @@ other service serves content on that port. Check your `docker ps -a`
 - Are the containers on the same network? Check with `docker inspect CONTAINER_ID`
 - Can access the container through browser when mapping the ports to the host OS? (See also debug mode for this)
 
+## Working `docker compose` setup, but not in GMT
+- Some features that are standard of the [compose file](https://docs.docker.com/compose/compose-file/compose-file-v2/) might not be implemented. Check our [Docs](https://docs.green-coding.berlin) if a feature you need is implemented.
+- Are you accessing with `http://localhost` ? This will not work in the GMT as it makes an internal network for the containers and does not know anything about the host machines. Please use the container names here.
+
 ## Run fails because *volumes*, *environment* or *ports* are in the `usage_scenario.yml`
 - If you just copied your `docker-compose.yml` and wanted to reuse it but do not need the functionality, then consider using the `--skip-unsafe` flag.
 - If you need the functionality then consider the `--allow-unsafe` flag
