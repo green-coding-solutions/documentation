@@ -8,45 +8,50 @@ weight: 1001
 ---
 
 It is comprised of:
+
 - A Python backend that handles the infrastructure orchestration
 - C UNIX-style reporters that generate energy and resource consumption metrics
 - A Python API to retrieve metrics
-- A native javascript web frontend that visalizes the data from the API in some nice charts
+- A native javascript web frontend that visualizes the data from the API with nice charts
 
-<img src="/img/green_metrics_dashboard.webp">
+<img class="ui centered rounded bordered image" src="/img/green_metrics_dashboard.webp">
 
 ## Getting to know the Green Metrics Tool
 
-We recommend that you start with the [Philosophy & Methodology →]({{< relref "philosophy-methodology" >}}) part 
-to understand the *WHY* of the tool and some design decisions.
+We recommend that you start with the [Philosophy & Methodology →]({{< relref "philosophy-methodology" >}}) part to  
+understand the *WHY* of the tool and some design decisions.
 
-After that we recommend the [Measurement Process →]({{< relref "measurement-process" >}}) to get a high level overview
-of *WHAT* the tool does and *HOW*.
+After that we recommend the [Measurement Process →]({{< relref "measurement-process" >}}) to  
+get a high level overview of *WHAT* the tool does and *HOW*.
 
 From here you can branch off in two paths:
 
-### Measure your own app with our online hosted service
-
-[Measuring with our hosted service →]({{< relref "measuring-service" >}}) 
-
-This is a one page summary of how to measure a sample application.
-{{< alert icon="👉" text="This Quick Start is intended to give you an idea how the tool works and how a consumeable application looks like" />}}
-
-After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly consumed.
-
-Your app must conform to the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) specification and be [Containerized →]({{< relref "containerizing-applications" >}})
-
+- [Install and measure locally →]({{< relref "measuring-locally" >}})
+- [Measuring with our hosted service →]({{< relref "measuring-service" >}})
 
 ### Install and measure locally
-Under [Installation on Linux →]({{< relref "installation-linux" >}}) / [Installation on macOS →]({{< relref "installation-macos" >}}) you find the detailed installation instructions.
 
-Then proceed with [Containerizing and measuring own applications →]({{< relref "containerizing-applications" >}}) to understand
-how to prepare your app to be consumed by the Green Metrics Tool.
+Refer to the installation instructions for your OS:
 
-Be sure to read the [usage_scenario.json →]({{< relref "usage-scenario" >}}) specification to get to know the flexibility of our tool to measure your application.
+- [Installation on Linux →]({{< relref "installation-linux" >}})
+- [Installation on macOS →]({{< relref "installation-macos" >}})
 
-Then proceed to [Measuring Locally]({{< relref "measuring-locally" >}})
+Then proceed with [containerizing and measuring your applications →]({{< relref "containerizing-applications" >}}) to  
+understand how to prepare your app to be measured by the Green Metrics Tool.
 
+Be sure to read the [usage_scenario.json →]({{< relref "usage-scenario" >}}) specification to  
+get to know the flexibility of our tool to measure your application.
+
+### Measure your own app with our online hosted service
+
+[Measuring with our hosted service →]({{< relref "measuring-service" >}})
+
+{{< alert icon="👉" text="This Quick Start is intended to give you an idea how the tool works and how a measurable application looks like" />}}
+
+The app you submit to our hosted service must conform to the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) specification  
+and be [Containerized →]({{< relref "containerizing-applications" >}})
+
+After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly measured.
 
 ## Help: FAQ / Troubleshooting
 

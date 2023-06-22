@@ -12,21 +12,26 @@ If you do not have that, please check out the relevant links given.
 
 ## Trying out the hosted service with an example application
 
-You can supply the Github link to our provided [easy example application](https://github.com/green-coding-berlin/simple-example-application) and wait for an email to arrive to view a report.
+Our hosted service is available at [https://metrics.green-coding.berlin/](https://metrics.green-coding.berlin/)  
+and you can [request a measurement of your application](https://metrics.green-coding.berlin/request.html).
 
-This example highlights that in order to measure an application you really need to only have a repository with a
- [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
+You can supply the Github link to our provided [easy example application](https://github.com/green-coding-berlin/simple-example-application) and wait for  
+an email to arrive to view a report.
 
-<img src="/img/add-new-project.webp">
+This example highlights that in order to measure an application you really need to only have a repository with a  
+[usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
+
+<img class="ui centered rounded bordered image" src="/img/add-new-project.webp">
 
 ## Measuring your applications
 
-The hosted service can really helpful when you want to measure your application a 
+The hosted service can really helpful when you want to measure your application a  
 reference machine and see if the values you are getting are in the same order of magnitude.
 
 The hosted service is free to use and makes your measurement data visible and reproducible for other people.
 
 ### Benefits of hosted service
+
 - No need to setup local linux environment
 - Reproducible measurements from machines maintained by our team
 - DC / AC Metrics Providers are calibrated on our machines
