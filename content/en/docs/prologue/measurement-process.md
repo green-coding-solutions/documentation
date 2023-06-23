@@ -7,14 +7,15 @@ weight: 1003
 toc: true
 ---
 
-The Green Metrics Tool can orchestrate your application by consuming what we call
-the [usage_scenario.yml →]({{< relref "usage-scenario" >}}).
+The Green Metrics Tool can orchestrate your application by consuming  
+what we call the [usage_scenario.yml →]({{< relref "usage-scenario" >}}).
 
 This files includes your architecture specification as well as the flow of how to  
 interact with the application.
 
-After orchestrating all the services with their respective containers the Green Metrics Tool
-attaches the *Metric Providers* to the containers.
+After orchestrating all the services with their respective containers,  
+the Green Metrics Tool attaches the *Metric Providers* to the containers.  
+
 The *Metric Providers* are to be understood as  
 <img src="/img/green-metrics-tool-orchestration.webp">
 
