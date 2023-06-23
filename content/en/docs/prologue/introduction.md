@@ -13,8 +13,20 @@ It is comprised of:
 - C UNIX-style reporters that generate energy and resource consumption metrics
 - A Python API to retrieve metrics
 - A native javascript web frontend that visualizes the data from the API with nice charts
-
-<img class="ui centered rounded bordered image" src="/img/green_metrics_dashboard.webp">
+  * Projects
+<img class="ui centered rounded bordered" src="/img/projects.webp" alt="Projects">
+  * Project data
+<img class="ui centered rounded bordered" src="/img/project_data.webp" alt="Project data">
+  * Measurement phases overview
+<img class="ui centered rounded bordered image" src="/img/green_metrics_dashboard.webp" alt="Measurement phases overview">
+  * Metrics
+<img class="ui centered rounded bordered" src="/img/metrics.webp" alt="Metrics">
+  * Metrics CO2
+<img class="ui centered rounded bordered" src="/img/metrics_co2.webp" alt="Metrics CO2">
+  * Charts
+<img class="ui centered rounded bordered" src="/img/charts.webp" alt="Charts">
+  * Comparison
+<img class="ui centered rounded bordered" src="/img/comparison.webp" alt="Comparison">
 
 ## Getting to know the Green Metrics Tool
 
@@ -44,12 +56,12 @@ get to know the flexibility of our tool to measure your application.
 
 ### Measure your own app with our online hosted service
 
-[Measuring with our hosted service →]({{< relref "measuring-service" >}})
-
 {{< alert icon="👉" text="This Quick Start is intended to give you an idea how the tool works and how a measurable application looks like" />}}
 
-The app you submit to our hosted service must conform to the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) specification  
-and be [Containerized →]({{< relref "containerizing-applications" >}})
+[Measuring with our hosted service →]({{< relref "measuring-service" >}})
+
+The app you submit to our hosted service must conform  
+to the [usage scenario specification]({{< relref "usage-scenario" >}})  and be [containerized]({{< relref "containerizing-applications" >}}).
 
 After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly measured.
 
