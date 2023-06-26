@@ -37,6 +37,7 @@ other service serves content on that port. Check your `docker ps -a`
 - Can access the container through browser when mapping the ports to the host OS? (See also debug mode for this)
 
 ## Working `docker compose` setup, but not in GMT
+
 - Some features that are standard of the [compose file](https://docs.docker.com/compose/compose-file/compose-file-v2/) might not be implemented. Check our [Docs](https://docs.green-coding.berlin) if a feature you need is implemented.
 - Are you accessing with `http://localhost` ? This will not work in the GMT as it makes an internal network for the containers and does not know anything about the host machines. Please use the container names here.
 
@@ -47,11 +48,11 @@ other service serves content on that port. Check your `docker ps -a`
 
 ## Run on macOS fails
 
-Either with the error `Base exception occured in runner.py:  no element found` or `xml.parsers.expat.ExpatError`
+Either with the error `Base exception occurred in runner.py:  no element found` or `xml.parsers.expat.ExpatError`
 
 This is due to a current bug with the reading of the XML output of the powermetrics reporter.
 
-Easiest fix: Just try the run again. The error happens seldomly and is random. 
+Easiest fix: Just try the run again. The error happens seldomly and is random.
 
 [Please consult this ticket for current status of the bugfix](https://github.com/green-coding-berlin/green-metrics-tool/issues/286)
 
@@ -91,6 +92,10 @@ To resolve this, update the `glib` package:
 ```bash
 sudo apt install libglib2.0-dev
 ```
+
+However, if the error is still present after this command, it might be that  
+it is not possible to use lm_sensors on your system. Comment out the section of the  
+install script that mentions it and comment it out of your `config.yml`.
 
 ## General tips
 
