@@ -31,7 +31,7 @@ Comparison is currently possible for measurements that are:
 
 The tool will let you know if you try to compare measurements that can't be compared.
 
-<img class="ui centered rounded bordered" src="/img/comparison.webp" alt="Comparison">
+<img class="ui centered rounded bordered" src="/img/overview/comparison.webp" alt="Comparison">
 
 When comparing measurements, you will see the standard deviance on the key metrics  
 and in a column under the detailed metrics.
@@ -39,6 +39,6 @@ and in a column under the detailed metrics.
 
 Graphs will also include the confidence interval.
 
-<img class="ui centered rounded bordered" src="/img/compare_charts.webp" alt="Graphs with confidence interval when comparing measurements">
+<img class="ui centered rounded bordered" src="/img/overview/compare_charts.webp" alt="Graphs with confidence interval when comparing measurements">
 
 Comparing measurements should help raise awareness of software energy use over time.

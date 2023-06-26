@@ -22,7 +22,7 @@ The Green Metrics Tool currently supports the following phases:
 - Runtime
 - Remove
 
-<img class="ui centered rounded bordered" src="/img/green_metrics_dashboard.webp" alt="Measurement phases overview">
+<img class="ui centered rounded bordered" src="/img/overview/green_metrics_dashboard.webp" alt="Measurement phases overview">
 
 These phases originate from the idea to look at software from a lifecycle perspective,  
 similar to how [ISO 14001](https://www.iso.org/iso-14001-environmental-management.html) and also the [Blue Angel](https://www.blauer-engel.de/en/productworld/resources-and-energy-efficient-software-products) for software does.

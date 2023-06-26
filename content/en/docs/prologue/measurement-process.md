@@ -17,7 +17,7 @@ After orchestrating all the services with their respective containers,
 the Green Metrics Tool attaches the *Metric Providers* to the containers.  
 
 The *Metric Providers* are to be understood as  
-<img src="/img/green-metrics-tool-orchestration.webp">
+<img src="/img/overview/green-metrics-tool-orchestration.webp">
 
 - The measurement is divided into phases, briefly covered in this high level overview
   + See [Measurement Phases →]({{< relref "measurement-phases" >}}) for exact details

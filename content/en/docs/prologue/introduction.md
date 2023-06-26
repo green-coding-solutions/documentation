@@ -7,24 +7,15 @@ toc: true
 weight: 1001
 ---
 
+
 It is comprised of:
 
 - A Python backend that handles the infrastructure orchestration
 - C UNIX-style reporters that generate energy and resource consumption metrics
 - A Python API to retrieve metrics
 - A native javascript web frontend that visualizes the data from the API with nice charts
-  * Projects
-<img class="ui centered rounded bordered" src="/img/projects.webp" alt="Projects">
-  * Project data
-<img class="ui centered rounded bordered" src="/img/project_data.webp" alt="Project data">
-  * Measurement phases overview
-<img class="ui centered rounded bordered image" src="/img/green_metrics_dashboard.webp" alt="Measurement phases overview">
-  * Metrics CO2
-<img class="ui centered rounded bordered" src="/img/metrics_co2.webp" alt="Metrics CO2">
-  * Charts
-<img class="ui centered rounded bordered" src="/img/compare_charts.webp" alt="Charts">
-  * Comparison
-<img class="ui centered rounded bordered" src="/img/comparison.webp" alt="Comparison">
+
+{{< slider dir="/img/overview" auto-slide="4000" width="700px" height="350px" no-fa="true" >}}
 
 ## Getting to know the Green Metrics Tool
 
