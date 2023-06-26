@@ -19,12 +19,10 @@ It is comprised of:
 <img class="ui centered rounded bordered" src="/img/project_data.webp" alt="Project data">
   * Measurement phases overview
 <img class="ui centered rounded bordered image" src="/img/green_metrics_dashboard.webp" alt="Measurement phases overview">
-  * Metrics
-<img class="ui centered rounded bordered" src="/img/metrics.webp" alt="Metrics">
   * Metrics CO2
 <img class="ui centered rounded bordered" src="/img/metrics_co2.webp" alt="Metrics CO2">
   * Charts
-<img class="ui centered rounded bordered" src="/img/charts.webp" alt="Charts">
+<img class="ui centered rounded bordered" src="/img/compare_charts.webp" alt="Charts">
   * Comparison
 <img class="ui centered rounded bordered" src="/img/comparison.webp" alt="Comparison">
 
@@ -40,6 +38,8 @@ From here you can branch off in two paths:
 
 - [Install and measure locally →]({{< relref "measuring-locally" >}})
 - [Measuring with our hosted service →]({{< relref "measuring-service" >}})
+
+However you choose to make the measurements, you are also able to [compare them]({{< relref "comparing" >}}).
 
 ### Install and measure locally
 
@@ -64,6 +64,7 @@ The app you submit to our hosted service must conform
 to the [usage scenario specification]({{< relref "usage-scenario" >}})  and be [containerized]({{< relref "containerizing-applications" >}}).
 
 After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly measured.
+
 
 ## Help: FAQ / Troubleshooting
 
