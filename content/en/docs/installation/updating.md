@@ -3,7 +3,7 @@ title: "Updating"
 description: "Updating"
 lead: ""
 date: 2022-11-23T01:49:15+00:00
-weight: 902
+weight: 904
 ---
 
 The standard way of updating the Green Metrics Tool is to run:
@@ -12,7 +12,7 @@ git pull # update the base files
 git submodule update --init # update all the submodules
 ```
 
-This will give you all the updated files. 
+This will give you all the updated files.
 
 Now we dive deeper in re-running the install script and restarting the containers,
  where you can opt to start fresh or keep most of your database / configuration.
@@ -22,8 +22,8 @@ Now we dive deeper in re-running the install script and restarting the container
 We will stop and rebuild the containers. Since the containers have a shared filesystem
 that is independent of the container state your database will be kept as is.
 
-However if a structural change to the database was included in the update you MUST 
-rebuild the database. We hopefully state this in the Github release tag ... but if you 
+However if a structural change to the database was included in the update you MUST
+rebuild the database. We hopefully state this in the Github release tag ... but if you
 run into unknown errors be sure to definitely rebuild the database.
 
 ```bash
@@ -43,7 +43,7 @@ changed, then they need to be installed.
 
 ## Re-Run the install script
 
-After every new `git pull` you should run the `install.sh` script to get the newest binaries and configuration params for 
+After every new `git pull` you should run the `install.sh` script to get the newest binaries and configuration params for
 the Green Metrics Tool.
 
 It will ask you for the database password every time. If you want to keep the database
@@ -65,7 +65,7 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 If you are a maintainer and want to push submodule changes please only push the latest version with a depth=1:
 ```bash
 git submodule update --remote
-git add FOLDER 
+git add FOLDER
 git commit -m "Submodule update"
 git push
 ```
