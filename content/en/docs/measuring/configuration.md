@@ -66,7 +66,7 @@ We will this only focus on the `measurement` key:
   + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
     * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
     * `METRIC_PROVIDER_NAME.resolution` **[integer]**: sampling resolution in ms
-
+- `client: sleep_time`: The seconds the job client should wait before retrying to get another job.
 Some metric providers have unique configuration params:
 
 - PsuEnergyAcXgboostSystemProvider
