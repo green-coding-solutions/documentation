@@ -20,29 +20,29 @@ Please modify the commands accordingly.
 
 {{< tabs >}}
 {{% tab name="Ubuntu" %}}
+
 ```bash
 git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool && \
-git submodule update --init && \
 sudo apt update && \
 sudo apt upgrade -y && \
-sudo apt install make gcc python3 python3-pip libpq-dev -y && \
+sudo apt install make gcc python3 python3-pip libpq-dev libglib2.0-dev -y && \
 sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 ```
+
 {{% /tab %}}
 {{% tab name="Fedora" %}}
+
 ```bash
 git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool && \
-git submodule update --init && \
 sudo dnf upgrade -y && \
-sudo dnf install -y make gcc python3 python3-devel libpq-devel
+sudo dnf install -y make gcc python3 python3-devel libpq-devel glib2-devel
 sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
-
-
 
 The sudo in the last command is very important, as it will tell pip to install to /usr directory instead to the home directory. So we can find the package later with other users on the system. If you do not want that use a venv in Python.
 
@@ -56,6 +56,7 @@ However, we provide here what we used in on our systems, but be sure to double c
 
 {{< tabs groupId="docker">}}
 {{% tab name="Ubuntu" %}}
+
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
@@ -64,8 +65,10 @@ sudo apt remove docker docker-engine docker.io containerd runc -y && \
 sudo apt install ca-certificates curl gnupg lsb-release -y && \
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 ```
+
 {{% /tab %}}
 {{% tab name="Fedora" %}}
+
 ```bash
 sudo dnf remove docker \
                   docker-client \
@@ -84,15 +87,15 @@ sudo dnf config-manager \
 sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo systemctl start docker
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
-
-
 
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now. You can also run
 `sudo docker run hello-world` which will run a little welcome container.
 
 ### Rootless mode
+
 The Green Metrics Tool (GMT) is currently designed to work only with Docker in rootless mode.
 
 If your docker daemon currently does not run in rootless mode please follow the heregiven instructions.
@@ -106,6 +109,7 @@ In order to use rootless mode you must have a non-root user on your system (see 
 {{< tabs groupId="rootless">}}
 {{% tab name="Ubuntu" %}}
 The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
+
 ```bash
 sudo systemctl disable --now docker.service docker.socket && \
 sudo apt install uidmap && \
@@ -118,13 +122,16 @@ After the installation the install script will tell you to add some `export` sta
 Please do so to always have the correct paths referenced if you open a new terminal.
 
 Lastly please run the following commands to have the docker daemon always lingering:
+
 ```bash
 systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
+
 {{% /tab %}}
 {{% tab name="Fedora" %}}
 The `docker-ce-rootless-extras` package on Fedora provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
+
 ```bash
 sudo systemctl disable --now docker.service docker.socket && \
 sudo dnf install -y shadow-utils fuse-overlayfs iptables && \
@@ -136,13 +143,14 @@ After the installation the install script will tell you to add some `export` sta
 Please do so to always have the correct paths referenced if you open a new terminal.
 
 Lastly please run the following commands to have the docker daemon always lingering:
+
 ```bash
 systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
-
 
 You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/).
 
@@ -156,33 +164,37 @@ It can technically be used in production, however it is designed to run on your 
 
 The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.internal:9142`
 
-
 ## Setup
 
 Please run the `install_linux.sh` script in the root folder.
 
 This script will:
+
 - Ask for the URLs of where to deploy the frontend and API
-    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
-    + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
+  + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
+  + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
 is running on port `80` or `443`
 - Set the database password for the containers
-    + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+  + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+- Initialize and update git submodules
 - Create the needed `/etc/hosts` entries for development
 - Install needed development libraries via `apt` for metric providers to build
 - Build the binaries for the Metric Providers
 - Set needed `/etc/sudoers` entry for requesting kernel scheduler info
 
 What you might want to add:
+
 - SMTP mail sending is by default deactivated, so for a quick-start you do not have to change that in the `config.yml`
 - The RAPL reporter is by default deactivated. Please check the [Metric Providers Documentation](https://docs.green-coding.berlin/docs/measuring/metric-providers) on how to active it
 
 After that you can start the containers:
+
 - Build and run in the `docker` directory with `docker compose up`
 - The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
 - To start in detached mode just use `docker compose -d`
 
 ### Connecting to DB
+
 You can now connect to the db directly on port 5432, which is exposed to your host system.\
 This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `5432:5432` entry in the `compose.yml` file.
 
@@ -215,6 +227,7 @@ As you can see *Restart* is set to never. The reason is that the docker dameon w
 As you can see we also reference the `/home/USERNAME/green-metrics-tool/startup-docker.sh` file which `systemd` expects to be in your green metrics tool directory.
 
 Please create the following file in your home directory and change **PATH_TO_GREEN_METRICS_TOOL** accordingly:
+
 ```bash
 #!/bin/bash
 docker context use rootless
@@ -222,12 +235,14 @@ docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 ```
 
 Now you can reload and enable the daemon:
+
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable green-coding-service
 ```
 
 ### Dockerfiles architecture explanation:
+
 - The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
 - The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to a UNIX socket in `/tmp`
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
@@ -244,17 +259,20 @@ are the libraries installed:
 
 {{< tabs groupId="sensors">}}
 {{% tab name="Ubuntu" %}}
+
 ```bash
 sudo apt install -y lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
 ```
+
 {{% /tab %}}
 {{% tab name="Fedora" %}}
+
 ```bash
 sudo dnf -y install lm_sensors lm_sensors-devel glib2 glib2-devel
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
-
 
 If you want the temperature metric provider to work you need to run the sensor detector
 
@@ -292,7 +310,6 @@ lm_sensors.temperature.provider.LmSenorsTempProvider:
 
 As the matching is open ended you could also only use `'Core'` instead of naming each feature.
 
-
 ### XGBoost
 
 The XGBoost metrics provider can estimate the power consumption of the total
@@ -306,6 +323,7 @@ git submodule update --init
 ```
 
 It must be supplied with the machine params in the `config.yml` file:
+
 - CPUChips
 - HW_CPUFreq
 - CPUCores
@@ -318,6 +336,7 @@ plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-c
 Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyAcXgboostSystemProvider*
 
 Lastly, if you don't have them already, you need to install some python libraries:
+
 ```bash
 python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xgboost/system/model/requirements.txt
 ```
@@ -325,6 +344,7 @@ python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xg
 ### DC Metrics Provider
 
 This providers needs a custom piece of hardware to work:
+
 - [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 
 Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "psu-energy-dc-picolog-system" >}})
@@ -334,13 +354,15 @@ Please look for details in the provider documentation at [PsuEnergyDcPicologSyst
 On kernels > 2.6 all the kernel modules should automatically be loaded.
 
 However just in case run:
-```
+
+```bash
 sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
 sudo modprobe intel_rapl_msr
 sudo modprobe rapl
 ```
 
 ## Live system
+
 **ℹ️ If you just want to run the Green Metrics Tool locally this step can be skipped \
 ℹ️ It is only if you want to host the Green Metrics Tool on a live server.**
 
@@ -359,8 +381,9 @@ green-coding-nginx:
 ```
 
 ### SSL
+
 TODO!
 
-No throrough documentation on this yet! However you have to configure NGINX
+No thorough documentation on this yet! However you have to configure NGINX
 accordingly so that it finds the SSL credentials and certificate.
 This is done in the `/docker/nginx/frontend.conf`.

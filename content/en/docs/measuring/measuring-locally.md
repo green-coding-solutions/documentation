@@ -6,21 +6,27 @@ date: 2022-06-18T08:48:45+00:00
 weight: 805
 ---
 
-Before starting to measure you must first install some prerequisites. See [Installation on Linux →]({{< relref "installation-linux" >}}) or [Installation on macOS →]({{< relref "installation-macos" >}})
+Before starting to measure you must first install some prerequisites.  
+See [Installation on Linux →]({{< relref "installation-linux" >}}) or [Installation on macOS →]({{< relref "installation-macos" >}})
 
-Make sure your docker containers are up and running. If they are not, you can start them by running `docker compose up` whilst in the green metrics docker subfolder. 
+Make sure your docker containers are up and running.  
+If they are not, you can start them by running `docker compose up`  
+whilst in the Green Metrics Tool `docker` subfolder.
 
-If you came here from [interacting with applications →]({{< relref "interacting-with-applications" >}}) then you can also directly use your `usage_scenario.yml` Otherwise we will set it up here.
+If you came here from [interacting with applications →]({{< relref "interacting-with-applications" >}}) then  
+you can also directly use your `usage_scenario.yml`.  
+Otherwise we will set it up here.
 
 ## Measuring a simple example load
 
 We will make the most basic example our tool can handle:
+
 - Using **alpine** base container.
 - Add the package `stress-ng` from `apk`
 - Just run a 5 seconds stress run with default metrics providers
 
-So let's start by going to the install folder of the Green Metrics Tool on your system and 
-then preparing the `usage_scenario.yml`:
+So let's start by going to the install folder of the Green Metrics Tool on your system  
+and then preparing the `usage_scenario.yml`:
 
 ```bash
 cd PATH_TO_GREEN_METRICS_TOOL/docker
@@ -38,7 +44,7 @@ Now please copy the following code inside the `usage_scenario.yml`.
 
 ```yaml
 name: Stress Example
-author: Arne Tarara
+author: Arne Tarara <arne@green-coding.berlin>
 version: 1
 description: Stress container on one core for 5 seconds
 
@@ -58,11 +64,13 @@ flow:
 
 ```
 
-Under *flow* you see that we are just calling `stress-ng -c 1 -t 5`, which will stress our CPU for 5 seconds on one core.
+Under *flow* you see that we are just calling `stress-ng -c 1 -t 5`,  
+which will stress our CPU for 5 seconds on one core.
+
 ```bash
 cd PATH_TO_GREEN_METRICS_TOOL
 python3 runner.py --uri /tmp/easiest-application --name testing-my-demo
-````
+```
 
 You should see an example output like so:
 
@@ -74,7 +82,6 @@ Please access your report with the ID: XXXX-XXXX ...
 ```
 
 Now you can view the report as the first item in your metrics dashboard at [http://metrics.green-coding.internal:9142/request.html](http://metrics.green-coding.internal:9142/request.html)
-
 
 ## Cron mode
 

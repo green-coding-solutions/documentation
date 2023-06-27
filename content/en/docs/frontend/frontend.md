@@ -27,51 +27,53 @@ through class names (like for instance Boostrap has).
 
 We use only the shipped components and modules that come with the framework.
 
-The only addition is the sidebar functionality, which is self-rolled, since it could 
+The only addition is the sidebar functionality, which is self-rolled, since it could  
 not handle the dynamic chart resizing we needed.
 The sidebar is done in flexbox.
 
 - All custom JS files we did live in `/frontend/js`.
 - All custom CSS files we did live in `/frontend/css`
-- All library files whichlive in `/frontend/dist/`
-    + In the `site.min.css` from Fomantic UI where we removed the @import statement for the *Lato* font.
-    + We removed the `emoji.min.css`
-    + We then concated all the minified file into a `semantic_reduced.min.css`
+- All library files which live in `/frontend/dist/`
+  + In the `site.min.css` from Fomantic UI where we removed the @import statement for the *Lato* font.
+  + We removed the `emoji.min.css`
+  + We then concatenated all the minified file into a `semantic_reduced.min.css`
 - The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
 
 ## HUGO
 
-Internally we use HUGO for the development of the frontend, which provides a better separation of 
+Internally we use HUGO for the development of the frontend, which provides a better separation of
 all the HTML files for us.
 
 Currently we do not have this repository published, but will do so in the next weeks.
 
 ## Charts
+
 We use the [eCharts Library](https://echarts.apache.org/).
 
 On the website you can select a custom build by only including the needed charts in the Javascript file.
 
 Our selection was:
+
 - Only Bar, Line, Pie and Radar chart
 - Only Grid coordinate system
 - All Components included
 - Utilities included
 - Code Compression
 
-
 ## Old Frontend / Chart alternative
 
 In the old 0.1-beta version of our tool we used:
+
 - [Material Dash from Bootstrap Dash](https://www.bootstrapdash.com/product/material-design-template-free/)
 - [Apex Charts](https://apexcharts.com/)
 
-We decided to not continue with Boostrap Dash, cause the template was just too 
+We decided to not continue with Bootstrap Dash, cause the template was just too
 convoluted with CSS classes and was just not clear and expressive enough to work with.
 
-ApexCharts could not handle the amout of datapoints we wanted to process, although
+ApexCharts could not handle the amount of datapoints we wanted to process, although
 it looked way nicer.
 
 So if you plan on measurements < 30 Minutes than ApexCharts might be a good choice for a frontend charting library.
-Please checkout our old release where we still used the library if you need a 
-starting point how to integrate it: [Release v0.1-beta](https://github.com/green-coding-berlin/green-metrics-tool/releases/tag/v0.1-beta) 
+Please checkout our old release where we still used the library if you need a
+starting point how to integrate it: [Release v0.1-beta](https://github.com/green-coding-berlin/green-metrics-tool/releases/tag/v0.1-beta)
