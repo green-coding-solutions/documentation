@@ -24,7 +24,7 @@ This reduces its accuracy and reproducibility, but increases its general applica
 The result is that you get an idea of the order of magnitude the energy consumption  
 is in, but reduces comparability to identical systems.
 
-Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Cluster]({{< relref "measurement-cluster" >}}) is designed for exactly that.
+Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Cluster]({{< relref "installation-cluster" >}}) is designed for exactly that.
 
 ## List of best practices
 
@@ -34,7 +34,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - However a comparison by the order of magnitude is very helpful to judge the underlying hardware
   + In order to judge software on different hardware your systems must be calibrated and run no non-deterministic components like schedulers (realtime linux kernel for instance)
 - Even systems with identical hardware components can have variations that you cannot easily account for, as there are unknown variables unless you measure them ahead (component energy consumption variance etc.)
-- Some comparisons make sense though if you have a tuned [Measurement Cluster]({{< relref "measurement-cluster" >}})
+- Some comparisons make sense though if you have a tuned [Measurement Cluster]({{< relref "installation-cluster" >}})
 
 ### 2. An application should NEVER come to the bounds of its resources.
 
@@ -81,7 +81,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 
 ### 10. Trigger test remotely or keep system inactive
 
-- Our [Measurement Cluster]({{< relref "measurement-cluster" >}}) runs tests fully autonomous. In dev setups this is however seldomly the case. To still get good results the system should be as noise free as possible.
+- Our [Measurement Cluster]({{< relref "installation-cluster" >}}) runs tests fully autonomous. In dev setups this is however seldomly the case. To still get good results the system should be as noise free as possible.
 - This means, if possible:
   + Turn your wifi and internet off
   + Do not touch the keyboard or the mouse
