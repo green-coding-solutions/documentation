@@ -361,28 +361,6 @@ sudo modprobe intel_rapl_msr
 sudo modprobe rapl
 ```
 
-## Cronjob
-
-**ℹ️ If you just want to run the Green Metrics Tool manually the cronjob is not needed. \
-ℹ️ It is only to have it pick up jobs entered through the web interface when it is running autonomous on a testing server.**
-
-The Green Metrics Tool comes with an implemented queuing and locking mechanism.
-
-You can install a cronjob on your system to periodically call:
-
-- `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
-- `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
-
-The `jobs.py` uses the python3 faulthandler mechanism and will also report to *STDERR* in case
-of a segfault.
-When running the cronjob we advice you to append all the output combined to a log file like so:
-`* * * * * python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
-
-Be sure to give the `green-metrics-jobs.log` file write access rights.
-
-Also be aware that our example for the cronjob assumes your crontab is using `bash`.
-Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
-
 ## Live system
 
 **ℹ️ If you just want to run the Green Metrics Tool locally this step can be skipped \

@@ -3,7 +3,7 @@ title: "Updating"
 description: "Updating"
 lead: ""
 date: 2022-11-23T01:49:15+00:00
-weight: 902
+weight: 904
 ---
 
 The standard way of updating the Green Metrics Tool is to run:
@@ -72,7 +72,7 @@ please only push the latest version with a depth=1:
 
 ```bash
 git submodule update --remote
-git add FOLDER 
+git add FOLDER
 git commit -m "Submodule update"
 git push
 ```
