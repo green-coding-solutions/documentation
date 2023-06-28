@@ -21,7 +21,7 @@ total energy consumption of a non-GPU server.
 
 ### Prerequisites
 
-The provider must be configured in the `config.yml`. Please see [Configuration →]({{< relref "configuration" >}})
+The provider must be configured in the `config.yml`. Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}})
 for further info.
 
 In the `config.yml` file also the *CpuUtilizationProcfsSystemProvider* must be activated

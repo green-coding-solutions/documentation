@@ -102,6 +102,6 @@ install script that mentions it and comment it out of your `config.yml`.
 - Always check container logs with `docker compose logs`. Sometimes streaming logs
 does not work that well when orchestrating multiple containers and polling the directly gives you all logs.
 - Add the `--debug` switch to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
-- Add `--allow-unsafe` to the call to `runner.py` and *ports* to your [usage_scenario.yml →]({{< relref "usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
+- Add `--allow-unsafe` to the call to `runner.py` and *ports* to your [usage_scenario.yml →]({{ relref . "usage-scenario" }}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
 - Rebuild the containers with `docker compose down -v` and then `docker compose up -d`
 - Re-run the `install.sh` script to get new configuration changes that you maybe have not yet applied after an update

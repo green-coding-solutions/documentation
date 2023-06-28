@@ -15,7 +15,7 @@ guidelines for the example applications:
 
 ## Characteristics
 
-- All reference images in the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) must be
+- All reference images in the [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) must be
 available on [dockerhub](https://hub.docker.com/)
 - Containers are not allowed to require volume mounts
 - Containers should follow the naming convention of using `gcb-` as prefix and `-` as delimiter

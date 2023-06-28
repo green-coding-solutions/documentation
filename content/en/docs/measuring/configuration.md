@@ -58,7 +58,7 @@ admin:
 
 ```
 
-The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "installation-linux" >}}) part.
+The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "/docs/installation/installation-linux" >}}) part.
 
 The `machine` key has `id` and `description` that are mandatory fields and will be registered in the DB on first run.
 
@@ -70,7 +70,7 @@ We will this only focus on the `measurement` key:
 - `phase-transition-time` **[integer]**: Seconds to idle between phases
 - `metric-providers`:
   + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
-    * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "metric-providers-overview" >}})
+    * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
     * `METRIC_PROVIDER_NAME.resolution` **[integer]**: sampling resolution in ms
 - `client: sleep_time`: The seconds the job client should wait before retrying to get another job.
 Some metric providers have unique configuration params:

@@ -34,7 +34,7 @@ the ports specified in the `usage_scenario.yml`
 
 ## Debugging metric providers
 
-To see if the [Metric Providers →]({{< relref "metric-providers-overview" >}}) are working correctly you have two options:
+To see if the [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) are working correctly you have two options:
 
 - Start them manually from their respective folder under `/metric-providers/...` and look if the output is as expected
 - Turn on the `--no-file-cleanup` switch to see if the files generated in `/tmp/green-metrics-tool/[...].log` are in expected format

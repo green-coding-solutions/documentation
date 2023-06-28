@@ -49,12 +49,12 @@ Replace **SERVICE** with the relevant service in the `compose.yml`
 docker build .
 ```
 
-What you get is an image in your `docker images` that is used in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
+What you get is an image in your `docker images` that is used in the [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}})
 
 ## Measuring the example applications
 
-To run the measurements please refer to: [Measuring locally →]({{< relref "measuring-locally" >}})
+To run the measurements please refer to: [Measuring locally →]({{< relref "/docs/measuring/measuring-locally" >}})
 
 ## Containerizing and measuring own applications
 
-Please refer to [Containerizing and measureing own applications →]({{< relref "containerizing-applications" >}})
+Please refer to [Containerizing and measureing own applications →]({{< relref "/docs/measuring/containerizing-applications" >}})

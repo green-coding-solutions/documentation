@@ -27,37 +27,37 @@ get a high level overview of *WHAT* the tool does and *HOW*.
 
 From here you can branch off in two paths:
 
-- [Install and measure locally →]({{< relref "measuring-locally" >}})
-- [Measuring with our hosted service →]({{< relref "measuring-service" >}})
+- [Install and measure locally →]({{< relref "/docs/measuring/measuring-locally" >}})
+- [Measuring with our hosted service →]({{< relref "/docs/measuring/measuring-service" >}})
 
-However you choose to make the measurements, you are also able to [compare them]({{< relref "comparing" >}}).
+However you choose to make the measurements, you are also able to [compare them]({{< relref "/docs/measuring/comparing-measurements" >}}).
 
 ### Install and measure locally
 
 Refer to the installation instructions for your OS:
 
-- [Installation on Linux →]({{< relref "installation-linux" >}})
-- [Installation on macOS →]({{< relref "installation-macos" >}})
+- [Installation on Linux →]({{< relref "/docs/installation/installation-linux" >}})
+- [Installation on macOS →]({{< relref "/docs/installation/installation-macos" >}})
 
-Then proceed with [containerizing and measuring your applications →]({{< relref "containerizing-applications" >}}) to  
+Then proceed with [containerizing and measuring your applications →]({{< relref "/docs/measuring/containerizing-applications" >}}) to  
 understand how to prepare your app to be measured by the Green Metrics Tool.
 
-Be sure to read the [usage_scenario.json →]({{< relref "usage-scenario" >}}) specification to  
+Be sure to read the [usage_scenario.json →]({{< relref "/docs/measuring/usage-scenario" >}}) specification to  
 get to know the flexibility of our tool to measure your application.
 
 ### Measure your own app with our online hosted service
 
 {{< alert icon="👉" text="This Quick Start is intended to give you an idea how the tool works and how a measurable application looks like" />}}
 
-[Measuring with our hosted service →]({{< relref "measuring-service" >}})
+[Measuring with our hosted service →]({{< relref "/docs/measuring/measuring-service" >}})
 
 The app you submit to our hosted service must conform  
-to the [usage scenario specification]({{< relref "usage-scenario" >}})  and be [containerized]({{< relref "containerizing-applications" >}}).
+to the [usage scenario specification]({{< relref "/docs/measuring/usage-scenario" >}})  and be [containerized]({{< relref "/docs/measuring/containerizing-applications" >}}).
 
 After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly measured.
 
 
 ## Help: FAQ / Troubleshooting
 
-- [FAQ →]({{< relref "faq" >}})
-- [Troubleshooting →]({{< relref "troubleshooting" >}})
+- [FAQ →]({{< relref "/docs/help/faq" >}})
+- [Troubleshooting →]({{< relref "/docs/help/troubleshooting" >}})

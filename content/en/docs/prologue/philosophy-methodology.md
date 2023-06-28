@@ -69,7 +69,7 @@ We want to reuse infrastructure files as best as possible.
 Therefore our tools consumes ready-built containers and will also be able  
 to consume Kubernetes infrastructure files.
 
-The format of the [usage_scenario.yml →]({{< relref "usage-scenario" >}}) is based of the `docker-compose.yml`  
+The format of the [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) is based of the `docker-compose.yml`  
 specification but does provide additional options to run the container, which are  
 very helpful in terms of reusing other peoples containers.
 
@@ -102,7 +102,7 @@ We also believe that they provide the best approach to understand how an applica
 would typically behave under real-world usecases.
 
 Therefore we create every measurement by providing the architecture of the software  
-and the flow that the software shall execute in such a [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
+and the flow that the software shall execute in such a [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) file.
 
 The difference is that we focus on application architectures that are modular or distributed.  
 We also provide a more holistic approach by also delivering an Open Data API and  

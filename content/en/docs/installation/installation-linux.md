@@ -347,7 +347,7 @@ This providers needs a custom piece of hardware to work:
 
 - [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 
-Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "psu-energy-dc-picolog-system" >}})
+Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "/docs/measuring/metric-providers/psu-energy-dc-picolog-system" >}})
 
 ### RAPL
 
