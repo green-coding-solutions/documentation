@@ -3,7 +3,7 @@ title: "Best practices"
 description: "Best practices for measuring with the Green Metrics Tool"
 lead: "Best practices for measuring with the Green Metrics Tool"
 date: 2022-06-14T08:49:15+00:00
-weight: 809
+weight: 810
 toc: true
 ---
 

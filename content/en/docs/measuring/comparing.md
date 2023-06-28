@@ -2,7 +2,7 @@
 title: "Comparing measurements"
 description: "Comparing measurements"
 date: 2023-05-30T08:49:15+00:00
-weight: 807
+weight: 808
 toc: true
 ---
 
