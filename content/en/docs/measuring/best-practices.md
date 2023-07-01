@@ -36,9 +36,11 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - Even systems with identical hardware components can have variations that you cannot easily account for, as there are unknown variables unless you measure them ahead (component energy consumption variance etc.)
 - Some comparisons make sense though if you have a tuned [Measurement Cluster]({{< relref "measurement-cluster" >}})
 
-### 2. An application should NEVER come to the bounds of its resources.
+### 2. An application should NEVER come to the bounds of its resources
 
 - Analyze the peak load of your application. If the system runs at >80% typically scheduling and queuing problems can kick in.
+    + If that is however what your application is design to operate it, then do not alter it. However most applications assume an
+   infinite amout of resources and behave weirdly if they run into resource limitations
 
 ### 3. The application you want to test must run at least twice as long as the minimal resolution
 
@@ -90,3 +92,21 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
   + Turn off any cronjobs / updates / housekeeping jobs on the system
   + Turn off any processes you do not need atm.
 - Or put more loosely: Listening to spotify while running an energy test is a bad idea :)
+
+### 11. Your system should not overheat
+- Most modern processors have features that limit their processing power if the heat of the system is too high. 
+    + This is at the moment a manual task in the GMT, however we are working on a feature that will check if the CPU has run
+into a heat limiting.
+- Also you should take waiting times between test runs to make sure that the system has cooled down again and your 
+energy measurements are not false-high. A good number for this has emerged in our testing which is **180 s**. However on 
+a 30+ core machine this value might be higher. We are currently working on a [calibration script](https://github.com/green-coding-berlin/green-metrics-tool/issues/355) to determine this exact 
+value for a particular system.
+
+If you are using a standard cronjob mechanism to trigger the GMT you can use the `idle-time-end` to force a fixed sleep time.
+
+
+### 12. Mount your `/tmp` on `/tmpfs`
+Since we extensively write the output of the `metric-providers` to `/tmp` on the host system this should be an in-memory
+filesytem. Otherwise it might skew with your measurement as disk-writes can be quite costly.
+
+On Ubuntu you can use `sudo systemctl enable /usr/share/systemd/tmp.mount`

@@ -66,6 +66,32 @@ git submodule update --init FOLDER
 git submodule init FOLDER
 ```
 
+## cpu.stat failed to open
+
+The full error looks something like this:
+```
+Error:  RuntimeError occured in runner.py:  Stderr on CpuUtilizationCgroupContainerProvider was NOT empty: b'Error - file /sys/fs/cgroup/user.slice/user-1003.slice/user@1003.service/user.slice/docker-6e18a15cbc237c9ff76af70cc8ef16c3c5b9f002a989f74cf0c7a22b5c8e4c9f.scope/cpu.stat failed to open: errno: 2'
+```
+
+This is because a container has exited during the run of the GMT. This is currently not supported. Please keep the container
+alive by having a shell always open.
+
+A way to do this with the GMT directly without changing your containers would be the `cmd` command. See [usage_scenario.yml →]({{ relref . "usage-scenario" }}) 
+
+An example where we use this command to keep a container alive is here: https://github.com/green-coding-berlin/example-applications/blob/main/idle/usage_scenario.yml
+
+If this does not work for you, you can also temporarily disable all `cgroup` based metric providers.
+
+
+## rdmsr:open: No such file or directory
+
+Your `msr` kernel module is not loaded. Since this is an uncommon setup for the distributions we support this is not
+part of the installation.
+
+Please run `sudo modprobe msr` for a quick-fix.
+
+We recommend adding it to the `/etc/modules` if you use the tool on a regular basis.
+
 ## Failing to compile LM sensors
 
 On Ubuntu 20.04, the `glib` does not contain the function `g_string_replace`:
