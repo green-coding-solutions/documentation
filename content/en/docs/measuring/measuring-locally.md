@@ -3,7 +3,7 @@ title : "Measuring locally"
 description: "Measuring locally with the runner.py"
 lead: ""
 date: 2022-06-18T08:48:45+00:00
-weight: 805
+weight: 820
 ---
 
 Before starting to measure you must first install some prerequisites.  
