@@ -110,14 +110,12 @@ Web Frontend to display the metrics in charts.
 
 ### Greenframe.io
 
-Our tool is also inspired by [Greenframe.io](https://www.greenframe.io) with the difference  
-that the code is fully free and open-source (FOSS).
+Our tool is also inspired by [Greenframe.io](https://www.greenframe.io) from Marmelab.
 
-All data generated as Open Data and supporting terminal applications like  
-ML / AI tools and also plans to support Desktop applications.
+The have,since we started developing our tool, also [open-sourced theirs on Github](https://marmelab.com/blog/2022/11/09/greenframe-open-source.html) and made their
+[methodology public](https://github.com/marmelab/greenframe-cli/blob/main/src/model/README.md).
 
-Also the formulas for measurement are fully visible and to be falsified by anyone,  
-which is not the case for Greenframe.io as they use a proprietary calculation model.
+The visual and chart display of the results are only available through their SaaS product which they host on Greenframe.io.
 
 ### Scaphandre and per-process measurement
 
