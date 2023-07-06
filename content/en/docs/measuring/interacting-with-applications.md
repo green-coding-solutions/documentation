@@ -39,7 +39,6 @@ This is the resulting `usage_scenario.yml` file:
 ```yaml
 name: Stress Container One Core 5 Seconds
 author: Arne Tarara
-version: 1
 architecture: linux
 services:
   simple-load-container:

@@ -18,10 +18,8 @@ The `usage_scenario.yml` consists of these main blocks:
 
 Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However keys that have the same name are also identical in function - thought potentially with some limitations.
 
-At the beginning of the file you should specify `name`, `author`, `version` and
-`architecture`.
-These will help you later on distinguish which version of the software was certified
-if you use the repository url multiple times in the certification process.
+At the beginning of the file you should specify `name`, `author`, and `architecture`.
+These will help you later on tell what the scenario is doing.
 
 **Linux** and **Darwin** are the only supported architectures. If you don't mention an `architecture` it will run on
 both.
@@ -38,7 +36,6 @@ Example for the start of a `usage_scenario.yml`
 ---
 name: My Hugo Test
 author: Arne Tarara <arne@green-coding.berlin>
-version: 1
 description: This is just an example usage_scenario ...
 ```
 

@@ -1,7 +1,6 @@
 ---
 name: HUGO energy cost
 author: Arne Tarara
-version: 1
 description: Measure energy cost of HUGO build for documentation
 architecture: linux
 

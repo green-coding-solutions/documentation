@@ -66,7 +66,6 @@ Now please copy the following code inside the usage_scenario.json.
 {
     "name": "Stress Container One Core 5 Seconds",
     "author": "Arne Tarara",
-    "version": 1,
     "architecture": "linux",
     "setup": [
           {
