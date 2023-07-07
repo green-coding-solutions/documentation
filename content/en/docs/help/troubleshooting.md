@@ -76,7 +76,7 @@ Error:  RuntimeError occured in runner.py:  Stderr on CpuUtilizationCgroupContai
 This is because a container has exited during the run of the GMT. This is currently not supported. Please keep the container
 alive by having a shell always open.
 
-A way to do this with the GMT directly without changing your containers would be the `cmd` command. See [usage_scenario.yml →]({{ relref . "usage-scenario" }}) 
+A way to do this with the GMT directly without changing your containers would be the `cmd` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
 
 An example where we use this command to keep a container alive is here: https://github.com/green-coding-berlin/example-applications/blob/main/idle/usage_scenario.yml
 
@@ -128,6 +128,6 @@ install script that mentions it and comment it out of your `config.yml`.
 - Always check container logs with `docker compose logs`. Sometimes streaming logs
 does not work that well when orchestrating multiple containers and polling the directly gives you all logs.
 - Add the `--debug` switch to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
-- Add `--allow-unsafe` to the call to `runner.py` and *ports* to your [usage_scenario.yml →]({{ relref . "usage-scenario" }}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
+- Add `--allow-unsafe` to the call to `runner.py` and *ports* to your [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
 - Rebuild the containers with `docker compose down -v` and then `docker compose up -d`
 - Re-run the `install.sh` script to get new configuration changes that you maybe have not yet applied after an update

@@ -29,7 +29,7 @@ python3 tools/prune_db.py
 
 We believe that all measurements are valueable, even if the failed fully or contained only partial data.
 
-In the [Hosted Service]({ relref "measuring-service" }) that we provide in particular, as only there you can see
+In the [Hosted Service]({{< relref "measuring-service" >}}) that we provide in particular, as only there you can see
 the debug logs if you need them.
 
 However even partial data can provide insights as there might be an energy related reason why a measurement failed
