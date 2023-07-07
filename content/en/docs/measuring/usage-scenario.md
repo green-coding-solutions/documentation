@@ -92,6 +92,9 @@ services:
       + Defaults to `/tmp/repo`
     - `cmd:` **[str]** *(optional)*
       + Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`
+    - `shell:` **[str]** *(optional)*
+      + Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
+      + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
 
 Please note that every key below `services` will also serve as the name of the
 container later on.
@@ -143,6 +146,15 @@ flow:
     - `ignore-errors` **[bool]** *(optional)*
       + If set to `true` the run will not fail if the process in `cmd` has a different exit code than `0`. Useful
            if you execute a command that you know will always fail like `timeout 0.1 stress -c 1`
+    - `shell:` **[str]** *(optional)*
+      + Will execute the `command` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
+      + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
+    - `log-stdout:` **[boolean]** *(optional)*
+      + Will log the *stdout* and make it available through the frontend in the *Logs* tab.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
+    - `log-stderr:` **[boolean]** *(optional)*
+      + Will log the *stderr* and make it available through the frontend in the *Logs* tab and in error messages.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
 
 ### Builds
 
