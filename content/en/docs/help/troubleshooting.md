@@ -82,6 +82,26 @@ An example where we use this command to keep a container alive is here: https://
 
 If this does not work for you, you can also temporarily disable all `cgroup` based metric providers.
 
+## Process had bad returncode: 1
+
+If your process fails in the GMT and it has a format in which quotes are present, for example like this: 
+
+`command: grep "asd" /tmp/myfile`
+
+Then try running the command in a shell. It might be that some quote escaping is confusing the `subprocess` library.
+
+Example:
+
+```
+command: grep "asd" /tmp/myfile
+shell: sh
+```
+
+Or, if you can, also ditch the quotes:
+
+```
+command: grep asd /tmp/myfile
+```
 
 ## rdmsr:open: No such file or directory
 
