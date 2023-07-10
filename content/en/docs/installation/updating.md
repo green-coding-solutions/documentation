@@ -55,6 +55,17 @@ that you are currently using just type in the same password again.
 Please note that your current `config.yml` will be *overwritten* and if you have made  
 custom changes you need to replay them afterwards.
 
+## Run the migrations
+
+Typically we also advertise this in the Github Release Notes, but also check in the `/migrations` folder
+if there is a migration with a date since you last updated.
+
+To run a migration either paste the SQL code directly to the DB or use the `import_data.py` script.
+
+Example:
+`python3 tools/import_data.py ./migrations/2023_07_08_indices.sql`
+
+
 ## Read the Github release notes
 
 If we release a new major version, or introduce breaking changes, we will post it  
