@@ -63,7 +63,10 @@ if there is a migration with a date since you last updated.
 To run a migration either paste the SQL code directly to the DB or use the `import_data.py` script.
 
 Example:
-`python3 tools/import_data.py ./migrations/2023_07_08_indices.sql`
+
+```bash
+python3 tools/import_data.py ./migrations/2023_07_08_indices.sql
+``
 
 
 ## Read the Github release notes
