@@ -1,14 +1,17 @@
 ---
-title : "Green Metrics Frontend"
-description: "Green Metrics Frontend"
+title : "Libraries and components"
+description: "Libraries and components"
 lead: ""
 date: 2022-06-16T08:48:23+00:00
 lastmod: 2022-06-16T08:48:23+00:00
 draft: false
+weight: 201
+
 images: []
 ---
 
-The Green Metrics Frontend is the part of our tool that displays the raw and unprocessed data from the API in a nice visual form.
+The Dashboard is the part of our tool that displays the raw unprocessed and aggretaged 
+data from the API in a nice visual form.
 
 The frontend relies on a [Fomantic UI Template](https://fomantic-ui.com/) and uses [eCharts](https://echarts.apache.org/en/index.html)
 for charting.
