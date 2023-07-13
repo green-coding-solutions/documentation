@@ -77,8 +77,8 @@ in the `config.yml`.
 
 ### Connecting to DB
 
-You can now connect to the db directly on port 5432, which is exposed to your host system.\
-This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `5432:5432` entry in the `compose.yml` file.
+You can now connect to the db directly on port 9573, which is exposed to your host system.\
+This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `9573:9573` entry in the `compose.yml` file.
 
 The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install.sh` run, and can be found in the `compose.yml` file.
 
