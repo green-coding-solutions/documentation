@@ -202,43 +202,41 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 
 ### Restarting Docker containers on system reboot
 
-We recommend `systemd`. Please use the following service file and change the **USERNAME** and **GROUPNAME** accordingly to the ones on your system.
+We recommend `systemd`. Please use the following service file and change the **USERNAME** accordingly to the ones on your system.
 
-The file will be installed to: `/etc/systemd/system/green-coding-service.service`
+The file will be installed to: `/home/USERNAME/.config/systemd/user/green-coding-service.service`
 
 ```systemd
 [Unit]
 Description=Docker Compose for all our services
-After=network.target
+After=docker.service
 
 [Service]
 Type=simple
-User=USERNAME
-Group=GROUPNAME
-ExecStart=/home/USERNAME/green-metrics-tool/startup-docker.sh
+ExecStart=/home/USERNAME/startup-docker.sh
 Restart=never
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
 
 As you can see *Restart* is set to never. The reason is that the docker dameon will restart the containers by itself. The `systemd` script is only needed to start the container once on reboot.
 
-As you can see we also reference the `/home/USERNAME/green-metrics-tool/startup-docker.sh` file which `systemd` expects to be in your green metrics tool directory.
+As you can see we also reference the `/home/USERNAME/startup-docker.sh` file which `systemd` expects to be in your green metrics tool directory.
 
-Please create the following file in your home directory and change **PATH_TO_GREEN_METRICS_TOOL** accordingly:
+Please create the following file in your home directory:
 
 ```bash
 #!/bin/bash
 docker context use rootless
-docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
+docker compose -f /home/USERNAME/docker/compose.yml up -d
 ```
 
 Now you can reload and enable the daemon:
 
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl enable green-coding-service
+systemctl --user daemon-reload
+systemctl --user enable green-coding-service
 ```
 
 ### Dockerfiles architecture explanation:
