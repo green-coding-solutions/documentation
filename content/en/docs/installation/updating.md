@@ -90,3 +90,30 @@ git add FOLDER
 git commit -m "Submodule update"
 git push
 ```
+
+## Update PostgreSQL
+
+An update is only necessary for major versions, for example from PostgreSQL 15.3 to 16.0, but not from 15.2 to 15.3
+
+
+Although running PostgreSQL in a container provides many benfits updating to a major version is **not** one of them.
+Sadly in order to update the DB the only proper way is exporting and importing.
+
+Following steps must be executed:
+
+```
+# make sure the GMT is running and the postgres db container is started.
+# you also need to have CLI access to the machine
+
+cd ~/green-metrics-tool/docker
+docker exec -u postgres green-coding-postgres-container pg_dump -p 9573 -C green-coding > /tmp/dump.sql
+docker compose down -v # to delete current database volume
+docker compose build # to upgrade image
+docker compose  up -d
+docker exec -it -u postgres green-coding-postgres-container psql -p 9573 -c 'DROP DATABASE "green-coding" WITH (FORCE);'
+docker exec -i -u postgres green-coding-postgres-container psql -p 9573 < /tmp/dump.sql
+
+```
+
+
+
