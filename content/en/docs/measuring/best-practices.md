@@ -121,3 +121,10 @@ You should only have it turned on when you are developing or debugging.
 Since the logs will be captured into a memory buffer there is a limit to how much this buffer can hold.
 If you really log excessive amounts (100 MB+) then at some point the buffer might get exhausted and either you will
 loose data or the run with the GMT will fail.
+
+### 14. Use `--docker-prune`
+
+This switch will prune all unassociated build caches, networks volumes and stopped containers on the system and keep
+your disk from not getting full.
+Downside: It will remove all stopped containers. So if you regulary keep stopped containers than avoid this switch and
+rather run `docker volume prune` once in a while

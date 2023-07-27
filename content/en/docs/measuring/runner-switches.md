@@ -33,10 +33,11 @@ with the `runner.py`.
   + This will enable the user to see the impact of each metric provider more clearly
   + There will be a 10 second sleep for two seconds after each provider boot
   + `RAPL` metric providers will be prioritized to start first, if enabled
-- `--full-docker-prune` Prune all images and build caches on the system
+- `--full-docker-prune` Stop and remove all containers, build caches, volumes and images on the system
+- `--docker-prune` Prune all unassociated build caches, networks volumes and stopped containers on the system
 - `--dry-run` Removes all sleeps. Resulting measurement data will be skewed.
 - `--dev-repeat-run` Checks if a docker image is already in the local cache and will then not build it.
-  + Also doesn't clear the images after a run
+- `--print-logs` Prints the container and process logs to stdout
 
 These options are not available when doing cron runs.
 
