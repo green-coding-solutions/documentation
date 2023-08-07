@@ -112,7 +112,7 @@ Web Frontend to display the metrics in charts.
 
 Our tool is also inspired by [Greenframe.io](https://www.greenframe.io) from Marmelab.
 
-The have,since we started developing our tool, also [open-sourced theirs on Github](https://marmelab.com/blog/2022/11/09/greenframe-open-source.html) and made their
+They have, since we started developing our tool, also [open-sourced theirs on Github](https://marmelab.com/blog/2022/11/09/greenframe-open-source.html) and made their
 [methodology public](https://github.com/marmelab/greenframe-cli/blob/main/src/model/README.md).
 
 The visual and chart display of the results are only available through their SaaS product which they host on Greenframe.io.
