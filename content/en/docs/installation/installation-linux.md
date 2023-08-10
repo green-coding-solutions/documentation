@@ -27,7 +27,7 @@ cd ~/green-metrics-tool && \
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install make gcc python3 python3-pip libpq-dev libglib2.0-dev -y && \
-sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 ```
 
 {{% /tab %}}
