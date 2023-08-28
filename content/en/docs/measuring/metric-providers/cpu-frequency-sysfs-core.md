@@ -52,3 +52,8 @@ For most user the detail output of this provider will rather be noise than value
 
 We recommend to either only look at the aggreagate data to understand how the cores behave individually or only 
 turn the provider on if you want to debug the behaviour of your measurement.
+
+### Troubleshooting
+The provider cannot be used if you do not have read access to `/sys` and more specifically `/sys/devices/system/cpu/`.
+
+Especially on VMs this directory often does not exist.
