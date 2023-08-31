@@ -52,6 +52,7 @@ common:
 ```
 
 The `host_ip` needs to be reachable from inside of the container and the proxy needs to be accessible on port 8889.
+Normally you don't neet to set the `host_ip` as we try to detect it. If this fails you can set it manually.
 
 ### Pitfalls
 
