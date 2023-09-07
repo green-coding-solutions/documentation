@@ -11,7 +11,6 @@ The `usage_scenario.yml` consists of these main blocks:
 - `networks` - Handles the orchestration of networks
 - `services` - Handles the orchestration of containers
 - `flow` - Handles the interaction with the containers
-- `build*` - Specifies which docker images should be build.
 - `compose-file*` - A compose file to include.
 
 `*`: means these values are optional.
@@ -156,17 +155,6 @@ flow:
       + Will log the *stderr* and make it available through the frontend in the *Logs* tab and in error messages.
       + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
 
-### Builds
-
-The GMT has the ability to build containers before the benchmark begins. Runs is a list of key/ value pairs. The
-key being the name of the container. We will always append `:latest` except if you specify a tag yourself. Please note you will then need to put the name in quotes so not to disrupt the yml parsing. The value is the docker file to build.
-
-Example:
-
-```yml
-build:
-  gcb_stress: Dockerfile
-```
 
 ### compose-file:
 
