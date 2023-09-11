@@ -14,14 +14,19 @@ This files includes your architecture specification as well as the flow of how t
 interact with the application.
 
 After orchestrating all the services with their respective containers,  
-the Green Metrics Tool attaches the *Metric Providers* to the containers.  
+the Green Metrics Tool attaches the [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) to the containers.  
 
-The *Metric Providers* are to be understood as  
-<img src="/img/overview/green-metrics-tool-orchestration.webp">
+The [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) are modular plugins
+that query a certain metric source, such as the CPU energy, DRAM energy, machine power, network traffic etc. 
 
-- The measurement is divided into phases, briefly covered in this high level overview
-  + See [Measurement Phases →]({{< relref "/docs/prologue/measurement-phases" >}}) for exact details
-- [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) file is read
+<img src="/img/green-metrics-tool-orchestration.webp">
+
+## General Measurement Workflow
+
+A general workflow of a measurement is as follows:
+
+- The repository is checked out
+- The [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) file is read and processed 
 - Docker images are pulled or built locally with [Kaniko](https://github.com/GoogleContainerTools/kaniko)
 - Networks are created according to the **networks** part in the [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}})
 - Containers are orchestrated and connected to each other according to the **services** part in the [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}})
@@ -33,5 +38,7 @@ The *Metric Providers* are to be understood as
     * simulated clicks / keyboard entries to interact with a Desktop application in a container
     * Network simulation tests where containers are added / removed to provoke certain behavior or failure
     * etc.
+- The measurement is divided into phases, briefly covered in this high level overview
+  + See [Measurement Phases →]({{< relref "/docs/prologue/measurement-phases" >}}) for exact details
 - After the flow the data from the [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) is collected and parsed
 - Saving all to the database and running formatting / aggregations
