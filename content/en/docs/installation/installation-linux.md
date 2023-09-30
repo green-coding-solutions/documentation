@@ -5,18 +5,25 @@ lead: ""
 date: 2022-06-15T01:49:15+00:00
 weight: 901
 ---
-## Setting up your machine
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 
 To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
+Currently the following distriubtions have been tested and are fully supported:
+- Ubuntu 22.04
+- Fedora 38
+
+The following distributions have been tested, but require manual work:
+- Ubuntu 20.04 (works, but *libglib* has to be manually updated to *libglib2.0-dev*)
+- Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "installation-cluster" >}}) has different names for timers)
+
 {{< alert icon="💡" text="If you want to develop on macOS please use this installation description: <a href='/docs/installation/installation-mac/'>Installation on Mac</a>" />}}
 
-We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
+## Downloading and required packages
 
 For the sake of this manual we put the green metrics tool into your home directory. Of course you can place it anywhere.
-Please modify the commands accordingly.
+Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different path for the tool please modify the commands accordingly.
 
 {{< tabs >}}
 {{% tab name="Ubuntu" %}}
@@ -26,8 +33,7 @@ git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metr
 cd ~/green-metrics-tool && \
 sudo apt update && \
 sudo apt upgrade -y && \
-sudo apt install make gcc python3 python3-pip libpq-dev libglib2.0-dev -y && \
-sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+sudo apt install -y make gcc python3 python3-pip python3-venv
 ```
 
 {{% /tab %}}
@@ -37,22 +43,21 @@ sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool && \
 sudo dnf upgrade -y && \
-sudo dnf install -y make gcc python3 python3-devel libpq-devel glib2-devel
-sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+sudo dnf install -y make gcc python3 python3-devel python3-venv
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-The sudo in the last command is very important, as it will tell pip to install to /usr directory instead to the home directory. So we can find the package later with other users on the system. If you do not want that use a venv in Python.
-
 ## Docker
 
 Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
+This is also the reason why the docker client is not part of the install script that we provide.
+
 However, we provide here what we used in on our systems, but be sure to double check on the official website. Especially if you are running a different distribution.
 
-### Base install
+### Docker base install
 
 {{< tabs groupId="docker">}}
 {{% tab name="Ubuntu" %}}
@@ -94,15 +99,26 @@ sudo systemctl start docker
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now. You can also run
 `sudo docker run hello-world` which will run a little welcome container.
 
-### Rootless mode
+### Root mode (default)
 
-The Green Metrics Tool (GMT) is currently designed to work only with Docker in rootless mode.
+Since `v0.20`` the Green Metrics Tool supports docker in it's default root mode.
 
-If your docker daemon currently does not run in rootless mode please follow the heregiven instructions.
+However you need to add your current user to the `docker` group. We need this so we do not need to start the Green Metrics Tool with `root` privileges.
+
+Please follow this explanation how to do it: [Official docker docs on docker group add](https://docs.docker.com/engine/install/linux-postinstall/)
+
+=> If you want to use the rootless mode anyway you do not have to to that. Just read the next paragraph.
+
+
+### Rootless mode (optional)
+
+Rootless mode allows the docker container to not inherit `root` rights when they run.
+
+{{< alert icon="💡" text="We recommend this mode when you have the Green Metrics Tool on a public machine, running somebody elses benchmarks or somewhere, where security is a concern. For development and try-out purposes of the Green Metrics Tool however you can safely skip this step." />}}
 
 In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/)
 
-👉 Typically a normal installation of Ubuntu/ Fedora has at least one non-root user setup during installation.
+👉 Typically a normal installation of Ubuntu/ Fedora has at least one non-root user setup during installation, so there is no need to create a different user from the one you are using already.
 
 **Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user` will not work.**
 
@@ -156,14 +172,6 @@ You must also enable the cgroup2 support with the metrics granted for the user: 
 
 Make sure to also enable the CPU, CPUSET, and I/O delegation as instructed there.
 
-### Dockerfiles
-
-The Dockerfiles will provide you with a running setup of the working system with just a few commands.
-
-It can technically be used in production, however it is designed to run on your local machine for testing purposes.
-
-The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.internal:9142`
-
 ## Setup
 
 Please run the `install_linux.sh` script in the root folder.
@@ -177,21 +185,24 @@ is running on port `80` or `443`
 - Set the database password for the containers
   + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Initialize and update git submodules
+- Install a python `venv` and activate it
 - Create the needed `/etc/hosts` entries for development
 - Install needed development libraries via `apt` for metric providers to build
 - Build the binaries for the Metric Providers
 - Set needed `/etc/sudoers` entry for requesting kernel scheduler info
+
+Please not that whenever you run the Green Metrics Tool you have to first activte the python `venv`.
 
 What you might want to add:
 
 - SMTP mail sending is by default deactivated, so for a quick-start you do not have to change that in the `config.yml`
 - The RAPL reporter is by default deactivated. Please check the [Metric Providers Documentation](https://docs.green-coding.berlin/docs/measuring/metric-providers) on how to active it
 
-After that you can start the containers:
+After that you can start the containers (use `sudo` if running in docker root mode):
 
-- Build and run in the `docker` directory with `docker compose up`
-- The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
-- To start in detached mode just use `docker compose -d`
+- Build and run in the `docker` directory with `[sudo] docker compose up`
+- The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `[sudo] docker compose down -v && [sudo] docker compose up`
+- To start in detached mode just use `[sudo] docker compose up -d`
 
 ### Connecting to DB
 
@@ -201,6 +212,8 @@ This exposure is not strictly needed for the green metrics tool to run, but is u
 The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install_linux.sh` run, and can be found in the `compose.yml` file.
 
 ### Restarting Docker containers on system reboot
+
+{{< alert icon="💡" text="This explanation is for docker rootless mode only." />}}
 
 We recommend `systemd`. Please use the following service file and change the **USERNAME** accordingly to the ones on your system.
 

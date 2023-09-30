@@ -5,22 +5,18 @@ lead: ""
 date: 2023-01-30T01:49:15+00:00
 weight: 902
 ---
-## Setting up your machine
-
 {{< alert icon="⚠" text="Running the GMT on Macs will never give you correct measurements! It should only ever be used to test your project for correctness in that it will run on the GMT but never to benchmark software " />}}
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 
 We have tested the tool on Intel as well as on Apple Silicon chips. Results may vary.
 
-We recommend to fully reset the node after every run, so no data from the previous run remains in memory or on disk.
+
+## Downloading and required packages
 
 ```bash
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
-sudo python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool
 ```
-
-The sudo in the last command is very important, as it will tell pip to install to /usr directory instead to the home directory. So we can find the package later with other users on the system. If you do not want that use a venv in Python.
 
 ## Docker
 
@@ -30,17 +26,9 @@ You can check if everything is working fine by running `docker stats`. It should
 
 You can also use the docker desktop client to start/ stop containers if you prefer a GUI application over the terminal.
 
-### Dockerfiles
-
-The Dockerfiles, found in the `docker` directory, will provide you with a running setup of the working system with just a few commands.
-
-It can technically be used in production, however it is designed to run on your local machine for testing purposes.
-
-The system binds in your host OS to port 9142. So the web view will be accessible through `http://metrics.green-coding.internal:9142`
-
 ## Setup
 
-Please run the `install_mac.sh` script in the root folder.
+Please run the `install_mac.sh` script in the installed folder (if you followed the instructions `~/green-metrics-tool`).
 
 This script will:
 
@@ -51,14 +39,17 @@ is running on port `80` or `443`
 - Set the database password for the containers
   + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Initialize and update git submodules
+- Install a python `venv` and activate it
 - Create the needed `/etc/hosts` entries for development
 - Set needed `/etc/sudoers` entry for running/ killing the `powermetrics` tool
 
+Please not that whenever you run the Green Metrics Tool you have to first activte the python `venv`!
+
 After that you can start the containers:
 
-- Build and run in the `docker` directory with `docker compose up`
+- Build and run in the `docker` directory with `docker compose up --build`
 - The compose file uses volumes to persist the state of the database even between rebuilds. If you want a fresh start use: `docker compose down -v && docker compose up`
-- To start in detached mode just use `docker compose -d`
+- To start in detached mode just use `docker compose up -d`
 
 ### Metric Providers
 
