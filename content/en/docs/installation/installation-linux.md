@@ -29,21 +29,22 @@ Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different 
 {{% tab name="Ubuntu" %}}
 
 ```bash
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
-cd ~/green-metrics-tool && \
 sudo apt update && \
 sudo apt upgrade -y && \
-sudo apt install -y make gcc python3 python3-pip python3-venv
+sudo apt install -y curl git make gcc python3 python3-pip python3-venv && \
+git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+cd ~/green-metrics-tool
+
 ```
 
 {{% /tab %}}
 {{% tab name="Fedora" %}}
 
 ```bash
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
-cd ~/green-metrics-tool && \
 sudo dnf upgrade -y && \
-sudo dnf install -y make gcc python3 python3-devel python3-venv
+sudo dnf install -y curl git make gcc python3 python3-devel python3-venv && \
+git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+cd ~/green-metrics-tool
 ```
 
 {{% /tab %}}
