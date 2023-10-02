@@ -71,6 +71,18 @@ If an SCI was configured also the parameters will be shown in the *Measurements*
 
 <img src="/img/sci_measurement_tab.webp">
 
-## Future work
-Future work will include making the SCI an actual metric_provider and thus allowing to capture it in every phase, optionally with having different dimensions per phase even.
+## Example applications
+
+We provide quite some example applications that showcase how the SCI can be measured with the Green Metrics Tool for APIs, CLI tools etc.
+
+[Example applications on Github](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci)
+
+[Example data with runs](https://metrics.green-coding.berlin/?uri=green-coding-berlin/example-applications&filename=green-software)
+
+## Caveats and future work
+At the moment the SCI is only measured in the *RUNTIME* phase and no sub-phase measurement is possible.
+
+Future work will include making the SCI an actual *Metric Provider* and thus allowing to capture it in every phase, optionally with having different dimensions per phase even.
+
+The work on this task is tracked in [this Github Issue](https://github.com/green-coding-berlin/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
 
