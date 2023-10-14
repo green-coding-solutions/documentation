@@ -20,7 +20,7 @@ When benchmarking software it is important to have reproducible results between 
 
 This documentation page does not document how to create a NOP Linux machine but rather what component's the Green Metrics Tool has to facilitate running on a measurement server. Even if you are not using a specialized Linux distribution it is advised to adhere to the ideas presented here.
 
-For a detailed description on how to produce your own NOP Linux instance visit our blog under [https://www.green-coding.berlin/blog/](https://www.green-coding.berlin/blog/).
+For a detailed description on how to produce your own NOP Linux instance visit [our blog article on NOP Linux](https://www.green-coding.berlin/blog/nop-linux/).
 
 The `tools/client.py` program is a script that should constantly be running and that periodically checks the database if a new job has been queued for this certain machine. If no job can be retried it sleeps for a certain amount of time set in the configuration file `config.yml`:
 
