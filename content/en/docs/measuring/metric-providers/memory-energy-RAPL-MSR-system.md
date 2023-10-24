@@ -12,13 +12,17 @@ This metric provider reads the DRAM energy from the Running Average Power Limit 
 
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
 
+### Technical specs
+
+- Time resolution: 976 micro-seconds
+- Energy resolution: 15.3 micro-Joules
+
 ### Classname
 - MemoryEnergyRaplMsrSystemProvider
 
 ### Input Parameters
 - Args:
     - i: specifies interval in milliseconds between measurements
-        - from RAPL documentation: RAPL can only measure until 1ms resolution 
     - d: Must be set to activate the DRAM reading mode.
 
 ```
