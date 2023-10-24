@@ -25,7 +25,8 @@ We have the following machines available for running measurements in our cluster
     + Turbo Boost: Off
     + Memory: 16 GB
     + [Sample measurement with machine specs](https://metrics.green-coding.berlin/stats.html?id=9d250a5f-1f01-42a2-926e-e3f9b216ed5a)
-    + Metrics Provider for Machine Power: [PowerSpy2]({{< relref "metric-providers/psu-energy-ac-powerspy2" >}})
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    
 - **Fujitsu TX1330 M2**
     + Ubuntu 22.04 ([NOP Linux](https://www.green-coding.berlin/blog/nop-linux/))
     + Single-Tenant Server 
@@ -36,7 +37,8 @@ We have the following machines available for running measurements in our cluster
     + Turbo Boost: Off
     + Memory: 8 GB 
     + [Sample measurement with machine specs](https://metrics.green-coding.berlin/stats.html?id=9784422b-f4c6-42f3-addd-9e4c0833da74)
-    + Metrics Provider for Machine Power: [PowerSpy2]({{< relref "metric-providers/psu-energy-ac-powerspy2" >}})
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    
 - **Fujitsu TX1330 M3**
     + Ubuntu 22.04 ([NOP Linux](https://www.green-coding.berlin/blog/nop-linux/))
     + Single-Tenant Server 
@@ -47,7 +49,8 @@ We have the following machines available for running measurements in our cluster
     + Turbo Boost: Off
     + Memory: 16 GB
     + [Sample measurement with machine specs](https://metrics.green-coding.berlin/stats.html?id=8a30b1bd-8c54-4c9d-919e-fd7c291b900c)
-    + Metrics Provider for Machine Power: [PowerSpy2]({{< relref "metric-providers/psu-energy-ac-powerspy2" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    
 - **Fujitsu TX1330 M3**
     + Ubuntu 22.04 (default)
     + Single-Tenant Server 
@@ -57,8 +60,9 @@ We have the following machines available for running measurements in our cluster
     + Hyper-Threading: Off
     + Turbo Boost: Off
     + Memory: 16 GB
-    + Metrics Provider for Machine Power: [PowerSpy2]({{< relref "metric-providers/psu-energy-ac-powerspy2" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
-- **Quanta Leopard-DDR3**
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+    
+- **Quanta Leopard-DDR3 - Currently unavailable**
     + 48-Thread Multi-Tenant Server 
     + Ubuntu 22.04 (default)
     + SoftAWERE compatible 
