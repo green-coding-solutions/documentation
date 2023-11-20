@@ -37,8 +37,9 @@ The sidebar is done in flexbox.
 - All custom JS files we did live in `/frontend/js`.
 - All custom CSS files we did live in `/frontend/css`
 - All library files which live in `/frontend/dist/`
-  + In the `site.min.css` from Fomantic UI where we removed the @import statement for the *Lato* font.
-  + We removed the `emoji.min.css`
+  + In the `site.min.css` from Fomantic UI where we removed the @import statement for the external fonts.
+  + We removed the `emoji.min.css` because it contained external imports
+  + We removed the `flags.min.css` because it contained external imports
   + We then concatenated all the minified file into a `semantic_reduced.min.css`
 - The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
