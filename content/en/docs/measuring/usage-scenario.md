@@ -78,6 +78,7 @@ services:
 - `services` **[object]**: (Object of container objects for orchestration)
   + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container
     - `image:` **[str]** Docker image identifier accessible locally on Docker Hub
+    - `container_name` **[a-zA-Z0-9_]** *(optional)* The name of the container. If not given, the service name is used as the name of the container.
     - `environment:` **[object]** *(optional)*
       + Key-Value pairs for ENV variables inside the container
     - `ports:` **[int:int]** *(optional)*
@@ -96,10 +97,7 @@ services:
       + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
 
 Please note that every key below `services` will also serve as the name of the
-container later on.
-
-The Green Metrics Tool does not create auto-generated container names and does
-not support the `container_name` key.
+container later on. You can overwrite the container name, if you use the `container_name` attribute of your service definition.
 
 ### Flow
 
