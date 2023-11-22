@@ -52,7 +52,7 @@ cd ~/green-metrics-tool
 
 ## Docker
 
-Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/)
 
 This is also the reason why the docker client is not part of the install script that we provide.
 
@@ -64,12 +64,16 @@ However, we provide here what we used in on our systems, but be sure to double c
 {{% tab name="Ubuntu" %}}
 
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-sudo apt update && \
-sudo apt remove docker docker-engine docker.io containerd runc -y && \
 sudo apt install ca-certificates curl gnupg lsb-release -y && \
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+sudo install -m 0755 -d /etc/apt/keyrings && \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+sudo chmod a+r /etc/apt/keyrings/docker.gpg && \
+echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+sudo apt update && \
+sudo apt remove docker docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc -y && \
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
 {{% /tab %}}
@@ -90,7 +94,7 @@ sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager \
     --add-repo \
     https://download.docker.com/linux/fedora/docker-ce.repo
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl start docker
 ```
 
@@ -102,7 +106,7 @@ You can check if everything is working fine by running `docker stats`. It should
 
 ### Root mode (default)
 
-Since `v0.20`` the Green Metrics Tool supports docker in it's default root mode.
+Since `v0.20` the Green Metrics Tool supports docker in it's default root mode.
 
 However you need to add your current user to the `docker` group. We need this so we do not need to start the Green Metrics Tool with `root` privileges.
 
