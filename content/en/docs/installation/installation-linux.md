@@ -52,7 +52,7 @@ cd ~/green-metrics-tool
 
 ## Docker
 
-Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/)
+Docker provides a great installation help on their website that will probably be more up to date than this readme: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
 This is also the reason why the docker client is not part of the install script that we provide.
 
