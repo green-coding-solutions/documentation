@@ -15,6 +15,13 @@ Following files have been overloaded and should be checked if they are changed o
 - /layouts/index.headers (Removed CSP netlify)
 - /layouts/sitemap.xml (was not rendering without)
 
+## Local build
+
+```sh
+npm install
+npm run build
+```
+
 ## Deploying to Cloudflare
 
 - Framework preset: `hugo`
