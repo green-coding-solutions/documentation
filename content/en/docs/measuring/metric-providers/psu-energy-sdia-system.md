@@ -7,7 +7,8 @@ weight: 170
 ---
 
 ### What it does
-It estimates the total system energy consumption (AC Power) based on the SDIA 
+
+It estimates the total system energy consumption (AC Power) based on the SDIA
 [linear model](https://docs.google.com/spreadsheets/d/1uCQVs8mVgfu6fcQLEttDgfqPzhCm1yuf19_9RUDuU6w/edit#gid=1126994188), which takes TDP, CPU-Chips and Utilization as input variables.
 
 The formula works as follows:
@@ -17,6 +18,7 @@ The formula works as follows:
 total energy consumption of a non-GPU server.
 
 ### Classname
+
 - PsuEnergyAcSdiaSystemProvider
 
 ### Prerequisites
@@ -32,11 +34,11 @@ In the `config.yml` file also the *CpuUtilizationProcfsSystemProvider* must be a
 - args
     - Takes no arguments
 
-The provider cannot be run directly, it only works in conjunction with a run 
+The provider cannot be run directly, it only works in conjunction with a run
 of the Green Metrics Tool.
 
 The provider reads the `/tmp/green-metrics-tool/cpu_utilization_procfs_system.log` file
-from the *CpuUtilizationProcfsSystemProvider* in order to keep overhead low and 
+from the *CpuUtilizationProcfsSystemProvider* in order to keep overhead low and
 not to double query the utilization from the system.
 
 ### Output

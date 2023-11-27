@@ -17,7 +17,7 @@ Following files have been overloaded and should be checked if they are changed o
 
 ## Local build
 
-```sh
+```bash
 npm install
 npm run build
 ```

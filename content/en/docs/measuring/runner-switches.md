@@ -6,8 +6,7 @@ date: 2023-07-05T08:48:45+00:00
 weight: 830
 ---
 
-Apart from the `config.yml` some configuration is additionally possible when doing manual runs
-with the `runner.py`.
+Apart from the `config.yml` some additional configuration is possible when manually running with the `runner.py`.
 
 - `--uri` The URI to get the usage_scenario.yml from.
   + If given a URL starting with `http(s)` the tool will try to clone a remote repository to `/tmp/green-metrics-tool/repo`
@@ -45,12 +44,12 @@ These options are not available when doing cron runs.
 
 ### Local app
 
-```console
-python3 runner.py --uri PATH_TO_MY_SAMPLE_APP_FOLDER --name MY_NAME`
+```bash
+python3 runner.py --uri PATH_TO_MY_SAMPLE_APP_FOLDER --name "MY_NAME"
 ```
 
-### Github repository
+### GitHub repository
 
-```console
-python3 runner.py --uri https://github.com/MY_GITHUB_NAME/MY_REPO --name MY_NAME
+```bash
+python3 runner.py --uri https://github.com/MY_GITHUB_NAME/MY_REPO --name "MY_NAME"
 ```

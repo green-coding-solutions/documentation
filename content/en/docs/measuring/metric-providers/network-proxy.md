@@ -7,6 +7,7 @@ weight: 141
 ---
 
 ### What it does
+
 This metric provider records all the external web resources that are requested by the build and the run of the
 benchmark. Currently it only supports **http** and **https** connections but more might follow if requested. This is very
 interesting when wanting to benchmark certain scenarios in which network traffic is important.
@@ -15,14 +16,14 @@ We use the great [tinyproxy](https://tinyproxy.github.io/) as it is very perform
 which might skew our measurements. Under Mac you need to install this by yourself with `brew install tinyproxy`!
 
 It is worth highlight that this proxy only works with **external** resources. It does not report on inter-container network
-communication. It also currently does not record the amount of data transferred. For this you can use our 
-[Network I/O cgroup provider](https://docs.green-coding.berlin/docs/measuring/metric-providers/network-io-cgroup-container/).
+communication. It also currently does not record the amount of data transferred. For this you can use our [Network I/O cgroup provider]({{< relref "network-io-cgroup-container" >}}).
 
 The proxy implementation does not follow the "standard" way in which we define metric providers in that they echo a
 key value pair to a file and this is then loaded into the measurements database. Instead it parses the output of the
 proxy program and then adds the corresponding values to the `network_intercepts` database.
 
 ### Classname
+
 - NetworkConnectionsProxyContainerProvider
 
 ### How it works
@@ -42,7 +43,7 @@ system. Please refer to the following configuration part to see how this can be 
 
 ### Configuration
 
-The network proxy does not need any configuration by default. It is however possible to set the `host_ip` variable 
+The network proxy does not need any configuration by default. It is however possible to set the `host_ip` variable
 if our logic does not resolve a correct ip on Linux.
 
 ```yml

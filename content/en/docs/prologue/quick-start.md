@@ -12,7 +12,7 @@ weight: 130
 toc: true
 ---
 
-## Running a measurement with a Github Repository
+## Running a measurement with a GitHub Repository
 
 The easiest way to run a measurement is to use our [Green Metrics Frontend](https://metrics.green-coding.berlin/request.html).
 
@@ -27,6 +27,7 @@ This example highlights that in order to measure an application you only need a 
 
 
 ### Prerequsites
+
 For the most basic setup you require:
 - a computer with a **Linux** operating system
 - `sudo` rights

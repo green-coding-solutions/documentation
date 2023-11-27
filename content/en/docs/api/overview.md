@@ -14,7 +14,7 @@ toc: true
 
 ## Live documentation
 
-Got to: [https://api.green-coding.berlin/doc](https://api.green-coding.berlin/docs)
+Go to: [https://api.green-coding.berlin/doc](https://api.green-coding.berlin/docs)
 
 {{< alert icon="💡" text="The FastAPI is self-documenting and thus will always be most up to date. It even contains a playground to try out requests." />}}
 
