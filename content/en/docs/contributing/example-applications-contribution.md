@@ -7,7 +7,7 @@ weight: 201
 toc: true
 ---
 
-We welcome everybody to provide example applications with a Pull Requests on [Github](https://github.com/green-coding-berlin/example-applications)
+We welcome everybody to provide example applications with a Pull Requests on [GitHub](https://github.com/green-coding-berlin/example-applications)
 
 Please be aware that in order to achieve the most gain for the community and
 the goal to keep measurements reproducible and comparable we provide some

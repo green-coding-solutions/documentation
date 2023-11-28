@@ -30,7 +30,7 @@ should be available in most cases.
 
 If entering the container looks fine and you need to access them through some of their  
 exposed ports (ex. via Browser through HTTP) turn on the `--allow-unsafe` flag to bind  
-the ports specified in the `usage_scenario.yml`
+the ports specified in the `usage_scenario.yml`.
 
 ## Debugging metric providers
 

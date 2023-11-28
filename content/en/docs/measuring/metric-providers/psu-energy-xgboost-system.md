@@ -7,11 +7,13 @@ weight: 162
 ---
 
 ### What it does
+
 It estimates the total system energy consumption (AC Power) based on training
 data from the [SPECPower database](https://www.spec.org/power_ssj2008).
-The underlying XGBoost model can be found [on our Github](https://github.com/green-coding-berlin/spec-power-model)
+The underlying XGBoost model can be found [on our GitHub](https://github.com/green-coding-berlin/spec-power-model)
 
 ### Classname
+
 - PsuEnergyAcXgboostSystemProvider
 
 ### Prerequisites
@@ -31,7 +33,7 @@ If you want to run the provider directly we advise that you rather check
 out it's main repository: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
 
 The provider reads the `/tmp/green-metrics-tool/cpu_utilization_procfs_system.log` file
-from the *CpuUtilizationProcfsSystemProvider* in order to keep overhead low and 
+from the *CpuUtilizationProcfsSystemProvider* in order to keep overhead low and
 not to double query the utilization from the system.
 
 ### Output

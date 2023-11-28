@@ -94,6 +94,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - Or put more loosely: Listening to spotify while running an energy test is a bad idea :)
 
 ### 11. Your system should not overheat
+
 - Most modern processors have features that limit their processing power if the heat of the system is too high. 
     + This is at the moment a manual task in the GMT, however we are working on a feature that will check if the CPU has run
 into a heat limiting.
@@ -104,10 +105,10 @@ value for a particular system.
 
 If you are using a standard cronjob mechanism to trigger the GMT you can use the `idle-time-end` to force a fixed sleep time.
 
-
 ### 12. Mount your `/tmp` on `/tmpfs`
+
 Since we extensively write the output of the `metric-providers` to `/tmp` on the host system this should be an in-memory
-filesytem. Otherwise it might skew with your measurement as disk-writes can be quite costly.
+filesystem. Otherwise it might skew with your measurement as disk-writes can be quite costly.
 
 On Ubuntu you can use `sudo systemctl enable /usr/share/systemd/tmp.mount`
 
@@ -126,5 +127,5 @@ loose data or the run with the GMT will fail.
 
 This switch will prune all unassociated build caches, networks volumes and stopped containers on the system and keep
 your disk from not getting full.
-Downside: It will remove all stopped containers. So if you regulary keep stopped containers than avoid this switch and
-rather run `docker volume prune` once in a while
+Downside: It will remove all stopped containers. So if you regularly keep stopped containers than avoid this switch and
+rather run `docker volume prune` once in a while.

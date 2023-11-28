@@ -7,11 +7,13 @@ draft: false
 images: []
 weight: 112
 ---
+
 ### What it does
 
 This metric provider reads time spent in the CPU based on the cgroups stats file for all your cgroups. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
+
 - CpuTimeCgroupSystemProvider
 
 ### Input Parameters
@@ -22,7 +24,7 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 By default the measurement interval is 100 ms.
 
 ```bash
-> ./metric-provider-binary -i 100 
+./metric-provider-binary -i 100 
 ```
 
 ### Output
@@ -38,6 +40,7 @@ Where:
 Any errors are printed to Stderr.
 
 ### How it works
+
 The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-pages/man7/cgroups.7.html) enabled on your system
 
 The provider reads from the `/sys/fs/cgroup/cpu.stat` file.

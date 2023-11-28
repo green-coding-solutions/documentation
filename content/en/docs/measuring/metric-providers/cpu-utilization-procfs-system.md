@@ -7,11 +7,13 @@ draft: false
 images: []
 weight: 110
 ---
+
 ### What it does
 
 This metric provider calculates an estimate of the % total CPU usage based of the system based on the `/proc/stat` file.
 
 ### Classname
+
 - CpuUtilizationProcfsSystemProvider
 
 ### Input Parameters
@@ -22,7 +24,7 @@ This metric provider calculates an estimate of the % total CPU usage based of th
 By default the measurement interval is 100 ms.
 
 ```bash
-> ./metric-provider-binary -i 100
+./metric-provider-binary -i 100
 ```
 
 ### Output
@@ -38,8 +40,9 @@ Where:
 Any errors are printed to Stderr.
 
 ### How it works
-The provider reads all the entries of the first line of the [`/proc/stat` file](https://www.kernel.org/doc/html/latest/filesystems/proc.html) and 
-uses the argument the same way `htop` does it. This means that CPU Utilization is 
+
+The provider reads all the entries of the first line of the [`/proc/stat` file](https://www.kernel.org/doc/html/latest/filesystems/proc.html) and
+uses the argument the same way `htop` does it. This means that CPU Utilization is
 calcuated as:
 
 **user_time+nice_time+system_time+irq_time+softirq_time+steal_time / wait_time,iowait_time+user_time+nice_time+system_time+irq_time+softirq_time+steal_time**

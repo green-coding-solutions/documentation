@@ -8,7 +8,6 @@ images: []
 weight: 161
 ---
 
-
 ### What it does
 
 This metric provider uses the [PowerSpy2](https://www.alciom.com/en/our-trades/products/powerspy2/)

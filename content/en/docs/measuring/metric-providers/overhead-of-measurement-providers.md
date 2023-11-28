@@ -9,7 +9,7 @@ weight: 102
 The Green Metrics Tools measurement providers run on the same system as the software
 to be measured.
 
-This allows for easiness of testing, but poses the risk of skewing the measured 
+This allows for easiness of testing, but poses the risk of skewing the measured
 results.
 
 The reporters are designed to have negligible impact on their own.
@@ -70,15 +70,16 @@ Tests done with `powerstat`
 
 
 ### Summary
-The most costly output is via STDOUT, which is only done if you run 
+
+The most costly output is via STDOUT, which is only done if you run
 the measurement provider manually for testing.
 
-In the Green Metrics Tool output is always redirected via POSIX redirection 
-to a file. 
+In the Green Metrics Tool output is always redirected via POSIX redirection
+to a file.
 This mode has the lowest impact, however not distinguishable from writing to file
 directly or to */dev/null*
 
-Since we recommend running the reporters at 100ms for normal analysis we conclude 
+Since we recommend running the reporters at 100ms for normal analysis we conclude
 that we have a lot of headroom by just running one reporter.
 
 
@@ -87,6 +88,7 @@ that we have a lot of headroom by just running one reporter.
 We have done measurements on two machines with a standard setup:
 
 ### Quanta Leopard-DDR3 48-Core
+
 - Normal Idle without GMT: **60 W**
 - Full load: **300 W**
 
@@ -105,6 +107,7 @@ This means the GMT reporters have around a *1-2 % overhead* regarding the full p
 
 
 ### Fujitsu TX1330 M2
+
 - Normal Idle without GMT: **15.8 W**
 - Full load: **50 W**
 

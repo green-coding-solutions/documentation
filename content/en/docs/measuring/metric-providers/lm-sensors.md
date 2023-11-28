@@ -7,6 +7,7 @@ draft: false
 images: []
 weight: 115
 ---
+
 ### What it does
 
 This metric provider uses the [lm_sensors](https://github.com/lm-sensors/lm-sensors)
@@ -20,6 +21,7 @@ the detect program first `sudo sensors-detect` which looks at all the chips in y
 file.
 
 ### Classname
+
 - LmSensorsFanProvider
 - LmSensorsTempProvider
 
@@ -51,7 +53,7 @@ The tool also accepts more general parameters:
 - `-h`: displays a little help message.
 
 ```bash
-> ./metric-provider-binary -c coretemp-isa-0000 -f "Package id 0" -i 100
+./metric-provider-binary -c coretemp-isa-0000 -f "Package id 0" -i 100
 ```
 
 Calling the metric-provider without any parameters will output all the values the package can read. This is for

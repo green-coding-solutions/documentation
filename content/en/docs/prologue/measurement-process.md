@@ -17,7 +17,7 @@ After orchestrating all the services with their respective containers,
 the Green Metrics Tool attaches the [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) to the containers.  
 
 The [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) are modular plugins
-that query a certain metric source, such as the CPU energy, DRAM energy, machine power, network traffic etc. 
+that query a certain metric source, such as the CPU energy, DRAM energy, machine power, network traffic etc.
 
 <img src="/img/green-metrics-tool-orchestration.webp">
 
@@ -26,7 +26,7 @@ that query a certain metric source, such as the CPU energy, DRAM energy, machine
 A general workflow of a measurement is as follows:
 
 - The repository is checked out
-- The [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) file is read and processed 
+- The [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) file is read and processed
 - Docker images are pulled or built locally with [Kaniko](https://github.com/GoogleContainerTools/kaniko)
 - Networks are created according to the **networks** part in the [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}})
 - Containers are orchestrated and connected to each other according to the **services** part in the [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}})

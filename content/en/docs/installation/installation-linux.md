@@ -10,7 +10,7 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 
 To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
-Currently the following distriubtions have been tested and are fully supported:
+Currently the following distributions have been tested and are fully supported:
 - Ubuntu 22.04
 - Fedora 38
 
@@ -20,7 +20,7 @@ The following distributions have been tested, but require manual work:
 
 {{< alert icon="💡" text="If you want to develop on macOS please use this installation description: <a href='/docs/installation/installation-mac/'>Installation on Mac</a>" />}}
 
-## Downloading and required packages
+## Downloading and installing required packages
 
 For the sake of this manual we put the green metrics tool into your home directory. Of course you can place it anywhere.
 Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different path for the tool please modify the commands accordingly.
@@ -259,7 +259,7 @@ systemctl --user enable green-coding-service
 
 ### Dockerfiles architecture explanation:
 
-- The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
+- The postgres container has a volume mount. This means that data in the database will persist between container removals / restarts
 - The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to a UNIX socket in `/tmp`
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
 - postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container will import the database structure fresh.
