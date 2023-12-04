@@ -35,7 +35,7 @@ For the most basic setup you require:
 - `python3` including `pandas` and `pyyaml`
 - `docker` installed and preferably running in rootless-mode
 
-If you currently do not have these packages already available please refer to [Installation on Linux →]({{< relref "installation-linux" >}}) or [Installation on macOS →]({{< relref "installation-macos" >}})
+If you currently do not have these packages already available please refer to [Installation on Linux →]({{< relref "installation-linux" >}}), [Installation on macOS →]({{< relref "installation-macos" >}}) or [Installation on Windows (WSL) →]({{< relref "installation-windows" >}})
 
 If you already have that and want to skip the installation, please only add one entry to your `/etc/hosts`:
 
