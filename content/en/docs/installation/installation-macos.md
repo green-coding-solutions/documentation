@@ -54,7 +54,7 @@ After that you can start the containers:
 ### Metric Providers
 
 On Linux we use a multitude of metric providers to give us statistics we use to benchmark programs. On MacOS correct
-values are not to come by so we use the `powermetrics` tool to get some relevant data. In the future we might
+values are not easy to come by so we use the `powermetrics` tool to get some relevant data. In the future we might
 include more providers but for now you only need to use the one.
 
 You will need to disable all providers and enable the:
