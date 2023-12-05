@@ -71,6 +71,10 @@ services:
       - /LOCAL/PATH:/PATH/IN/CONTAINER
     networks:
       - wordpress-mariadb-data-green-coding-network
+  gcb-wordpress-apache:
+    # ...
+    depends_on:
+      - gcb-wordpress-mariadb
 ```
 
 - `services` **[object]**: (Object of container objects for orchestration)
@@ -81,6 +85,8 @@ services:
       + Key-Value pairs for ENV variables inside the container
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
+    - `depends_on` **[array]** *(optional)*
+      + Array of service names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. Currently, only the [short syntax](https://docs.docker.com/compose/compose-file/05-services/#short-syntax-1) is supported.
     - `setup-commands:` **[array]** *(optional)*
       + Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
     - `volumes:` **[array]**  *(optional)*
