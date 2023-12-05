@@ -6,8 +6,8 @@ date: 2022-06-18T08:48:45+00:00
 weight: 820
 ---
 
-Before starting to measure you must first install some prerequisites.  
-See [Installation on Linux →]({{< relref "/docs/installation/installation-linux" >}}) or [Installation on macOS →]({{< relref "/docs/installation/installation-macos" >}})
+Before starting to measure you must first install some prerequisites.
+See [Installation on Linux →]({{< relref "/docs/installation/installation-linux" >}}), [Installation on macOS →]({{< relref "/docs/installation/installation-macos" >}}) or [Installation on Windows (WSL) →]({{< relref "/docs/installation/installation-windows" >}})
 
 Make sure your Docker containers are up and running.  
 If they are not, you can start them by running `docker compose up`  

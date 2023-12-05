@@ -18,7 +18,7 @@ The following distributions have been tested, but require manual work:
 - Ubuntu 20.04 (works, but *libglib* has to be manually updated to *libglib2.0-dev*)
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "installation-cluster" >}}) has different names for timers)
 
-{{< alert icon="💡" text="If you want to develop on macOS please use this installation description: <a href='/docs/installation/installation-mac/'>Installation on Mac</a>" />}}
+{{< alert icon="💡" text="If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>" />}}
 
 ## Downloading and installing required packages
 
@@ -196,7 +196,7 @@ is running on port `80` or `443`
 - Build the binaries for the Metric Providers
 - Set needed `/etc/sudoers` entry for requesting kernel scheduler info
 
-Please not that whenever you run the Green Metrics Tool you have to first activte the python `venv`.
+Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`.
 
 What you might want to add:
 

@@ -43,7 +43,7 @@ is running on port `80` or `443`
 - Create the needed `/etc/hosts` entries for development
 - Set needed `/etc/sudoers` entry for running/ killing the `powermetrics` tool
 
-Please not that whenever you run the Green Metrics Tool you have to first activte the python `venv`!
+Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`!
 
 After that you can start the containers:
 

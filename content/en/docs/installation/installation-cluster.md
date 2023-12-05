@@ -3,7 +3,7 @@ title: "Installation of a Cluster"
 description: "A description on how to run the GMT in a cluster with NOP Linux"
 lead: ""
 date: 2023-06-26T01:49:15+00:00
-weight: 903
+weight: 904
 ---
 
 ## Cluster setup
