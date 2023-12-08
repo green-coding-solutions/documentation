@@ -128,3 +128,11 @@ This switch will prune all unassociated build caches, networks volumes and stopp
 your disk from not getting full.
 Downside: It will remove all stopped containers. So if you regulary keep stopped containers than avoid this switch and
 rather run `docker volume prune` once in a while
+
+### 15. Use non standard sampling intervals and avoid undersampling
+If the effect you are looking for in your code is likely only a 200 ms activity you should at least
+use a sampling rate (metric provider resolution) of 100 ms. 
+
+Having said that: It is also good practice to use an odd number here, which is slightly lower. For instance 99 ms or even 95 ms. 
+
+The reason for this is that you do not want to run into a lock-step sampling error, where you always look at the machine just after a load has happened, and since no jitter is on the machine you always miss the actual load. By sliding your sampling intervals in relation to the frequency of the event frequency that you want to observe you will still see the event sometimes.
