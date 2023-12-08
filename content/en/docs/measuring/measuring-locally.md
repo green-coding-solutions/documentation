@@ -6,10 +6,10 @@ date: 2022-06-18T08:48:45+00:00
 weight: 820
 ---
 
-Before starting to measure you must first install some prerequisites.  
-See [Installation on Linux →]({{< relref "/docs/installation/installation-linux" >}}) or [Installation on macOS →]({{< relref "/docs/installation/installation-macos" >}})
+Before starting to measure you must first install some prerequisites.
+See [Installation on Linux →]({{< relref "/docs/installation/installation-linux" >}}), [Installation on macOS →]({{< relref "/docs/installation/installation-macos" >}}) or [Installation on Windows (WSL) →]({{< relref "/docs/installation/installation-windows" >}})
 
-Make sure your docker containers are up and running.  
+Make sure your Docker containers are up and running.  
 If they are not, you can start them by running `docker compose up`  
 whilst in the Green Metrics Tool `docker` subfolder.
 
@@ -73,14 +73,14 @@ python3 runner.py --uri /tmp/easiest-application --name testing-my-demo
 
 You should see an example output like so:
 
-```bash
+```txt
 Having usage scenario ....
 ....
 ....
 Please access your report with the ID: XXXX-XXXX ...
 ```
 
-Now you can view the report as the first item in your metrics dashboard at [http://metrics.green-coding.internal:9142/request.html](http://metrics.green-coding.internal:9142/request.html)
+Now you can view the report as the first item in your metrics dashboard at [http://metrics.green-coding.internal:9142/index.html](http://metrics.green-coding.internal:9142/index.html)
 
 ## Cron mode
 

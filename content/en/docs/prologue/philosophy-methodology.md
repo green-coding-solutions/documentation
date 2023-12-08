@@ -99,7 +99,7 @@ The Green Metrics Tool borrows the concept of
 *Standard Usage Scenarios* from the [Blauer Engel](https://www.blauer-engel.de/en/productworld/resources-and-energy-efficient-software-products) / [KDE Team](https://eco.kde.org).  
 
 We also believe that they provide the best approach to understand how an application  
-would typically behave under real-world usecases.
+would typically behave under real-world use cases.
 
 Therefore we create every measurement by providing the architecture of the software  
 and the flow that the software shall execute in such a [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) file.
@@ -112,7 +112,7 @@ Web Frontend to display the metrics in charts.
 
 Our tool is also inspired by [Greenframe.io](https://www.greenframe.io) from Marmelab.
 
-They have, since we started developing our tool, also [open-sourced theirs on Github](https://marmelab.com/blog/2022/11/09/greenframe-open-source.html) and made their
+They have, since we started developing our tool, also [open-sourced theirs on GitHub](https://marmelab.com/blog/2022/11/09/greenframe-open-source.html) and made their
 [methodology public](https://github.com/marmelab/greenframe-cli/blob/main/src/model/README.md).
 
 The visual and chart display of the results are only available through their SaaS product which they host on Greenframe.io.

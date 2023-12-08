@@ -15,23 +15,21 @@ The `usage_scenario.yml` consists of these main blocks:
 
 `*`: means these values are optional.
 
-Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However keys that have the same name are also identical in function - thought potentially with some limitations.
+Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
 
 At the beginning of the file you should specify `name`, `author`, and `architecture`.
 These will help you later on tell what the scenario is doing.
 
-**Linux** and **Darwin** are the only supported architectures. If you don't mention an `architecture` it will run on
-both.
+**Linux** and **Darwin** are the only supported architectures. If you don't mention an `architecture` it will run on both.
 
 Please note that when running the measurement you can supply an additional name,
 which can and should be different from the name in the `usage_scenario.yml`.
 
-The idea is to have a general name for the `usage_scenario.yml` and another one for the specific
-measurement run.
+The idea is to have a general name for the `usage_scenario.yml` and another one for the specific measurement run.
 
 Example for the start of a `usage_scenario.yml`
 
-```bash
+```yaml
 ---
 name: My Hugo Test
 author: Arne Tarara <arne@green-coding.berlin>
@@ -73,19 +71,26 @@ services:
       - /LOCAL/PATH:/PATH/IN/CONTAINER
     networks:
       - wordpress-mariadb-data-green-coding-network
+  gcb-wordpress-apache:
+    # ...
+    depends_on:
+      - gcb-wordpress-mariadb
 ```
 
 - `services` **[object]**: (Object of container objects for orchestration)
-  + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container
+  + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container/service
     - `image:` **[str]** Docker image identifier accessible locally on Docker Hub
+    - `container_name` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
     - `environment:` **[object]** *(optional)*
       + Key-Value pairs for ENV variables inside the container
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
+    - `depends_on` **[array]** *(optional)*
+      + Array of service names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. Currently, only the [short syntax](https://docs.docker.com/compose/compose-file/05-services/#short-syntax-1) is supported.
     - `setup-commands:` **[array]** *(optional)*
       + Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
     - `volumes:` **[array]**  *(optional)*
-      + Array of volumes to be mapped. Only read of `runner.py` is executed with `--allow-unsafe` flag
+      + Array of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
     - `folder-destination`: **[str]** *(optional)*
       + Specify where the project that is being measured will be mounted inside of the container
       + Defaults to `/tmp/repo`
@@ -95,11 +100,8 @@ services:
       + Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
       + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
 
-Please note that every key below `services` will also serve as the name of the
-container later on.
-
-The Green Metrics Tool does not create auto-generated container names and does
-not support the `container_name` key.
+Please note that every key below `services` will serve as the name of the
+container later on. You can overwrite the container name with the key `container_name`.
 
 ### Flow
 
@@ -112,14 +114,14 @@ flow:
     commands:
     - type: console
       command: node /var/www/puppeteer-flow.js
-      note: Starting Pupeteer Flow
+      note: Starting Puppeteer Flow
       read-notes-stdout: true
     - type: console
       command: sleep 30
       note: Idling
     - type: console
       command: node /var/www/puppeteer-flow.js
-      note: Starting Pupeteer Flow again
+      note: Starting Puppeteer Flow again
       read-notes-stdout: true
   - name: Shutdown DB
     container: database-container
@@ -141,7 +143,7 @@ flow:
     - `note:` **[str]** *(optional)*
       + A string that will appear as note attached to the datapoint of measurement (optional)
     - `read-notes-stdout:` **[bool]** *(optional)*
-      + Read notes from the STDOUT of the command. This is helpful if you have a long running command that does multiple steps and you want to log every step.
+      + Read notes from the STDOUT of the command. This is helpful if you have a long running command that does multiple steps and you want to log every step
     - `ignore-errors` **[bool]** *(optional)*
       + If set to `true` the run will not fail if the process in `cmd` has a different exit code than `0`. Useful
            if you execute a command that you know will always fail like `timeout 0.1 stress -c 1`
@@ -154,7 +156,6 @@ flow:
     - `log-stderr:` **[boolean]** *(optional)*
       + Will log the *stderr* and make it available through the frontend in the *Logs* tab and in error messages.
       + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
-
 
 ### compose-file:
 

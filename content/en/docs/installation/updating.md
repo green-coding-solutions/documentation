@@ -3,7 +3,7 @@ title: "Updating"
 description: "Updating"
 lead: ""
 date: 2022-11-23T01:49:15+00:00
-weight: 904
+weight: 905
 ---
 
 The standard way of updating the Green Metrics Tool is to run:
@@ -24,7 +24,7 @@ We will stop and rebuild the containers. Since the containers have a shared file
 that is independent of the container state your database will be kept as is.
 
 However if a structural change to the database was included in the update you MUST  
-rebuild the database. We hopefully state this in the Github release tag ... but if you  
+rebuild the database. We hopefully state this in the GitHub release tag ... but if you  
 run into unknown errors be sure to definitely rebuild the database.
 
 ```bash
@@ -41,7 +41,7 @@ If Python dependencies have been updated, e.g. `requirements.txt` has been
 changed, then they need to be installed with:
 
 ```bash
-    python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+python3 -m pip install -r ~/green-metrics-tool/requirements.txt
 ```
 
 ## Re-Run the install script
@@ -57,7 +57,7 @@ custom changes you need to replay them afterwards.
 
 ## Run the migrations
 
-Typically we also advertise this in the Github Release Notes, but also check in the `/migrations` folder
+Typically we also advertise this in the GitHub Release Notes, but also check in the `/migrations` folder
 if there is a migration with a date since you last updated.
 
 To run a migration either paste the SQL code directly to the DB or use the `import_data.py` script.
@@ -66,16 +66,17 @@ Example:
 
 ```bash
 python3 tools/import_data.py ./migrations/2023_07_08_indices.sql
-``
+```
 
-
-## Read the Github release notes
+## Read the GitHub release notes
 
 If we release a new major version, or introduce breaking changes, we will post it  
 there and also often on our [Company Blog](https://www.green-coding.berlin/blog).
 
 If you ever get stuck during this installation, be sure to reboot the machine once.  
 It may help to correctly load some configurations and/or daemons.
+
+---
 
 # Maintainer section
 
@@ -101,7 +102,7 @@ Sadly in order to update the DB the only proper way is exporting and importing.
 
 Following steps must be executed:
 
-```
+```bash
 # make sure the GMT is running and the postgres db container is started.
 # you also need to have CLI access to the machine
 
@@ -112,8 +113,4 @@ docker compose build # to upgrade image
 docker compose  up -d
 docker exec -it -u postgres green-coding-postgres-container psql -p 9573 -c 'DROP DATABASE "green-coding" WITH (FORCE);'
 docker exec -i -u postgres green-coding-postgres-container psql -p 9573 < /tmp/dump.sql
-
 ```
-
-
-

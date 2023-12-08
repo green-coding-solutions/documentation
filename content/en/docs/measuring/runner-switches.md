@@ -6,8 +6,7 @@ date: 2023-07-05T08:48:45+00:00
 weight: 830
 ---
 
-Apart from the `config.yml` some configuration is additionally possible when doing manual runs
-with the `runner.py`.
+Apart from the `config.yml` some additional configuration is possible when manually running with the `runner.py`.
 
 - `--uri` The URI to get the usage_scenario.yml from.
   + If given a URL starting with `http(s)` the tool will try to clone a remote repository to `/tmp/green-metrics-tool/repo`
@@ -15,7 +14,7 @@ with the `runner.py`.
 - `--branch` When providing a git repository, optionally specify a branch
 - `--name` A name which will be stored to the database to discern this run from others
 - `--filename` An optional alternative filename if you do not want to use "usage_scenario.yml"
-- `--config-override` Override the configuration file with the passed in yml file.  
+- `--config-override` Override the configuration file with the passed in yml file.
   + Must be located in the same directory as the regular configuration file. Pass in only the name.
 - `--no-file-cleanup` flag to not delete the metric provider data in `/tmp/green-metrics-tool`
 - `--debug` flag to activate steppable debug mode
@@ -28,7 +27,7 @@ with the `runner.py`.
     * See [usage_scenario.yml →]({{< relref "usage-scenario" >}}) **environment** option for details
 - `--skip-unsafe` flag to skip unsafe volume bindings, ports and complex env vars
   + This is typically done when reusing already present `compose.yml` files without the need to alter the file
-- `--skip-config-check` Skip checking the configuration
+- `--skip-system-checks` Skip checking the system if the GMT can run
 - `--verbose-provider-boot` flag to boot metric providers gradually
   + This will enable the user to see the impact of each metric provider more clearly
   + There will be a 10 second sleep for two seconds after each provider boot
@@ -45,12 +44,12 @@ These options are not available when doing cron runs.
 
 ### Local app
 
-```console
-python3 runner.py --uri PATH_TO_MY_SAMPLE_APP_FOLDER --name MY_NAME`
+```bash
+python3 runner.py --uri PATH_TO_MY_SAMPLE_APP_FOLDER --name "MY_NAME"
 ```
 
-### Github repository
+### GitHub repository
 
-```console
-python3 runner.py --uri https://github.com/MY_GITHUB_NAME/MY_REPO --name MY_NAME
+```bash
+python3 runner.py --uri https://github.com/MY_GITHUB_NAME/MY_REPO --name "MY_NAME"
 ```

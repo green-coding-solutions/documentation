@@ -69,7 +69,8 @@ git submodule init FOLDER
 ## cpu.stat failed to open
 
 The full error looks something like this:
-```
+
+```log
 Error:  RuntimeError occured in runner.py:  Stderr on CpuUtilizationCgroupContainerProvider was NOT empty: b'Error - file /sys/fs/cgroup/user.slice/user-1003.slice/user@1003.service/user.slice/docker-6e18a15cbc237c9ff76af70cc8ef16c3c5b9f002a989f74cf0c7a22b5c8e4c9f.scope/cpu.stat failed to open: errno: 2'
 ```
 
@@ -100,14 +101,14 @@ Then try running the command in a shell. It might be that some quote escaping is
 
 Example:
 
-```
+```yaml
 command: grep "asd" /tmp/myfile
 shell: sh
 ```
 
 Or, if you can, also ditch the quotes:
 
-```
+```yaml
 command: grep asd /tmp/myfile
 ```
 

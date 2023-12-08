@@ -40,7 +40,7 @@ After that just plug it into your USB and please use Channel 1.
 
 
 ```bash
-> ./metric-provider-binary -i 100
+./metric-provider-binary -i 100
 ```
 
 ### Output

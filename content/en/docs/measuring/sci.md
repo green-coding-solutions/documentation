@@ -9,8 +9,8 @@ toc: true
 
 Since version v0.18 the Green Metrics Tool can measure the [Green Software Foundation's SCI](https://sci-guide.greensoftware.foundation/)
 
-The metrics is essentially a Carbon per Unit of work metric and thus is very flexible in it's application. Supplemental
-to the various metric providers that the Green Metrics Tool support this introduces not only the concept of total 
+The metric is essentially a Carbon per Unit of work metric and thus is very flexible in it's application. Supplemental
+to the various metric providers that the Green Metrics Tool support this introduces not only the concept of total
 energy / carbon per usage_scenario, but also the concept of work done.
 
 ## Setup
@@ -27,7 +27,7 @@ Please see an example how to configure in our [example applications repository f
 
 A simple integration for an CLI based application might for instance look like this:
 
-```
+```yaml
 ...
 sci:
   R_d: calculated prime number
@@ -59,7 +59,6 @@ from official databases like:
 - [https://tco.exploresurface.com/sustainability/calculator](https://tco.exploresurface.com/sustainability/calculator)
 - [https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf](https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf)
 
-    
 
 ## Display
 
@@ -75,14 +74,15 @@ If an SCI was configured also the parameters will be shown in the *Measurements*
 
 We provide quite some example applications that showcase how the SCI can be measured with the Green Metrics Tool for APIs, CLI tools etc.
 
-[Example applications on Github](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci)
+[Example applications on GitHub](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci)
 
 [Example data with runs](https://metrics.green-coding.berlin/?uri=green-coding-berlin/example-applications&filename=green-software)
 
 ## Caveats and future work
+
 At the moment the SCI is only measured in the *RUNTIME* phase and no sub-phase measurement is possible.
 
 Future work will include making the SCI an actual *Metric Provider* and thus allowing to capture it in every phase, optionally with having different dimensions per phase even.
 
-The work on this task is tracked in [this Github Issue](https://github.com/green-coding-berlin/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
+The work on this task is tracked in [this GitHub Issue](https://github.com/green-coding-berlin/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
 

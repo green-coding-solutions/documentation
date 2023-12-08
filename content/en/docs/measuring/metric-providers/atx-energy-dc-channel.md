@@ -7,10 +7,13 @@ draft: false
 images: []
 weight: 150
 ---
+
 # ⚠️Warning - LEGACY PROVIDER⚠️
+
 This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
 
 ### What it does
+
 This metric provider reads the the voltage from the DC channels of the ATX connector
 on the mainboard through shunt resistors and converts the voltage to an energy reading.
 
@@ -18,11 +21,13 @@ The reporter is different from the purely software based, as it collects the met
 through an external device: [Picotech PicoLog HDR ADC 24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 
 ### Classname
+
 - None
 
 Only an importer script is needed to ingest the metrics.
 
 ### Input Parameters
+
 The AppImage must be called in order to start the measurement.
 
 All values should be configured with `100 ms` time resolution and `+/- 625 mV` sensitivity range.
@@ -41,4 +46,5 @@ python3 tools/dc_converter.py filename project_id db_host db_pw
 ```
 
 ### Software
+
 We are using the [Piclog 6.2.5 AppImage](https://www.picotech.com/download/software/picolog6/sr/picolog-6.2.5-x86_64.AppImage) on Ubuntu 22.04

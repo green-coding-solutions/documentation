@@ -37,6 +37,7 @@ Refer to the installation instructions for your OS:
 
 - [Installation on Linux →]({{< relref "/docs/installation/installation-linux" >}})
 - [Installation on macOS →]({{< relref "/docs/installation/installation-macos" >}})
+- [Installation on Windows (WSL) →]({{< relref "/docs/installation/installation-windows" >}})
 
 Then proceed with [containerizing and measuring your applications →]({{< relref "/docs/measuring/containerizing-applications" >}}) to  
 understand how to prepare your app to be measured by the Green Metrics Tool.
