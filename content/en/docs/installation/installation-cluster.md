@@ -29,11 +29,10 @@ client:
   sleep_time: 300
 ```
 
-After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
-
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
-Create a file under: `/etc/systemd/system/green-coding-client-service.service` with following content
+Create a file under: `/etc/systemd/system/green-coding-client-service.service` with following content, but be sure to 
+double-check the out-commented line regarding the docker environment variable:
 
 ```init
 [Unit]
@@ -45,9 +44,12 @@ Type=simple
 User=gc
 Group=gc
 WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/usr/bin/python3 /home/gc/green-metrics-tool/tools/client.py
+ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/tools/client.py
 Restart=always
 RestartSec=30s
+
+# Uncomment this line if you are running docker in non-rootless mode (aka default root mode)
+#Environment="DOCKER_HOST=unix:///run/user/1000/docker.sock"
 
 [Install]
 WantedBy=multi-user.target
@@ -78,6 +80,16 @@ sudo systemctl status green-coding-client-service
 ```
 
 You should now see the client reporting it's status on the server. It is important to note that only the client ever talks to the server (polling). The server never tries to contact the client. This is to not create any interrupts while a measurement might be running.
+
+After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+
+This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. We recommend the following:
+
+```
+sudo touch /etc/sudoers.d/green-coding-cluster-cleanup
+echo "ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.sh" | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
+sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
+```
 
 ## 2) Cronjob
 
