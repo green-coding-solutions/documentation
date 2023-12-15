@@ -10,18 +10,38 @@ weight: 162
 
 It estimates the total system energy consumption (AC Power) based on training
 data from the [SPECPower database](https://www.spec.org/power_ssj2008).
-The underlying XGBoost model can be found [on our GitHub](https://github.com/green-coding-berlin/spec-power-model)
-
+The underlying XGBoost model can be found [on our GitHub](https://github.com/green-coding-berlin/spec-power-model).
 ### Classname
 
 - PsuEnergyAcXgboostSystemProvider
 
-### Prerequisites
+### Prerequisites & Installation
 
-The provider must be configured in the `config.yml`. Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}})
+This provider is included as a submodule in the Green Metrics Tool and should have been checked out with the
+initial install command of this manual. If not, run:
+
+```bash
+git submodule update --init
+```
+
+If you don't have them already, you need to install some python libraries:
+
+```bash
+python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xgboost/machine/model/requirements.txt
+```
+
+The provider must be configured in the `config.yml`. It must be supplied with the machine params in the `config.yml` file:
+
+- CPUChips
+- HW_CPUFreq
+- CPUCores
+- TDP
+- HW_MemAmountGB
+
+Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}})
 for further info.
 
-In the `config.yml` file also the *CpuUtilizationProcfsSystemProvider* must be activated
+In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be activated
  for the *PsuEnergyAcXgboostSystemProvider* to work.
 
 ### Input Parameters

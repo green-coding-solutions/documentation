@@ -16,9 +16,60 @@ Mostly temperatures from various hardware components and fan speeds.
 
 ### Install
 
-You will need  `sudo apt install libsensors-dev` installed on a Debian based distro. Further you will need to run
-the detect program first `sudo sensors-detect` which looks at all the chips in your computer and creates the config
-file.
+The required libraries are installed automatically via the `install-linux.sh` call when installing the Green Metrics Tool. However for completeness, these are the libraries installed:
+
+{{< tabs groupId="sensors">}}
+{{% tab name="Ubuntu" %}}
+
+```bash
+sudo apt install -y lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
+```
+
+{{% /tab %}}
+{{% tab name="Fedora" %}}
+
+```bash
+sudo dnf -y install lm_sensors lm_sensors-devel glib2 glib2-devel
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+If you want the temperature metric provider to work you need to run the sensor detector
+
+```bash
+sudo sensors-detect
+```
+
+in order to detect all the sensors in your system. One you have run this you should be able to run the
+
+```bash
+sensors
+```
+
+command and see your CPU temp. You can then use this output to look for the parameters you need to set in the `config.yml`.
+For example if sensors gives you:
+
+```bash
+coretemp-isa-0000
+Adapter: ISA adapter
+Package id 0:  +29.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 0:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 1:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 2:        +28.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 3:        +29.0°C  (high = +100.0°C, crit = +100.0°C)
+```
+
+Your config could be:
+
+```bash
+lm_sensors.temperature.provider.LmSensorsTempProvider:
+    resolution: 100
+    chips: ['coretemp-isa-0000']
+    features: ['Package id 0', 'Core 0', 'Core 1', 'Core 2', 'Core 3']
+```
+
+As the matching is open ended you could also only use `'Core'` instead of naming each feature.
 
 ### Classname
 
