@@ -270,100 +270,17 @@ Some metric providers need extra setup before they work.
 
 ### LM-Sensors
 
-The required libraries are installed automatically via the `install.sh` call. However for completeness, these
-are the libraries installed:
-
-{{< tabs groupId="sensors">}}
-{{% tab name="Ubuntu" %}}
-
-```bash
-sudo apt install -y lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
-```
-
-{{% /tab %}}
-{{% tab name="Fedora" %}}
-
-```bash
-sudo dnf -y install lm_sensors lm_sensors-devel glib2 glib2-devel
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-If you want the temperature metric provider to work you need to run the sensor detector
-
-```bash
-sudo sensors-detect
-```
-
-in order to detect all the sensors in your system. One you have run this you should be able to run the
-
-```bash
-sensors
-```
-
-command and see your CPU temp. You can then use this output to look for the parameters you need to set in the `config.yml`.
-For example if sensors gives you:
-
-```bash
-coretemp-isa-0000
-Adapter: ISA adapter
-Package id 0:  +29.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 0:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 1:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 2:        +28.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 3:        +29.0°C  (high = +100.0°C, crit = +100.0°C)
-```
-
-Your config could be:
-
-```bash
-lm_sensors.temperature.provider.LmSenorsTempProvider:
-    resolution: 100
-    chips: ['coretemp-isa-0000']
-    features: ['Package id 0', 'Core 0', 'Core 1', 'Core 2', 'Core 3']
-```
-
-As the matching is open ended you could also only use `'Core'` instead of naming each feature.
+The required libraries are installed automatically via the `install-linux.sh` call. Some modifications need to be made to your `config.yml`  file though, which are detailed in the lm-sensors metric provider [documentation →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}), along with further details regarding prerequisites.
 
 ### XGBoost
 
 The XGBoost metrics provider can estimate the power consumption of the total
-system (AC-Energy).
-
-It is included as a submodule in the Green Metrics Tool and should have been checked out with the
-initial install command of this manual. If not run:
-
-```bash
-git submodule update --init
-```
-
-It must be supplied with the machine params in the `config.yml` file:
-
-- CPUChips
-- HW_CPUFreq
-- CPUCores
-- TDP
-- HW_MemAmountGB
-
-Please look at the always current documentation here to understand what values to
-plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
-
-Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyAcXgboostSystemProvider*
-
-Lastly, if you don't have them already, you need to install some python libraries:
-
-```bash
-python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xgboost/machine/model/requirements.txt
-```
+system (AC-Energy). It is included as a submodule in the Green Metrics Tool and should have been checked out with the initial install command of this manual. The `config.yml` file also needs additional details which are detailed in the metric provider [documentation→]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-system" >}}).
 
 ### DC Metrics Provider
 
-This providers needs a custom piece of hardware to work:
+Some of our PSU metrics providers may need specific hardware attached to your machine in order to run. These include the [Powerspy]({{< relref "docs/measuring/metric-providers/psu-energy-ac-powerspy2" >}}), [MCP]({{< relref "docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}}), and [Picolog]({{< relref "docs/measuring/metric-providers/psu-energy-dc-picolog-system" >}}) metric providers. Please look for details in each provider's corresponding documentation
 
-- [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
-
-Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "/docs/measuring/metric-providers/psu-energy-dc-picolog-system" >}})
 
 ### RAPL
 

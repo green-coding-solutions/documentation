@@ -13,6 +13,19 @@ This metric provider reads the DRAM energy from the Running Average Power Limit 
 
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
 
+
+### System Setup
+On kernels > 2.6 all the kernel modules should automatically be loaded.
+
+However just in case run:
+
+```bash
+sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
+sudo modprobe intel_rapl_msr
+sudo modprobe rapl
+```
+
+
 ### Technical specs
 
 - Time resolution: 976 micro-seconds
