@@ -94,8 +94,8 @@ services:
     - `folder-destination`: **[str]** *(optional)*
       + Specify where the project that is being measured will be mounted inside of the container
       + Defaults to `/tmp/repo`
-    - `cmd:` **[str]** *(optional)*
-      + Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`
+    - `command:` **[str]** *(optional)*
+      + Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`.
     - `shell:` **[str]** *(optional)*
       + Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
       + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
@@ -156,7 +156,7 @@ flow:
     - `note:` **[str]** *(optional)*
       + A string that will appear as note attached to the datapoint of measurement (optional)
     - `ignore-errors:` **[bool]** *(optional)*
-      + If set to `true` the run will not fail if the process in `cmd` has a different exit code than `0`. Useful
+      + If set to `true` the run will not fail if the process in `command` has a different exit code than `0`. Useful
            if you execute a command that you know will always fail like `timeout 0.1 stress -c 1`
     - `shell:` **[str]** *(optional)*
       + Will execute the `command` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
