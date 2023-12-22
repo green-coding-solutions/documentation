@@ -78,7 +78,7 @@ This is because a container has exited during the run of the GMT or you are runn
 - If not using rootless mode: Please turn all **cgroup** providers off, by commenting them out in the `config.yml`
 - If using rootless mode: Please keep the container alive by having a shell always open 
 
-A way to do this with the GMT directly without changing your containers would be the `cmd` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
+A way to do this with the GMT directly without changing your containers would be the `command` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
 
 An example where we use this command to keep a container alive is here: https://github.com/green-coding-berlin/example-applications/blob/main/idle/usage_scenario.yml
 

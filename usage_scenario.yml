@@ -7,7 +7,7 @@ architecture: linux
 services:
   hugo-container:
     image: klakegg/hugo:0.101.0-alpine
-    cmd: shell
+    commmand: shell
     setup-commands:
       - cp -R /tmp/repo /src
 
