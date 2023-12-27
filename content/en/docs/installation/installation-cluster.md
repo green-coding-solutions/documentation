@@ -121,3 +121,44 @@ machine:
   # Takes a file path to log all the errors to it. This is disabled if False
   error_log_file: False
 ```
+The `id` and the `description` must be unique so that they do not conflict with the other machines in the cluster.
+
+## Power saving in the cluster
+
+### Wake-on-LAN
+
+When the cluster is setup it is often not needed to have the machines powered when there is no job in the queue.
+
+What you can setup is a simple Wake-on-LAN script that will only wakeup the machines when there is job in the queue waiting.
+
+For examplary purposes we document a script here that works on a low power *Raspberry PI* that we have active in our 
+local network, but any simple microcontroller that has HTTP capabilites will.
+
+```bash
+#!/bin/bash
+# filename: wake_machine.sh
+
+
+# Install this script as a cronjob
+# m h  dom mon dow   command
+# */15 * * * * bash /home/pi/wake_machine.sh
+
+## You need the wakeonlan and the jq package installed
+## sudo apt install wakeonlan jq -y
+
+output=$(curl "https://api.green-coding.berlin/v1/jobs" --silent |  jq '.["data"][] | select(.[6] == "My machine description" and .[7] == "WAITING")' | wc -l | sed -e 's/^[ \t]*//')
+
+# Check if the output is a specific string
+if [ "$output" != "0" ]; then
+    echo "Having waiting jobs. Sending Wake on LAN magic packet ..."
+
+    # Please replace '80:1B:3E:A8:26:19' with your machines MAC address
+    # Using port 1234 will usually work. If you run into issues try port 9, 8 or 7 also
+    # Do not use the IP address of the machine, but the broadcast address (usually the last number block must be replaced by 255)
+    wakeonlan -i 10.1.0.255 -p 1234 80:1B:3E:A8:26:19
+
+    echo "Wake on LAN magic packet send!"
+else
+    echo "Command output is '0'. No other program started."
+fi
+```
