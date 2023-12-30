@@ -79,7 +79,10 @@ services:
 
 - `services` **[object]**: (Object of container objects for orchestration)
   + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container/service
-    - `image:` **[str]** Docker image identifier accessible locally on Docker Hub
+    - `image:` **[str]** Docker image identifier. If `build` is not provided the image needs to be accessible locally on Docker Hub. If `build` is provided it is used as identifier for the image.
+    - `build:` **[str]** *(optional)* Path to build context. See `context` for restrictions. Default for `dockerfile` is `Dockerfile`. Alternatively, you can provide more detailed build information with:
+      - `context:` **[str]** *(optional)* Path to the build context. Needs to be in the path or repo that is passed with `--uri` to `runner.py`. Default: `.`.
+      - `dockerfile:` **[str]** *(optional)* Path to Dockerfile. Needs to be in `context`. Default: `Dockerfile`.
     - `container_name:` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
     - `environment:` **[object]** *(optional)*
       + Key-Value pairs for ENV variables inside the container
