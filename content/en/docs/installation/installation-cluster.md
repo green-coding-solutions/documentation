@@ -87,7 +87,7 @@ This script is run as root and thus needs to be in the `/etc/sudoers` file or su
 
 ```
 sudo touch /etc/sudoers.d/green-coding-cluster-cleanup
-echo "ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.sh" | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
+echo "ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.sh ''" | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
 sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
 ```
 
