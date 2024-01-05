@@ -14,7 +14,12 @@ This metric provider calculates an estimate of the % total CPU usage based of th
 
 ### Classname
 
-- CpuUtilizationProcfsSystemProvider
+- `CpuUtilizationProcfsSystemProvider`
+
+### Metric Name
+
+- `cpu_utilization_procfs_system`
+
 
 ### Input Parameters
 

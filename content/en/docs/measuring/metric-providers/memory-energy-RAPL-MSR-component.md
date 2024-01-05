@@ -1,6 +1,6 @@
 ---
-title: "Memory Energy - RAPL System"
-description: "Documentation for MemoryEnergyRaplMsrSystemProvider of the Green Metrics Tool"
+title: "Memory Energy - RAPL Component"
+description: "Documentation for MemoryEnergyRaplMsrComponentProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-06-02T08:49:15+00:00
 draft: false
@@ -33,7 +33,11 @@ sudo modprobe rapl
 
 ### Classname
 
-- MemoryEnergyRaplMsrSystemProvider
+- `MemoryEnergyRaplMsrComponentProvider`
+
+### MetricName
+
+- `memory_energy_rapl_msr_component`
 
 ### Input Parameters
 

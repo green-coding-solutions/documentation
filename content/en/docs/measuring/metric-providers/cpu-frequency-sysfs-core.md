@@ -15,7 +15,11 @@ It does this throug a simple bash script just *cat-ting* the file endpoint.
 
 ### Classname
 
-- CpuFrequencySysfsCoreProvider
+- `CpuFrequencySysfsCoreProvider`
+
+### Metric Name
+
+- `cpu_frequency_sysfs_core`
 
 ### Input Parameters
 

@@ -14,7 +14,11 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 
 ### Classname
 
-- CpuTimeCgroupContainerProvider
+- `CpuTimeCgroupContainerProvider`
+
+### Metric Name
+
+- `cpu_time-cgroup_container`
 
 ### Input Parameters
 

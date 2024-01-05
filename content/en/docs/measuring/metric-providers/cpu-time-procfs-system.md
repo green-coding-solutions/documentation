@@ -14,7 +14,11 @@ This metric provider reads the total time spent in the CPU based on the system `
 
 ### Classname
 
-- CpuTimeProcfsSystemProvider
+- `CpuTimeProcfsSystemProvider`
+
+### Metric Name
+
+- `cpu_time_procfs_system`
 
 ### Input Parameters
 

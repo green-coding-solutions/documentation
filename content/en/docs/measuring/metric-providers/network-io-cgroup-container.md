@@ -12,7 +12,12 @@ It reads the total amount of sent and received bytes from the network interface 
 
 ### Classname
 
-- NetworkIoCgroupContainerProvider
+- `NetworkIoCgroupContainerProvider`
+
+### Metric Name
+
+- `network_io_cgroup_container`
+
 
 ### Input Parameters
 

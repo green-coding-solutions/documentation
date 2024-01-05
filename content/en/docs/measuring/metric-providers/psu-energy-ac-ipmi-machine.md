@@ -33,7 +33,12 @@ in your computer and creates the config file.
 
 ### Classname
 
-- PsuEnergyAcIpmiMachineProvider
+- `PsuEnergyAcIpmiMachineProvider`
+
+### Metric Name
+
+- `psu_energy_ac_ipmi_machine`
+
 
 ### Input Parameters
 

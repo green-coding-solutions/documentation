@@ -1,6 +1,6 @@
 ---
-title: "PSU Energy - AC - XGBoost - System"
-description: "Documentation for PsuEnergyAcXgboostSystemProvider of the Green Metrics Tool"
+title: "PSU Energy - AC - XGBoost - Machine"
+description: "Documentation for PsuEnergyAcXgboostMachineProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-08-04T08:49:15+00:00
 weight: 162
@@ -8,12 +8,17 @@ weight: 162
 
 ### What it does
 
-It estimates the total system energy consumption (AC Power) based on training
+It estimates the total machine energy consumption (AC Power) based on training
 data from the [SPECPower database](https://www.spec.org/power_ssj2008).
 The underlying XGBoost model can be found [on our GitHub](https://github.com/green-coding-berlin/spec-power-model).
+
 ### Classname
 
-- PsuEnergyAcXgboostSystemProvider
+- `PsuEnergyAcXgboostMachineProvider`
+
+### Metric Name
+
+- `psu_energy_ac_xgboost_machine`
 
 ### Prerequisites & Installation
 
@@ -42,7 +47,7 @@ Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}})
 for further info.
 
 In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be activated
- for the *PsuEnergyAcXgboostSystemProvider* to work.
+ for the *PsuEnergyAcXgboostMachineProvider* to work.
 
 ### Input Parameters
 
@@ -60,7 +65,7 @@ not to double query the utilization from the system.
 
 Since this provider should not be run directly there it has no direct output.
 
-The resulting data however is the wattage for the whole system (AC Power) in Watts.
+The resulting data however is the wattage for the whole machine (AC Power) in Watts.
 
 This value has the same granularity as the one configured in the `config.yml` for the
 *CpuUtilizationProcfsSystemProvider*

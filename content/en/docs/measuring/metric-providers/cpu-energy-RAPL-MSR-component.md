@@ -1,6 +1,6 @@
 ---
-title: "CPU Energy Package - RAPL System"
-description: "Documentation for CpuEnergyRaplMsrSystemProvider of the Green Metrics Tool"
+title: "CPU Energy Package - RAPL Component"
+description: "Documentation for CpuEnergyRaplMsrComponentProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-06-02T08:49:15+00:00
 draft: false
@@ -32,7 +32,11 @@ sudo modprobe rapl
 
 ### Classname
 
-- CpuEnergyRaplMsrSystemProvider
+- `CpuEnergyRaplMsrComponentProvider`
+
+### Metric Name
+
+- `cpu_energy_rapl_msr_component`
 
 ### Input Parameters
 
