@@ -71,26 +71,51 @@ services:
       - /LOCAL/PATH:/PATH/IN/CONTAINER
     networks:
       - wordpress-mariadb-data-green-coding-network
+    healthcheck:
+      test: curl -f http://nc
+      interval: "30s"
+      timeout: "10s"
+      retries: 10
+      start_period: "10s"
+      disable: False
   gcb-wordpress-apache:
     # ...
     depends_on:
-      - gcb-wordpress-mariadb
+      gcb-wordpress-mariadb: service_healthy
+  gcb-wordpress-dummy:
+    # ...
+    depends_on:
+      - gcb-wordpress-mariadb      
 ```
 
 - `services` **[object]**: (Object of container objects for orchestration)
   + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container/service
     - `image:` **[str]** Docker image identifier accessible locally on Docker Hub
     - `container_name:` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
-    - `environment:` **[object]** *(optional)*
-      + Key-Value pairs for ENV variables inside the container
+    - `environment:` **[object|array]** *(optional)*
+      + Either Key-Value pairs for ENV variables inside the container
+      + Or list items with strings in the format: *MYSQL_PASSWORD=123*
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
-    - `depends_on:` **[array]** *(optional)*
-      + Array of service names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. Currently, only the [short syntax](https://docs.docker.com/compose/compose-file/05-services/#short-syntax-1) is supported.
+    - `depends_on:` **[array|object]** *(optional)*
+      + Can either be an array of services names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. 
+      + Or it can be an object where each key represents a service as a string. The string then can have two values:
+          * `service_healthy`: Will wait for the container until the docker *healthcheck* returns *healthy*.
+          * `service_started`: Similar to the list syntax this will enforce a starting order and just wait until the container has been created.
     - `setup-commands:` **[array]** *(optional)*
       + Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
     - `volumes:` **[array]**  *(optional)*
       + Array of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
+    - `networks:` **[array]**  *(optional)*
+      + The networks to put the container into. If no networks are defined throughout the `usage_scenario.yml` the container will be put into the default network will all others in the file.
+    - `healthcheck:` **[object]** *(optional)*
+      + Please see the definition of these arguments and how healthcheck works in the official docker compose definition. We just copy them over: [Docker compose healthcheck specification](https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck)
+      + `test:` **[str|array]**         
+      + `interval:` **[str]**
+      + `timeout:` **[str]**
+      + `retries:` **[integer]**
+      + `start_period:` **[str]**
+      + `disable:` **[boolean]**
     - `folder-destination`: **[str]** *(optional)*
       + Specify where the project that is being measured will be mounted inside of the container
       + Defaults to `/tmp/repo`

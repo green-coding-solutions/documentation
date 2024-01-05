@@ -14,7 +14,11 @@ It reads the total amount of memory, in bytes, used by the cgroup of a container
 
 ### Classname
 
-- MemoryTotalCgroupContainerProvider
+- `MemoryTotalCgroupContainerProvider`
+
+### Metric Name
+
+- `memory_total_cgroup_container`
 
 ### Input Parameters
 

@@ -85,13 +85,14 @@ After running a job the client program executes the `tools/cluster/cleanup.sh` s
 
 This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. We recommend the following:
 
-```
-sudo touch /etc/sudoers.d/green-coding-cluster-cleanup
-echo "ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.sh ''" | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
+```bash
+echo 'ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.sh ""' | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
 sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
 ```
 
-## 2) Cronjob
+## 2) Cronjob (DEPRECATED)
+
+⚠️ We do not recommend using the cronjob implementation in production as it does not support temperature checking or sytem cleanups. This mode should only be used for local quick testing setups, when you cannot use NOP Linux. ⚠️
 
 The Green Metrics Tool comes with an implemented queuing and locking mechanism. In contrast to the NOP Linux implementation this way of checking for jobs doesn't poll with a process all the time but relies on cron which is not available on NOP Linux.
 
@@ -112,16 +113,69 @@ Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
 
 ## General settings
 
+### Machine
+
 When using the cluster you will need to configure the machine names in the `machines` table in the database and set the corresponding value in the `config.yml`:
 
 ```yml
 machine:
   id: 1
-  description: "Development machine for testing"
+  description: "My Machine Name"
   # Takes a file path to log all the errors to it. This is disabled if False
   error_log_file: False
+  base_temperature_value: 30
+  base_temperature_chip: "coretemp-isa-0000"
+  base_temperature_feature: "Package id 0"
 ```
 The `id` and the `description` must be unique so that they do not conflict with the other machines in the cluster.
+
+If you are using the *NOP Linux* setup with the `client.py` service you must also setup the temperature checking. Find out what your system has when it is cool. You can either use our calibration script or just let the machine sit for a while until the temperature does not change anymore. Then set the value `base_temperature_value`. It has no unit, but is rather just a value in degree (°). It should have the same unit as your output of `senors` on your Linux box.
+
+Since we are using our [lm_sensors provider →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}) to query the temperature you must also set the `base_temperature_chip` and `base_temperature_feature` to query from. Refer to the [provider documentation →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}) for more details.
+
+### Client
+
+The GMT refers to *client* when it is talking about the settings for the `client.py` settings only.
+
+When using the *client* mode the cluster expects a *Measurement Control Workload* to be set to determine if the cluster accuracy has deviated from the expected baseline. This is done by running a defined workload and checking the standard deviation over a defined window of measurements.
+
+We recommend the following setting by using our provided workload under :
+```yml
+cluster:
+  client:
+    ...  
+    time_between_control_workload_validations: 21600
+    send_control_workload_status_mail: True
+    ...
+    control_workload:
+      name: "Measurement control Workload"
+      uri: "https://github.com/green-coding-berlin/measurement-control-workload"
+      filename: "usage_scenario.yml"
+      branch: "main"
+      comparison_window: 5
+      threshold: 0.01
+      phase: "004_[RUNTIME]"
+      metrics:
+        - "psu_energy_ac_mcp_machine"
+        - "psu_power_ac_mcp_machine"
+        - "cpu_power_rapl_msr_component"
+        - "cpu_energy_rapl_msr_component"
+```
+
+- `time_between_control_workload_validations` **[integer]**: Time in seconds until control workload shall be run again to check measurement std.dev.
+- `send_control_workload_status_mail` **[boolean]**: Send an email with debug information about current std.dev.
+- `control_workload` **[object]**: (Object of settings for measurement control workload)
+  + `name` **[string]**: The name of the workload. Will show up in the runs list as the name
+  + `uri` **[URI]**: URI to the git repo of the control workload.
+  + `filename` **[a-zA-Z0-9_]**: The filename of the *usage scenario* file in the repo. Default is usually `usage_scenario.yml`
+  + `branch` **[git-branch]**: The branchname of the repo to check out
+  + `comparison_window` **[integer]**: The amount of previuous measurements to include in the std.dev. calculations.
+  + `threshold` **[float]**: The threshhold when the std.dev. is considered to high. *0.01* means *1%*
+  + `phase` **[str]**: The phase to look at. default is *004_[RUNTIME]*. We do not recommend to change this unless you have a custom defined phase you want to look at.
+  + `metrics` **[list]**: Contains a list of all the metrics you want to check the std.dev. for. Every metric is looked at individually and if the std.dev. of any of them is above the `thresshold` the check cluster will pause further job processing. We recommend using the default set as defined above. If you do not have these providers available we recommend choosing at least one `psu_energy_...` provider that actually measures and does not estimation. The names are found in the *Metric Name* section of the respective metric provider.\
+  Example: [RAPL CPU →]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}}) is `cpu_energy_rapl_msr_component`
+  
+
 
 ## Power saving in the cluster
 
@@ -162,4 +216,24 @@ if [[ "$output" =~ ^[0-9]+$ && $output -ne 0 ]]; then
 else
     echo "Command output is '0'. No other program started."
 fi
+```
+
+### Turning machine off on empty queue
+To use this functionality you should have *Wake-on-LAN* activated.
+
+You can then set the `shutdown_on_job_no` to *True* and the machine will turn off when the job queue is empty.
+
+```yml
+cluster:
+  client:
+    ...  
+    shutdown_on_job_no: True
+```
+
+In order for the shutdown to be triggered by the `client.py` you must allow the `sudo` call without password in an `/etc/sudoers.d/` entry.
+
+Example:
+```bash
+echo 'ALL ALL=(ALL) NOPASSWD:/usr/sbin/shutdown ""' | sudo tee /etc/sudoers.d/green-coding-shutdown
+sudo chmod 500 /etc/sudoers.d/green-coding-shutdown
 ```

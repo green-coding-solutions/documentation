@@ -13,7 +13,11 @@ This metric provider calculates an estimate of the % total CPU usage based on th
 
 ### Classname
 
-- CpuUtilizationCgroupContainerProvider
+- `CpuUtilizationCgroupContainerProvider`
+
+### Metric Name
+
+- `cpu_utilization_cgroup_container`
 
 ### Input Parameters
 

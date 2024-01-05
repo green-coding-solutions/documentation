@@ -255,3 +255,6 @@ Afterwards run the measurements.
 An example how to run a measurement locally can be found here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
 To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/simple-example-application)
+
+### Help / Debugging
+If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.

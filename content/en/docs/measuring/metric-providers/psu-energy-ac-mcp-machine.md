@@ -32,7 +32,12 @@ After that just plug it into your USB and please use Channel 1.
 
 ### Classname
 
-- PsuEnergyAcMcpMachineProvider
+- `PsuEnergyAcMcpMachineProvider`
+
+### Metric Name
+
+- `psu_energy_ac_mcp_machine`
+
 
 ### Input Parameters
 

@@ -1,6 +1,6 @@
 ---
-title: "PSU Energy - AC - Powerspy2"
-description: "Documentation for PsuEnergyAcPowerspy2SystemProvider of the Green Metrics Tool"
+title: "PSU Energy - AC - Powerspy2 - Machine"
+description: "Documentation for PsuEnergyAcPowerspy2MachineProvider of the Green Metrics Tool"
 lead: ""
 date: 2023-01-03T20:16:35+0000
 draft: false
@@ -49,7 +49,12 @@ if you are on a shared machine!
 
 ### Classname
 
-- PsuEnergyAcPowerspy2SystemProvider
+- `PsuEnergyAcPowerspy2MachineProvider`
+
+### Metric Name
+
+- `psu_energy_ac_powerspy2_machine`
+
 
 ### Input Parameters
 

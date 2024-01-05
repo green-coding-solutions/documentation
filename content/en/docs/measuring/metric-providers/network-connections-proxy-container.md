@@ -24,7 +24,12 @@ proxy program and then adds the corresponding values to the `network_intercepts`
 
 ### Classname
 
-- NetworkConnectionsProxyContainerProvider
+- `NetworkConnectionsProxyContainerProvider`
+
+### Metric Name
+
+- `network_connections_proxy_container`
+
 
 ### How it works
 
