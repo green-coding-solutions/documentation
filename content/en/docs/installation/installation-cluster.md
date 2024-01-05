@@ -150,7 +150,7 @@ local network, but any simple microcontroller that has HTTP capabilites will.
 output=$(curl "https://api.green-coding.berlin/v1/jobs?machine_id=7&state=WAITING" --silent  |  jq '.["data"] | length')
 
 # Check if the output is a specific string
-if [ $output =~ ^[0-9]+$ && $output -ne 0 ]; then
+if [[ "$output" =~ ^[0-9]+$ && $output -ne 0 ]]; then
     echo "Having waiting jobs. Sending Wake on LAN magic packet ..."
 
     # Please replace '80:1B:3E:A8:26:19' with your machines MAC address
