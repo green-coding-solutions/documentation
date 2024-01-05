@@ -77,9 +77,13 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - Same goes for `docker-compose.yml` /  `compose.yml` files etc.
 - This practice helps you spot changes to the software infrastructure your code is running on and understand changes that have been made by third parties, which influence your energy results.
 
-### 9. Use a tuned Measurement Cluster or our Hosted Service for reproducibility and visibility
+### 9. Use temperature control and validate measurement std.dev.
 
-- Use our measurement service for reproducibility and visibility of your measurements
+Our [Hosted Service]({{< relref "measuring-service" >}}) with the [Measurement Cluster]({{< relref "measurement-cluster" >}}) checks periodically if the standard deviation of the measurements is within a certain allowed error margin.
+
+It does this by running defined control workloads and also calibrating the machine beforehand so that any measurement only runs if a certain baseline temperature is reached again.
+
+You can either use our service with a free tier or set the cluster up yourself. The setup and methodology is explained in [Installation of a cluster]({{< relref "/docs/installation/installation-cluster" >}})
 
 ### 10. Trigger test remotely or keep system inactive
 
@@ -138,3 +142,4 @@ use a sampling rate (metric provider resolution) of 100 ms.
 Having said that: It is also good practice to use an odd number here, which is slightly lower. For instance 99 ms or even 95 ms. 
 
 The reason for this is that you do not want to run into a lock-step sampling error, where you always look at the machine just after a load has happened, and since no jitter is on the machine you always miss the actual load. By sliding your sampling intervals in relation to the frequency of the event frequency that you want to observe you will still see the event sometimes.
+
