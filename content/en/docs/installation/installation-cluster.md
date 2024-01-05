@@ -141,15 +141,16 @@ local network, but any simple microcontroller that has HTTP capabilites will.
 
 # Install this script as a cronjob
 # m h  dom mon dow   command
-# */15 * * * * bash /home/pi/wake_machine.sh
+# 15\/* * * * * bash /home/pi/wake_machine.sh
 
 ## You need the wakeonlan and the jq package installed
 ## sudo apt install wakeonlan jq -y
 
-output=$(curl "https://api.green-coding.berlin/v1/jobs" --silent |  jq '.["data"][] | select(.[6] == "My machine description" and .[7] == "WAITING")' | wc -l | sed -e 's/^[ \t]*//')
+
+output=$(curl "https://api.green-coding.berlin/v1/jobs?machine_id=7&state=WAITING" --silent  |  jq '.["data"] | length')
 
 # Check if the output is a specific string
-if [ "$output" != "0" ]; then
+if [ $output =~ ^[0-9]+$ && $output -ne 0 ]; then
     echo "Having waiting jobs. Sending Wake on LAN magic packet ..."
 
     # Please replace '80:1B:3E:A8:26:19' with your machines MAC address
