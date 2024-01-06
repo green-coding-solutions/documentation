@@ -5,7 +5,7 @@ lead: ""
 date: 2024-01-06T08:49:15+00:00
 draft: false
 images: []
-weight: 9999999999999999999999999999999999999999999999999
+weight: 180
 ---
 
 ### What it does
@@ -61,7 +61,7 @@ Check in `sudo dmesg` if the kernel module could correctly be lodaded and then v
 By default the measurement interval is 100 ms.
 
 ```bash
-./metric-provider-nvidia-smi-wrapper -i 100
+./metric-provider-nvidia-smi-wrapper.sh -i 100
 ```
 
 ### Output
