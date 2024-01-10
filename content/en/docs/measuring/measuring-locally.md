@@ -44,7 +44,7 @@ Now please copy the following code inside the `usage_scenario.yml`.
 
 ```yaml
 name: Stress Example
-author: Arne Tarara <arne@green-coding.berlin>
+author: Arne Tarara <arne@green-coding.io>
 description: Stress container on one core for 5 seconds
 
 services:

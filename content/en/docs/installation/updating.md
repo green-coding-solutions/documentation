@@ -71,7 +71,7 @@ python3 tools/import_data.py ./migrations/2023_07_08_indices.sql
 ## Read the GitHub release notes
 
 If we release a new major version, or introduce breaking changes, we will post it  
-there and also often on our [Company Blog](https://www.green-coding.berlin/blog).
+there and also often on our [Company Blog](https://www.green-coding.io/blog).
 
 If you ever get stuck during this installation, be sure to reboot the machine once.  
 It may help to correctly load some configurations and/or daemons.

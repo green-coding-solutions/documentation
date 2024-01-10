@@ -11,4 +11,4 @@ toc: true
 
 Please send all pull requests to our [`main` branch](https://github.com/green-coding-berlin/green-metrics-tool/tree/dev).
 
-If you have any questions to not hesitate to send us an email: [info@green-coding.berlin](mailto:info@green-coding.berlin)
+If you have any questions to not hesitate to send us an email: [info@green-coding.io](mailto:info@green-coding.io)

@@ -14,7 +14,7 @@ toc: true
 
 ## Other documentation?
 
-- [API](https://api.green-coding.berlin)
+- [API](https://api.green-coding.io)
 
 ## Where can I get the lastest features
 
@@ -30,10 +30,10 @@ toc: true
 
 Yes, please write us an email or open a Bug report on Github
 
-- [info@green-coding.berlin](mailto:info@green-coding.berlin)
+- [info@green-coding.io](mailto:info@green-coding.io)
 
 ## Contact the creator?
 
 Send us a message:
 
-- [info@green-coding.berlin](mailto:info@green-coding.berlin)
+- [info@green-coding.io](mailto:info@green-coding.io)

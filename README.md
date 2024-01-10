@@ -2,7 +2,7 @@
 
 This is only the source.
 
-Here is the [Live Version](https://docs.green-coding.berlin)
+Here is the [Live Version](https://docs.green-coding.io)
 
 ## Updating
 
@@ -34,7 +34,7 @@ npm run build
 If you want to measure the energy just use the `usage_scenario.yml` file inside
 which will tell you how much Joules / kWh the build will cost.
 
-You can find all the measurements on https://metrics.green-coding.berlin/ by searching
+You can find all the measurements on https://metrics.green-coding.io/ by searching
 for the repository URL.
 
 <img src="https://img.shields.io/badge/Energy%20cost%20for%20build-~5%20J-orange">

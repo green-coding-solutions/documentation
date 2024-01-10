@@ -38,7 +38,7 @@ other service serves content on that port. Check your `docker ps -a`
 
 ## Working `docker compose` setup, but not in GMT
 
-- Some features that are standard of the [compose file](https://docs.docker.com/compose/compose-file/compose-file-v2/) might not be implemented. Check our [Docs](https://docs.green-coding.berlin) if a feature you need is implemented.
+- Some features that are standard of the [compose file](https://docs.docker.com/compose/compose-file/compose-file-v2/) might not be implemented. Check our [Docs](https://docs.green-coding.io) if a feature you need is implemented.
 - Are you accessing with `http://localhost` ? This will not work in the GMT as it makes an internal network for the containers and does not know anything about the host machines. Please use the container names here.
 
 ## Run fails because *volumes*, *environment* or *ports* are in the `usage_scenario.yml`

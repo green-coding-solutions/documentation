@@ -201,7 +201,7 @@ Please note that whenever you run the Green Metrics Tool you have to first activ
 What you might want to add:
 
 - SMTP mail sending is by default deactivated, so for a quick-start you do not have to change that in the `config.yml`
-- The RAPL reporter is by default deactivated. Please check the [Metric Providers Documentation](https://docs.green-coding.berlin/docs/measuring/metric-providers) on how to active it
+- The RAPL reporter is by default deactivated. Please check the [Metric Providers Documentation](https://docs.green-coding.io/docs/measuring/metric-providers) on how to active it
 
 After that you can start the containers (use `sudo` if running in docker root mode):
 
