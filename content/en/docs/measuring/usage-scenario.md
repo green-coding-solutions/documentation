@@ -32,7 +32,7 @@ Example for the start of a `usage_scenario.yml`
 ```yaml
 ---
 name: My Hugo Test
-author: Arne Tarara <arne@green-coding.berlin>
+author: Arne Tarara <arne@green-coding.io>
 description: This is just an example usage_scenario ...
 ```
 

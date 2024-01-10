@@ -91,7 +91,7 @@ hardware setups is not totally feasible. All measurements should be compared onl
 for the exact same machine, not even machines with identical components.
 
 Therefore we provide a central repository for all the measurements we make to  
-compare measurements on prepared fixed machine we provide: [Green Metrics Frontend](https://metrics.green-coding.berlin)
+compare measurements on prepared fixed machine we provide: [Green Metrics Frontend](https://metrics.green-coding.io)
 
 ## Honorable mentions, Differences, and USPs
 

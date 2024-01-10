@@ -76,7 +76,7 @@ We provide quite some example applications that showcase how the SCI can be meas
 
 [Example applications on GitHub](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci)
 
-[Example data with runs](https://metrics.green-coding.berlin/?uri=green-coding-berlin/example-applications&filename=green-software)
+[Example data with runs](https://metrics.green-coding.io/?uri=green-coding-berlin/example-applications&filename=green-software)
 
 ## Caveats and future work
 

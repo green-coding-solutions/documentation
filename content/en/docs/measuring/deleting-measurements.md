@@ -38,5 +38,5 @@ due to resource congestion, overheating etc.
 What could be possible though is a login mechanism for the web interface that would allow the creator to delete their
 own measurement. Because it would introduce currently unwanted complexity we decided to not include it for now.
 
-If you however want your measurement removed from our online metrics collection at [https://metrics.green-coding.berlin](https://metrics.green-coding.berlin)
-please shoot us an email to info@green-coding.berlin
+If you however want your measurement removed from our online metrics collection at [https://metrics.green-coding.io](https://metrics.green-coding.io)
+please shoot us an email to info@green-coding.io

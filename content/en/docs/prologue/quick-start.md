@@ -14,7 +14,7 @@ toc: true
 
 ## Running a measurement with a GitHub Repository
 
-The easiest way to run a measurement is to use our [Green Metrics Frontend](https://metrics.green-coding.berlin/request.html).
+The easiest way to run a measurement is to use our [Green Metrics Frontend](https://metrics.green-coding.io/request.html).
 
 Here you can supply the link of our [easiest example application](https://github.com/green-coding-berlin/simple-example-application) and wait
 for an email to arrive to view a report.

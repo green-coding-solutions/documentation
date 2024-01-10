@@ -12,8 +12,8 @@ If you do not have that, please check out the relevant links given.
 
 ## Trying out the hosted service with an example application
 
-Our hosted service is available at [https://metrics.green-coding.berlin/](https://metrics.green-coding.berlin/)  
-and you can [request a measurement of your application](https://metrics.green-coding.berlin/request.html).
+Our hosted service is available at [https://metrics.green-coding.io/](https://metrics.green-coding.io/)  
+and you can [request a measurement of your application](https://metrics.green-coding.io/request.html).
 
 You can supply the GitHub link to our provided [easy example application](https://github.com/green-coding-berlin/simple-example-application) and wait for  
 an email to arrive to view a report.
