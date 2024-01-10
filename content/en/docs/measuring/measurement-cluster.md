@@ -80,6 +80,8 @@ We have the following machines available for running measurements in our cluster
     + Turbo Boost: On
     + Memory: 12 GB
     + Graphics: Palit GF110 (GeForce GTX 570)
+        * Installed *CUDA* version: 12
+        * *NVIDIA* kernel driver version 390
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
 
 ---

@@ -277,6 +277,11 @@ The required libraries are installed automatically via the `install-linux.sh` ca
 The XGBoost metrics provider can estimate the power consumption of the total
 system (AC-Energy). It is included as a submodule in the Green Metrics Tool and should have been checked out with the initial install command of this manual. The `config.yml` file also needs additional details which are detailed in the metric provider [documentation→]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}}).
 
+### NVIDIA SMI
+
+The *NVIDIA SMI* metrics reporter can read the power draw of an *NVIDIA* GPU. Some libraries need to be installed in order for the  [NVIDIA SMI metric provider]({{< relref "/docs/measuring/metric-providers/gpu-energy-nvidia-smi-component" >}}) to work.
+
+
 ### DC Metrics Provider
 
 Some of our PSU metrics providers may need specific hardware attached to your machine in order to run. These include the [Powerspy]({{< relref "docs/measuring/metric-providers/psu-energy-ac-powerspy2-machine" >}}), [MCP]({{< relref "docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}}), and [Picolog]({{< relref "docs/measuring/metric-providers/psu-energy-dc-picolog-machine" >}}) metric providers. Please look for details in each provider's corresponding documentation
