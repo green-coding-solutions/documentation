@@ -45,8 +45,13 @@ User=gc
 Group=gc
 WorkingDirectory=/home/gc/green-metrics-tool/
 ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/tools/client.py
+StandardOutput=append:/var/log/green-metrics-client-service.log
 Restart=always
 RestartSec=30s
+TimeoutStopSec=600
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+FinalKillSignal=SIGKILL
 
 # Uncomment this line if you are running docker in non-rootless mode (aka default root mode)
 #Environment="DOCKER_HOST=unix:///run/user/1000/docker.sock"
