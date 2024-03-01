@@ -31,6 +31,7 @@ machine:
   description: "Development machine for testing"
 
 measurement:
+  system_check_threshold: 3 # Can be 1=INFO, 2=WARN or 3=ERROR  
   idle-time-start: 10
   idle-time-end: 5
   flow-process-runtime: 1800
@@ -70,6 +71,7 @@ The `machine` key has `id` and `description` that are mandatory fields and will 
 
 Here we focus on the `measurement` key:
 
+- `system_check_threshold` **[integer]: Level at which an exception will be raised for system checks. The lower the more restrictive system checks are. We recommend *3* for development and *2* for cluster setups. *1* only for debugging.
 - `idle-time-start` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
 - `idle-time-end` **[integer]**: Seconds to idle containers after measurement
 - `flow-process-runtime` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
