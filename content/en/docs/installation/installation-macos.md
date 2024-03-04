@@ -12,7 +12,7 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 We have tested the tool on Intel as well as on Apple Silicon chips. Results may vary.
 
 
-## Downloading and required packages
+## Downloading and installing required packages
 
 ```bash
 git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool
@@ -43,7 +43,7 @@ is running on port `80` or `443`
 - Create the needed `/etc/hosts` entries for development
 - Set needed `/etc/sudoers` entry for running/ killing the `powermetrics` tool
 
-Please not that whenever you run the Green Metrics Tool you have to first activte the python `venv`!
+Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`!
 
 After that you can start the containers:
 
@@ -54,7 +54,7 @@ After that you can start the containers:
 ### Metric Providers
 
 On Linux we use a multitude of metric providers to give us statistics we use to benchmark programs. On MacOS correct
-values are not to come by so we use the `powermetrics` tool to get some relevant data. In the future we might
+values are not easy to come by so we use the `powermetrics` tool to get some relevant data. In the future we might
 include more providers but for now you only need to use the one.
 
 You will need to disable all providers and enable the:
@@ -75,7 +75,7 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 
 ### Dockerfiles architecture explanation:
 
-- The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
+- The postgres container has a volume mount. This means that data in the database will persist between container removals / restarts
 - The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to a UNIX socket in `/tmp`
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
 - postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container will import the database structure fresh.
@@ -85,7 +85,7 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 - The macOS tooling was mainly developed to create `usage_scenario` files conveniently on the Mac. However it provides\
   no validated accuracy or open source code as the `powermetrics` tool used is quite opaque and undocumented.
 - As it is not recommended to run the GMT on MacOS as a service we don't document this here. There is no need to configure
-  SMTP or eMail services.
+  SMTP or email services.
 - While we support MacOS features are still experimental and shouldn't be used in production. Please use the more stable
   Linux version here.
 - There is a problem in the way the `powermetrics` tool reports time in that the resolution of the timestamp is

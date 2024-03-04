@@ -10,7 +10,7 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 
 To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
-Currently the following distriubtions have been tested and are fully supported:
+Currently the following distributions have been tested and are fully supported:
 - Ubuntu 22.04
 - Fedora 38
 
@@ -18,9 +18,9 @@ The following distributions have been tested, but require manual work:
 - Ubuntu 20.04 (works, but *libglib* has to be manually updated to *libglib2.0-dev*)
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "installation-cluster" >}}) has different names for timers)
 
-{{< alert icon="💡" text="If you want to develop on macOS please use this installation description: <a href='/docs/installation/installation-mac/'>Installation on Mac</a>" />}}
+{{< alert icon="💡" text="If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>" />}}
 
-## Downloading and required packages
+## Downloading and installing required packages
 
 For the sake of this manual we put the green metrics tool into your home directory. Of course you can place it anywhere.
 Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different path for the tool please modify the commands accordingly.
@@ -64,12 +64,16 @@ However, we provide here what we used in on our systems, but be sure to double c
 {{% tab name="Ubuntu" %}}
 
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-sudo apt update && \
-sudo apt remove docker docker-engine docker.io containerd runc -y && \
 sudo apt install ca-certificates curl gnupg lsb-release -y && \
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+sudo install -m 0755 -d /etc/apt/keyrings && \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+sudo chmod a+r /etc/apt/keyrings/docker.gpg && \
+echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+sudo apt update && \
+sudo apt remove docker docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc -y && \
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
 {{% /tab %}}
@@ -90,7 +94,7 @@ sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager \
     --add-repo \
     https://download.docker.com/linux/fedora/docker-ce.repo
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl start docker
 ```
 
@@ -102,7 +106,7 @@ You can check if everything is working fine by running `docker stats`. It should
 
 ### Root mode (default)
 
-Since `v0.20`` the Green Metrics Tool supports docker in it's default root mode.
+Since `v0.20` the Green Metrics Tool supports docker in it's default root mode.
 
 However you need to add your current user to the `docker` group. We need this so we do not need to start the Green Metrics Tool with `root` privileges.
 
@@ -192,12 +196,12 @@ is running on port `80` or `443`
 - Build the binaries for the Metric Providers
 - Set needed `/etc/sudoers` entry for requesting kernel scheduler info
 
-Please not that whenever you run the Green Metrics Tool you have to first activte the python `venv`.
+Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`.
 
 What you might want to add:
 
 - SMTP mail sending is by default deactivated, so for a quick-start you do not have to change that in the `config.yml`
-- The RAPL reporter is by default deactivated. Please check the [Metric Providers Documentation](https://docs.green-coding.berlin/docs/measuring/metric-providers) on how to active it
+- The RAPL reporter is by default deactivated. Please check the [Metric Providers Documentation](https://docs.green-coding.io/docs/measuring/metric-providers) on how to active it
 
 After that you can start the containers (use `sudo` if running in docker root mode):
 
@@ -255,7 +259,7 @@ systemctl --user enable green-coding-service
 
 ### Dockerfiles architecture explanation:
 
-- The postgres container has a volume mount. This means that data in the database will persists between container removals / restarts
+- The postgres container has a volume mount. This means that data in the database will persist between container removals / restarts
 - The interconnect between the gunicorn and the nginx container runs through a shared volume mount in the filesystem. Both use the user `www-data` to read and write to a UNIX socket in `/tmp`
 - all webserver configuration files are mounted on start of the container as read-only. This allows for changing configuration of the server through git-pull or manual editing without having to rebuild the docker image.
 - postgresql can detect changes to the structure.sql. If you issue a `docker compose down -v` the attached volume will be cleared and the postgres container will import the database structure fresh.
@@ -266,100 +270,22 @@ Some metric providers need extra setup before they work.
 
 ### LM-Sensors
 
-The required libraries are installed automatically via the `install.sh` call. However for completeness, these
-are the libraries installed:
-
-{{< tabs groupId="sensors">}}
-{{% tab name="Ubuntu" %}}
-
-```bash
-sudo apt install -y lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
-```
-
-{{% /tab %}}
-{{% tab name="Fedora" %}}
-
-```bash
-sudo dnf -y install lm_sensors lm_sensors-devel glib2 glib2-devel
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-If you want the temperature metric provider to work you need to run the sensor detector
-
-```bash
-sudo sensors-detect
-```
-
-in order to detect all the sensors in your system. One you have run this you should be able to run the
-
-```bash
-sensors
-```
-
-command and see your CPU temp. You can then use this output to look for the parameters you need to set in the `config.yml`.
-For example if sensors gives you:
-
-```bash
-coretemp-isa-0000
-Adapter: ISA adapter
-Package id 0:  +29.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 0:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 1:        +27.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 2:        +28.0°C  (high = +100.0°C, crit = +100.0°C)
-Core 3:        +29.0°C  (high = +100.0°C, crit = +100.0°C)
-```
-
-Your config could be:
-
-```bash
-lm_sensors.temperature.provider.LmSenorsTempProvider:
-    resolution: 100
-    chips: ['coretemp-isa-0000']
-    features: ['Package id 0', 'Core 0', 'Core 1', 'Core 2', 'Core 3']
-```
-
-As the matching is open ended you could also only use `'Core'` instead of naming each feature.
+The required libraries are installed automatically via the `install-linux.sh` call. Some modifications need to be made to your `config.yml`  file though, which are detailed in the lm-sensors metric provider [documentation →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}), along with further details regarding prerequisites.
 
 ### XGBoost
 
 The XGBoost metrics provider can estimate the power consumption of the total
-system (AC-Energy).
+system (AC-Energy). It is included as a submodule in the Green Metrics Tool and should have been checked out with the initial install command of this manual. The `config.yml` file also needs additional details which are detailed in the metric provider [documentation→]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}}).
 
-It is included as a submodule in the Green Metrics Tool and should have been checked out with the
-initial install command of this manual. If not run:
+### NVIDIA SMI
 
-```bash
-git submodule update --init
-```
+The *NVIDIA SMI* metrics reporter can read the power draw of an *NVIDIA* GPU. Some libraries need to be installed in order for the  [NVIDIA SMI metric provider]({{< relref "/docs/measuring/metric-providers/gpu-energy-nvidia-smi-component" >}}) to work.
 
-It must be supplied with the machine params in the `config.yml` file:
-
-- CPUChips
-- HW_CPUFreq
-- CPUCores
-- TDP
-- HW_MemAmountGB
-
-Please look at the always current documentation here to understand what values to
-plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
-
-Also the model must be activated by uncommenting the appropriate line with *...PsuEnergyAcXgboostSystemProvider*
-
-Lastly, if you don't have them already, you need to install some python libraries:
-
-```bash
-python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xgboost/machine/model/requirements.txt
-```
 
 ### DC Metrics Provider
 
-This providers needs a custom piece of hardware to work:
+Some of our PSU metrics providers may need specific hardware attached to your machine in order to run. These include the [Powerspy]({{< relref "docs/measuring/metric-providers/psu-energy-ac-powerspy2-machine" >}}), [MCP]({{< relref "docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}}), and [Picolog]({{< relref "docs/measuring/metric-providers/psu-energy-dc-picolog-machine" >}}) metric providers. Please look for details in each provider's corresponding documentation
 
-- [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
-
-Please look for details in the provider documentation at [PsuEnergyDcPicologSystemProvider →]({{< relref "/docs/measuring/metric-providers/psu-energy-dc-picolog-system" >}})
 
 ### RAPL
 

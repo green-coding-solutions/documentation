@@ -15,26 +15,24 @@ The `usage_scenario.yml` consists of these main blocks:
 
 `*`: means these values are optional.
 
-Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However keys that have the same name are also identical in function - thought potentially with some limitations.
+Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
 
 At the beginning of the file you should specify `name`, `author`, and `architecture`.
 These will help you later on tell what the scenario is doing.
 
-**Linux** and **Darwin** are the only supported architectures. If you don't mention an `architecture` it will run on
-both.
+**Linux** and **Darwin** are the only supported architectures. If you don't mention an `architecture` it will run on both.
 
 Please note that when running the measurement you can supply an additional name,
 which can and should be different from the name in the `usage_scenario.yml`.
 
-The idea is to have a general name for the `usage_scenario.yml` and another one for the specific
-measurement run.
+The idea is to have a general name for the `usage_scenario.yml` and another one for the specific measurement run.
 
 Example for the start of a `usage_scenario.yml`
 
-```bash
+```yaml
 ---
 name: My Hugo Test
-author: Arne Tarara <arne@green-coding.berlin>
+author: Arne Tarara <arne@green-coding.io>
 description: This is just an example usage_scenario ...
 ```
 
@@ -73,33 +71,78 @@ services:
       - /LOCAL/PATH:/PATH/IN/CONTAINER
     networks:
       - wordpress-mariadb-data-green-coding-network
+    healthcheck:
+      test: curl -f http://nc
+      interval: "30s"
+      timeout: "10s"
+      retries: 10
+      start_period: "10s"
+      disable: False
+  gcb-wordpress-apache:
+    # ...
+    depends_on:
+      gcb-wordpress-mariadb: service_healthy
+  gcb-wordpress-dummy:
+    # ...
+    depends_on:
+      - gcb-wordpress-mariadb      
 ```
 
 - `services` **[object]**: (Object of container objects for orchestration)
-  + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container
-    - `image:` **[str]** Docker image identifier accessible locally on Docker Hub
-    - `environment:` **[object]** *(optional)*
-      + Key-Value pairs for ENV variables inside the container
+  + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container/service
+    - `image:` **[str]** Docker image identifier. If `build` is not provided the image needs to be accessible locally on Docker Hub. If `build` is provided it is used as identifier for the image.
+    - `build:` **[str]** *(optional)* Path to build context. See `context` for restrictions. Default for `dockerfile` is `Dockerfile`. Alternatively, you can provide more detailed build information with:
+      - `context:` **[str]** *(optional)* Path to the build context. Needs to be in the path or repo that is passed with `--uri` to `runner.py`. Default: `.`.
+      - `dockerfile:` **[str]** *(optional)* Path to Dockerfile. Needs to be in `context`. Default: `Dockerfile`.
+    - `container_name:` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
+    - `environment:` **[object|array]** *(optional)*
+      + Either Key-Value pairs for ENV variables inside the container
+      + Or list items with strings in the format: *MYSQL_PASSWORD=123*
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
+    - `depends_on:` **[array|object]** *(optional)*
+      + Can either be an array of services names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. 
+      + Or it can be an object where each key represents a service as a string. The string then can have two values:
+          * `service_healthy`: Will wait for the container until the docker *healthcheck* returns *healthy*.
+          * `service_started`: Similar to the list syntax this will enforce a starting order and just wait until the container has been created.
     - `setup-commands:` **[array]** *(optional)*
       + Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
     - `volumes:` **[array]**  *(optional)*
-      + Array of volumes to be mapped. Only read of `runner.py` is executed with `--allow-unsafe` flag
+      + Array of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
+    - `networks:` **[array]**  *(optional)*
+      + The networks to put the container into. If no networks are defined throughout the `usage_scenario.yml` the container will be put into the default network will all others in the file.
+    - `healthcheck:` **[object]** *(optional)*
+      + Please see the definition of these arguments and how healthcheck works in the official docker compose definition. We just copy them over: [Docker compose healthcheck specification](https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck)
+      + `test:` **[str|array]**         
+      + `interval:` **[str]**
+      + `timeout:` **[str]**
+      + `retries:` **[integer]**
+      + `start_period:` **[str]**
+      + `disable:` **[boolean]**
     - `folder-destination`: **[str]** *(optional)*
       + Specify where the project that is being measured will be mounted inside of the container
       + Defaults to `/tmp/repo`
-    - `cmd:` **[str]** *(optional)*
-      + Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`
+    - `command:` **[str]** *(optional)*
+      + Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`.
     - `shell:` **[str]** *(optional)*
       + Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
       + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
+    - `log-stdout:` **[boolean]** *(optional)*
+      + Will log the *stdout* and make it available through the frontend in the *Logs* tab.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
+    - `log-stderr:` **[boolean]** *(optional)*
+      + Will log the *stderr* and make it available through the frontend in the *Logs* tab and in error messages.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
+    - `read-notes-stdout:` **[bool]** *(optional)*
+      + Read notes from *stdout*. Most likely you do not need this, as it also requires customization of your application (writing of a log message in a specific format). It may be helpful if your application has asynchronous operations and you want to know when they have finished.
+      + Make sure to also set `log-stdout` to `true`. Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
+    - `read-sci-stdout:` **[bool]** *(optional)*
+      + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
+      + Please see [SCI (Green Software Foundation) →]({{< relref "sci" >}}) for more information.
 
-Please note that every key below `services` will also serve as the name of the
-container later on.
 
-The Green Metrics Tool does not create auto-generated container names and does
-not support the `container_name` key.
+Please note that every key below `services` will serve as the name of the
+container later on. You can overwrite the container name with the key `container_name`.
 
 ### Flow
 
@@ -112,14 +155,14 @@ flow:
     commands:
     - type: console
       command: node /var/www/puppeteer-flow.js
-      note: Starting Pupeteer Flow
+      note: Starting Puppeteer Flow
       read-notes-stdout: true
     - type: console
       command: sleep 30
       note: Idling
     - type: console
       command: node /var/www/puppeteer-flow.js
-      note: Starting Pupeteer Flow again
+      note: Starting Puppeteer Flow again
       read-notes-stdout: true
   - name: Shutdown DB
     container: database-container
@@ -140,10 +183,8 @@ flow:
       + When the command is detached it will get sent to the background. This allows to run commands in parallel if needed, for instance if you want to stress the DB in parallel with a web request
     - `note:` **[str]** *(optional)*
       + A string that will appear as note attached to the datapoint of measurement (optional)
-    - `read-notes-stdout:` **[bool]** *(optional)*
-      + Read notes from the STDOUT of the command. This is helpful if you have a long running command that does multiple steps and you want to log every step.
-    - `ignore-errors` **[bool]** *(optional)*
-      + If set to `true` the run will not fail if the process in `cmd` has a different exit code than `0`. Useful
+    - `ignore-errors:` **[bool]** *(optional)*
+      + If set to `true` the run will not fail if the process in `command` has a different exit code than `0`. Useful
            if you execute a command that you know will always fail like `timeout 0.1 stress -c 1`
     - `shell:` **[str]** *(optional)*
       + Will execute the `command` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
@@ -154,7 +195,12 @@ flow:
     - `log-stderr:` **[boolean]** *(optional)*
       + Will log the *stderr* and make it available through the frontend in the *Logs* tab and in error messages.
       + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
-
+    - `read-notes-stdout:` **[bool]** *(optional)*
+      + Read notes from the *stdout* of the command. This is helpful if you have a long running command that does multiple steps and you want to log every step.
+      + Make sure to also set `log-stdout` to `true`. Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
+    - `read-sci-stdout:` **[bool]** *(optional)*
+      + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
+      + Please see [SCI (Green Software Foundation) →]({{< relref "sci" >}}) for more information.
 
 ### compose-file:
 
@@ -217,7 +263,7 @@ Example:
 
 Every note will then be consumed and can be retrieved through the API.
 
-Please be aware that the timestamps of the note do not have have to be identical
+Please be aware that the timestamps of the note do not have to be identical
 with any command or action of the container. If the timestamp however does not fall
 into the time window of your measurement run it will not be displayed in the frontend.
 

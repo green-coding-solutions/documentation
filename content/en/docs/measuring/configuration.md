@@ -22,15 +22,22 @@ cluster:
   api_url: http://api.green-coding.internal:9142
   metrics_url: http://metrics.green-coding.internal:9142
 
+client:
+  sleep_time_no_job: 300
+  sleep_time_after_job: 300
+
 machine:
   id: 1
   description: "Development machine for testing"
 
 measurement:
+  system_check_threshold: 3 # Can be 1=INFO, 2=WARN or 3=ERROR  
   idle-time-start: 10
   idle-time-end: 5
   flow-process-runtime: 1800
   phase-transition-time: 1
+  boot:
+    wait_time_dependencies: 20
   metric-providers:
     linux:
       cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
@@ -62,28 +69,38 @@ The `postgresql`, `smtp` and `cluster` key were already discussed in the [instal
 
 The `machine` key has `id` and `description` that are mandatory fields and will be registered in the DB on first run.
 
-We will this only focus on the `measurement` key:
+Here we focus on the `measurement` key:
 
+- `system_check_threshold` **[integer]: Level at which an exception will be raised for system checks. The lower the more restrictive system checks are. We recommend *3* for development and *2* for cluster setups. *1* only for debugging.
 - `idle-time-start` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
 - `idle-time-end` **[integer]**: Seconds to idle containers after measurement
 - `flow-process-runtime` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
 - `phase-transition-time` **[integer]**: Seconds to idle between phases
+- `boot`:
+  + `wait_time_dependencies`: **[integer]**: Max. duration in seconds to wait for dependencies (defined with `depends_on`) to be ready. If duration is reached and a dependency is not ready, the measurement will fail.
 - `metric-providers`:
   + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
     * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
     * `METRIC_PROVIDER_NAME.resolution` **[integer]**: sampling resolution in ms
-- `client: sleep_time`: The seconds the job client should wait before retrying to get another job.
+
 Some metric providers have unique configuration params:
 
 - PsuEnergyAcXgboostSystemProvider
-  + Please look at the always current documentation here to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
+  + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
 
-Also note that some providers are deactivated by default, because they either need a
+Also note that some providers are deactivated by default, because they either need
 additional configuration parameters, extra hardware or a specially configured system.
 
 Once you have set them up you can uncomment the line. In this example for instance
 the line `psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider` and all
 the lines directly below it.
+
+### client
+
+The `client` key provides the possibility to change the waiting time of the job client:
+
+- `sleep_time_no_job` **[integer]**: Seconds the job client should wait before retrying to get another job
+- `sleep_time_after_job` **[integer]**: Seconds the job client should wait after a job is done
 
 ### admin
 

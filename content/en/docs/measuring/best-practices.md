@@ -77,9 +77,13 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - Same goes for `docker-compose.yml` /  `compose.yml` files etc.
 - This practice helps you spot changes to the software infrastructure your code is running on and understand changes that have been made by third parties, which influence your energy results.
 
-### 9. Use a tuned Measurement Cluster or our Hosted Service for reproducibility and visibility
+### 9. Use temperature control and validate measurement std.dev.
 
-- Use our measurement service for reproducibility and visibility of your measurements
+Our [Hosted Service]({{< relref "measuring-service" >}}) with the [Measurement Cluster]({{< relref "measurement-cluster" >}}) checks periodically if the standard deviation of the measurements is within a certain allowed error margin.
+
+It does this by running defined control workloads and also calibrating the machine beforehand so that any measurement only runs if a certain baseline temperature is reached again.
+
+You can either use our service with a free tier or set the cluster up yourself. The setup and methodology is explained in [Installation of a cluster]({{< relref "/docs/installation/installation-cluster" >}})
 
 ### 10. Trigger test remotely or keep system inactive
 
@@ -94,6 +98,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - Or put more loosely: Listening to spotify while running an energy test is a bad idea :)
 
 ### 11. Your system should not overheat
+
 - Most modern processors have features that limit their processing power if the heat of the system is too high. 
     + This is at the moment a manual task in the GMT, however we are working on a feature that will check if the CPU has run
 into a heat limiting.
@@ -104,10 +109,10 @@ value for a particular system.
 
 If you are using a standard cronjob mechanism to trigger the GMT you can use the `idle-time-end` to force a fixed sleep time.
 
-
 ### 12. Mount your `/tmp` on `/tmpfs`
+
 Since we extensively write the output of the `metric-providers` to `/tmp` on the host system this should be an in-memory
-filesytem. Otherwise it might skew with your measurement as disk-writes can be quite costly.
+filesystem. Otherwise it might skew with your measurement as disk-writes can be quite costly.
 
 On Ubuntu you can use `sudo systemctl enable /usr/share/systemd/tmp.mount`
 
@@ -126,5 +131,15 @@ loose data or the run with the GMT will fail.
 
 This switch will prune all unassociated build caches, networks volumes and stopped containers on the system and keep
 your disk from not getting full.
-Downside: It will remove all stopped containers. So if you regulary keep stopped containers than avoid this switch and
-rather run `docker volume prune` once in a while
+
+Downside: It will remove all stopped containers. So if you regularly keep stopped containers than avoid this switch and
+rather run `docker volume prune` once in a while.
+
+### 15. Use non standard sampling intervals and avoid undersampling
+If the effect you are looking for in your code is likely only a 200 ms activity you should at least
+use a sampling rate (metric provider resolution) of 100 ms. 
+
+Having said that: It is also good practice to use an odd number here, which is slightly lower. For instance 99 ms or even 95 ms. 
+
+The reason for this is that you do not want to run into a lock-step sampling error, where you always look at the machine just after a load has happened, and since no jitter is on the machine you always miss the actual load. By sliding your sampling intervals in relation to the frequency of the event frequency that you want to observe you will still see the event sometimes.
+

@@ -2,7 +2,7 @@
 
 This is only the source.
 
-Here is the [Live Version](https://docs.green-coding.berlin)
+Here is the [Live Version](https://docs.green-coding.io)
 
 ## Updating
 
@@ -14,6 +14,13 @@ Following files have been overloaded and should be checked if they are changed o
 - /layouts/partials/* (Removed integrity protection to run on Cloudflare CDN)
 - /layouts/index.headers (Removed CSP netlify)
 - /layouts/sitemap.xml (was not rendering without)
+
+## Local build
+
+```bash
+npm install
+npm run build
+```
 
 ## Deploying to Cloudflare
 
@@ -27,7 +34,7 @@ Following files have been overloaded and should be checked if they are changed o
 If you want to measure the energy just use the `usage_scenario.yml` file inside
 which will tell you how much Joules / kWh the build will cost.
 
-You can find all the measurements on https://metrics.green-coding.berlin/ by searching
+You can find all the measurements on https://metrics.green-coding.io/ by searching
 for the repository URL.
 
 <img src="https://img.shields.io/badge/Energy%20cost%20for%20build-~5%20J-orange">

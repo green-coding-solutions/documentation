@@ -38,7 +38,7 @@ other service serves content on that port. Check your `docker ps -a`
 
 ## Working `docker compose` setup, but not in GMT
 
-- Some features that are standard of the [compose file](https://docs.docker.com/compose/compose-file/compose-file-v2/) might not be implemented. Check our [Docs](https://docs.green-coding.berlin) if a feature you need is implemented.
+- Some features that are standard of the [compose file](https://docs.docker.com/compose/compose-file/compose-file-v2/) might not be implemented. Check our [Docs](https://docs.green-coding.io) if a feature you need is implemented.
 - Are you accessing with `http://localhost` ? This will not work in the GMT as it makes an internal network for the containers and does not know anything about the host machines. Please use the container names here.
 
 ## Run fails because *volumes*, *environment* or *ports* are in the `usage_scenario.yml`
@@ -69,7 +69,8 @@ git submodule init FOLDER
 ## cpu.stat failed to open
 
 The full error looks something like this:
-```
+
+```log
 Error:  RuntimeError occured in runner.py:  Stderr on CpuUtilizationCgroupContainerProvider was NOT empty: b'Error - file /sys/fs/cgroup/user.slice/user-1003.slice/user@1003.service/user.slice/docker-6e18a15cbc237c9ff76af70cc8ef16c3c5b9f002a989f74cf0c7a22b5c8e4c9f.scope/cpu.stat failed to open: errno: 2'
 ```
 
@@ -77,7 +78,7 @@ This is because a container has exited during the run of the GMT or you are runn
 - If not using rootless mode: Please turn all **cgroup** providers off, by commenting them out in the `config.yml`
 - If using rootless mode: Please keep the container alive by having a shell always open 
 
-A way to do this with the GMT directly without changing your containers would be the `cmd` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
+A way to do this with the GMT directly without changing your containers would be the `command` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
 
 An example where we use this command to keep a container alive is here: https://github.com/green-coding-berlin/example-applications/blob/main/idle/usage_scenario.yml
 
@@ -100,14 +101,14 @@ Then try running the command in a shell. It might be that some quote escaping is
 
 Example:
 
-```
+```yaml
 command: grep "asd" /tmp/myfile
 shell: sh
 ```
 
 Or, if you can, also ditch the quotes:
 
-```
+```yaml
 command: grep asd /tmp/myfile
 ```
 

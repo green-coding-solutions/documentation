@@ -6,9 +6,26 @@ date: 2022-06-15T08:48:45+00:00
 weight: 840
 ---
 
-## Debugging containers or runner.py itself
+## Debugging containers
 
-The first step in debugging a measurement workflow is to  
+The GMT offers two approaches to debugging that can be used
+separately or in conjunction
+
+### --dev flags
+The first approach is to use the `--dev-*` switches as defined in the [runner switches →]({{< relref "/docs/measuring/runner-switches" >}}).
+
+Here you can turn on many switches that speed up a run. Please note that no useful measurement
+will come out of the tool. These flags should only be used when debugging.
+
+Especially the `--dev-flow-timetravel` is extremely useful as it will let you retry a step in 
+the *usage scenario* without having to go through all previous steps. It will also keep the container state so that if you can do live edits to the files in your local filesystem that are mounted then writeable into the container.
+Please note that this only works with a local repository. If your repository is online only atm clone it first to your local filesystem. This allows for editing files while running a *usage scenario*
+
+A typical call looks like this:
+`python3 --uri MY_LOCAL_PATH --name Testing --allow-unsafe --dev-no-metrics --dev-no-sleeps --dev-no-build --dev-flow-timetravel`
+
+### --debug flag
+The second approach in debugging a *usage_scenario* is to  
 turn the `--debug` flag of the `runner.py` on.
 
 When you call the `runner.py` locally it will turn into  
@@ -30,7 +47,7 @@ should be available in most cases.
 
 If entering the container looks fine and you need to access them through some of their  
 exposed ports (ex. via Browser through HTTP) turn on the `--allow-unsafe` flag to bind  
-the ports specified in the `usage_scenario.yml`
+the ports specified in the `usage_scenario.yml`.
 
 ## Debugging metric providers
 

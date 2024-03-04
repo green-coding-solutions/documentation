@@ -135,9 +135,9 @@ Let's drill down on what is happening in this `usage_scenario.yml`:
 - First the network is set up
 - Then all services are defined and on which network they can communicate
   + This results in three services:
-    * db-container: Our mariadb database based off a local image (Server side)
-    * wordpress-container: Our Wordpress based off a local image (Server side)
-    * puppeteer-container: Our headless chrome browser based off our custom image on docker hub (client side)
+    * `db-container`: Our mariadb database based off a local image (Server side)
+    * `wordpress-container`: Our Wordpress based off a local image (Server side)
+    * `puppeteer-container`: Our headless chrome browser based off our custom image on docker hub (client side)
 - Then a flow is defined which triggers Node to run a sequential flow to be executed by the headless Chrome
   + The flow runs one time, then a 30 second sleep occurs and then the flow is executed again
     * The reason being that this simulates a user more typically. You browse, you read, your browse again ... etc.

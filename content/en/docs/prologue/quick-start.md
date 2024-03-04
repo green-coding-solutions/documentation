@@ -12,9 +12,9 @@ weight: 130
 toc: true
 ---
 
-## Running a measurement with a Github Repository
+## Running a measurement with a GitHub Repository
 
-The easiest way to run a measurement is to use our [Green Metrics Frontend](https://metrics.green-coding.berlin/request.html).
+The easiest way to run a measurement is to use our [Green Metrics Frontend](https://metrics.green-coding.io/request.html).
 
 Here you can supply the link of our [easiest example application](https://github.com/green-coding-berlin/simple-example-application) and wait
 for an email to arrive to view a report.
@@ -27,6 +27,7 @@ This example highlights that in order to measure an application you only need a 
 
 
 ### Prerequsites
+
 For the most basic setup you require:
 - a computer with a **Linux** operating system
 - `sudo` rights
@@ -34,7 +35,7 @@ For the most basic setup you require:
 - `python3` including `pandas` and `pyyaml`
 - `docker` installed and preferably running in rootless-mode
 
-If you currently do not have these packages already available please refer to [Installation on Linux →]({{< relref "installation-linux" >}}) or [Installation on macOS →]({{< relref "installation-macos" >}})
+If you currently do not have these packages already available please refer to [Installation on Linux →]({{< relref "installation-linux" >}}), [Installation on macOS →]({{< relref "installation-macos" >}}) or [Installation on Windows (WSL) →]({{< relref "installation-windows" >}})
 
 If you already have that and want to skip the installation, please only add one entry to your `/etc/hosts`:
 

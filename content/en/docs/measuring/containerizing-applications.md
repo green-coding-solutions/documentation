@@ -19,7 +19,7 @@ When containerizing apps for the Green Metrics Tool,
 the containers *must not* shut down after starting them.
 
 So you either must have a daemon / process running inside the container  
-that keeps the container running or use the `cmd` option in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})  
+that keeps the container running or use the `command` option in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})  
 file to start a shell that keeps the container running.
 
 This is because our tool sends the commands to the containers after they have  
@@ -137,7 +137,7 @@ mysqldump -u USERNAME -p DATABASE_NAME > /tmp/demo-app/wordpress-dump.sql
 
 We will now create the Dockerfile `Dockerfile-mariadb` as follows:
 
-```bash
+```Dockerfile
 # Dockerfile-mariadb
 FROM mariadb:10.6.4-focal
 COPY ./wordpress-dump.sql /docker-entrypoint-initdb.d/wordpress-dump.sql
@@ -150,7 +150,7 @@ pick up the dump and import it.
 
 Now for the `compose.yml`:
 
-```bash
+```yml
 services:
   db:
     build:
@@ -252,6 +252,9 @@ and from there create your [usage_scenario.yml →]({{< relref "usage-scenario" 
 
 Afterwards run the measurements.
 
-An example how to run a measurement locally you can find here: [Measuring locally →]({{< relref "measuring-locally" >}})
+An example how to run a measurement locally can be found here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
 To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/simple-example-application)
+
+### Help / Debugging
+If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.

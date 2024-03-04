@@ -7,12 +7,18 @@ draft: false
 images: []
 weight: 111
 ---
+
 ### What it does
 
 This metric provider reads the total time spent in the CPU based on the system `/proc/stat` file.
 
 ### Classname
-- CpuTimeProcfsSystemProvider
+
+- `CpuTimeProcfsSystemProvider`
+
+### Metric Name
+
+- `cpu_time_procfs_system`
 
 ### Input Parameters
 
@@ -22,7 +28,7 @@ This metric provider reads the total time spent in the CPU based on the system `
 By default the measurement interval is 100 ms.
 
 ```bash
-> ./metric-provider-binary -i 100
+./metric-provider-binary -i 100
 ```
 
 ### Output
@@ -38,4 +44,5 @@ Where:
 Any errors are printed to Stderr.
 
 ### How it works
+
 The provider reads from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal** (see definitions [here](https://www.idnt.net/en-US/kb/941772)), and add them together over the measurement period.
