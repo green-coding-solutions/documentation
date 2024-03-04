@@ -26,8 +26,13 @@ The `tools/client.py` program is a script that should constantly be running and 
 
 ```yml
 client:
-  sleep_time: 300
+  sleep_time_no_job: 300
+  sleep_time_after_job: 300
 ```
+
+You can also set a time that the script should wait after a job has finished execution to give the system time to cool down. Please use the [calibrate script](/docs/installation/callibration/) to fine tune this value.
+
+After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
