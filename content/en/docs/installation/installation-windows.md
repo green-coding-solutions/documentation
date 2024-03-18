@@ -22,22 +22,38 @@ You can just use the Docker Desktop for Windows bundle. Make sure the WSL 2 feat
 
 ## Setup
 
-Before following the setup instructions given in [Installation on Linux →]({{< relref "installation-linux#setup" >}}), make sure the automatic generation of the hosts file is disabled.
+Before following the setup instructions given in [Installation on Linux →]({{< relref "installation-linux#setup" >}}), you have to first change your WSL configuration.
 
-### Disable automatic generation of hosts file
+### Change WSL config
+
+Required changes:
+
+- Disable automatic generation of hosts file
+- Enable systemd (install script currently enforces the usage of systemd)
 
 ```bash
 sudo vim /etc/wsl.conf
 ```
 
-Add the following two lines:
+Add the following lines:
 
-```bash
+```ini
 [network]
 generateHosts = false
+
+[boot]
+systemd = true
 ```
 
-Reference: [https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/](https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/)
+Restart:
+
+```bash
+wsl.exe --shutdown
+```
+
+References:
+- [https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/](https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/)
+- [https://learn.microsoft.com/en-us/windows/wsl/systemd](https://learn.microsoft.com/en-us/windows/wsl/systemd)
 
 ### Add hosts entries to Windows
 
