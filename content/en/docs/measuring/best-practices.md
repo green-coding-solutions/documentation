@@ -143,3 +143,8 @@ Having said that: It is also good practice to use an odd number here, which is s
 
 The reason for this is that you do not want to run into a lock-step sampling error, where you always look at the machine just after a load has happened, and since no jitter is on the machine you always miss the actual load. By sliding your sampling intervals in relation to the frequency of the event frequency that you want to observe you will still see the event sometimes.
 
+### 16. System Check Threshhold
+
+The GMT comes with many sytem checks that only issue a warning in the default configuration.
+
+We recommend setting `system_check_treshold` to **2** in your production setup of the [Configuration]({{< relref "configuration" >}})
