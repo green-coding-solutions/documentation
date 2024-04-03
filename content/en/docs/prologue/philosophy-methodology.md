@@ -33,6 +33,19 @@ into this format (at least for the purpose of measuring).
 Therefore, the Green Metrics Tool is primarily designed to  
 measure containerized applications and software.
 
+### Granularity / Per process energy data
+
+As stated in the paragraph before we selected as the container to be the lowest level of granularity.
+
+Although other tools like Scaphandre (See also below) can give you a number on a per-process energy value 
+this value is highly instable and a self decided splitting factor is choosen.
+
+Containers have the splitting factor alredy chosen by the kernel through the cgroup attribution mechanism.
+
+We have a dicussion on if an implementation is useful here if you want to contribute and maybe have an implementation
+of this functionality in the GMT in a future version: https://github.com/green-coding-solutions/green-metrics-tool/discussions/562
+
+
 ## Architecture & Technology
 
 We rely on the container specification that is most dominantly implemented by [Docker](https://www.docker.com/)
@@ -132,3 +145,4 @@ falsify the measurements is not the approach we believe is best to go.
 Therefore we decided to pursue a different path with our tool and not reuse Scaphandre.
 
 {{< alert icon="👉" text="If you however have more the need for observability and measuring on a process level please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which may fit your needs better than our tool." />}}
+
