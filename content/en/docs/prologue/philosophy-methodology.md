@@ -33,6 +33,32 @@ into this format (at least for the purpose of measuring).
 Therefore, the Green Metrics Tool is primarily designed to  
 measure containerized applications and software.
 
+### Granularity of energy data
+
+Energy data by the current metrics reporters we support comes at different levels of granularity:
+
+- Machine wide (MCP, IPMI etc.)
+- Component wide (CPU, DRAM)
+
+When optimizing an application it might be interesting to get the energy value per container and not only for the component that the whole machine is utilizing.
+Such splittings can be theoretically done as for instance [Scaphandre](https://github.com/hubblo-org/scaphandre)
+ can split a whole CPU energy signal by the CPU utilization (see also below for caveats). Other tools like 
+ [Kepler](https://github.com/sustainable-computing-io/kepler) use for instance *CPU Instructions* to derive a per container or per process energy value.
+
+ These values, although theoretically intriguing, have multiple caveats attached like for instance speculative execution, out of order execution, instable instruction counting etc. that make the non-exact and still only an approximation to what the process / container is actually in energy.
+
+ Therefore we decided for the moment of not going the route of splitting the energy per container for the moment until a gold-standard has emerged that makes sense to use.
+ Our philosphy is rather that if a machine is executing a piece of software everything on that box should be attributed to the energy cost of the software.
+
+ Our Measurement Cluster uses dedicated machines so small that they represent a typical VM that you would also use in the cloud to give a realistic and comparable picture of what your software might also be using in a final cloud setup. Furthermore we will offer soon the support to for instance separate two logical and physical disjunct components onto two machines.
+
+Example: You have a driver (JMeter, a Webbrowser, curl etc.) and an API. At the moment the GMT will orchestrate both of these on one machine. However we will soon support the functionality to provision both of these disjunct components on two separate machines to better reflect the cumulated energy cost that incurs when having two physical machines as it would be in a real world scenario.
+
+We have a dicussion on if an implementation is useful here if you want to contribute and maybe have an implementation
+of this functionality in the GMT in a future version: https://github.com/green-coding-solutions/green-metrics-tool/discussions/562
+
+
+
 ## Architecture & Technology
 
 We rely on the container specification that is most dominantly implemented by [Docker](https://www.docker.com/)
@@ -119,16 +145,17 @@ The visual and chart display of the results are only available through their Saa
 
 ### Scaphandre and per-process measurement
 
-Scaphandre is one of the major open source tools currently available to measure  
+[Scaphandre](https://github.com/hubblo-org/scaphandre) is one of the major open source tools currently available to measure  
 the energy consumption of software.
 
 We however believe that for the job of pure energy measurement it is too complex  
 in terms of the size of the tool. Having smaller reporters that only spit out one metric  
 and can be technically used everywhere inline is the better way to go.
 
-Also that Scaphandre does not handle the reproducible orchestration part to  
+Also that [Scaphandre](https://github.com/hubblo-org/scaphandre) does not handle the reproducible orchestration part to  
 falsify the measurements is not the approach we believe is best to go.
 
-Therefore we decided to pursue a different path with our tool and not reuse Scaphandre.
+Therefore we decided to pursue a different path with our tool and not reuse [Scaphandre](https://github.com/hubblo-org/scaphandre).
 
 {{< alert icon="👉" text="If you however have more the need for observability and measuring on a process level please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which may fit your needs better than our tool." />}}
+
