@@ -58,11 +58,13 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `ENERGY_OUTPUT`: Energy used during interval, in micro Joules
+- `DRAM_ID`: ID of the DRAM controller measured in case you have multiple memory controllers installed. Otherwise always. Otherwise *DRAM_0*
 
 Example output:
 
 ```txt
-screenshot example
+1712641603443421 2092 DRAM_0
+1712641604443831 2047 DRAM_0
 ```
 
 Any errors are printed to Stderr.
