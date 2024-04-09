@@ -72,7 +72,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The estimated % CPU used
+- `READING`: The energy used by the GPU in milliWatts (Ex: 12230 for 12.23 Watts)
 
 Any errors are printed to Stderr.
 
