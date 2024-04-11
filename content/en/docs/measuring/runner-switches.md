@@ -34,7 +34,6 @@ Apart from the `config.yml` some additional configuration is possible when manua
   + `RAPL` metric providers will be prioritized to start first, if enabled
 - `--full-docker-prune` Stop and remove all containers, build caches, volumes and images on the system
 - `--docker-prune` Prune all unassociated build caches, networks volumes and stopped containers on the system
-- `--dry-run` Removes all sleeps. Resulting measurement data will be skewed.
 - `--dev-no-metrics` Skips loading the metric providers. Runs will be faster, but you will have no metric
 - `--dev-no-sleeps` Removes all sleeps. Resulting measurement data will be skewed.
 - `--dev-no-build` Checks if a container image is already in the local cache and will then not build it. Also doesn't clear the images after a run. Please note that skipping builds only works the second time you make a run since the image has to be built at least initially to work.
