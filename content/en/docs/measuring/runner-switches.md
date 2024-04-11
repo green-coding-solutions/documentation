@@ -38,6 +38,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--dev-no-sleeps` Removes all sleeps. Resulting measurement data will be skewed.
 - `--dev-no-build` Checks if a container image is already in the local cache and will then not build it. Also doesn't clear the images after a run. Please note that skipping builds only works the second time you make a run since the image has to be built at least initially to work.
 - `--dev-flow-timetravel` Allows to repeat a failed flow or timetravel to beginning of flows or restart services
+- `--dev-no-optimizations` Disables the creation of potential optimization recommendations based on the measurement run.
 - `--print-logs` Prints the container and process logs to stdout
 
 These options are not available when doing cron runs.
