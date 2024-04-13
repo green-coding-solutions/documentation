@@ -58,10 +58,10 @@ measurement:
   #      HW_MemAmountGB: 16
 
 admin:
-  # This address will get an email, when a new project was added through the frontend
-  email: myemail@dev.internal
-  # no_emails: True will suppress all emails. Helpful in development servers
-  no_emails: True
+  notification_email: False
+  notification_email_bcc: False
+  error_file: False
+  error_email: False
 
 ```
 
@@ -104,9 +104,10 @@ The `client` key provides the possibility to change the waiting time of the job 
 
 ### admin
 
-The `admin` key provides no configuration for the measurements themselves, but rather how
-the framework behaves.
+The `admin` key provides no configuration for essential configurations like for instance error handling and 
+email behaviour if configured
 
-- `email`: The email where to error mails and debug mails to
-- `no_emails`: If the framework should send emails at all (including error mails).
-  + If you have not SMTP configured you must set this to `False`
+- `notification_email` **[str|bool]**: This address will get an email, for any error or new project added etc.
+- `notification_email_bcc` **[str|bool]**: This email will always get a copy of every notification email sent, even for user-only mails like the "Your report is ready" mail.
+- `error_file` **[str|bool]**: Takes a file path to log all the errors to it. This is disabled if False
+- `error_email` **[str|bool]**: Sends an error notification also via email. This is disabled if False
