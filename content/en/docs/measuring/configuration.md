@@ -15,20 +15,51 @@ Here is an example configuration:
 
 ```yaml
 postgresql:
- ...
-smtp:
- ...
-cluster:
-  api_url: http://api.green-coding.internal:9142
-  metrics_url: http://metrics.green-coding.internal:9142
+  host: green-coding-postgres-container
+  user: postgres
+  dbname: green-coding
+  password: PLEASE_CHANGE_THIS
+  port: 9573
 
-client:
-  sleep_time_no_job: 300
-  sleep_time_after_job: 300
+redis:
+  host: green-coding-redis-container
+
+smtp:
+  server: SMTP_SERVER
+  sender: SMTP_SENDER
+  port: SMTP_PORT
+  password: SMTP_AUTH_PW
+  user: SMTP_AUTH_USER
+
+cluster:
+  api_url: __API_URL__
+  metrics_url: __METRICS_URL__
+  client:
+    sleep_time_no_job: 300
+    jobs_processing: "random"
+    time_between_control_workload_validations: 21600
+    send_control_workload_status_mail: False
+    shutdown_on_job_no: False
+    control_workload:
+      name: "Measurement control Workload"
+      uri: "https://github.com/green-coding-berlin/measurement-control-workload"
+      filename: "usage_scenario.yml"
+      branch: "main"
+      comparison_window: 5
+      threshold: 0.01
+      phase: "004_[RUNTIME]"
+      metrics:
+        - "psu_energy_ac_mcp_machine"
+        - "psu_power_ac_mcp_machine"
+        - "cpu_power_rapl_msr_component"
+        - "cpu_energy_rapl_msr_component"
 
 machine:
   id: 1
   description: "Development machine for testing"
+  base_temperature_value: False
+  base_temperature_chip: False
+  base_temperature_feature: False
 
 measurement:
   system_check_threshold: 3 # Can be 1=INFO, 2=WARN or 3=ERROR  
@@ -48,14 +79,7 @@ measurement:
         resolution: 100
       cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider:
         resolution: 100
-  #    psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
-  #      resolution: 100
-        # This is a default configuration. Please change this to your system!
-  #      CPUChips: 1
-  #      HW_CPUFreq: 3100
-  #      CPUCores: 28
-  #      TDP: 150
-  #      HW_MemAmountGB: 16
+    # ...
 
 admin:
   notification_email: False
@@ -67,9 +91,20 @@ admin:
 
 The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "/docs/installation/installation-linux" >}}) part.
 
-The `machine` key has `id` and `description` that are mandatory fields and will be registered in the DB on first run.
+## machine
+Please see [installation →]({{< relref "/docs/installation/installation-cluster" >}})
 
-Here we focus on the `measurement` key:
+
+## cluster
+- `api_url` **[str]**: URL including schema where the API is locates
+- `metrics_url` **[str]**: URL including schema where the API is locates
+
+For the rest please see [installation →]({{< relref "/docs/installation/installation-cluster" >}})
+
+
+
+
+## measurement
 
 - `system_check_threshold` **[integer]: Level at which an exception will be raised for system checks. The lower the more restrictive system checks are. We recommend *3* for development and *2* for cluster setups. *1* only for debugging.
 - `idle-time-start` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
@@ -95,12 +130,6 @@ Once you have set them up you can uncomment the line. In this example for instan
 the line `psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider` and all
 the lines directly below it.
 
-### client
-
-The `client` key provides the possibility to change the waiting time of the job client:
-
-- `sleep_time_no_job` **[integer]**: Seconds the job client should wait before retrying to get another job
-- `sleep_time_after_job` **[integer]**: Seconds the job client should wait after a job is done
 
 ### admin
 
