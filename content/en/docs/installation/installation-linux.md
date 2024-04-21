@@ -232,13 +232,16 @@ After=docker.service
 [Service]
 Type=simple
 ExecStart=/home/USERNAME/startup-docker.sh
-Restart=never
+Restart=on-failure
+RestartSec=5s
+StartLimitBurst=10
+StartLimitInterval=0
 
 [Install]
 WantedBy=default.target
 ```
 
-As you can see *Restart* is set to never. The reason is that the docker dameon will restart the containers by itself. The `systemd` script is only needed to start the container once on reboot.
+As you can see *Restart* is set to *on-failure*. The reason is that the docker dameon will restart the containers by itself. The `systemd` script is only needed to start the container once on reboot.
 
 As you can see we also reference the `/home/USERNAME/startup-docker.sh` file which `systemd` expects to be in your green metrics tool directory.
 
@@ -255,6 +258,13 @@ Now you can reload and enable the daemon:
 ```bash
 systemctl --user daemon-reload
 systemctl --user enable green-coding-service
+```
+
+Since the service runs as a user it might be the case that the user is not logged in. So we also enable lingering
+which guarantees that processes can be started when no user is logged in:
+
+```bash
+loginctl enable-linger $(whoami)
 ```
 
 ### Dockerfiles architecture explanation:

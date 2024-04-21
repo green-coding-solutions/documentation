@@ -36,8 +36,48 @@ After running a job the client program executes the `tools/cluster/cleanup.sh` s
 
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
-Create a file under: `/etc/systemd/system/green-coding-client-service.service` with following content, but be sure to 
-double-check the out-commented line regarding the docker environment variable:
+{{< tabs groupId="mode">}}
+{{% tab name="Docker-Rootless-Mode" %}}
+\
+Create a file under: `~/.config/systemd/user/green-coding-client.service`:
+
+```init
+[Unit]
+Description=The Green Metrics Client Service
+After=docker.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/gc/green-metrics-tool/
+ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/tools/client.py
+StandardOutput=append:/var/log/green-metrics-client-service.log
+Restart=always
+RestartSec=30s
+TimeoutStopSec=600
+KillSignal=SIGINT
+RestartKillSignal=SIGINT
+FinalKillSignal=SIGKILL
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then activate the service
+```bash
+sudo touch /var/log/green-metrics-client-service.log
+sudo chown gc:gc /var/log/green-metrics-client-service.log
+systemctl --user daemon-reload # Reload the systemd configuration
+systemctl --ser enable green-coding-client # enable on boot
+systemctl --user start green-coding-client # start service
+
+systemctl --user status green-coding-client # check status
+```
+
+{{% /tab %}}
+{{% tab name="Docker-Root-Mode" %}}
+\
+Create a file under: `/etc/systemd/system/green-coding-client.service`:
+
 
 ```init
 [Unit]
@@ -58,36 +98,24 @@ KillSignal=SIGINT
 RestartKillSignal=SIGINT
 FinalKillSignal=SIGKILL
 
-# Uncomment this line if you are running docker in non-rootless mode (aka default root mode)
-#Environment="DOCKER_HOST=unix:///run/user/1000/docker.sock"
+Environment="DOCKER_HOST=unix:///run/user/1000/docker.sock"
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-- Reload the systemd configuration by running:
-
+Then activate the service
 ```bash
-sudo systemctl daemon-reload
+sudo systemctl daemon-reload # Reload the systemd configuration
+sudo systemctl enable green-coding-client # enable on boot
+sudo systemctl start green-coding-client # start service
+
+sudo systemctl status green-coding-client # check status
 ```
 
-- Start your new service:
+{{% /tab %}}
+{{< /tabs >}}
 
-```bash
-sudo systemctl start green-coding-client-service
-```
-
-- Enable the service to run at boot:
-
-```bash
-sudo systemctl enable green-coding-client-service
-```
-
-- To check the status of your service, run:
-
-```bash
-sudo systemctl status green-coding-client-service
-```
 
 You should now see the client reporting it's status on the server. It is important to note that only the client ever talks to the server (polling). The server never tries to contact the client. This is to not create any interrupts while a measurement might be running.
 
