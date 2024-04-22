@@ -59,7 +59,7 @@ RestartKillSignal=SIGINT
 FinalKillSignal=SIGKILL
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
 
 Then activate the service
