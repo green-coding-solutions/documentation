@@ -250,7 +250,7 @@ Please create the following file in your home directory:
 ```bash
 #!/bin/bash
 docker context use rootless
-docker compose -f /home/USERNAME/docker/compose.yml up -d
+docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 ```
 
 Now you can reload and enable the daemon:
