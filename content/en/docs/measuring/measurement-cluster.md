@@ -30,7 +30,7 @@ We have the following machines available for running measurements in our cluster
 ---
 
 - **Fujitsu TX1330 M2**
-    + Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
+    + Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Single-Tenant Server 
     + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
     + Cores: 4

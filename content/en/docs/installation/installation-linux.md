@@ -11,6 +11,7 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
 Currently the following distributions have been tested and are fully supported:
+- Ubuntu 24.04
 - Ubuntu 22.04
 - Fedora 38
 
