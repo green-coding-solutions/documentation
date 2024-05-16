@@ -43,6 +43,13 @@ docker exec -it MY_CONTAINER_NAME bash
 Some container do not have `bash`. However `sh`, which has less capabilities,  
 should be available in most cases.
 
+### --print-logs
+
+If your container fails to boot in the GMT many of the prior mentioned debugging flags do not help.
+
+Since this is usually related to a problem in the `Dockerfile` you can show the output of the docker build client
+by adding `--print-logs`
+
 ## Debugging containers via HTTP / exposed ports
 
 If entering the container looks fine and you need to access them through some of their  
