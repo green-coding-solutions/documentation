@@ -70,6 +70,20 @@ If an SCI was configured also the parameters will be shown in the *Measurements*
 
 <img src="/img/sci_measurement_tab.webp">
 
+## Formula
+
+The [SCI formula](https://sci-guide.greensoftware.foundation/) is specified by the [Green Software Foundation](https://greensoftware.foundation/)
+
+The components of the SCI are attributed by the GMT as follows:
+
+- *E*: The energy of the total machine + the energy of the network. 
+    - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) etc. 
+        - If none is activated machine energy will be excluded from the SCI.
+    - A *Network IO* provider must be activated to populate this value with the network energy. 
+        - If none is activated network energy will be excluded from the SCI.
+- *I:* Configured in the `config.yml`. Set the intensity of your used grid location
+- *M:* Configured in the `config.yml`. Set the embodied carbon of your used machine
+
 ## Example applications
 
 We provide quite some example applications that showcase how the SCI can be measured with the Green Metrics Tool for APIs, CLI tools etc.
