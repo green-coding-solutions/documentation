@@ -272,6 +272,6 @@ In order for the shutdown to be triggered by the `client.py` you must allow the 
 
 Example:
 ```bash
-echo 'ALL ALL=(ALL) NOPASSWD:/usr/sbin/shutdown ""' | sudo tee /etc/sudoers.d/green-coding-shutdown
+echo 'ALL ALL=(ALL) NOPASSWD:/usr/sbin/systemctl suspend' | sudo tee /etc/sudoers.d/green-coding-shutdown
 sudo chmod 500 /etc/sudoers.d/green-coding-shutdown
 ```
