@@ -34,6 +34,7 @@ We have the following machines available for running measurements in our cluster
 
 - **CO2 Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2**
     + Use Case: For benchmarking of a software where configuration is tuned for reproducability
+    + Vendor: Fujitsu TX1330 M2
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server 
     + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
@@ -51,6 +52,7 @@ We have the following machines available for running measurements in our cluster
 
 - **Micro Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M3**
     + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 1ms resolution and limited to RAPL CPU / Memory
+    + Vendor: Fujitsu TX1330 M3
     + Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server 
     + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
@@ -67,6 +69,8 @@ We have the following machines available for running measurements in our cluster
 ---
 
 - **Fujitsu TX1330 M3 - IPMI**
+    + Use Case: For profiling of a software to get a value for an off-the-shelf Ubuntu system with default configuration
+    + Vendor: Fujitsu TX1330 M3
     + OS: Ubuntu 22.04 (default)
     + Type: Single-Tenant Server 
     + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
