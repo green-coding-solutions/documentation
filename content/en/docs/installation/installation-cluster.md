@@ -159,8 +159,6 @@ When using the cluster you will need to configure the machine names in the `mach
 machine:
   id: 1
   description: "My Machine Name"
-  # Takes a file path to log all the errors to it. This is disabled if False
-  error_log_file: False
   base_temperature_value: 30
   base_temperature_chip: "coretemp-isa-0000"
   base_temperature_feature: "Package id 0"
@@ -170,6 +168,59 @@ The `id` and the `description` must be unique so that they do not conflict with 
 If you are using the *NOP Linux* setup with the `client.py` service you must also setup the temperature checking. Find out what your system has when it is cool. You can either use our calibration script or just let the machine sit for a while until the temperature does not change anymore. Then set the value `base_temperature_value`. It has no unit, but is rather just a value in degree (°). It should have the same unit as your output of `sensors` on your Linux box.
 
 Since we are using our [lm_sensors provider →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}) to query the temperature you must also set the `base_temperature_chip` and `base_temperature_feature` to query from. Refer to the [provider documentation →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}) for more details.
+
+#### Profiling Machines
+
+Machines that are intended to create a carbon profile *as it would be seen in a user machine* should have:
+- Turbo Boost turned on
+- Hyper Threading turned on
+- DVFS turned on
+- Allow C8-C0 states
+
+This is the minium set we deem reasonable. Please note that this resembles a user machine the best. For server machines some of these configurations should be changed. For servers Hyper Threading is often turned on whereas DVFS is often turned off.
+
+
+#### Benchmarking Machines
+
+To have the most stable result benchmarking machines should have:
+
+- Turbo Boost turned on
+- Hyper Threading turned on
+- DVFS turned on
+- Allow C8-C0 states
+
+All of these settings can be tweaked best in the BIOS. Additionally for turning DVFS off we recommend booting the kernel with `intel_pstate` CPU frequency driver deactived and using the `acpi` one which allows for setting the `userspace` govenor.
+
+```
+$ nano /etc/default/grub
+
+# Change this line
+# GRUB_CMDLINE_LINUX_DEFAULT=""
+# to 
+# GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=disable acpi=force"
+
+$ update-grub
+
+$ cat <<EOF > /etc/systemd/system/fix-cpu-frequency.service
+[Unit]
+Description=Fix CPU Frequency
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cpupower frequency-set -g userspace
+ExecStartPost=/usr/bin/cpupower frequency-set -f 2.1GHz
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+$ systemctl enable fix-cpu-frequency
+$ systemctl start fix-cpu-frequency
+
+$ cat /proc/cpuinfo | grep MHz # to check that frequency is fixed
+```
 
 ### Client
 
@@ -275,3 +326,4 @@ Example:
 echo 'ALL ALL=(ALL) NOPASSWD:/usr/sbin/systemctl suspend' | sudo tee /etc/sudoers.d/green-coding-shutdown
 sudo chmod 500 /etc/sudoers.d/green-coding-shutdown
 ```
+
