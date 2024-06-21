@@ -107,7 +107,7 @@ energy measurements are not false-high. A good number for this has emerged in ou
 a 30+ core machine this value might be higher. We are currently working on a [calibration script](https://github.com/green-coding-berlin/green-metrics-tool/issues/355) to determine this exact 
 value for a particular system.
 
-If you are using a standard cronjob mechanism to trigger the GMT you can use the `idle-time-end` to force a fixed sleep time.
+If you are using a standard cronjob mechanism to trigger the GMT you can use the `post-test-sleep` to force a fixed sleep time.
 
 ### 12. Mount your `/tmp` on `/tmpfs`
 
@@ -148,3 +148,8 @@ The reason for this is that you do not want to run into a lock-step sampling err
 The GMT comes with many sytem checks that only issue a warning in the default configuration.
 
 We recommend setting `system_check_treshold` to **2** in your production setup of the [Configuration]({{< relref "configuration" >}})
+
+### 17. Idle Duration
+If you are trying to calculate an energy per container you should set the `idle-duration` configuration value high enough so you get a stable value to base the offset on.
+
+We recommend at least *120 s*.
