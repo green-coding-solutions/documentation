@@ -62,13 +62,16 @@ machine:
   base_temperature_feature: False
 
 measurement:
-  system_check_threshold: 3 # Can be 1=INFO, 2=WARN or 3=ERROR  
-  idle-time-start: 10
-  idle-time-end: 5
-  flow-process-runtime: 1800
+  system_check_threshold: 3 # Can be 1=INFO, 2=WARN or 3=ERROR
+  pre-test-sleep: 5
+  idle-duration: 5
+  baseline-duration: 5
+  flow-process-duration: 1800 # half hour
+  total-duration: 3600 # one hour
+  post-test-sleep: 5
   phase-transition-time: 1
   boot:
-    wait_time_dependencies: 20
+    wait_time_dependencies: 60
   metric-providers:
     linux:
       cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
@@ -107,9 +110,12 @@ For the rest please see [installation →]({{< relref "/docs/installation/instal
 ## measurement
 
 - `system_check_threshold` **[integer]: Level at which an exception will be raised for system checks. The lower the more restrictive system checks are. We recommend *3* for development and *2* for cluster setups. *1* only for debugging.
-- `idle-time-start` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
-- `idle-time-end` **[integer]**: Seconds to idle containers after measurement
-- `flow-process-runtime` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
+- `pre-test-sleep` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
+- `post-test-sleep` **[integer]**: Seconds to idle containers after measurement
+- `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
+- `total-duration` **[integer]**: Max. duration in seconds for how long the whole benchmark may take. Including building containers, baseline, idle, runtime and removal phases.
+- `idle-duration` **[integer]**: Duration in seconds for the idle phase
+- `baseline-duration` **[integer]**: Duration in seconds for the baseline phase
 - `phase-transition-time` **[integer]**: Seconds to idle between phases
 - `boot`:
   + `wait_time_dependencies`: **[integer]**: Max. duration in seconds to wait for dependencies (defined with `depends_on`) to be ready. If duration is reached and a dependency is not ready, the measurement will fail.
