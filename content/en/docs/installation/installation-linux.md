@@ -16,7 +16,8 @@ Currently the following distributions have been tested and are fully supported:
 - Fedora 38
 
 The following distributions have been tested, but require manual work:
-- Ubuntu 20.04 (works, but *libglib* has to be manually updated to *libglib2.0-dev*)
+- Ubuntu 18.04 (works, but Python3 has to be update to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html) and *libsensors* has to be updated to *libsensors 3.6.0* to support [SENSORS_SUBFEATURE_POWER_MIN](https://github.com/lm-sensors/lm-sensors/commit/dcf23676cc264927ad58ae7960f518689372741a))
+- Ubuntu 20.04 (works, but Python3 has to be update to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html))
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "installation-cluster" >}}) has different names for timers)
 
 {{< alert icon="💡" text="If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>" />}}
