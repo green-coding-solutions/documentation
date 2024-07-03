@@ -43,7 +43,7 @@ cd ~/green-metrics-tool
 
 ```bash
 sudo dnf upgrade -y && \
-sudo dnf install -y curl git make gcc python3 python3-devel python3-venv && \
+sudo dnf install -y curl git make gcc python3 python3-devel && \
 git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool
 ```
