@@ -34,4 +34,5 @@ The hosted service is free to use and makes your measurement data visible and re
 - Reproducible measurements from machines maintained by our team
 - DC / AC Metrics Providers are calibrated on our machines
 - Visibility of measurements on central platform
+- Premium features like advanced optimizations and automated certification reports for Blue Angel for Software / Blauer Engel für Software
 - Applied [best practices →]({{< relref "best-practices" >}}) for measurement configuration

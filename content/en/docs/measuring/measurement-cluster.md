@@ -3,7 +3,7 @@ title: "Measurement Cluster"
 description: "Setting up your measurement cluster - Our measurement cluster"
 lead: "Measurement Cluster"
 date: 2023-04-10T08:49:15+00:00
-weight: 840
+weight: 880
 toc: true
 ---
 
@@ -50,9 +50,9 @@ We have the following machines available for running measurements in our cluster
 
 ---
 
-- **Micro Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M3**
+- **Micro Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2**
     + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 1ms resolution and limited to RAPL CPU / Memory
-    + Vendor: Fujitsu TX1330 M3
+    + Vendor: Fujitsu TX1330 M2
     + Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server 
     + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
@@ -68,16 +68,16 @@ We have the following machines available for running measurements in our cluster
 
 ---
 
-- **Fujitsu TX1330 M3 - IPMI**
-    + Use Case: For profiling of a software to get a value for an off-the-shelf Ubuntu system with default configuration
+- **GUI/Desktop Applications (DVFS ON, TB ON, HT OFF) - TX1330 M3**
+    + Use Case: For profiling of a GUI / Desktop software that uses X11 or Wayland window management systems
     + Vendor: Fujitsu TX1330 M3
-    + OS: Ubuntu 22.04 (default)
+    + OS: Ubuntu 24.04 (default)
     + Type: Single-Tenant Server 
     + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
     + Cores: 4
     + Threads: 4
     + Hyper-Threading: Off
-    + Turbo Boost: Off
+    + Turbo Boost: On
     + Memory: 16 GB
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
 
