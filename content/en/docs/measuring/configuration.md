@@ -34,6 +34,9 @@ smtp:
 cluster:
   api_url: __API_URL__
   metrics_url: __METRICS_URL__
+  cors_allowed_origins:
+    - __API_URL__
+    - __METRICS_URL__
   client:
     sleep_time_no_job: 300
     jobs_processing: "random"
@@ -101,10 +104,9 @@ Please see [installation →]({{< relref "/docs/installation/installation-cluste
 ## cluster
 - `api_url` **[str]**: URL including schema where the API is locates
 - `metrics_url` **[str]**: URL including schema where the API is locates
+- `cors_allowed_orgins` **[list]**: Allowed URLs for CORS requests to the API. It should at least include your chosen `api_url` and `metrics_url`
 
 For the rest please see [installation →]({{< relref "/docs/installation/installation-cluster" >}})
-
-
 
 
 ## measurement
