@@ -43,11 +43,12 @@ The provider must be configured in the `config.yml`. It must be supplied with th
 - TDP
 - HW_MemAmountGB
 
-Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}})
-for further info.
+You can find these parameters in your data sheet of the used machine. In case you are using a VM please check 
+[this repository](https://github.com/green-coding-solutions/carbondb-agent) for an example how to derive the values.
 
-In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be activated
- for the *PsuEnergyAcXgboostMachineProvider* to work.
+Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}}) for further info.
+
+In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be activated for the *PsuEnergyAcXgboostMachineProvider* to work.
 
 ### Input Parameters
 

@@ -67,5 +67,11 @@ To be able to access the frontend and the API of the GMT, you have to add the UR
 ### Metric providers
 
 With WSL it is not possible to measure anything except the CPU utilization via procfs (`cpu.utilization.procfs.system.provider`).
+- See the provider documentation for it: [CPU Utilization Procfs Reporter →]({{< relref "/docs/measuring/metric-providers/cpu-utilization-procfs-system" >}})
+
+Additionally to these measurement provider you can however enable the [Cloud Energy](https://github.com/green-coding-solutions/cloud-energy) machine power estimation based on an ML XGBoost model.
+- See the provider documentation for it: [Cloud Energy Machine Power Estimation Reporter →]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}})
 
 You have to disable all other providers in your `config.yml`.
+
+
