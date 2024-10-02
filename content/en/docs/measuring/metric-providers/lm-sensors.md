@@ -1,6 +1,6 @@
 ---
 title: "LM Sensors - temp - fanspeed"
-description: "Documentation for LmSensorsProvider of the Green Metrics Tool"
+description: "Documentation for LmsensorsProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-12-29T20:16:35+0000
 draft: false
@@ -63,7 +63,7 @@ Core 3:        +29.0°C  (high = +100.0°C, crit = +100.0°C)
 Your config could be:
 
 ```bash
-lm_sensors.temperature.provider.LmSensorsTempComponentProvider:
+lmsensors.temperature.provider.LmsensorsTempComponentProvider:
     resolution: 100
     chips: ['coretemp-isa-0000']
     features: ['Package id 0', 'Core 0', 'Core 1', 'Core 2', 'Core 3']
@@ -73,17 +73,17 @@ As the matching is open ended you could also only use `'Core'` instead of naming
 
 ### Classname
 
-- `LmSensorsFanComponentProvider`
-- `LmSensorsTempComponentProvider`
+- `LmsensorsFanComponentProvider`
+- `LmsensorsTempComponentProvider`
 
-these both extend the `LmSensorsProvider` which makes it very easy to add new specific providers. We need to separate
+these both extend the `LmsensorsProvider` which makes it very easy to add new specific providers. We need to separate
 fan and temperature because they both come in different units. Temp in °C or °F and fan speeds in RPM.
 
 
 ### Metric Name
 
-- `lm_sensors_fan_component`
-- `lm_senors_temp_component`
+- `lmsensors_fan_component`
+- `lmsenors_temp_component`
 
 ### Input Parameters
 
@@ -103,7 +103,7 @@ The tool also accepts more general parameters:
 
 - `-i`: interval in milliseconds. By default the measurement interval is 100 ms.
 
-- `-s`: it is possible to pass in a `lm_sensors` config file if you don't want to use the system one.
+- `-s`: it is possible to pass in a `lm-sensors` config file if you don't want to use the system one.
 
 - `-t`: this will output in degrees fahrenheit. This is not recommended when using it in the green coding context!
 

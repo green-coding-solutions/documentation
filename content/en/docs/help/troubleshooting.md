@@ -127,8 +127,8 @@ On Ubuntu 20.04, the `glib` does not contain the function `g_string_replace`:
 
 ```bash
 Building binaries ...
-Installing ./metric_providers/lm_sensors/metric-provider-binary ...
-make: Entering directory '/home/user/green-metrics-tool/metric_providers/lm_sensors'
+Installing ./metric_providers/lmsensors/metric-provider-binary ...
+make: Entering directory '/home/user/green-metrics-tool/metric_providers/lmsensors'
 gcc source.c chips.c -o3 -Wall -Llib -lsensors -lglib-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o metric-provider-binary
 source.c: In function ‘main’:
 source.c:326:17: warning: implicit declaration of function ‘g_string_replace’; did you mean ‘g_tree_replace’? [-Wimplicit-function-declaration]
@@ -139,7 +139,7 @@ source.c:326:17: warning: implicit declaration of function ‘g_string_replace�
 source.c:(.text+0xbcc): undefined reference to `g_string_replace'
 collect2: error: ld returned 1 exit status
 make: *** [Makefile:8: binary] Error 1
-make: Leaving directory '/home/user/green-metrics-tool/metric_providers/lm_sensors'
+make: Leaving directory '/home/user/green-metrics-tool/metric_providers/lmsensors'
 ```
 
 To resolve this, update the `glib` package:
@@ -149,7 +149,7 @@ sudo apt install libglib2.0-dev
 ```
 
 However, if the error is still present after this command, it might be that  
-it is not possible to use lm_sensors on your system. Comment out the section of the  
+it is not possible to use `lm-sensors` on your system. Comment out the section of the  
 install script that mentions it and comment it out of your `config.yml`.
 
 ## General tips

@@ -43,7 +43,7 @@ Configured reporters
 - CpuUtilizationProcfsSystemProvider: 99 ms resolution
 - MemoryTotalCgroupContainerProvider: 99 ms resolution
 - CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- LmsensorsTemperatureComponentProvider: 99 ms resolution
 
 ```console
 [INFO] 2024-02-16 10:56:49,208 - System Baseline measurement successful
@@ -97,7 +97,7 @@ Configured reporters
 - CpuUtilizationProcfsSystemProvider: 99 ms resolution
 - MemoryTotalCgroupContainerProvider: 99 ms resolution
 - CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- LmsensorsTemperatureComponentProvider: 99 ms resolution
 
 ```console
 [INFO] 2024-02-16 12:08:32,652 - System Baseline measurement successful
@@ -147,7 +147,7 @@ Configured reporters
 - CpuUtilizationProcfsSystemProvider: 99 ms resolution
 - MemoryTotalCgroupContainerProvider: 99 ms resolution
 - CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- LmsensorsTemperatureComponentProvider: 99 ms resolution
 
 ```console
 [INFO] 2024-02-16 10:13:26,496 - System Baseline measurement successful
@@ -196,7 +196,7 @@ Configured reporters
 - CpuUtilizationProcfsSystemProvider: 99 ms resolution
 - MemoryTotalCgroupContainerProvider: 99 ms resolution
 - CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- LmsensorsTemperatureComponentProvider: 99 ms resolution
 
 ```console
 [INFO] 2024-02-16 12:26:02,660 - System Baseline measurement successful
