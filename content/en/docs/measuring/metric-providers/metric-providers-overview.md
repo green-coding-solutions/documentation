@@ -70,6 +70,8 @@ The `runner.py` will instrument all the metric providers automatically for you. 
 
 If you wish to run them independently however, you can do so as a C program or with the python wrapper. The C program will output all of its data as a continuous stream to Stdout.
 
+To activate a metric provider simply uncomment the line where it's name appears. To de-activate it comment it out.
+
 #### C
 
 After building the metric provider binary via the `Makefile` or `install.sh` script, simply run it.
