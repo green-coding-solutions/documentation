@@ -1,8 +1,7 @@
 ---
 title: "Network Connections - Proxy Container"
 description: "Documentation for the NetworkConnectionsProxyContainerProvider for the Green Metrics Tool"
-lead: ""
-date: 2023-30-04T08:49:15+00:00
+date: 2023-04-30T08:49:15+00:00
 weight: 141
 ---
 
