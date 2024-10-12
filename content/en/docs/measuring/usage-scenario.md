@@ -47,7 +47,7 @@ networks:
   name: wordpress-mariadb-data-green-coding-network
 ```
 
-- `networks:` **[object]** (Object of network objects for orchestration)
+- `networks:` **[dict]** (Dictionary of network dictionaries for orchestration)
   + `name: [NETWORK]` **[a-zA-Z0-9_]** The name of the network with a trailing colon. No value required.
 
 ### Services
@@ -88,32 +88,32 @@ services:
       - gcb-wordpress-mariadb      
 ```
 
-- `services` **[object]**: (Object of container objects for orchestration)
+- `services` **[dict]**: (Dictionary of container dictionaries for orchestration)
   + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container/service
     - `image:` **[str]** Docker image identifier. If `build` is not provided the image needs to be accessible locally on Docker Hub. If `build` is provided it is used as identifier for the image.
     - `build:` **[str]** *(optional)* Path to build context. See `context` for restrictions. Default for `dockerfile` is `Dockerfile`. Alternatively, you can provide more detailed build information with:
       - `context:` **[str]** *(optional)* Path to the build context. Needs to be in the path or repo that is passed with `--uri` to `runner.py`. Default: `.`.
       - `dockerfile:` **[str]** *(optional)* Path to Dockerfile. Needs to be in `context`. Default: `Dockerfile`.
     - `container_name:` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
-    - `environment:` **[object|array]** *(optional)*
+    - `environment:` **[dict|list]** *(optional)*
       + Either Key-Value pairs for ENV variables inside the container
       + Or list items with strings in the format: *MYSQL_PASSWORD=123*
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
-    - `depends_on:` **[array|object]** *(optional)*
-      + Can either be an array of services names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. 
-      + Or it can be an object where each key represents a service as a string. The string then can have two values:
+    - `depends_on:` **[list|dict]** *(optional)*
+      + Can either be an list of services names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. 
+      + Or it can be an dict where each key represents a service as a string. The string then can have two values:
           * `service_healthy`: Will wait for the container until the docker *healthcheck* returns *healthy*.
           * `service_started`: Similar to the list syntax this will enforce a starting order and just wait until the container has been created.
-    - `setup-commands:` **[array]** *(optional)*
-      + Array of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
-    - `volumes:` **[array]**  *(optional)*
-      + Array of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
-    - `networks:` **[array]**  *(optional)*
+    - `setup-commands:` **[list]** *(optional)*
+      + List of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
+    - `volumes:` **[list]**  *(optional)*
+      + List of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
+    - `networks:` **[list]**  *(optional)*
       + The networks to put the container into. If no networks are defined throughout the `usage_scenario.yml` the container will be put into the default network will all others in the file.
-    - `healthcheck:` **[object]** *(optional)*
+    - `healthcheck:` **[dict]** *(optional)*
       + Please see the definition of these arguments and how healthcheck works in the official docker compose definition. We just copy them over: [Docker compose healthcheck specification](https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck)
-      + `test:` **[str|array]**         
+      + `test:` **[str|list]**         
       + `interval:` **[str]**
       + `timeout:` **[str]**
       + `retries:` **[integer]**
@@ -171,10 +171,10 @@ flow:
       command: killall postgres
 ```
 
-- `flow:` **[array]** (Array of flows to interact with containers)
+- `flow:` **[list]** (List of flows to interact with containers)
   + `name:` **[\.\s0-9a-zA-Z_\(\)-]+** An arbitrary name, that helps you distinguish later on where the load happend in the chart
   + `container:` **[a-zA-Z0-9][a-zA-Z0-9_.-]+** The name of the container specified on `setup` which you want the run the flow
-  + `commands:` **[array]**
+  + `commands:` **[list]**
     - `type:` **[console]** (Only console currently supported)
       + `console` will execute a shell command inside the container
     - `command:` **[str]**
