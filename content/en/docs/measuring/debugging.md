@@ -22,7 +22,7 @@ the *usage scenario* without having to go through all previous steps. It will al
 Please note that this only works with a local repository. If your repository is online only atm clone it first to your local filesystem. This allows for editing files while running a *usage scenario*
 
 A typical call looks like this:
-`python3 --uri MY_LOCAL_PATH --name Testing --allow-unsafe --dev-no-metrics --dev-no-sleeps --dev-no-build --dev-flow-timetravel`
+`python3 --uri MY_LOCAL_PATH --name Testing --allow-unsafe --dev-no-metrics --dev-no-sleeps --dev-cache-build --dev-flow-timetravel`
 
 ### --debug flag
 The second approach in debugging a *usage_scenario* is to  
