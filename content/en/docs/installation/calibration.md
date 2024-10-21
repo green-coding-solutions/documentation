@@ -52,7 +52,7 @@ Important values that are extracted:
 
 Please remember that we multiply the values with 100 to avoid integers in the database
 
-<img class="ui centered rounded bordered image" src="/img/callibration.webp">
+<img class="ui centered rounded bordered image" src="/img/calibration.webp">
 
 ## Future work
 

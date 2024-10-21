@@ -30,7 +30,7 @@ client:
   sleep_time_after_job: 300
 ```
 
-You can also set a time that the script should wait after a job has finished execution to give the system time to cool down. Please use the [calibrate script](/docs/installation/callibration/) to fine tune this value.
+You can also set a time that the script should wait after a job has finished execution to give the system time to cool down. Please use the [calibrate script]({{< relref "calibration" >}}) to fine tune this value.
 
 After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
