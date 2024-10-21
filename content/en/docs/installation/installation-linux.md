@@ -332,8 +332,11 @@ green-coding-nginx:
 
 ### SSL
 
-TODO!
+SSL is an option you can activate in the install process directly.
 
-No thorough documentation on this yet! However you have to configure NGINX
-accordingly so that it finds the SSL credentials and certificate.
-This is done in the `/docker/nginx/frontend.conf`.
+The install script will ask if you want to activate it or not. In case you select yes
+you must supply the path for the certificate file and the key file where they will copied into the correct locations to be accessible by the NGINX container.
+
+At the moment an SSL active installation must be supplied a **https://** url and the webserver will be listening on port 443. You can manually change that in the `frontend.conf` and the `api.conf` files if necessary.
+
+If your certificates change just re-run the install script and supply the new filenames.
