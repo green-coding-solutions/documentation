@@ -82,9 +82,9 @@ Please access your report with the ID: XXXX-XXXX ...
 
 Now you can view the report as the first item in your metrics dashboard at [http://metrics.green-coding.internal:9142/index.html](http://metrics.green-coding.internal:9142/index.html)
 
-## Cron mode
+## Cron mode / Cluster-Client mode
 
-If you have [installed a cronjob →]({{< relref "/docs/installation/installation-linux" >}}) you can insert a new job at [http://metrics.green-coding.internal:9142/request.html](http://metrics.green-coding.internal:9142/request.html)
+If you have [installed a cronjob or run in cluster-client mode →]({{< relref "/docs/cluster/installation" >}}) you can insert a new job at [http://metrics.green-coding.internal:9142/request.html](http://metrics.green-coding.internal:9142/request.html)
 
 <p align="center">
   <img src="/img/add-new-project.webp" width="80%" title="Cron mode job insertion for green metrics tool">

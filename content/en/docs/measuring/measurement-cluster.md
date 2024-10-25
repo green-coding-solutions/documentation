@@ -117,4 +117,4 @@ We have the following machines available for running measurements in our cluster
 
 ## Setting up your own measurement cluster
 
-Please refer to the page [Installation of a Cluster]({{< relref "/docs/installation/installation-cluster" >}})
+Please refer to the page [Installation of a Cluster]({{< relref "/docs/cluster/installation" >}})

@@ -83,7 +83,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) with the [Measurement C
 
 It does this by running defined control workloads and also calibrating the machine beforehand so that any measurement only runs if a certain baseline temperature is reached again.
 
-You can either use our service with a free tier or set the cluster up yourself. The setup and methodology is explained in [Installation of a cluster]({{< relref "/docs/installation/installation-cluster" >}})
+You can either use our service with a free tier or set the cluster up yourself. The setup and methodology is explained in [Installation of a cluster]({{< relref "/docs/cluster/installation" >}})
 
 ### 10. Trigger test remotely or keep system inactive
 
