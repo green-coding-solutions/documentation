@@ -9,7 +9,7 @@ weight: 825
 ## Config.yml
 
 The `config.yml` configures some global measurement settings that are used when
-executing the `runner.py` directly or through cron mode.
+executing the `runner.py` directly or through cron / cluster-client mode.
 
 Here is an example configuration:
 
@@ -98,15 +98,20 @@ admin:
 The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "/docs/installation/installation-linux" >}}) part.
 
 ## machine
-Please see [installation →]({{< relref "/docs/installation/installation-cluster" >}})
+If you run locally nothing needs to be configured here. But if you run a *cluster* you must set the base temperature values for the accuracy control to work
+
+Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}) and [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}})
 
 
 ## cluster
+
+Only the following three variables are important for a local installation:
+
 - `api_url` **[str]**: URL including schema where the API is locates
 - `metrics_url` **[str]**: URL including schema where the API is locates
 - `cors_allowed_orgins` **[list]**: Allowed URLs for CORS requests to the API. It should at least include your chosen `api_url` and `metrics_url`
 
-For the rest please see [installation →]({{< relref "/docs/installation/installation-cluster" >}})
+For the rest please see [installation →]({{< relref "/docs/cluster/installation" >}})
 
 
 ## measurement
