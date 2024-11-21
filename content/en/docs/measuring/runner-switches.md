@@ -16,7 +16,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--filename` An optional alternative filename if you do not want to use "usage_scenario.yml"
 - `--config-override` Override the configuration file with the passed in yml file.
   + Must be located in the same directory as the regular configuration file. Pass in only the name.
-- `--no-file-cleanup` flag to not delete the metric provider data in `/tmp/green-metrics-tool`
+- `--file-cleanup` flag to delete the metric provider data in `/tmp/green-metrics-tool`.  Normally this folder is purged on run start.
 - `--debug` flag to activate steppable debug mode
   + This allows you to enter the containers and debug them if necessary.
 - `--allow-unsafe` flag to activate unsafe volume bindings, ports, and complex env vars
