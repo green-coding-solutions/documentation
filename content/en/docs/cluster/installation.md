@@ -175,26 +175,26 @@ This is the minium set we deem reasonable. Please note that this resembles a use
 
 #### Benchmarking Machines
 
-To have the most stable result benchmarking machines should have:
+To have the most stable result benchmarking machines or if you want to use Container Energy Estimations based on CPU Utilization you should have:
 
-- Turbo Boost turned on
-- Hyper Threading turned on
-- DVFS turned on
-- Allow C8-C0 states
+- Turbo Boost turned off
+- Hyper Threading turned off
+- DVFS turned off
+- Allow only C0 state
 
 All of these settings can be tweaked best in the BIOS. Additionally for turning DVFS off we recommend booting the kernel with `intel_pstate` CPU frequency driver deactived and using the `acpi` one which allows for setting the `userspace` govenor.
 
 ```
-$ nano /etc/default/grub
+$ sudo nano /etc/default/grub
 
 # Change this line
 # GRUB_CMDLINE_LINUX_DEFAULT=""
 # to 
 # GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=disable acpi=force"
 
-$ update-grub
+$ sudo update-grub
 
-$ cat <<EOF > /etc/systemd/system/fix-cpu-frequency.service
+$ cat <<EOF | sudo tee /etc/systemd/system/fix-cpu-frequency.service
 [Unit]
 Description=Fix CPU Frequency
 
@@ -209,8 +209,11 @@ WantedBy=multi-user.target
 EOF
 
 
-$ systemctl enable fix-cpu-frequency
-$ systemctl start fix-cpu-frequency
+$ sudo systemctl enable fix-cpu-frequency
+
+# Reboot here!
+
+$ sudo systemctl start fix-cpu-frequency
 
 $ cat /proc/cpuinfo | grep MHz # to check that frequency is fixed
 ```
