@@ -78,8 +78,10 @@ We have the following machines available for running measurements in our cluster
     + Threads: 4
     + Hyper-Threading: Off
     + Turbo Boost: On
+    + DVFS: Off (Fixed to 2.1 GHz)
+    + C-States: C0 only
     + Memory: 16 GB
-    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) / [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
 
 ---
 
