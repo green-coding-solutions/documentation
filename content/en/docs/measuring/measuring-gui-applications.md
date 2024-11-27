@@ -30,7 +30,7 @@ description: Opens Firefox running in a docker container with a GUI window on Ub
 
 services:
   gcb-playwright:
-    image: greencoding/gcb_playwright:v12
+    image: greencoding/gcb_playwright:v15
     volumes:
        - /tmp/.X11-unix:/tmp/.X11-unix # allows to bind to X11 wayland bridge
     environment:
