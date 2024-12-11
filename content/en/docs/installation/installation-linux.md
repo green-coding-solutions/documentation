@@ -200,6 +200,8 @@ is running on port `80` or `443`
 
 Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`.
 
+{{< alert icon="💡" text="Note for ARM systems: Please use the '-r' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems." />}}
+
 What you might want to add:
 
 - SMTP mail sending is by default deactivated, so for a quick-start you do not have to change that in the `config.yml`
