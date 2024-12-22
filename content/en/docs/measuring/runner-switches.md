@@ -28,6 +28,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--skip-unsafe` flag to skip unsafe volume bindings, ports and complex env vars
   + This is typically done when reusing already present `compose.yml` files without the need to alter the file
 - `--skip-system-checks` Skip checking the system if the GMT can run
+- `--skip-volume-inspect` flag to skip disable docker volume inspection. Can help if you encounter permission issues, since GMT runs as non root but for some docker configurations volume dir are only readable by root user.
 - `--verbose-provider-boot` flag to boot metric providers gradually
   + This will enable the user to see the impact of each metric provider more clearly
   + There will be a 10 second sleep for two seconds after each provider boot
