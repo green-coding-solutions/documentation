@@ -30,8 +30,8 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--skip-system-checks` Skip checking the system if the GMT can run
 - `--skip-volume-inspect` flag to skip disable docker volume inspection. Can help if you encounter permission issues, since GMT runs as non root but for some docker configurations volume dir are only readable by root user.
 - `--verbose-provider-boot` flag to boot metric providers gradually
-  + This will enable the user to see the impact of each metric provider more clearly
-  + There will be a 10 second sleep for two seconds after each provider boot
+  + This will enable the user to see the impact of each metric provider more clearly in the metric timelines
+  + There will be a 10 second sleep after each provider boot
   + `RAPL` metric providers will be prioritized to start first, if enabled
 - `--user-id` Execute run as a specific user (Default: 1) - See also [User Management →]({{< relref "/docs/cluster/user-management.md" >}})
 - `--full-docker-prune` Stop and remove all containers, build caches, volumes and images on the system
