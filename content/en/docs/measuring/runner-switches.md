@@ -33,6 +33,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
   + This will enable the user to see the impact of each metric provider more clearly
   + There will be a 10 second sleep for two seconds after each provider boot
   + `RAPL` metric providers will be prioritized to start first, if enabled
+- `--user-id` Execute run as a specific user (Default: 1) - See also [User Management →]({{< relref "/docs/cluster/user-management.md" >}})
 - `--full-docker-prune` Stop and remove all containers, build caches, volumes and images on the system
 - `--docker-prune` Prune all unassociated build caches, networks volumes and stopped containers on the system
 - `--dev-no-metrics` Skips loading the metric providers. Runs will be faster, but you will have no metric
