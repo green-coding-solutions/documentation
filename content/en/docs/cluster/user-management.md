@@ -14,7 +14,7 @@ In the FOSS version of GMT only two base users are configured and every action c
 
 By default *USER 1* has full capabilities and can access all resources.
 
-The *USER 1* has the token *DEFAULT* by default
+The *USER 1* has the token *DEFAULT* by default.
 
 ## Authentication mechanism
 
