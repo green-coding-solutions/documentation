@@ -153,3 +153,11 @@ We recommend setting `system_check_treshold` to **2** in your production setup o
 If you are trying to calculate an energy per container you should set the `idle-duration` configuration value high enough so you get a stable value to base the offset on.
 
 We recommend at least *120 s*.
+
+### 18. Internal Networking Only
+External networking introduces variable latency in your benchmarks and thus should be avoided whereever possible.
+
+One method to achieve this is to set the network to internal only. See [Docker Compose directive](https://docs.docker.com/reference/compose-file/networks/#internal).
+ GMT supports this feature natively.
+
+ In case you need access to external networking we recommend you at least try to cache the request in a warmup run and then run the final benchmark on the cached / internally mirrored result.
