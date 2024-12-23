@@ -27,7 +27,7 @@ Here is an example cURL request:
 ```bash
     API_TOKEN='DEFAULT'
     curl -X POST https://api.green-coding.io/v1/runs \
-         -H "X-Authentication: ${API_TOKEN}" \
+         -H "X-Authentication: ${API_TOKEN}"
 ```
 
 **Important:** If no *X-Authentication* header is supplied the API will still authenticate *USER 1* by default. 
