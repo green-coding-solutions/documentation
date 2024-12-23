@@ -17,11 +17,11 @@ This page provides examples how we setup the *cron jobs*. Adjust the times and f
 SHELL=/bin/bash
 
 ## Deprecated! We do not recommend to use the cron feature to schedule jobs
-#*/5    *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/tools/jobs.py project &>> /var/log/green-metrics-jobs.log
+#*\/5    *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/tools/jobs.py project &>> /var/log/green-metrics-jobs.log
 
 ## We recommend to trigger the email job every 2 minutes
 ## You can trigger it more often, as it has a locking mechanism. The mechanism is however not fully parallel safe and email processing is not done in a transaction which might lead to race conditions if multiple connections to the DB in parallel try to set the DB lock.
-*/2     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/jobs.py email &>> /var/log/green-metrics-jobs.log
+*\/2     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/jobs.py email &>> /var/log/green-metrics-jobs.log
 
 ## If you only run daily or weekly projects this needs to only run once a day
 ## If you use the commit or tag feature we recommend every 15 minutes
