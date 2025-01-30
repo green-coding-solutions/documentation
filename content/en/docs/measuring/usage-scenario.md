@@ -85,7 +85,7 @@ services:
   gcb-wordpress-dummy:
     # ...
     depends_on:
-      - gcb-wordpress-mariadb      
+      - gcb-wordpress-mariadb
 ```
 
 - `services` **[dict]**: (Dictionary of container dictionaries for orchestration)
@@ -101,7 +101,7 @@ services:
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
     - `depends_on:` **[list|dict]** *(optional)*
-      + Can either be an list of services names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started. 
+      + Can either be an list of services names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started.
       + Or it can be an dict where each key represents a service as a string. The string then can have two values:
           * `service_healthy`: Will wait for the container until the docker *healthcheck* returns *healthy*.
           * `service_started`: Similar to the list syntax this will enforce a starting order and just wait until the container has been created.
@@ -113,7 +113,7 @@ services:
       + The networks to put the container into. If no networks are defined throughout the `usage_scenario.yml` the container will be put into the default network will all others in the file.
     - `healthcheck:` **[dict]** *(optional)*
       + Please see the definition of these arguments and how healthcheck works in the official docker compose definition. We just copy them over: [Docker compose healthcheck specification](https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck)
-      + `test:` **[str|list]**         
+      + `test:` **[str|list]**
       + `interval:` **[str]**
       + `timeout:` **[str]**
       + `retries:` **[integer]**
@@ -139,7 +139,8 @@ services:
     - `read-sci-stdout:` **[bool]** *(optional)*
       + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
       + Please see [SCI (Green Software Foundation) →]({{< relref "sci" >}}) for more information.
-
+    - `docker-args:` **[list]** *(optional)
+      + A list of string that should be added to the `docker run` command of that container. The argument needs to be listed in the `user.capabilities` json under `measurement:orchestrators:docker:allow-args`. The string in the `user.capabilities` can be a regex. Opening this up could be a potential security issue!
 
 Please note that every key below `services` will serve as the name of the
 container later on. You can overwrite the container name with the key `container_name`.
