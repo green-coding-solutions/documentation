@@ -124,6 +124,11 @@ services:
       + Defaults to `/tmp/repo`
     - `command:` **[str]** *(optional)*
       + Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`.
+    - `entrypoint:` **[str]** *(optional)*
+      + Declares the default entrypoint for the service container. This overrides the ENTRYPOINT instruction from the service's Dockerfile.
+      + The value of `entrypoint` must consist of a single command without a space!
+      + If you need to provide arguments, either provide a script (e.g. `entrypoint.sh`) or provide the arguments via `command`.
+      + If `entrypoint` is used in conjunction with `command`, the value of `command` is used as the argument for the `entrypoint`.
     - `shell:` **[str]** *(optional)*
       + Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
       + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
