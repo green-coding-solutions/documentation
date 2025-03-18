@@ -271,9 +271,3 @@ Every note will then be consumed and can be retrieved through the API.
 Please be aware that the timestamps of the note do not have to be identical
 with any command or action of the container. If the timestamp however does not fall
 into the time window of your measurement run it will not be displayed in the frontend.
-
-#### Flow notes
-
-- Commands have a time-limit configured in [Configuration →]({{< relref "configuration" >}}). If you measure locally you can increase that limit if needed.
-- In our Green Metrics Tool online version this limit is currently fixed. You may issue multiple separate commands though if you like.
-  + We will introduce a fixed limit of 15 Minutes for the whole measurement run for our online version in the near future.
