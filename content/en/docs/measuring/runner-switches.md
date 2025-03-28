@@ -42,6 +42,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--dev-flow-timetravel` Allows to repeat a failed flow or timetravel to beginning of flows or restart services
 - `--dev-no-optimizations` Disables the creation of potential optimization recommendations based on the measurement run.
 - `--print-logs` Prints the container and process logs to stdout
+- `--print-phase-stats PHASE_NAME` Prints the stats of the given phase to the CLI. Typical argument would be "\[RUNTIME\]" to see all runtime phases combined
 
 These options are not available when doing cron runs.
 
