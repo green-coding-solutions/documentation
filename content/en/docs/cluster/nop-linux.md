@@ -32,7 +32,7 @@ done
 
 
 # Remove all the packages we don't need
-sudo apt purge -y --purge snapd cloud-guest-utils cloud-init apport apport-symptoms cryptsetup cryptsetup-bin cryptsetup-initramfs curl gdisk lxd-installer mdadm open-iscsi snapd squashfs-tools ssh-import-id wget xauth unattended-upgrades update-notifier-common python3-update-manager unattended-upgrades needrestart command-not-found cron lxd-agent-loader modemmanager motd-news-config pastebinit packagekit
+sudo apt purge -y --purge snapd cloud-guest-utils cloud-init apport apport-symptoms cryptsetup cryptsetup-bin cryptsetup-initramfs curl gdisk lxd-installer mdadm open-iscsi snapd squashfs-tools ssh-import-id wget xauth update-notifier-common python3-update-manager unattended-upgrades needrestart command-not-found cron lxd-agent-loader modemmanager motd-news-config pastebinit packagekit
 sudo systemctl daemon-reload
 sudo apt autoremove -y --purge
 
@@ -41,7 +41,7 @@ sudo apt update
 
 sudo apt install psmisc -y
 
-# on some versions killall might be missing. Please insta
+# on some versions killall might be missing. Please install then
 sudo killall unattended-upgrade-shutdown
 
 sudo apt upgrade -y
@@ -119,7 +119,7 @@ echo 0 | sudo tee /proc/sys/kernel/watchdog_thresh
 sudo rm /etc/update-motd.d/*
 
 # Remove all cron files. Cron shouldn't be running anyway but just to be safe
-rm -R /etc/cron*
+sudo rm -R /etc/cron*
 
 sudo apt autoremove -y --purge
 
