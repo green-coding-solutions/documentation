@@ -101,6 +101,8 @@ services:
       + Or list items with strings in the format: *MYSQL_PASSWORD=123*
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
+    - `init:` **[boolean]**
+      + Will start a PID 1 *init* process in the container that helps when you are experiencing zombie processes and memory leaks. See [Docker Docs](https://docs.docker.com/reference/cli/docker/container/run/#init) for details
     - `depends_on:` **[list|dict]** *(optional)*
       + Can either be an list of services names on which the service is dependent. It affects the startup order and forces the dependency to be started (container state = "running") before the service is started.
       + Or it can be an dict where you can specify a condition. The `condition` can have two values:
