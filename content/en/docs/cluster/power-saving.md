@@ -3,7 +3,7 @@ title: "Power Saving"
 description: "Power saving in GMT cluster mode"
 lead: ""
 date: 2023-06-26T01:49:15+00:00
-weight: 105
+weight: 106
 ---
 
 ## Wake-on-LAN
