@@ -2,7 +2,7 @@
 title: "Network Connections - Proxy Container"
 description: "Documentation for the NetworkConnectionsProxyContainerProvider for the Green Metrics Tool"
 date: 2023-04-30T08:49:15+00:00
-weight: 141
+weight: 190
 ---
 
 ### What it does
