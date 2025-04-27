@@ -140,4 +140,4 @@ GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
 The default user has a default password and can see all runs by all other users on the system.
 For additional security the default user can either be deactivated or downgraded and the password be changed.
 
-Please note that the [User Management]({{< relref "/docs/measuring/user-management" >}}) is only part of the [Enterprise](https://www.green-coding.io/products/green-metrics-tool/) version.
+Please note that the [User Management]({{< relref "user-management" >}}) is only part of the [Enterprise](https://www.green-coding.io/products/green-metrics-tool/) version.
