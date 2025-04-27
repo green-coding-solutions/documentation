@@ -8,24 +8,17 @@ weight: 815
 
 The `usage_scenario.yml` consists of these main blocks:
 
-- `networks` - Handles the orchestration of networks
+- Start of the file with some basic root level keys
 - `services` - Handles the orchestration of containers
+- `networks` - (optional) Handles the orchestration of networks
 - `flow` - Handles the interaction with the containers
-- `compose-file*` - A compose file to include.
-
-`*`: means these values are optional.
+- `compose-file` - (optional) A compose file to include
 
 Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
 
-At the beginning of the file you should specify `name`, `author`, and `architecture`.
-These will help you later on tell what the scenario is doing.
+See also the note on [unsupported features](#unsupported-docker-compose-features)
 
-**Linux** and **Darwin** are the only supported architectures. If you don't mention an `architecture` it will run on both.
-
-Please note that when running the measurement you can supply an additional name,
-which can and should be different from the name in the `usage_scenario.yml`.
-
-The idea is to have a general name for the `usage_scenario.yml` and another one for the specific measurement run.
+### Basic root level keys
 
 Example for the start of a `usage_scenario.yml`
 
@@ -36,19 +29,22 @@ author: Arne Tarara <arne@green-coding.io>
 description: This is just an example usage_scenario ...
 ```
 
+
+- `name` **[str]**: Name of the scenario 
+- `description` **[str]**: Detailed description of the scenario 
+- `author` **[str]**: Author of the scenario
+- `architecture` **[str]** *(optional)*: If your *usage_scenario* runs only on a specific architecture you can instruct the GMT to check if the architecture of the machine matches. You can specify **Linux**, **Windows** and **Darwin**. Omit this key if your scenario has no architecture restriction.
+    + Note: Windows with WSL2 and Linux containers would be **Linux** as architecture
+- `ignore-unsupported-compose` **[bool]** *(optional)*: Ignore unsupported [Docker Compose](https://docs.docker.com/compose/compose-file) features and still run usage_scenario
+
+
+Please note that when running the measurement you can supply an additional name,
+which can and should be different from the name in the `usage_scenario.yml`.
+
+The idea is to have a general name for the `usage_scenario.yml` and another one for the specific measurement run.
+
 When running the `runner.py` we would then set `--name` for instance to: *Hugo Test run on my Macbook*
 
-### Networks
-
-Example:
-
-```yaml
-networks:
-  name: wordpress-mariadb-data-green-coding-network
-```
-
-- `networks:` **[dict]** (Dictionary of network dictionaries for orchestration)
-  + `name: [NETWORK]` **[a-zA-Z0-9_]** The name of the network with a trailing colon. No value required.
 
 ### Services
 
@@ -152,6 +148,18 @@ services:
 
 Please note that every key below `services` will serve as the name of the
 container later on. You can overwrite the container name with the key `container_name`.
+
+### Networks
+
+Example:
+
+```yaml
+networks:
+  name: wordpress-mariadb-data-green-coding-network
+```
+
+- `networks:` **[dict]** (Dictionary of network dictionaries for orchestration)
+  + `name: [NETWORK]` **[a-zA-Z0-9_]** The name of the network with a trailing colon. No value required.
 
 ### Flow
 
@@ -275,3 +283,11 @@ Every note will then be consumed and can be retrieved through the API.
 Please be aware that the timestamps of the note do not have to be identical
 with any command or action of the container. If the timestamp however does not fall
 into the time window of your measurement run it will not be displayed in the frontend.
+
+### Unsupported Docker Compose features
+
+All features not listed here are not supported by the Green Metrics Tool.
+
+Since we allow the import of [Docker Compose](https://docs.docker.com/compose/compose-file) files this can lead to importing unsupported features.
+
+GMT will error in this case. If you do not want that add the `ignore-unsupported-compose` key after you have tested your *usage_scenario.yml* file.
