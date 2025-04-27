@@ -3,7 +3,7 @@ title: "Cluster Security"
 description: "Hardening a GMT cluster installation"
 lead: ""
 date: 2024-10-25T01:49:15+00:00
-weight: 106
+weight: 108
 ---
 
 
@@ -12,10 +12,6 @@ weight: 106
 In the default installation one user is installed for the database and also for the API access.
 
 In a cluster installation we recommend restricting both.
-
-### Deactivating the default user
-
-TODO 🤔
 
 ### Creating a management user for delete operations
 
@@ -138,3 +134,10 @@ GRANT USAGE, SELECT ON SEQUENCE notes_id_seq TO client;
 GRANT SELECT,INSERT ON TABLE phase_stats TO client;
 GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
 ```
+
+### Visibility / Deactivating the Default User
+
+The default user has a default password and can see all runs by all other users on the system.
+For additional security the default user can either be deactivated or downgraded and the password be changed.
+
+Please note that the [User Management]({{< relref "/docs/measuring/user-management" >}}) is only part of the [Enterprise](https://www.green-coding.io/products/green-metrics-tool/) version.
