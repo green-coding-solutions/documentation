@@ -66,7 +66,7 @@ services:
     ports:
       - 3306:3306
     setup-commands:
-      - sleep 20
+      - command: sleep 20
     volumes:
       - /LOCAL/PATH:/PATH/IN/CONTAINER
     networks:
@@ -110,6 +110,11 @@ services:
         * `service_started`: Similar to the list syntax -> this will enforce a starting order and just wait until the container state is "running".
     - `setup-commands:` **[list]** *(optional)*
       + List of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
+      + `command:` **[str]**
+        * The command to be executed
+      + `shell:` **[str]** *(optional)*
+        * Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
+        ** Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
     - `volumes:` **[list]**  *(optional)*
       + List of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
     - `networks:` **[list]**  *(optional)*
@@ -131,9 +136,6 @@ services:
       + Declares the default entrypoint for the service container. This overrides the ENTRYPOINT instruction from the service's Dockerfile.
       + The value of `entrypoint` can either be an empty string (ENTRYPOINT instruction will be ignored) or a single word (helpful to provide a script).
       + If you need an entrypoint that consists of multiple commands/arguments, either provide a script (e.g. `entrypoint.sh`) or set it to an empty string and provide your commands via `command`.
-    - `shell:` **[str]** *(optional)*
-      + Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
-      + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
     - `log-stdout:` **[boolean]** *(optional)*
       + Will log the *stdout* and make it available through the frontend in the *Logs* tab.
       + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.

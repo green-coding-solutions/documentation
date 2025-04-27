@@ -44,7 +44,7 @@ services:
   simple-load-container:
     image: alpine
     setup-commands:
-      - apk add stress-ng
+      - command: apk add stress-ng
  
  flow:
   - name: Stress
@@ -109,7 +109,7 @@ services:
   puppeteer-container:
     image: greencoding/puppeteer-chrome
     setup-commands:
-      - cp /tmp/repo/puppeteer-flow.js /var/www/puppeteer-flow.js
+      - command: cp /tmp/repo/puppeteer-flow.js /var/www/puppeteer-flow.js
     networks:
       - example-network
 

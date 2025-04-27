@@ -51,7 +51,7 @@ services:
   simple-load-container:
     image: alpine
     setup-commands:
-      - apk add stress-ng
+      - command: apk add stress-ng
  
 flow:
   - name: Stress
