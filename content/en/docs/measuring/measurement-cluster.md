@@ -23,7 +23,7 @@ We have the following machines available for running measurements in our cluster
     + CPU: Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz
     + Cores: 4
     + Threads: 4
-    + Hyper-Threading: Off
+    + Hyper-Threading: N/A
     + Turbo Boost: Off
     + DVFS: On
     + C-States: All
@@ -76,7 +76,7 @@ We have the following machines available for running measurements in our cluster
     + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
     + Cores: 4
     + Threads: 4
-    + Hyper-Threading: Off
+    + Hyper-Threading: N/A
     + Turbo Boost: On
     + DVFS: Off (Fixed to 2.1 GHz)
     + C-States: C0 only
@@ -92,7 +92,7 @@ We have the following machines available for running measurements in our cluster
     + CPU: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
     + Cores: 6
     + Threads: 6
-    + Hyper-Threading: Off
+    + Hyper-Threading: N/A
     + Turbo Boost: On
     + Memory: 32 GB
     + Graphics: GeForce GTX 1080
