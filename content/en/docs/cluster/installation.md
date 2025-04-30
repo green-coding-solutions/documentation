@@ -43,7 +43,7 @@ After=docker.target
 [Service]
 Type=simple
 WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/tools/client.py
+ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/cron/client.py
 Restart=always
 RestartSec=30s
 TimeoutStopSec=600
@@ -58,7 +58,7 @@ WantedBy=default.target
 Then activate the service
 ```bash
 systemctl --user daemon-reload # Reload the systemd configuration
-systemctl --ser enable green-coding-client # enable on boot
+systemctl --user enable green-coding-client # enable on boot
 systemctl --user start green-coding-client # start service
 
 systemctl --user status green-coding-client # check status
