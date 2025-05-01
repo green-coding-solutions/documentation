@@ -59,6 +59,14 @@ from official databases like:
 - [https://tco.exploresurface.com/sustainability/calculator](https://tco.exploresurface.com/sustainability/calculator)
 - [https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf](https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf)
 
+Example:
+```yml
+sci:
+    EL: 4 # means 4 years of usage
+    RS: 1 # means we use 1/1 = 100% of the machine. Bare metal. No virtualization
+    TE: 181000 # Example value for a laptop taken from https://dataviz.boavizta.org/terminalimpact. Value is in g
+    I: 436 # The number 436 that comes as default is for Germany from 2022. Value in gCO2e/kWh
+```
 
 ## Display
 
