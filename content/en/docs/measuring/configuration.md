@@ -121,7 +121,6 @@ For the rest please see [installation →]({{< relref "/docs/cluster/installatio
 - `system_check_threshold` **[integer]: Level at which an exception will be raised for system checks. The lower the more restrictive system checks are. We recommend *3* for development and *2* for cluster setups. *1* only for debugging.
 - `pre-test-sleep` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
 - `post-test-sleep` **[integer]**: Seconds to idle containers after measurement
-benchmark may take. Including building containers, baseline, idle, runtime and removal phases.
 - `idle-duration` **[integer]**: Duration in seconds for the idle phase
 - `baseline-duration` **[integer]**: Duration in seconds for the baseline phase
 - `phase-transition-time` **[integer]**: Seconds to idle between phases
@@ -191,7 +190,6 @@ For local installations these are to be found under [https://metrics.green-codin
 - `disabled_metric_providers` **[list]**: Providers to disable in CamelCase format.
   + Example: *NetworkConnectionsProxyContainerProvider*
 - `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
-- `total-duration` **[integer]**: Max. duration in seconds for how long the whole run is allowed to take
+- `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
 
-
-<center><img style="width: 300px;" src="/img/dashboard-settings.webp" alt="Dashboard Setings for GMT Measurements"></center>
+<center><img style="width: 300px;" src="/img/dashboard-settings.webp" alt="Dashboard Settings for GMT Measurements"></center>
