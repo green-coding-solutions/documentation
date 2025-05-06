@@ -15,8 +15,11 @@ The `usage_scenario.yml` consists of these main blocks:
 - `compose-file` - (optional) A compose file to include
 
 Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
+See also the note on [unsupported features](#unsupported-docker-compose-features) to disable the warning about that.
 
-See also the note on [unsupported features](#unsupported-docker-compose-features)
+Inside the `usage_scenario.yml` you can use variables. See [variables](#variables) for details.
+
+
 
 ### Basic root level keys
 
@@ -291,3 +294,43 @@ All features not listed here are not supported by the Green Metrics Tool.
 Since we allow the import of [Docker Compose](https://docs.docker.com/compose/compose-file) files this can lead to importing unsupported features.
 
 GMT will error in this case. If you do not want that add the `ignore-unsupported-compose` key after you have tested your *usage_scenario.yml* file.
+
+
+## Variables
+
+A variable must adhere to the format `__GMT_VAR_[\w]+__`. An example would be `__GMT_VAR_NUMBER__`.
+
+The value of the variable is a string. It will be replaced as is without adding " or ' though.
+
+Example in a `usage_scenario.yml`:
+```yml
+---
+name: Test Stress
+author: Dan Mateas
+description: test
+
+services:
+  test-container:
+    type: container
+    image: gcb_stress
+    build:
+      context: ../stress-application
+
+flow:
+  - name: Stress
+    container: test-container
+    commands:
+      - type: console
+        command: stress-ng -c 1 -t __GMT_VAR_DURATION__ -q
+        note: Starting Stress
+```
+
+Here we can leverage the variable functionality to supply different durations without creating new usage scenarios all the time.
+
+A run where we want the variable to be *1* as example can be started like this:
+```bash
+$ python3 runner.py --uri PATH_TO_SCENARIO --variables "__GMT_VAR_DURATION__=1"
+```
+See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches/" >}})
+
+The API accepts these variables as arguments also to the `/v1/software/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.

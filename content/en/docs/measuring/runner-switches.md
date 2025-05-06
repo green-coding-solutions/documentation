@@ -14,6 +14,8 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--branch` When providing a git repository, optionally specify a branch
 - `--name` A name which will be stored to the database to discern this run from others
 - `--filename` An optional alternative filename if you do not want to use "usage_scenario.yml"
+- `--variables` A list of string key-value pairs with variables to be replaced in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
+  + e.g.: `--variables '__GMT_VAR_MY_VALUE_=cats are cool'`
 - `--config-override` Override the configuration file with the passed in yml file.
   + Must be located in the same directory as the regular configuration file. Pass in only the name.
 - `--no-file-cleanup` flag to not delete the metric provider data in `/tmp/green-metrics-tool`
