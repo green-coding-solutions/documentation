@@ -43,7 +43,7 @@ After=docker.target
 [Service]
 Type=simple
 WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/cron/client.py
+ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 -u /home/gc/green-metrics-tool/cron/client.py
 Restart=always
 RestartSec=30s
 TimeoutStopSec=600
@@ -80,7 +80,7 @@ Type=simple
 User=gc
 Group=gc
 WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/tools/client.py
+ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 -u /home/gc/green-metrics-tool/tools/client.py
 Restart=always
 RestartSec=30s
 TimeoutStopSec=600
@@ -125,13 +125,13 @@ sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
 The Green Metrics Tool comes with an implemented queueing and locking mechanism. In contrast to the NOP Linux implementation this way of checking for jobs doesn't poll with a process all the time but relies on cron which is not available on NOP Linux.
 
 You can install a cronjob on your system to periodically call:
-- `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
-- `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
 
 The `jobs.py` uses the *Python* faulthandler mechanism and will also report to *STDERR* in case of a segfault.
 When running the cronjob we advice you to append all the output combined to a log file like so:
 
-`* * * * * python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
+`* * * * * python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
 
 Be sure to give the `green-metrics-jobs.log` file write access rights.
 
