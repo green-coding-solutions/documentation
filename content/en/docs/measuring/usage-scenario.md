@@ -327,6 +327,16 @@ flow:
 
 Here we can leverage the variable functionality to supply different durations without creating new usage scenarios all the time.
 
+Beware that it is often very helpful to put the whole command in quotes like this:
+
+```yml
+...
+command: "stress-ng -c 1 -t __GMT_VAR_DURATION__ -q"
+...
+```
+
+The reason being that when your variable contains *YAML* control characters like a *:* you might get into parsing errors.
+
 A run where we want the variable to be *1* as example can be started like this:
 ```bash
 $ python3 runner.py --uri PATH_TO_SCENARIO --variables "__GMT_VAR_DURATION__=1"
