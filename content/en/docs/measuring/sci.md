@@ -23,7 +23,7 @@ The actual ticks for the unit of work (*R*) are captured from the containers and
 
 ### Setup in usage_scenario
 
-Please see an example how to configure in our [example applications repository for SCI apps](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci).
+Please see an example how to configure in our [example applications repository for SCI apps](https://github.com/green-coding-solutions/example-applications/tree/main/green-software-foundation-sci).
 
 A simple integration for an CLI based application might for instance look like this:
 
@@ -52,7 +52,7 @@ If you have an API or similar the output might not happen on the CLI directly, b
 
 ### Setup in config.yml
 
-An [example configuration](https://github.com/green-coding-berlin/green-metrics-tool/blob/main/config.yml.example) for the `config.yml` is provided when the Green Metrics Tool is installed.
+An [example configuration](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/config.yml.example) for the `config.yml` is provided when the Green Metrics Tool is installed.
 The values for the respective variables have to be either defined to best knowledge (like lifetime for instance) and / or
 from official databases like:
 - [https://dataviz.boavizta.org/manufacturerdata](https://dataviz.boavizta.org/manufacturerdata)
@@ -96,9 +96,9 @@ The components of the SCI are attributed by the GMT as follows:
 
 We provide quite some example applications that showcase how the SCI can be measured with the Green Metrics Tool for APIs, CLI tools etc.
 
-[Example applications on GitHub](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci)
+[Example applications on GitHub](https://github.com/green-coding-solutions/example-applications/tree/main/green-software-foundation-sci)
 
-[Example data with runs](https://metrics.green-coding.io/?uri=green-coding-berlin/example-applications&filename=green-software)
+[Example data with runs](https://metrics.green-coding.io/?uri=green-coding-solutions/example-applications&filename=green-software)
 
 ## Caveats and future work
 
@@ -106,5 +106,5 @@ At the moment the SCI is only measured in the *RUNTIME* phase and no sub-phase m
 
 Future work will include making the SCI an actual *Metric Provider* and thus allowing to capture it in every phase, optionally with having different dimensions per phase even.
 
-The work on this task is tracked in [this GitHub Issue](https://github.com/green-coding-berlin/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
+The work on this task is tracked in [this GitHub Issue](https://github.com/green-coding-solutions/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
 

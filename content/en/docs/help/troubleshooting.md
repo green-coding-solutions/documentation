@@ -54,7 +54,7 @@ This is due to a current bug with the reading of the XML output of the powermetr
 
 Easiest fix: Just try the run again. The error happens seldomly and is random.
 
-[Please consult this ticket for current status of the bugfix](https://github.com/green-coding-berlin/green-metrics-tool/issues/286)
+[Please consult this ticket for current status of the bugfix](https://github.com/green-coding-solutions/green-metrics-tool/issues/286)
 
 ## Submodule issues
 
@@ -80,7 +80,7 @@ This is because a container has exited during the run of the GMT or you are runn
 
 A way to do this with the GMT directly without changing your containers would be the `command` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
 
-An example where we use this command to keep a container alive is here: https://github.com/green-coding-berlin/example-applications/blob/main/idle/usage_scenario.yml
+An example where we use this command to keep a container alive is here: https://github.com/green-coding-solutions/example-applications/blob/main/idle/usage_scenario.yml
 
 ## Stderr on {metric_provider.__class__.__name__} was NOT empty
 

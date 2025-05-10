@@ -15,7 +15,7 @@ We have tested the tool on Intel as well as on Apple Silicon chips. Results may 
 ## Downloading and installing required packages
 
 ```bash
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool
+git clone https://github.com/green-coding-solutions/green-metrics-tool ~/green-metrics-tool
 ```
 
 ## Docker

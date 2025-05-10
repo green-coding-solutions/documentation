@@ -80,4 +80,4 @@ it looked way nicer.
 
 So if you plan on measurements < 30 Minutes than ApexCharts might be a good choice for a frontend charting library.
 Please checkout our old release where we still used the library if you need a
-starting point how to integrate it: [Release v0.1-beta](https://github.com/green-coding-berlin/green-metrics-tool/releases/tag/v0.1-beta)
+starting point how to integrate it: [Release v0.1-beta](https://github.com/green-coding-solutions/green-metrics-tool/releases/tag/v0.1-beta)

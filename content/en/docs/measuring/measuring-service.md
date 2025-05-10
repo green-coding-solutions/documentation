@@ -15,8 +15,7 @@ If you do not have that, please check out the relevant links given.
 Our hosted service is available at [https://metrics.green-coding.io/](https://metrics.green-coding.io/)  
 and you can [request a measurement of your application](https://metrics.green-coding.io/request.html).
 
-You can supply the GitHub link to our provided [easy example application](https://github.com/green-coding-berlin/simple-example-application) and wait for  
-an email to arrive to view a report.
+You can supply the GitHub link to our provided [easy example application](https://github.com/green-coding-solutions/simple-example-application) and wait for an email to arrive to view a report.
 
 This example highlights that in order to measure an application you really need to only have a repository with a [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
 

@@ -49,7 +49,7 @@ cluster:
     shutdown_on_job_no: False
     control_workload:
       name: "Measurement control Workload"
-      uri: "https://github.com/green-coding-berlin/measurement-control-workload"
+      uri: "https://github.com/green-coding-solutions/measurement-control-workload"
       filename: "usage_scenario.yml"
       branch: "main"
       comparison_window: 5
@@ -134,7 +134,7 @@ For the rest please see [installation →]({{< relref "/docs/cluster/installatio
 Some metric providers have unique configuration params:
 
 - PsuEnergyAcXgboostSystemProvider
-  + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
+  + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
 
 Also note that some providers are deactivated by default, because they either need
 additional configuration parameters, extra hardware or a specially configured system.

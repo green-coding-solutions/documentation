@@ -192,7 +192,7 @@ services:
 
 In order to simulate a client we need a container running a headless browser.
 
-We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-firefox-chrome](https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-firefox-chrome)
+We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-solutions/example-applications/tree/main/puppeteer-firefox-chrome](https://github.com/green-coding-solutions/example-applications/tree/main/puppeteer-firefox-chrome)
 
 You can also download the container directly from docker hub here: [Docker Hub](https://hub.docker.com/r/greencoding/puppeteer-chrome)
 
@@ -254,7 +254,7 @@ Afterwards run the measurements.
 
 An example how to run a measurement locally can be found here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
-To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/simple-example-application)
+To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-solutions/simple-example-application)
 
 ### Help / Debugging
 If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.

@@ -104,7 +104,7 @@ You can either use our service with a free tier or set the cluster up yourself. 
 into a heat limiting.
 - Also you should take waiting times between test runs to make sure that the system has cooled down again and your 
 energy measurements are not false-high. A good number for this has emerged in our testing which is **180 s**. However on 
-a 30+ core machine this value might be higher. We are currently working on a [calibration script](https://github.com/green-coding-berlin/green-metrics-tool/issues/355) to determine this exact 
+a 30+ core machine this value might be higher. We are currently working on a [calibration script](https://github.com/green-coding-solutions/green-metrics-tool/issues/355) to determine this exact
 value for a particular system.
 
 If you are using a standard cronjob mechanism to trigger the GMT you can use the `post-test-sleep` to force a fixed sleep time.

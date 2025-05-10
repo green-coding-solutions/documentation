@@ -34,7 +34,7 @@ Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different 
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install -y curl git make gcc python3 python3-pip python3-venv && \
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+git clone https://github.com/green-coding-solutions/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool
 
 ```
@@ -45,7 +45,7 @@ cd ~/green-metrics-tool
 ```bash
 sudo dnf upgrade -y && \
 sudo dnf install -y curl git make gcc python3 python3-devel && \
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+git clone https://github.com/green-coding-solutions/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool
 ```
 

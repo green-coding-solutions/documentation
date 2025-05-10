@@ -54,7 +54,7 @@ get to know the flexibility of our tool to measure your application.
 The app you submit to our hosted service must conform  
 to the [usage scenario specification]({{< relref "/docs/measuring/usage-scenario" >}})  and be [containerized]({{< relref "/docs/measuring/containerizing-applications" >}}).
 
-After that you can look at our [Example Apps Repository](https://github.com/green-coding-berlin/example-applications) to see some prepared apps that can be directly measured.
+After that you can look at our [Example Apps Repository](https://github.com/green-coding-solutions/example-applications) to see some prepared apps that can be directly measured.
 
 
 ## Help: FAQ / Troubleshooting

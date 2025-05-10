@@ -20,7 +20,7 @@ cluster:
     ...
     control_workload:
       name: "Measurement control Workload"
-      uri: "https://github.com/green-coding-berlin/measurement-control-workload"
+      uri: "https://github.com/green-coding-solutions/measurement-control-workload"
       filename: "usage_scenario.yml"
       branch: "main"
       comparison_window: 5
