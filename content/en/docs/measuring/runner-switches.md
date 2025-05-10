@@ -44,6 +44,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--dev-no-metrics` Skips loading the metric providers. Runs will be faster, but you will have no metric
 - `--dev-no-sleeps` Removes all sleeps. Resulting measurement data will be skewed.
 - `--dev-no-phase-stats` Do not calculate phase stats.
+- `--dev-no-save` Will save no data to the DB. This implicitly activates `--dev-no-phase-stats`, `--dev-no-metrics` and `--dev-no-optimizations`
 - `--dev-cache-build` Checks if a container image is already in the local cache and will then not build it. Also doesn't clear the images after a run. Please note that skipping builds only works the second time you make a run since the image has to be built at least initially to work.
 - `--dev-no-optimizations` Disables the creation of potential optimization recommendations based on the measurement run.
 - `--print-phase-stats PHASE_NAME` Prints the stats of the given phase to the CLI. Typical argument would be "\[RUNTIME\]" to see all runtime phases combined
