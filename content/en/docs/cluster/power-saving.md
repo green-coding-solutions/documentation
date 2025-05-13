@@ -48,16 +48,17 @@ fi
 ### Turning machine off on empty queue
 To use this functionality you should have *Wake-on-LAN* activated.
 
-You can then set the `shutdown_on_job_no` to *True* and the machine will turn off when the job queue is empty.
+You can then set the `shutdown_on_job_no` to either "*poweroff*" or "*suspend*" and the machine will turn off when the job queue is empty.
 
 ```yml
 cluster:
   client:
     ...  
-    shutdown_on_job_no: True
+    shutdown_on_job_no: suspend
 ```
 
 In order for the shutdown to be triggered by the `client.py` you must allow the `sudo` call without password in an `/etc/sudoers.d/` entry.
+Please choose the line that is appropriate for you depending on if you want to suspend or poweroff.
 
 Example:
 ```bash
