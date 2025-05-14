@@ -22,6 +22,8 @@ Please further note that you must execute certain service still periodically. Th
 #!/bin/bash
 set -euox pipefail
 
+## This is only needed for systems with Window Managers
+
 # this is a patch. Firefox seems to have a trick to remove read-only filesystem. We need to unmount that first
 sudo umount /var/snap/firefox/common/host-hunspell || true
 
@@ -30,9 +32,21 @@ for i in {1..3}; do # we do this three times as packages depends on one another
     for snap_pkg in $(snap list | awk 'NR>1 {print $1}'); do sudo snap remove --purge "$snap_pkg"; done
 done
 
+systemctl --user disable --now snap.firmware-updater.firmware-notifier.timer
+systemctl --user disable --now snap.snapd-desktop-integration.snapd-desktop-integration.service
+sudo systemctl disable --now wpa_supplicant.service
+sudo systemctl disable --now launchpadlib-cache-clean.timer
+sudo rm /etc/systemd/user/timers.target.wants/launchpadlib-cache-clean.timer # launchpad timer is a heavy beast and must be disabled in global scope
+sudo systemctl disable --now snapd.snap-repair.timer
+
+### END Window manager systems
+
+
+# remove bluetooth if installed from previous GMT installs as it just generates noise and is non standard
+sudo apt remove --purge bluez bluez-obexd
 
 # Remove all the packages we don't need
-sudo apt purge -y --purge snapd cloud-guest-utils cloud-init apport apport-symptoms cryptsetup cryptsetup-bin cryptsetup-initramfs curl gdisk lxd-installer mdadm open-iscsi snapd squashfs-tools ssh-import-id wget xauth update-notifier-common python3-update-manager unattended-upgrades needrestart command-not-found cron lxd-agent-loader modemmanager motd-news-config pastebinit packagekit
+sudo apt remove -y --purge snapd cloud-guest-utils cloud-init apport apport-symptoms cryptsetup cryptsetup-bin cryptsetup-initramfs curl gdisk lxd-installer mdadm open-iscsi snapd squashfs-tools ssh-import-id wget xauth update-notifier-common python3-update-manager unattended-upgrades needrestart command-not-found cron lxd-agent-loader modemmanager motd-news-config pastebinit packagekit
 sudo systemctl daemon-reload
 sudo apt autoremove -y --purge
 
@@ -51,11 +65,6 @@ sudo apt remove -y --purge networkd-dispatcher multipath-tools
 
 sudo apt autoremove -y --purge
 
-# These are user running services
-systemctl --user disable --now snap.firmware-updater.firmware-notifier.timer
-systemctl --user disable --now launchpadlib-cache-clean.timer
-systemctl --user disable --now snap.snapd-desktop-integration.snapd-desktop-integration.service
-
 
 # Disable services that might do things
 sudo systemctl disable --now apt-daily-upgrade.timer
@@ -65,36 +74,29 @@ sudo systemctl disable --now e2scrub_all.timer
 sudo systemctl disable --now fstrim.timer
 sudo systemctl disable --now motd-news.timer
 sudo systemctl disable --now e2scrub_reap.service
-sudo systemctl disable --now tinyproxy.service
-sudo systemctl disable --now  anacron.timer
+sudo systemctl disable --now tinyproxy.service # from previous GMT installs
+sudo systemctl disable --now anacron.timer
 
+
+# systemd own timers - must be masked as they cannot be disabled
+sudo systemctl mask --now systemd-tmpfiles-clean.timer
+systemctl --user mask --now systemd-tmpfiles-clean.timer
+sudo systemctl mask --now systemd-journal-flush.service
 
 # these following timers might be missing on newer ubuntus
-sudo systemctl disable --now systemd-tmpfiles-clean.timer
 sudo systemctl disable --now fwupd-refresh.timer
 sudo systemctl disable --now logrotate.timer
 sudo systemctl disable --now ua-timer.timer
 sudo systemctl disable --now man-db.timer
-
 sudo systemctl disable --now sysstat-collect.timer
 sudo systemctl disable --now sysstat-summary.timer
-
-sudo systemctl disable --now systemd-journal-flush.service
 sudo systemctl disable --now systemd-timesyncd.service
-
-sudo systemctl disable --now systemd-fsckd.socket
-sudo systemctl disable --now systemd-initctl.socket
-
-sudo systemctl disable --now cryptsetup.target
-
 sudo systemctl disable --now power-profiles-daemon.service
 sudo systemctl disable --now thermald.service
 sudo systemctl disable --now anacron.service
 
-
-
-# Packages to install for editing and later bluetooth. some of us prefer nano, some vim :)
-sudo apt install -y vim nano bluez
+# Packages to install for editing. some of us prefer nano, some vim. We install bot to keep wild opinionated mobs away :)
+sudo apt install -y vim nano
 
 # Setup networking
 NET_NAME=$(sudo networkctl list "en*" --no-legend | cut -f 4 -d " ")
@@ -106,7 +108,7 @@ Name=$NET_NAME
 DHCP=ipv4
 EOT
 
-# Disable NTP
+# Disable NTP - we trigger it one-off in the cluster service
 sudo timedatectl set-ntp false
 
 # Disable the kernel watchdogs
@@ -116,11 +118,13 @@ echo 0 | sudo tee /proc/sys/kernel/watchdog
 echo 0 | sudo tee /proc/sys/kernel/watchdog_thresh
 
 # Removes the large header when logging in
-sudo rm /etc/update-motd.d/*
+sudo rm -f /etc/update-motd.d/*
 
 # Remove all cron files. Cron shouldn't be running anyway but just to be safe
-sudo rm -R /etc/cron*
+sudo rm -fR /etc/cron*
+sudo rm -fR /var/spool/cron*
 
+# final remove
 sudo apt autoremove -y --purge
 
 # Desktop systems have NetworkManager. Here we want to disable the periodic check to Host: connectivity-check.ubuntu.com.
@@ -133,8 +137,26 @@ else
 fi
 
 # List all timers and services to validate we have nothing left
-sudo systemctl list timers
-systemctl --user list-timers
+
+output=$(sudo systemctl --all list-timers)
+if [[ "$output" == *"0 timers listed"* ]]; then
+    echo "OK: No system timers listed"
+elif [[ "$output" == *"-       - -         - systemd-tmpfiles-clean.timer -"* && "$output" == *"1 timers listed"* ]]; then
+    echo "OK: Only masked system timers listed"
+else
+    echo -e "\e[31mFAIL: Timers are active\e[0m" >&2
+    sudo systemctl --all list-timers
+    exit 1
+fi
+
+output=$(systemctl --user --all list-timers)
+if [[ "$output" == *"0 timers listed"* ]]; then
+    echo "OK: No user timers listed"
+else
+    echo -e "\e[31mFAIL: Timers are active\e[0m" >&2
+    systemctl --user --all list-timers
+    exit 1
+fi
 
 echo "All done. Please reboot system!"
 ```
