@@ -30,9 +30,6 @@ After running a job the client program executes the `tools/cluster/cleanup.sh` s
 
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
-{{< tabs groupId="mode">}}
-{{% tab name="Docker-Rootless-Mode" %}}
-\
 Create a file under: `~/.config/systemd/user/green-coding-client.service`:
 
 ```init
@@ -63,49 +60,6 @@ systemctl --user start green-coding-client # start service
 
 systemctl --user status green-coding-client # check status
 ```
-
-{{% /tab %}}
-{{% tab name="Docker-Root-Mode" %}}
-\
-Create a file under: `/etc/systemd/system/green-coding-client.service`:
-
-
-```init
-[Unit]
-Description=The Green Metrics Client Service
-After=network.target
-
-[Service]
-Type=simple
-User=gc
-Group=gc
-WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 -u /home/gc/green-metrics-tool/cron/client.py
-Restart=always
-RestartSec=30s
-TimeoutStopSec=600
-KillSignal=SIGINT
-RestartKillSignal=SIGINT
-FinalKillSignal=SIGKILL
-
-Environment="DOCKER_HOST=unix:///run/user/1000/docker.sock"
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Then activate the service
-```bash
-sudo systemctl daemon-reload # Reload the systemd configuration
-sudo systemctl enable green-coding-client # enable on boot
-sudo systemctl start green-coding-client # start service
-
-sudo systemctl status green-coding-client # check status
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 
 You should now see the client reporting it's status on the server. It is important to note that only the client ever talks to the server (polling). The server never tries to contact the client. This is to not create any interrupts while a measurement might be running.
 
