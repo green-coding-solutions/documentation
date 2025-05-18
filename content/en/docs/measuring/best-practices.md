@@ -42,9 +42,9 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
     + If that is however what your application is design to operate it, then do not alter it. However most applications assume an
    infinite amout of resources and behave weirdly if they run into resource limitations
 
-### 3. The application you want to test must run at least twice as long as the minimal resolution
+### 3. The application you want to test must run at least twice as long as the minimal sampling rate
 
-- The minimal resolution is the one you have configured with your [Metric Providers]({{< relref "metric-providers" >}})
+- The minimal sampling rate is the one you have configured with your [Metric Providers]({{< relref "metric-providers" >}})
   + Also be aware that Intel RAPL has a minimum time resolution of ~10ms and CPU time resolution is typically around 1 microsecond.
 
 ### 4. When running tests your disk load should not go over 50%
@@ -52,11 +52,11 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 - Since typically linux systems can run in congestion above 60% and also our tool needs some disk time.
   + Check `iostat -xmdz` if in doubt
 
-### 5. Limit amount and resolution of Metric Providers to what you absolutely need
+### 5. Limit amount and sampling rate of Metric Providers to what you absolutely need
 
-- Do not exceed 10 Metric Reporters on 100 ms resolution,
-- or 2 metric reporters on 10 ms resolution as this will produce a non-significant load on the system and might skew results.
-- Try to keep the resolution of all metric reporters identical. This allows for easier data drill-down later.
+- Do not exceed 10 Metric Reporters on 100 ms sampling rate,
+- or 2 metric reporters on 10 ms sampling rate as this will produce a non-significant load on the system and might skew results.
+- Try to keep the sampling rate of all metric reporters identical. This allows for easier data drill-down later.
 
 ### 6. Always check STDDEV
 
@@ -137,7 +137,7 @@ rather run `docker volume prune` once in a while.
 
 ### 15. Use non standard sampling intervals and avoid undersampling
 If the effect you are looking for in your code is likely only a 200 ms activity you should at least
-use a sampling rate (metric provider resolution) of 100 ms. 
+use a sampling rate of 100 ms.
 
 Having said that: It is also good practice to use an odd number here, which is slightly lower. For instance 99 ms or even 95 ms. 
 

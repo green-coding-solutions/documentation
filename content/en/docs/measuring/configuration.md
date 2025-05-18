@@ -80,13 +80,13 @@ measurement:
   metric-providers:
     linux:
       cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
-        resolution: 100
+        sampling_rate: 100
       cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
-        resolution: 100
+        sampling_rate: 100
       memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider:
-        resolution: 100
+        sampling_rate: 100
       cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider:
-        resolution: 100
+        sampling_rate: 100
     # ...
 
 admin:
@@ -129,7 +129,7 @@ For the rest please see [installation →]({{< relref "/docs/cluster/installatio
 - `metric-providers`:
   + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
     * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
-    * `METRIC_PROVIDER_NAME.resolution` **[integer]**: sampling resolution in ms
+    * `METRIC_PROVIDER_NAME.sampling_rate` **[integer]**: sampling rate in ms
 
 Some metric providers have unique configuration params:
 

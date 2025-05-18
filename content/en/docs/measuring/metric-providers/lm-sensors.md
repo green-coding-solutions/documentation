@@ -64,7 +64,7 @@ Your config could be:
 
 ```bash
 lmsensors.temperature.provider.LmsensorsTempComponentProvider:
-    resolution: 100
+    sampling_rate: 100
     chips: ['coretemp-isa-0000']
     features: ['Package id 0', 'Core 0', 'Core 1', 'Core 2', 'Core 3']
 ```

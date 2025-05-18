@@ -61,7 +61,7 @@ You will need to disable all providers and enable the:
 
 ```yml
 powermetrics.provider.PowermetricsProvider:
-    resolution: 100
+    sampling_rate: 100
 ```
 
 in the `config.yml`.

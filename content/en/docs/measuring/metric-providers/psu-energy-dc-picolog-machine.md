@@ -73,7 +73,7 @@ The provider will configure the PicoLog HRDL ADC-24 into streaming mode with
 By default the measurement interval is *1000 ms*, which however is only for testing
 purposes.
 
-As stated in the paragraph before the provider should always be used with *61 ms* samling frequency
+As stated in the paragraph before the provider should always be used with *61 ms* sampling rate
 
 ```bash
 ./metric-provider-binary -i 61
@@ -103,7 +103,7 @@ The provider has a significant energy overhead when used as it draws power
 from the USB port of the system.
 
 In our test system the PicoLog HRDL ADC-24 draws about **0.5 W on Stand-By** and
-about **6 W when used with a 61 ms capture resolution**.
+about **6 W when used with a 61 ms sampling rate**.
 
 If you are using a AC reporter in conjuction this will heavily skew your signal.
 Please either use only an AC or DC reporter, or correct the output data

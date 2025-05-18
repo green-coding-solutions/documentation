@@ -27,8 +27,8 @@ sudo modprobe rapl
 
 ### Technical specs
 
-- Time resolution: 976 micro-seconds
-- Energy resolution: 15.3 micro-Joules
+- Time resolution: up to 976 micro-seconds (depending on production year of the CPU)
+- Energy resolution: up to 15.3 micro-Joules (depending on production year of the CPU)
 
 ### Classname
 
