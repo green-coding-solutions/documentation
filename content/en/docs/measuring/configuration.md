@@ -191,5 +191,8 @@ For local installations these are to be found under [https://metrics.green-codin
   + Example: *NetworkConnectionsProxyContainerProvider*
 - `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
 - `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
+- `phase-padding` **[integer]**: Phase padding is by default applied to the end of the phase to capture the last sampling tick, which might be cut-off. GMT applies one extra tick to the end of the phase. If your phase cut-offs must me microsecond exact you can turn this off. Typically not recommended and should be left on. See [https://github.com/green-coding-solutions/green-metrics-tool/issues/1129](https://github.com/green-coding-solutions/green-metrics-tool/issues/1129) for details.
+- `dev-no-sleeps` **[integer]**: Does not sleep in between phases and for cool-down periods. Beware that this will speed up runs on the cluster but render them invalid.
+- `dev-no-optimizations` **[integer]**: De-activates running the optimizations after a measurement.
 
-<center><img style="width: 300px;" src="/img/dashboard-settings.webp" alt="Dashboard Settings for GMT Measurements"></center>
+<center><img style="width: 600px;" src="/img/dashboard-settings.webp" alt="Dashboard Settings for GMT Measurements"></center>
