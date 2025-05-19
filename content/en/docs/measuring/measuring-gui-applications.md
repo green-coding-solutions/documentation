@@ -118,5 +118,17 @@ X-GNOME-Autostart-enabled=true
 Name=Allow Docker X11 / Wayland
 ```
 
+#### Starting with a selected window manager
+
+On Ubuntu, our reference distribution for cluster setups, this is chosen in the *GDM* config.
+
+Open `/etc/gdm3/custom.conf` and add:
+```conf
+# this will activate Wayland
+WaylandEnable=true
+```
+
+If you want *X.org* just set the variable to `false`.
+
 ### Help / Debugging
 If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.
