@@ -67,3 +67,55 @@ echo 'ALL ALL=(ALL) NOPASSWD:/usr/bin/systemctl poweroff' | sudo tee -a /etc/sud
 sudo chmod 500 /etc/sudoers.d/green-coding-shutdown
 ```
 
+### Activating Wake-On-Lan
+
+In rare circumstances Wake-On-Lan is not active on the machine.
+
+Check the following:
+- Check the BIOS if Wake-On-Lan is enabled.
+  + If no option is present it might not be configurable through the BIOS
+- Check `$ sudo ethtool <YOUR_INTERFACE>`
+  + Output should list: `Wake-on: g`
+
+If the value is `d` it is disabled. You can activate it temporarily until the next suspend / reboot with: `$ sudo ethtool -s <YOUR_INTERFACE> wol g`
+
+Persist it with a *systemd* service: `$ sudo nano /etc/systemd/system/wol.service`
+
+```systemd
+[Unit]
+Description=Enable Wake-on-LAN on YOUR_INTERFACE
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ethtool -s <YOUR_INTERFACE> wol g
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Activating suspend to ram
+
+Instead of powering the system off you can also bring it to a suspend mode.
+
+To really save power your system should support *Suspend to RAM*.
+
+Check `$ cat /sys/power/state`. It should list `mem` as part of the output.
+
+This means the OS supports bringing the system to *Suspend to RAM*.
+
+Now check `$ cat /sys/power/mem_sleep`. A sample output looks like this:
+```log
+s2idle [deep]
+```
+
+If *deep* is in brackets all is good. If *s2idle* is in brackets you have the wrong setting.
+To change the setting you can set a kernel boot parameter:
+
+Add `mem_sleep_default=deep` to GRUB: `GRUB_CMDLINE_LINUX_DEFAULT="... mem_sleep_default=deep"`
+Then `$ sudo update-grub` and reboot.
+
+If your output is only *[s2idle]* then your network card driver or some other component does not support *Suspend to Ram* or is prohibiting it's activation.
+For instance disabling CPU power saving modes can block this setting.
