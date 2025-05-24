@@ -7,7 +7,7 @@ weight: 841
 toc: true
 ---
 
-GMT can also measure websites and takes a multi-dimenisonal approach here:
+GMT can also measure websites and takes a multi-dimensional approach here:
 - The energy of the browser is measured to display and render the page
 - The network transfer energy is measured that was needed to download the HTML and page assets
 
@@ -25,7 +25,7 @@ Measure a sample query like this: `bash run-template.sh website "https://www.gre
 
 It will download the needed containers, setup them up and run the measurement. Once you got this quick measurement running iterate on it by extending the [example measurement file](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/templates/website/usage_scenario.yml) with more steps, for instance measuring all the sub-pages on your domain
 
-Bonus tipp: If you apply `--quick` to the `run-template.sh` call the measurement is quicker for debugging purposes. However results will be not as reliable. Use only for debugging!
+Bonus tip: If you apply `--quick` to the `run-template.sh` call the measurement is quicker for debugging purposes. However results will be not as reliable. Use only for debugging!
 
 #### Trying out our hosted service
 

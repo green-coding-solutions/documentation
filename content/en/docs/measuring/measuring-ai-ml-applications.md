@@ -15,7 +15,7 @@ See [our example ML example application](https://github.com/green-coding-solutio
 
 ### Example for GenAI Text LLM workload
 
-The simplest way is to use [ollama](https://ollama.com) as a manager and encapsulte it inside of the GMT.
+The simplest way is to use [ollama](https://ollama.com) as a manager and encapsulate it inside of the GMT.
 
 See [our example ollama LLM example application](https://github.com/green-coding-solutions/example-applications/tree/main/ai-model) to have a usage scenario to get started.
 
@@ -29,7 +29,7 @@ Measure a sample query like this: `bash run-template.sh ai "How cool is the GMT?
 
 It will download ollama, setup the containers and download an example model (*gemma3:1b*). Once you got this quick measurement running iterate on it by using our [our example ollama LLM example application](https://github.com/green-coding-solutions/example-applications/tree/main/ai-model).
 
-Bonus tipp: If you apply `--quick` to the `run-template.sh` call the measurement is quicker for debugging purposes. However results will be not as reliable. Use only for debugging!
+Bonus tip: If you apply `--quick` to the `run-template.sh` call the measurement is quicker for debugging purposes. However results will be not as reliable. Use only for debugging!
 
 #### Trying out our hosted service
 
