@@ -15,7 +15,7 @@ To isolate this as best as possible GMT orchestrates a reverse proxy, warms up t
 
 **Warning:** Measuring websites is very tricky! GMT shaves off some of the caveats by using reverse proxys and cache pre-loading to make results more reliable. Since measurement load times are in milliseconds range you must have [Metric Providers]({{< relref "/docs/measuring/metric-providers/" >}}) with very high *sampling_rates* connected. **2ms** is a good value. Also website measurements are really only realiable in a [controlled cluster]({{< relref "/docs/cluster/" >}}) with [accuracy control]({{< relref "/docs/cluster/accuracy-control/" >}}).
 
-#### Quick Website query measuring
+#### Quick website measuring
 
 Since measuring websites is so common GMT comes with a quick measurement function for that.
 
