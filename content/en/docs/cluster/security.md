@@ -133,6 +133,9 @@ GRANT USAGE, SELECT ON SEQUENCE notes_id_seq TO client;
 
 GRANT SELECT,INSERT ON TABLE phase_stats TO client;
 GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
+
+GRANT INSERT on changelog to client;
+GRANT SELECT, USAGE on changelog_id_seq to client;
 ```
 
 ### Visibility / Deactivating the Default User
