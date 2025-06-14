@@ -26,7 +26,7 @@ client:
 
 You can also set a time that the script should wait after a job has finished execution to give the system time to cool down. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune this value.
 
-After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the `tools/cluster/cleanup.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
@@ -63,12 +63,12 @@ systemctl --user status green-coding-client # check status
 
 You should now see the client reporting it's status on the server. It is important to note that only the client ever talks to the server (polling). The server never tries to contact the client. This is to not create any interrupts while a measurement might be running.
 
-After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the `tools/cluster/cleanup.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
 This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. We recommend the following:
 
 ```bash
-echo 'ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.sh ""' | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
+echo 'ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.py ""' | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
 sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
 ```
 
