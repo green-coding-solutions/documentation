@@ -44,12 +44,6 @@ The sidebar is done in flexbox.
 - The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
 
-## HUGO
-
-Internally we use HUGO for the development of the frontend, which provides a better separation of
-all the HTML files for us.
-
-Currently we do not have this repository published, but will do so in the next weeks.
 
 ## Charts
 
