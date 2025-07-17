@@ -32,7 +32,6 @@ module.exports = {
           './node_modules/@hyas/doks/assets/scss/components/_syntax.scss',
           './node_modules/@hyas/doks/assets/scss/components/_search.scss',
           './node_modules/@hyas/doks/assets/scss/common/_dark.scss',
-          './node_modules/katex/dist/katex.css',
         ]),
       ],
     }),

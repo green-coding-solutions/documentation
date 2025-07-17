@@ -21,10 +21,6 @@
   target = "assets/js/vendor/flexsearch"
 
 [[mounts]]
-  source = "node_modules/katex"
-  target = "assets/js/vendor/katex"
-
-[[mounts]]
   source = "node_modules/mermaid"
   target = "assets/js/vendor/mermaid"
 

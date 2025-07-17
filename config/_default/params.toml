@@ -124,7 +124,3 @@ highlightBroken = true # true or false (default)
 # [options]
 #   clipBoard = true
 #   instantPage = true
-#   highLight = true
-#   kaTex = false
-#   docsVersioning = false
-#   fullWidth = false
