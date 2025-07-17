@@ -33,6 +33,6 @@ Bonus tip: If you apply `--quick` to the `run-template.sh` call the measurement 
 
 #### Trying out our hosted service
 
-We operate [green-coding.ai](https://green-coding.ai) as a simple demo vertical that uses the underlying [Green Metrics Tool Cluster Hosted Service →]({{< relref "/docs/measuring/measuring-service/" >}}).
+We operate [green-coding.ai](https://green-coding.ai) as a simple demo vertical that uses the underlying [Green Metrics Tool Cluster Hosted Service →]({{< relref "/docs/measuring/measuring-service" >}}).
 
 Check it out if you do not feel like installing the GMT and just want to get carbon and energy info on single prompts.
