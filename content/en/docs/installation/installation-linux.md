@@ -29,8 +29,8 @@ If you want to develop on macOS or Windows please use the appropriate installati
 For the sake of this manual we put the green metrics tool into your home directory. Of course you can place it anywhere.
 Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different path for the tool please modify the commands accordingly.
 
-{{< tabs >}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "install-packages" >}}
+{{< tab "Ubuntu" >}}
 
 ```bash
 sudo apt update && \
@@ -41,8 +41,8 @@ cd ~/green-metrics-tool
 
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 
 ```bash
 sudo dnf upgrade -y && \
@@ -51,7 +51,7 @@ git clone https://github.com/green-coding-solutions/green-metrics-tool ~/green-m
 cd ~/green-metrics-tool
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Docker
@@ -64,8 +64,8 @@ However, we provide here what we used in on our systems, but be sure to double c
 
 ### Docker base install
 
-{{< tabs groupId="docker">}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "docker" >}}
+{{< tab "Ubuntu" >}}
 
 ```bash
 sudo apt install ca-certificates curl gnupg lsb-release -y && \
@@ -80,8 +80,8 @@ sudo apt remove docker docker.io docker-doc docker-compose docker-compose-v2 pod
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 
 ```bash
 sudo dnf remove docker \
@@ -102,7 +102,7 @@ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo systemctl start docker
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now. You can also run
@@ -133,8 +133,8 @@ In order to use rootless mode you must have a non-root user on your system (see 
 
 **Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user` will not work.**
 
-{{< tabs groupId="rootless">}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "rootless" >}}
+{{< tab "Ubuntu" >}}
 The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 
 ```bash
@@ -156,8 +156,8 @@ systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 The `docker-ce-rootless-extras` package on Fedora provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 
 ```bash
@@ -177,7 +177,7 @@ systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/).

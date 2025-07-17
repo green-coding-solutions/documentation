@@ -18,21 +18,21 @@ Mostly temperatures from various hardware components and fan speeds.
 
 The required libraries are installed automatically via the `install-linux.sh` call when installing the Green Metrics Tool. However for completeness, these are the libraries installed:
 
-{{< tabs groupId="sensors">}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "sensors" >}}
+{{< tab "Ubuntu" >}}
 
 ```bash
 sudo apt install -y lm-sensors libsensors-dev libglib2.0-0 libglib2.0-dev
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 
 ```bash
 sudo dnf -y install lm_sensors lm_sensors-devel glib2 glib2-devel
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 If you want the temperature metric provider to work you need to run the sensor detector
