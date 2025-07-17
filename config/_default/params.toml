@@ -122,7 +122,6 @@ highlightBroken = true # true or false (default)
 
 # TODO: Cleanup
 # [options]
-#   lazySizes = true
 #   clipBoard = true
 #   instantPage = true
 #   highLight = true
