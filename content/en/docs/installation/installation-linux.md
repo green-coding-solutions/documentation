@@ -135,6 +135,7 @@ The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-s
 
 ```bash
 sudo systemctl disable --now docker.service docker.socket && \
+sudo rm /var/run/docker.sock && \
 sudo apt install uidmap && \
 sudo apt update && \
 sudo apt-get install -y docker-ce-rootless-extras dbus-user-session && \
