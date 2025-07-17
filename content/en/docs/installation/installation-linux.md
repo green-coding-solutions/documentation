@@ -20,7 +20,9 @@ The following distributions have been tested, but require manual work:
 - Ubuntu 20.04 (works, but Python3 has to be updated to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html))
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "/docs/cluster/installation" >}}) has different names for timers)
 
-{{< alert icon="💡" text="If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>" />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>
+{{< /callout >}}
 
 ## Downloading and installing required packages
 
@@ -121,7 +123,9 @@ Please follow this explanation how to do it: [Official docker docs on docker gro
 
 Rootless mode allows the docker container to not inherit `root` rights when they run.
 
-{{< alert icon="💡" text="We recommend this mode when you have the Green Metrics Tool on a public machine, running somebody elses benchmarks or somewhere, where security is a concern. For development and try-out purposes of the Green Metrics Tool however you can safely skip this step." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+We recommend this mode when you have the Green Metrics Tool on a public machine, running somebody elses benchmarks or somewhere, where security is a concern. For development and try-out purposes of the Green Metrics Tool however you can safely skip this step.
+{{< /callout >}}
 
 In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/)
 
@@ -201,7 +205,9 @@ is running on port `80` or `443`
 
 Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`.
 
-{{< alert icon="💡" text="Note for ARM systems: Please use the '-r' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+Note for ARM systems: Please use the '-r' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems.
+{{< /callout >}}
 
 What you might want to add:
 
@@ -223,7 +229,9 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 
 ### Restarting Docker containers on system reboot
 
-{{< alert icon="💡" text="This explanation is for docker rootless mode only." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+This explanation is for docker rootless mode only.
+{{< /callout >}}
 
 We recommend `systemd`. Please use the following service file and change the **USERNAME** accordingly to the ones on your system.
 

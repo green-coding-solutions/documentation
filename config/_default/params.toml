@@ -57,39 +57,75 @@ smallLimit = "300"
 footer = "Powered by <a class=\"text-muted\" href=\"https://www.cloudlare.com/\">Cloudflare</a>, <a class=\"text-muted\" href=\"https://gohugo.io/\">Hugo</a>, and <a class=\"text-muted\" href=\"https://getdoks.org/\">Doks</a>"
 
 # Feed
-copyRight = "Copyright (c) Green Coding Berlin"
+copyRight = "Copyright (c) Green Coding Solutions"
 
 # Alert
 alert = false
 alertDismissable = true
-# alertText = "Introducing the Doks child theme, several DX + UX updates, and more! <a class=\"alert-link stretched-link\" href=\"https://getdoks.org/blog/doks-v0.2/\" target=\"_blank\" rel=\"noopener\">Check out Doks v0.2</a>"
-alertText = "Introducing the Doks child theme, several DX + UX updates, and more! <a class=\"alert-link stretched-link\" href=\"https://getdoks.org/blog/doks-v0.2/\">Check out Doks v0.2</a>"
 
 # Edit Page
 # repoHost [Github | Gitea | GitLab | Bitbucket | BitbucketServer ] is used for building the edit link based on git hoster
 repoHost = "GitHub"
 #repoHost = "Gitea"
 docsRepo = "https://github.com/green-coding-solutions/documentation"
-docsRepoBranch = "master"
+docsRepoBranch = "main"
 docsRepoSubPath = ""
 editPage = false
 lastMod = false
 
-[options]
-  lazySizes = true
-  clipBoard = true
-  instantPage = true
-  flexSearch = true
-  darkMode = true
-  bootStrapJs = true
-  breadCrumb = false
-  highLight = true
-  kaTex = false
-  multilingualMode = false
-  docsVersioning = false
-  fullWidth = false
+mainSections = ["docs"]
 
-[menu]
-  [menu.section]
-    auto = true
-    collapsibleSidebar = true
+# Doks configuration for thulite/doks v1
+[doks]
+  # Color mode
+  colorMode = "auto"  # auto (default), light or dark
+  colorModeToggler = true  # true (default) or false
+  
+  # Navbar
+  navbarSticky = true
+  containerBreakpoint = "lg"
+  
+  # Search
+  flexSearch = true
+  searchExclKinds = []
+  searchExclTypes = []
+  showSearch = []
+  indexSummary = false
+
+  # Search results
+  showDate = false # false (default) or true
+  showSummary = true # true (default) or false
+  searchLimit = 10 # 0 (no limit, default) or natural number
+  
+  # Bootstrap
+  bootstrapJavascript = true # false (default)
+  
+  # Navigation
+  sectionNav = ["docs"]
+  toTopButton = false
+  breadcrumbTrail = false
+  headlineHash = true
+  scrollSpy = true
+
+  # Alerts
+  alert = false
+
+  # [doks.menu]
+  #   [doks.menu.section]
+  #     auto = true
+  #     collapsibleSidebar = true
+  
+# Debug
+[render_hooks.link]
+errorLevel = 'error' # ignore (default), warning, or error (fails the build)
+highlightBroken = true # true or false (default)
+
+# TODO: Cleanup
+# [options]
+#   lazySizes = true
+#   clipBoard = true
+#   instantPage = true
+#   highLight = true
+#   kaTex = false
+#   docsVersioning = false
+#   fullWidth = false

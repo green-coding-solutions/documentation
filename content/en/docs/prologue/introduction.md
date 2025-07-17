@@ -47,7 +47,9 @@ get to know the flexibility of our tool to measure your application.
 
 ### Measure your own app with our online hosted service
 
-{{< alert icon="👉" text="This Quick Start is intended to give you an idea how the tool works and how a measurable application looks like" />}}
+{{< callout context="note" icon="outline/hand-finger-right" >}}
+This Quick Start is intended to give you an idea how the tool works and how a measurable application looks like
+{{< /callout >}}
 
 [Measuring with our hosted service →]({{< relref "/docs/measuring/measuring-service" >}})
 

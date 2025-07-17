@@ -1,0 +1,74 @@
+## archetypes
+[[mounts]]
+  source = "node_modules/@thulite/doks-core/archetypes"
+  target = "archetypes"
+
+[[mounts]]
+  source = "archetypes"
+  target = "archetypes"
+
+## assets
+[[mounts]]
+  source = "node_modules/@thulite/doks-core/assets"
+  target = "assets"
+
+[[mounts]]
+  source = "node_modules/@tabler/icons/icons"
+  target = "assets/svgs/tabler-icons"
+
+[[mounts]]
+  source = "node_modules/flexsearch"
+  target = "assets/js/vendor/flexsearch"
+
+[[mounts]]
+  source = "node_modules/katex"
+  target = "assets/js/vendor/katex"
+
+[[mounts]]
+  source = "node_modules/mermaid"
+  target = "assets/js/vendor/mermaid"
+
+[[mounts]]
+  source = "assets"
+  target = "assets"
+
+## content
+[[mounts]]
+  source = "node_modules/@thulite/doks-core/content"
+  target = "content"
+
+[[mounts]]
+  source = "content/en"
+  target = "content"
+  lang   = "en"
+
+## data
+[[mounts]]
+  source = "node_modules/@thulite/doks-core/data"
+  target = "data"
+
+[[mounts]]
+  source = "data"
+  target = "data"
+
+## layouts
+[[mounts]]
+  source = "node_modules/@thulite/doks-core/layouts"
+  target = "layouts"
+
+[[mounts]]
+  source = "node_modules/@thulite/inline-svg/layouts"
+  target = "layouts"
+
+[[mounts]]
+  source = "layouts"
+  target = "layouts"
+
+## static
+[[mounts]]
+  source = "node_modules/@thulite/doks-core/static"
+  target = "static"
+
+[[mounts]]
+  source = "static"
+  target = "static"

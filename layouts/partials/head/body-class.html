@@ -1,0 +1,28 @@
+{{/* Set body classes */}}
+{{- $bodyClasses := slice -}}
+
+{{- if .IsHome -}}
+  {{- $bodyClasses = $bodyClasses | append "home" -}}
+{{- end -}}
+
+{{- if .IsPage -}}
+  {{- $bodyClasses = $bodyClasses | append "page" -}}
+{{- end -}}
+
+{{- if .IsSection -}}
+  {{- $bodyClasses = $bodyClasses | append "section" -}}
+{{- end -}}
+
+{{- if .Kind -}}
+  {{- $bodyClasses = $bodyClasses | append .Kind -}}
+{{- end -}}
+
+{{- if .Type -}}
+  {{- $bodyClasses = $bodyClasses | append .Type -}}
+{{- end -}}
+
+{{- if .Layout -}}
+  {{- $bodyClasses = $bodyClasses | append .Layout -}}
+{{- end -}}
+
+{{- .Scratch.Set "class" $bodyClasses -}}

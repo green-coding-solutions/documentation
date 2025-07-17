@@ -6,7 +6,9 @@ date: 2023-12-04T01:49:15+00:00
 weight: 903
 ---
 
-{{< alert icon="⚠" text="Running the GMT on Windows with WSL is only meant for development and testing of usage scenarios! It is not possible to use this setup for actual measurements. However, once you have a working usage scenario you can hand that in on our <a href=/docs/measuring/measuring-service/>measurement cluster</a> for a proper measurement." />}}
+{{< callout context="caution" icon="outline/alert-triangle" >}}
+Running the GMT on Windows with WSL is only meant for development and testing of usage scenarios! It is not possible to use this setup for actual measurements. However, once you have a working usage scenario you can hand that in on our <a href=/docs/measuring/measuring-service/>measurement cluster</a> for a proper measurement.
+{{< /callout >}}
 
 GMT can only run on Windows with the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/) (WSL). Before installing GMT make sure you have a working WSL environment.
 
