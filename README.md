@@ -13,7 +13,6 @@ The main theme is referenced as node_module and thus updating is handled via npm
 Following files have been overloaded and should be checked if they are changed on an update:
 - /layouts/partials/* (Removed integrity protection to run on Cloudflare CDN)
 - /layouts/index.headers (Removed CSP netlify)
-- /layouts/sitemap.xml (was not rendering without)
 
 ## Local build
 

@@ -20,7 +20,7 @@ defaultContentLanguageInSubdir = false
 
 # add redirects/headers
 [outputs]
-home = ["HTML", "RSS", "REDIRECTS", "HEADERS", "SEARCHINDEX"]
+home = ["HTML", "RSS", "REDIRECTS", "HEADERS", "SEARCHINDEX", "SITEMAP"]
 section = ["HTML", "RSS", "SITEMAP"]
 
 # remove .{ext} from text/netlify
