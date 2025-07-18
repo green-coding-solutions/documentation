@@ -168,7 +168,7 @@ optimization:
 
 ## sci
 
-Please see for details: [SCI →]({{< relref "sci" >}}).
+Please see for details: [SCI →]({{< relref "carbon/sci" >}}).
 
 ## electricity_maps_token
 
