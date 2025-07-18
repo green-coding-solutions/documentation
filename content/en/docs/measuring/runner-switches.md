@@ -3,7 +3,8 @@ title : "runner.py switches"
 description: ""
 lead: ""
 date: 2023-07-05T08:48:45+00:00
-weight: 830
+weight: 430
+toc: false
 ---
 
 Apart from the `config.yml` some additional configuration is possible when manually running with the `runner.py`.

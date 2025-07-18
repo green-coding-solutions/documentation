@@ -3,7 +3,8 @@ title: "Installation on Windows"
 description: "A description on how to install the GMT on Windows machines"
 lead: ""
 date: 2023-12-04T01:49:15+00:00
-weight: 903
+weight: 304
+toc: true
 ---
 
 {{< callout context="caution" icon="outline/alert-triangle" >}}

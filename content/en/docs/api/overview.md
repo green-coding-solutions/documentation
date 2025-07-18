@@ -5,10 +5,7 @@ lead: "Green Metrics API documentation"
 date: 2022-06-15T08:49:15+00:00
 draft: false
 images: []
-menu:
-  docs:
-    parent: "help"
-weight: 610
+weight: 510
 toc: true
 ---
 

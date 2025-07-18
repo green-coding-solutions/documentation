@@ -3,7 +3,8 @@ title: "Minimum system requirements"
 description: "Minimum system requirements"
 lead: ""
 date: 2024-10-09T01:49:15+00:00
-weight: 705
+weight: 301
+toc: true
 ---
 
 ### CPU

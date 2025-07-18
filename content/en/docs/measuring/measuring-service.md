@@ -2,7 +2,7 @@
 title: "Measuring with hosted service"
 description: "User our hosted service to measure applications on GitHub."
 date: 2022-06-21T08:49:15+00:00
-weight: 835
+weight: 435
 toc: true
 ---
 

@@ -3,7 +3,8 @@ title: "Cron Jobs"
 description: "Cron Jobs to be executed in the Green Metrics Tool"
 lead: ""
 date: 2024-10-25T01:49:15+00:00
-weight: 102
+weight: 1002
+toc: false
 ---
 
 All *cron jobs* can be found in the `/cron` directory.

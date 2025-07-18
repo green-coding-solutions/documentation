@@ -3,7 +3,8 @@ title: "Installation on Linux"
 description: "Installation"
 lead: ""
 date: 2022-06-15T01:49:15+00:00
-weight: 901
+weight: 302
+toc: true
 ---
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.

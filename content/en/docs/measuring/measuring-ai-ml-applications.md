@@ -3,7 +3,7 @@ title: "Measuring AI/ML applications"
 description: ""
 lead: ""
 date: 2025-05-23T01:49:15+00:00
-weight: 840
+weight: 440
 toc: true
 ---
 
