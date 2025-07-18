@@ -85,6 +85,6 @@ footer = "Powered by <a class=\"text-muted\" href=\"https://www.cloudlare.com/\"
   editPage = false
   lastMod = false
   repoHost = "GitHub"
-  docsRepo = "https://github.com/h-enk/doks"
+  docsRepo = "https://github.com/green-coding-solutions/documentation/"
   docsRepoBranch = "main"
   docsRepoSubPath = ""
