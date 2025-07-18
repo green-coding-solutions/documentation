@@ -88,8 +88,3 @@ footer = "Powered by <a class=\"text-muted\" href=\"https://www.cloudlare.com/\"
   docsRepo = "https://github.com/h-enk/doks"
   docsRepoBranch = "main"
   docsRepoSubPath = ""
-  
-# Debug
-[render_hooks.link]
-errorLevel = 'error' # ignore (default), warning, or error (fails the build)
-highlightBroken = true # true or false (default)
