@@ -110,6 +110,9 @@ mainSections = ["docs"]
   # Alerts
   alert = false
 
+  # Versioning
+  docsVersioning = false
+
   # [doks.menu]
   #   [doks.menu.section]
   #     auto = true
@@ -119,8 +122,3 @@ mainSections = ["docs"]
 [render_hooks.link]
 errorLevel = 'error' # ignore (default), warning, or error (fails the build)
 highlightBroken = true # true or false (default)
-
-# TODO: Cleanup
-# [options]
-#   clipBoard = true
-#   instantPage = true
