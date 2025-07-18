@@ -53,10 +53,7 @@ If you have an API or similar the output might not happen on the CLI directly, b
 
 An [example configuration](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/config.yml.example) for the `config.yml` is provided when the Green Metrics Tool is installed.
 The values for the respective variables have to be either defined to best knowledge (like lifetime for instance) and / or
-from official databases like:
-- [https://dataviz.boavizta.org/manufacturerdata](https://dataviz.boavizta.org/manufacturerdata)
-- [https://tco.exploresurface.com/sustainability/calculator](https://tco.exploresurface.com/sustainability/calculator)
-- [https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf](https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf)
+from official databases (like [Embodied Carbon →]({{< relref "embodied-carbon" >}}) and [Grid Carbon Intensity →]({{< relref "grid-carbon-intensity" >}})). See the respective documentation page for possible sources.
 
 Example:
 ```yml
