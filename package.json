@@ -26,7 +26,7 @@
     "lint:scripts": "eslint assets/js config functions",
     "lint:styles": "stylelint \"assets/scss/**/*.{css,sass,scss,sss,less}\"",
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
-    "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
+    "lint:markdown-fix": "markdownlint-cli2 --fix \"*.md\" \"content/**/*.md\"",
     "server": "exec-bin node_modules/.bin/hugo/hugo server",
     "test": "npm run -s lint",
     "env": "env",
