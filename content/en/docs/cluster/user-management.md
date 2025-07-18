@@ -3,7 +3,7 @@ title: "User Management"
 description: "User Management in cluster mode"
 lead: ""
 date: 2024-12-23T01:49:15+00:00
-weight: 105
+weight: 1005
 ---
 
 In the FOSS version of GMT only two base users are configured and every action can be executed with them:

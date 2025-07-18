@@ -5,11 +5,8 @@ lead: "One page summary of how to measure a sample application."
 date: 2025-04-28T08:00:00+00:00
 draft: false
 images: []
-menu:
-  docs:
-    parent: "prologue"
-weight: 2000
-toc: true
+weight: 107
+toc: false
 ---
 
 ## Running GMT out of GitHub codespace

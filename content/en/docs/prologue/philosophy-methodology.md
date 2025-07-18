@@ -3,7 +3,7 @@ title: "Philosophy & Methodology"
 description: "How we approach the measurement of softwares energy use."
 lead: "How we approach the measurement of software energy use."
 date: 2022-06-15T08:49:15+00:00
-weight: 1002
+weight: 102
 toc: true
 ---
 
@@ -157,5 +157,7 @@ falsify the measurements is not the approach we believe is best to go.
 
 Therefore we decided to pursue a different path with our tool and not reuse [Scaphandre](https://github.com/hubblo-org/scaphandre).
 
-{{< alert icon="👉" text="If you however have more the need for observability and measuring on a process level please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which may fit your needs better than our tool." />}}
+{{< callout context="note" icon="outline/hand-finger-right" >}}
+If you however have more the need for observability and measuring on a process level please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which may fit your needs better than our tool.
+{{< /callout >}}
 

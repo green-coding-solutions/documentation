@@ -3,7 +3,7 @@ title: "Observability"
 description: "Observability in cluster mode"
 lead: ""
 date: 2024-06-26T01:49:15+00:00
-weight: 107
+weight: 1007
 ---
 
 When running *cluster* mode the GMT execute automated processes through *cron jobs* but also through *control workloads*.

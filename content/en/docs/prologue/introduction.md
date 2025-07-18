@@ -4,7 +4,7 @@ description: "The Green Metrics Tool is a wholistic framework to measure the ene
 lead: "The Green Metrics Tool is a holistic framework to measure the energy / CO2 of your application."
 date: 2022-06-15T08:49:15+00:00
 toc: true
-weight: 1001
+weight: 101
 ---
 
 It is comprised of:
@@ -47,7 +47,9 @@ get to know the flexibility of our tool to measure your application.
 
 ### Measure your own app with our online hosted service
 
-{{< alert icon="👉" text="This Quick Start is intended to give you an idea how the tool works and how a measurable application looks like" />}}
+{{< callout context="note" icon="outline/hand-finger-right" >}}
+This Quick Start is intended to give you an idea how the tool works and how a measurable application looks like
+{{< /callout >}}
 
 [Measuring with our hosted service →]({{< relref "/docs/measuring/measuring-service" >}})
 

@@ -3,7 +3,7 @@ title: "Debugging measurements"
 description: "Debugging measurements"
 lead: ""
 date: 2022-06-15T08:48:45+00:00
-weight: 860
+weight: 460
 ---
 
 ## Debugging containers

@@ -5,11 +5,8 @@ lead: "Freedom of tracking & advertising policies for the Green Metrics Tool"
 date: 2024-09-30T01:49:15+00:00
 draft: false
 images: []
-menu:
-  docs:
-    parent: "declarations"
-weight: 100
-toc: true
+weight: 700
+toc: false
 ---
 
 ## Advertising

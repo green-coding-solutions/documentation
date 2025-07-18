@@ -3,9 +3,11 @@ title: "Installation on MacOS"
 description: "A description on how to install the GMT on Apple machines"
 lead: ""
 date: 2023-01-30T01:49:15+00:00
-weight: 902
+weight: 303
 ---
-{{< alert icon="⚠" text="Running the GMT on Macs will never give you correct measurements! It should only ever be used to test your project for correctness in that it will run on the GMT but never to benchmark software " />}}
+{{< callout context="caution" icon="outline/alert-triangle" >}}
+Running the GMT on Macs will never give you correct measurements! It should only ever be used to test your project for correctness in that it will run on the GMT but never to benchmark software
+{{< /callout >}}
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 

@@ -5,10 +5,7 @@ lead: "Answers to frequently asked questions."
 date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
-menu:
-  docs:
-    parent: "help"
-weight: 630
+weight: 930
 toc: true
 ---
 

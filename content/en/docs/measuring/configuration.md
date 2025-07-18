@@ -3,7 +3,7 @@ title : "Configuration"
 description: ""
 lead: ""
 date: 2022-06-20T08:48:45+00:00
-weight: 825
+weight: 425
 ---
 
 Configurations in the GMT happen at two central places.

@@ -1,12 +1,23 @@
-{{ if eq (hugo.Environment) "development" -}}
-  {{ $options := (dict "targetPath" "main.css" "enableSourceMap" true "includePaths" (slice "node_modules")) -}}
-  {{ $css := resources.Get "scss/app.scss" | toCSS $options -}}
-  <link rel="stylesheet" href="{{ $css.Permalink | relURL }}">
-{{ else -}}
-  {{ $options := (dict "targetPath" "main.css" "outputStyle" "compressed" "includePaths" (slice "node_modules")) -}}
-  {{ $css := resources.Get "scss/app.scss" | toCSS $options | postCSS (dict "config" "config/postcss.config.js") -}}
-  {{ $secureCSS := $css | resources.Fingerprint "sha512" -}}
-  <link rel="stylesheet" href="{{ $secureCSS.Permalink }}" crossorigin="anonymous">
-{{ end -}}
-<link rel="stylesheet" href="/css/custom.css" crossorigin="anonymous">
+{{- /* CSS processing with SCSS and PostCSS (without integrity protection for Cloudflare CDN) */ -}}
+{{- $sass := resources.Get "scss/app.scss" -}}
+{{- $options := dict "targetPath" "main.css" "includePaths" (slice "node_modules") -}}
+
+{{- if eq hugo.Environment "development" -}}
+  {{- $options = merge $options (dict "enableSourceMap" true) -}}
+  {{- $css := $sass | toCSS $options -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{- else -}}
+  {{- $options = merge $options (dict "outputStyle" "compressed") -}}
+  {{- $css := $sass | toCSS $options -}}
+  {{- with resources.Get "config/postcss.config.js" -}}
+    {{- $css = $css | postCSS (dict "config" "config/postcss.config.js") -}}
+  {{- end -}}
+  {{- $css = $css | minify -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{- end -}}
+
+{{- /* Custom CSS */ -}}
+<link rel="stylesheet" href="/css/custom.css">
+
+{{- /* Noscript styles */ -}}
 <noscript><style>img.lazyload { display: none; }</style></noscript>

@@ -3,7 +3,7 @@ title : "Deleting measurements"
 description: "How to delete measurements locally"
 lead: ""
 date: 2023-07-06T08:48:45+00:00
-weight: 822
+weight: 422
 ---
 
 ## Removing failed measurements in the CLI

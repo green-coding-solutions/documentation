@@ -11,9 +11,11 @@ The theme is a child-theme of [Doks](https://getdoks.org/docs/).
 The main theme is referenced as node_module and thus updating is handled via npm.
 
 Following files have been overloaded and should be checked if they are changed on an update:
-- /layouts/partials/* (Removed integrity protection to run on Cloudflare CDN)
-- /layouts/index.headers (Removed CSP netlify)
-- /layouts/sitemap.xml (was not rendering without)
+
+- `assets/js/flexsearch.js` (commented out one line due to an Firefox-related issue)
+- `/layouts/_default/single.html` (enable display of the `lead` attribute)
+- `/layouts/partials/*` (Removed integrity protection to run on Cloudflare CDN)
+- `/layouts/index.headers` (Removed CSP netlify)
 
 ## Local build
 

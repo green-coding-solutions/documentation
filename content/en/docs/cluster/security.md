@@ -3,7 +3,7 @@ title: "Cluster Security"
 description: "Hardening a GMT cluster installation"
 lead: ""
 date: 2024-10-25T01:49:15+00:00
-weight: 108
+weight: 1008
 ---
 
 

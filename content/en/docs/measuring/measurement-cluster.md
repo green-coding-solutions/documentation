@@ -3,7 +3,7 @@ title: "Measurement Cluster"
 description: "Setting up your measurement cluster - Our measurement cluster"
 lead: "Measurement Cluster"
 date: 2023-04-10T08:49:15+00:00
-weight: 880
+weight: 480
 toc: true
 ---
 
