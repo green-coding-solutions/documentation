@@ -9,7 +9,7 @@
 @import "common/variables-custom";
 
 /** Import Bootstrap */
-@import "bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 /** Import theme styles */
 @import "common/fonts";

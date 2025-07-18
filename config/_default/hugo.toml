@@ -9,6 +9,9 @@ enableRobotsTXT = true
 languageCode = "en-US"
 pagination.pagerSize = 7
 rssLimit = 10
+summarylength = 20 # 70 (default)
+
+copyRight = "Copyright (c) Green Coding Solutions"
 
 # Multilingual
 defaultContentLanguage = "en"
@@ -78,3 +81,10 @@ notAlternative = true
 [module.hugoVersion]
 extended = true
 min = "0.141.0"
+
+[imaging]
+  anchor = "Center"
+  bgColor = "#ffffff"
+  hint = "photo"
+  quality = 85
+  resampleFilter = "Lanczos"

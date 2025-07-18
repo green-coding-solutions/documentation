@@ -3,7 +3,7 @@
   "description": "Doks child theme",
   "version": "0.4.3",
   "engines": {
-    "node": ">=16.15.0"
+    "node": ">=20.11.0"
   },
   "browserslist": [
     "defaults"
@@ -17,10 +17,9 @@
     "init": "shx rm -rf .git && git init -b main",
     "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "npm run clean",
-    "start": "exec-bin node_modules/.bin/hugo/hugo server  --bind=0.0.0.0 --disableFastRender",
+    "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender --noHTTPCache",
     "prebuild": "npm run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
-    "build:preview": "npm run build -D -F",
     "clean": "shx rm -rf public resources",
     "clean:install": "shx rm -rf package-lock.json node_modules ",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown",
@@ -34,35 +33,36 @@
     "precheck": "npm version",
     "check": "exec-bin node_modules/.bin/hugo/hugo version",
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "preview": "vite preview --outDir public"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.28",
     "@babel/core": "^7.28",
     "@babel/preset-env": "^7.28",
     "@fullhuman/postcss-purgecss": "^4.1",
+    "@tabler/icons": "^3.34.0",
     "@thulite/doks-core": "^1.8.1",
     "@thulite/inline-svg": "^1.2.0",
-    "@tabler/icons": "^3.34.0",
     "auto-changelog": "^2.5.0",
     "autoprefixer": "^10.4.21",
     "bootstrap": "^5.1",
-    "eslint": "^8.57",
     "exec-bin": "^1.0.0",
     "flexsearch": "^0.8.205",
     "hugo-installer": "^4.0",
-    "markdownlint-cli2": "^0.4.0",
     "postcss": "^8.5",
     "postcss-cli": "^9.1",
-    "purgecss-whitelister": "^2.4",
+    "purgecss-whitelister": "^2.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.57",
+    "markdownlint-cli2": "^0.4.0",
     "shx": "^0.4",
     "stylelint": "^14.8",
-    "stylelint-config-standard-scss": "^3.0"
+    "stylelint-config-standard-scss": "^3.0",
+    "vite": "^7.0.5"
   },
   "otherDependencies": {
     "hugo": "0.148.1"
-  },
-  "dependencies": {
-    "@thulite/inline-svg": "^1.2.0"
   }
 }
