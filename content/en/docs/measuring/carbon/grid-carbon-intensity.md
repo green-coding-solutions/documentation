@@ -9,9 +9,9 @@ toc: true
 
 ## What is Grid Carbon Intensity?
 
-Grid carbon intensity refers to the amount of carbon dioxide equivalent (CO2e) emissions produced per kilowatt-hour (kWh) of electricity consumed from the power grid. This metric reflects the mix of energy sources (coal, gas, renewables, nuclear) used to generate electricity in a specific location and time.
+Grid carbon intensity refers to the amount of carbon dioxide equivalent (CO₂e) emissions produced per kilowatt-hour (kWh) of electricity consumed from the power grid. This metric reflects the mix of energy sources (coal, gas, renewables, nuclear) used to generate electricity in a specific location and time.
 
-We have described the conversion from energy to carbon emissions also on our website: [CO2 Formulas - From kWh to CO2e](https://www.green-coding.io/co2-formulas/#from-kwh-to-co2e)
+We have described the conversion from energy to carbon emissions also on our website: [CO₂ Formulas - From kWh to CO₂e](https://www.green-coding.io/co2-formulas/#from-kwh-to-co2e)
 
 ## Data Sources
 

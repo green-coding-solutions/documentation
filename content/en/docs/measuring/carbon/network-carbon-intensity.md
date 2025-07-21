@@ -9,12 +9,12 @@ toc: true
 
 ## What is Network Carbon Intensity?
 
-Network carbon intensity measures the amount of carbon dioxide equivalent (CO2e) emissions generated per unit of data transferred across network infrastructure.
-Since carbon emissions from network transfers cannot be directly measured, they must be estimated. Network carbon intensity is calculated using two key factors: the *Network Energy Intensity* (kWh/GB) and the *[Grid Carbon Intensity]({{< relref "grid-carbon-intensity" >}})* (g CO2e/kWh).
+Network carbon intensity measures the amount of carbon dioxide equivalent (CO₂e) emissions generated per unit of data transferred across network infrastructure.
+Since carbon emissions from network transfers cannot be directly measured, they must be estimated. Network carbon intensity is calculated using two key factors: the *Network Energy Intensity* (kWh/GB) and the *[Grid Carbon Intensity]({{< relref "grid-carbon-intensity" >}})* (g CO₂e/kWh).
 
 ## Methodology
 
-The network carbon intensity methodology and data sources used by the Green Metrics Tool are documented in detail on our [CO2 Formulas page](https://www.green-coding.io/CO2-formulas/#gigabytes-to-kwh).
+The network carbon intensity methodology and data sources used by the Green Metrics Tool are documented in detail on our [CO₂ Formulas page](https://www.green-coding.io/CO2-formulas/#gigabytes-to-kwh).
 
 ## Relevance for the Green Metrics Tool
 
@@ -24,7 +24,7 @@ Although network emissions are not officially part of the [Software Carbon Inten
 
 ### Measurement Approach
 
-The Green Metrics Tool aggregates all network traffic from all containers and estimate CO2 emissions using the[CO2-Formula](https://www.green-coding.io/CO2-formulas). This approach assumes that all traffic is with external services. However, if your containers only communicate with each other and run on a single machine in production, the calculated emissions will significantly overstate the actual CO2 impact.
+The Green Metrics Tool aggregates all network traffic from all containers and estimate CO₂ emissions using the [CO₂-Formula](https://www.green-coding.io/CO2-formulas). This approach assumes that all traffic is with external services. However, if your containers only communicate with each other and run on a single machine in production, the calculated emissions will significantly overstate the actual CO₂ impact.
 
 We made this design choice because, during benchmarking, we can't predict how your containers will be orchestrated in production. They might all run on one machine (resulting in zero network emissions), be distributed within a data center (with minimal emissions), or be spread globally (incurring the highest emissions). Since the Green Metrics Tool is meant to provide a baseline for optimization, we chose to report based on the worst-case scenario.
 
