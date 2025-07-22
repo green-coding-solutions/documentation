@@ -3,7 +3,7 @@ title: "User Management"
 description: "User Management in cluster mode"
 lead: ""
 date: 2024-12-23T01:49:15+00:00
-weight: 110
+weight: 1005
 ---
 
 In the FOSS version of GMT only two base users are configured and every action can be executed with them:
@@ -45,7 +45,7 @@ For complex usage cases GMT comes with a user management system that allows:
 - Restricting view access to content from other / selective users
 - Allowing badge access to the public, but restricting everything else
 
-Please note that the user management system is bundled with GMT but managed and fully documented only through an **enterprise/premium** component.
+Please note that the user management system is bundled with GMT but managed and fully documented as part of the [Enterprise](https://www.green-coding.io/products/green-metrics-tool/) package.
+Furthermore many features like needed maintenance jobs / cron jobs and ACL generators are only shipped with the [Enterprise](https://www.green-coding.io/products/green-metrics-tool/) version.
 
-We believe that user management is only needed in bigger corporate settings and thus we encourage you to support
-this project by considering upgrading to a [paid version](https://www.green-coding.io/products/green-metrics-tool) which includes the User Management tool to create ACL lists
+We believe that user management is only needed in bigger corporate settings and thus we encourage you to support this project by considering upgrading to a [paid version](https://www.green-coding.io/products/green-metrics-tool) which includes the User Management either included in the SaaS version or the Enterprise version.

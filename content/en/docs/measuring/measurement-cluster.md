@@ -3,7 +3,7 @@ title: "Measurement Cluster"
 description: "Setting up your measurement cluster - Our measurement cluster"
 lead: "Measurement Cluster"
 date: 2023-04-10T08:49:15+00:00
-weight: 880
+weight: 480
 toc: true
 ---
 
@@ -23,7 +23,7 @@ We have the following machines available for running measurements in our cluster
     + CPU: Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz
     + Cores: 4
     + Threads: 4
-    + Hyper-Threading: Off
+    + Hyper-Threading: N/A
     + Turbo Boost: Off
     + DVFS: On
     + C-States: All
@@ -51,7 +51,7 @@ We have the following machines available for running measurements in our cluster
 ---
 
 - **Micro Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2**
-    + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 1ms resolution and limited to RAPL CPU / Memory
+    + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 1ms sampling_rate and limited to RAPL CPU / Memory
     + Vendor: Fujitsu TX1330 M2
     + Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server 
@@ -76,7 +76,7 @@ We have the following machines available for running measurements in our cluster
     + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
     + Cores: 4
     + Threads: 4
-    + Hyper-Threading: Off
+    + Hyper-Threading: N/A
     + Turbo Boost: On
     + DVFS: Off (Fixed to 2.1 GHz)
     + C-States: C0 only
@@ -85,7 +85,26 @@ We have the following machines available for running measurements in our cluster
 
 ---
 
-- **Palit GPU**
+- **ML/AI Profiling (DVFS ON, TB ON, HT OFF) - GTX-1080 - [PREMIUM]**
+    + Use Case: For GPU measurements and AI training measurements
+    + OS: Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
+    + Type: Desktop-PC
+    + CPU: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+    + Cores: 6
+    + Threads: 6
+    + Hyper-Threading: N/A
+    + Turbo Boost: On
+    + Memory: 32 GB
+    + Graphics: GeForce GTX 1080
+        * Installed *CUDA* version: 12.2
+        * *NVIDIA* kernel driver version 535.230.02
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+
+
+
+### Old Machines
+
+- **Palit GPU - (Phased out Early 2025)**
     + Use Case: For GPU measurements and AI training measurements
     + OS: Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Desktop-PC
@@ -102,7 +121,7 @@ We have the following machines available for running measurements in our cluster
 
 ---
 
-- **Quanta Leopard-DDR3 - Currently unavailable**
+- **Quanta Leopard-DDR3 - (Phased out Early 2025)**
     + Use Case: Heavy parallelized workloads / HPC
     + Type: 48-Thread Multi-Tenant Server 
     + OS: Ubuntu 22.04 (default)

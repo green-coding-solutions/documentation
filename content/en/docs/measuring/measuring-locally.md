@@ -3,7 +3,7 @@ title : "Measuring locally"
 description: "Measuring locally with the runner.py"
 lead: ""
 date: 2022-06-18T08:48:45+00:00
-weight: 820
+weight: 420
 ---
 
 Before starting to measure you must first install some prerequisites.
@@ -51,7 +51,7 @@ services:
   simple-load-container:
     image: alpine
     setup-commands:
-      - apk add stress-ng
+      - command: apk add stress-ng
  
 flow:
   - name: Stress

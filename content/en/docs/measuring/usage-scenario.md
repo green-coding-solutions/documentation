@@ -3,29 +3,25 @@ title: "usage_scenario.yml"
 description: "Specification of the usage_scenario.yml file"
 lead: ""
 date: 2022-06-16T08:48:45+00:00
-weight: 815
+weight: 415
 ---
 
 The `usage_scenario.yml` consists of these main blocks:
 
-- `networks` - Handles the orchestration of networks
+- Start of the file with some basic root level keys
 - `services` - Handles the orchestration of containers
+- `networks` - (optional) Handles the orchestration of networks
 - `flow` - Handles the interaction with the containers
-- `compose-file*` - A compose file to include.
-
-`*`: means these values are optional.
+- `compose-file` - (optional) A compose file to include
 
 Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
+See also the note on [unsupported features](#unsupported-docker-compose-features) to disable the warning about that.
 
-At the beginning of the file you should specify `name`, `author`, and `architecture`.
-These will help you later on tell what the scenario is doing.
+Inside the `usage_scenario.yml` you can use variables. See [variables](#variables) for details.
 
-**Linux** and **Darwin** are the only supported architectures. If you don't mention an `architecture` it will run on both.
 
-Please note that when running the measurement you can supply an additional name,
-which can and should be different from the name in the `usage_scenario.yml`.
 
-The idea is to have a general name for the `usage_scenario.yml` and another one for the specific measurement run.
+### Basic root level keys
 
 Example for the start of a `usage_scenario.yml`
 
@@ -36,19 +32,22 @@ author: Arne Tarara <arne@green-coding.io>
 description: This is just an example usage_scenario ...
 ```
 
+
+- `name` **[str]**: Name of the scenario 
+- `description` **[str]**: Detailed description of the scenario 
+- `author` **[str]**: Author of the scenario
+- `architecture` **[str]** *(optional)*: If your *usage_scenario* runs only on a specific architecture you can instruct the GMT to check if the architecture of the machine matches. You can specify **Linux**, **Windows** and **Darwin**. Omit this key if your scenario has no architecture restriction.
+    + Note: Windows with WSL2 and Linux containers would be **Linux** as architecture
+- `ignore-unsupported-compose` **[bool]** *(optional)*: Ignore unsupported [Docker Compose](https://docs.docker.com/compose/compose-file) features and still run usage_scenario
+
+
+Please note that when running the measurement you can supply an additional name,
+which can and should be different from the name in the `usage_scenario.yml`.
+
+The idea is to have a general name for the `usage_scenario.yml` and another one for the specific measurement run.
+
 When running the `runner.py` we would then set `--name` for instance to: *Hugo Test run on my Macbook*
 
-### Networks
-
-Example:
-
-```yaml
-networks:
-  name: wordpress-mariadb-data-green-coding-network
-```
-
-- `networks:` **[dict]** (Dictionary of network dictionaries for orchestration)
-  + `name: [NETWORK]` **[a-zA-Z0-9_]** The name of the network with a trailing colon. No value required.
 
 ### Services
 
@@ -66,7 +65,7 @@ services:
     ports:
       - 3306:3306
     setup-commands:
-      - sleep 20
+      - command: sleep 20
     volumes:
       - /LOCAL/PATH:/PATH/IN/CONTAINER
     networks:
@@ -81,7 +80,8 @@ services:
   gcb-wordpress-apache:
     # ...
     depends_on:
-      gcb-wordpress-mariadb: service_healthy
+      gcb-wordpress-mariadb:
+        condition: service_healthy
   gcb-wordpress-dummy:
     # ...
     depends_on:
@@ -100,13 +100,20 @@ services:
       + Or list items with strings in the format: *MYSQL_PASSWORD=123*
     - `ports:` **[int:int]** *(optional)*
       + Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
+    - `init:` **[boolean]**
+      + Will start a PID 1 *init* process in the container that helps when you are experiencing zombie processes and memory leaks. See [Docker Docs](https://docs.docker.com/reference/cli/docker/container/run/#init) for details
     - `depends_on:` **[list|dict]** *(optional)*
-      + Can either be an list of services names on which the service is dependent. It affects the startup order and forces the dependency to be "ready" before the service is started.
-      + Or it can be an dict where each key represents a service as a string. The string then can have two values:
-          * `service_healthy`: Will wait for the container until the docker *healthcheck* returns *healthy*.
-          * `service_started`: Similar to the list syntax this will enforce a starting order and just wait until the container has been created.
+      + Can either be an list of services names on which the service is dependent. It affects the startup order and forces the dependency to be started (container state = "running") before the service is started.
+      + Or it can be an dict where you can specify a condition. The `condition` can have two values:
+        * `service_healthy`: Will wait for the container until the docker *healthcheck* returns *healthy*.
+        * `service_started`: Similar to the list syntax -> this will enforce a starting order and just wait until the container state is "running".
     - `setup-commands:` **[list]** *(optional)*
       + List of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
+      + `command:` **[str]**
+        * The command to be executed
+      + `shell:` **[str]** *(optional)*
+        * Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
+        ** Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
     - `volumes:` **[list]**  *(optional)*
       + List of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
     - `networks:` **[list]**  *(optional)*
@@ -124,9 +131,10 @@ services:
       + Defaults to `/tmp/repo`
     - `command:` **[str]** *(optional)*
       + Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`.
-    - `shell:` **[str]** *(optional)*
-      + Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
-      + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
+    - `entrypoint:` **[str]** *(optional)*
+      + Declares the default entrypoint for the service container. This overrides the ENTRYPOINT instruction from the service's Dockerfile.
+      + The value of `entrypoint` can either be an empty string (ENTRYPOINT instruction will be ignored) or a single word (helpful to provide a script).
+      + If you need an entrypoint that consists of multiple commands/arguments, either provide a script (e.g. `entrypoint.sh`) or set it to an empty string and provide your commands via `command`.
     - `log-stdout:` **[boolean]** *(optional)*
       + Will log the *stdout* and make it available through the frontend in the *Logs* tab.
       + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
@@ -144,6 +152,18 @@ services:
 
 Please note that every key below `services` will serve as the name of the
 container later on. You can overwrite the container name with the key `container_name`.
+
+### Networks
+
+Example:
+
+```yaml
+networks:
+  name: wordpress-mariadb-data-green-coding-network
+```
+
+- `networks:` **[dict]** (Dictionary of network dictionaries for orchestration)
+  + `name: [NETWORK]` **[a-zA-Z0-9_]** The name of the network with a trailing colon. No value required.
 
 ### Flow
 
@@ -268,8 +288,60 @@ Please be aware that the timestamps of the note do not have to be identical
 with any command or action of the container. If the timestamp however does not fall
 into the time window of your measurement run it will not be displayed in the frontend.
 
-#### Flow notes
+### Unsupported Docker Compose features
 
-- Commands have a time-limit configured in [Configuration →]({{< relref "configuration" >}}). If you measure locally you can increase that limit if needed.
-- In our Green Metrics Tool online version this limit is currently fixed. You may issue multiple separate commands though if you like.
-  + We will introduce a fixed limit of 15 Minutes for the whole measurement run for our online version in the near future.
+All features not listed here are not supported by the Green Metrics Tool.
+
+Since we allow the import of [Docker Compose](https://docs.docker.com/compose/compose-file) files this can lead to importing unsupported features.
+
+GMT will error in this case. If you do not want that add the `ignore-unsupported-compose` key after you have tested your *usage_scenario.yml* file.
+
+
+## Variables
+
+A variable must adhere to the format `__GMT_VAR_[\w]+__`. An example would be `__GMT_VAR_NUMBER__`.
+
+The value of the variable is a string. It will be replaced as is without adding " or ' though.
+
+Example in a `usage_scenario.yml`:
+```yml
+---
+name: Test Stress
+author: Dan Mateas
+description: test
+
+services:
+  test-container:
+    type: container
+    image: gcb_stress
+    build:
+      context: ../stress-application
+
+flow:
+  - name: Stress
+    container: test-container
+    commands:
+      - type: console
+        command: stress-ng -c 1 -t __GMT_VAR_DURATION__ -q
+        note: Starting Stress
+```
+
+Here we can leverage the variable functionality to supply different durations without creating new usage scenarios all the time.
+
+Beware that it is often very helpful to put the whole command in quotes like this:
+
+```yml
+...
+command: "stress-ng -c 1 -t __GMT_VAR_DURATION__ -q"
+...
+```
+
+The reason being that when your variable contains *YAML* control characters like a *:* you might get into parsing errors.
+
+A run where we want the variable to be *1* as example can be started like this:
+```bash
+$ python3 runner.py --uri PATH_TO_SCENARIO --variables "__GMT_VAR_DURATION__=1"
+```
+See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches" >}})
+
+The API accepts these variables as arguments also to the `/v1/software/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.

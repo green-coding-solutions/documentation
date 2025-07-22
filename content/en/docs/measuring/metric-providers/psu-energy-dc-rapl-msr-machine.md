@@ -5,7 +5,7 @@ lead: ""
 date: 2024-04-08T08:16:35+0000
 draft: false
 images: []
-weight: 173
+weight: 214
 ---
 
 
@@ -18,21 +18,13 @@ This MSR keeps a running count of the energy used in a specified domain in micro
 
 We have tested this domain on modern [Framework](https://frame.work/de/en) notebooks and the domain includes here at least all of the CPU, DRAM as well as the display.
 
-### System Setup
-On kernels > 2.6 all the kernel modules should automatically be loaded.
-
-However just in case run:
-
-```bash
-sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
-sudo modprobe intel_rapl_msr
-sudo modprobe rapl
-```
+### Setup
+Please look at [RAPL installation]({{< relref "/docs/installation/installation-linux" >}})
 
 ### Technical specs
 
-- Time resolution: 976 micro-seconds
-- Energy resolution: 15.3 micro-Joules
+- Time resolution: up to 976 micro-seconds (depending on production year of the CPU)
+- Energy resolution: up to 15.3 micro-Joules (depending on production year of the CPU)
 
 ### Classname
 

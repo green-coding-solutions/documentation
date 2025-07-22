@@ -3,7 +3,7 @@ title: "Debugging measurements"
 description: "Debugging measurements"
 lead: ""
 date: 2022-06-15T08:48:45+00:00
-weight: 840
+weight: 460
 ---
 
 ## Debugging containers
@@ -50,6 +50,15 @@ If your container fails to boot in the GMT many of the prior mentioned debugging
 Since this is usually related to a problem in the `Dockerfile` you can show the output of the docker build client
 by adding `--print-logs`
 
+## Debug flow commands
+
+Be sure to activate:
+```docker
+log-stderr: true
+log-stdout: true
+```
+on the flow commands to debug them.
+
 ## Debugging containers via HTTP / exposed ports
 
 If entering the container looks fine and you need to access them through some of their  
@@ -62,3 +71,12 @@ To see if the [Metric Providers →]({{< relref "/docs/measuring/metric-provider
 
 - Start them manually from their respective folder under `/metric-providers/...` and look if the output is as expected
 - Turn on the `--no-file-cleanup` switch to see if the files generated in `/tmp/green-metrics-tool/[...].log` are in expected format
+
+## Debugging flow commands not ending
+
+This is a tricky problem as it might be "intended" behaviour.
+Typically when a *flow command* does not end it is because the process is really working endlessly (daemon) or the process ran into some kind of deadlock (mutex locks, OOM etc.).
+
+We recommend you check if the container ran into configured memory / cpu limits of the docker orchestrator. Either through linux system tools or through *docker stats* if you have system access.
+
+If you are using the **GMT Cluster / SaaS** you can let the process run into the maximum time limit to see the metrics timelines to understand memory and CPU usage and possible limits hit.

@@ -3,10 +3,14 @@ title : "Configuration"
 description: ""
 lead: ""
 date: 2022-06-20T08:48:45+00:00
-weight: 825
+weight: 425
 ---
 
-## Config.yml
+Configurations in the GMT happen at two central places.
+
+The file based [config.yml](#configyml) and the Dashboard based [User Settings](#user-settings)
+
+## config.yml
 
 The `config.yml` configures some global measurement settings that are used when
 executing the `runner.py` directly or through cron / cluster-client mode.
@@ -45,7 +49,7 @@ cluster:
     shutdown_on_job_no: False
     control_workload:
       name: "Measurement control Workload"
-      uri: "https://github.com/green-coding-berlin/measurement-control-workload"
+      uri: "https://github.com/green-coding-solutions/measurement-control-workload"
       filename: "usage_scenario.yml"
       branch: "main"
       comparison_window: 5
@@ -69,8 +73,6 @@ measurement:
   pre-test-sleep: 5
   idle-duration: 5
   baseline-duration: 5
-  flow-process-duration: 1800 # half hour
-  total-duration: 3600 # one hour
   post-test-sleep: 5
   phase-transition-time: 1
   boot:
@@ -78,13 +80,13 @@ measurement:
   metric-providers:
     linux:
       cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
-        resolution: 100
+        sampling_rate: 100
       cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
-        resolution: 100
+        sampling_rate: 100
       memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider:
-        resolution: 100
+        sampling_rate: 100
       cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider:
-        resolution: 100
+        sampling_rate: 100
     # ...
 
 admin:
@@ -97,13 +99,13 @@ admin:
 
 The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "/docs/installation/installation-linux" >}}) part.
 
-## machine
+### machine
 If you run locally nothing needs to be configured here. But if you run a *cluster* you must set the base temperature values for the accuracy control to work
 
 Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}) and [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}})
 
 
-## cluster
+### cluster
 
 Only the following three variables are important for a local installation:
 
@@ -114,13 +116,11 @@ Only the following three variables are important for a local installation:
 For the rest please see [installation →]({{< relref "/docs/cluster/installation" >}})
 
 
-## measurement
+### measurement
 
 - `system_check_threshold` **[integer]: Level at which an exception will be raised for system checks. The lower the more restrictive system checks are. We recommend *3* for development and *2* for cluster setups. *1* only for debugging.
 - `pre-test-sleep` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
 - `post-test-sleep` **[integer]**: Seconds to idle containers after measurement
-- `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
-- `total-duration` **[integer]**: Max. duration in seconds for how long the whole benchmark may take. Including building containers, baseline, idle, runtime and removal phases.
 - `idle-duration` **[integer]**: Duration in seconds for the idle phase
 - `baseline-duration` **[integer]**: Duration in seconds for the baseline phase
 - `phase-transition-time` **[integer]**: Seconds to idle between phases
@@ -129,12 +129,12 @@ For the rest please see [installation →]({{< relref "/docs/cluster/installatio
 - `metric-providers`:
   + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
     * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
-    * `METRIC_PROVIDER_NAME.resolution` **[integer]**: sampling resolution in ms
+    * `METRIC_PROVIDER_NAME.sampling_rate` **[integer]**: sampling rate in ms
 
 Some metric providers have unique configuration params:
 
 - PsuEnergyAcXgboostSystemProvider
-  + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
+  + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
 
 Also note that some providers are deactivated by default, because they either need
 additional configuration parameters, extra hardware or a specially configured system.
@@ -153,3 +153,46 @@ email behaviour if configured
 - `notification_email_bcc` **[str|bool]**: This email will always get a copy of every notification email sent, even for user-only mails like the "Your report is ready" mail.
 - `error_file` **[str|bool]**: Takes a file path to log all the errors to it. This is disabled if False
 - `error_email` **[str|bool]**: Sends an error notification also via email. This is disabled if False
+
+
+## optimization
+Here you can ignore certain optimizations to not run.
+
+All possible optimizations are found in the `/optimization_providers` folder of the GMT.
+
+To disable for instance the *container_build_time* optimization you could set:
+```yml
+optimization:
+  ignore:
+    - container_build_time
+```
+
+## sci
+
+Please see for details: [SCI →]({{< relref "sci" >}}).
+
+## electricity_maps_token
+
+If you are using [Eco CI](https://www.green-coding.io/products/eco-ci) or [Carbon DB](https://www.green-coding.io/products/eco-ci) you need to configure Electricitymaps with a valid API token to get carbon intensity data.
+
+The value is a string.
+
+Example:
+```yml
+electricity_maps_token: 'MY_TOKEN'
+```
+
+## User Settings
+
+Settings that are specifc to a user and apply to all machines that you are measuring on equally are to be configured via the Dashboard.
+For local installations these are to be found under [https://metrics.green-coding.internal:9142/settings.html](https://metrics.green-coding.internal:9142/settings.html). If you use our [Hosted Service](https://metrics.green-coding.io/) you find it at [https://metrics.green-coding.io/settings.html](https://metrics.green-coding.io/settings.html)
+
+- `disabled_metric_providers` **[list]**: Providers to disable in CamelCase format.
+  + Example: *NetworkConnectionsProxyContainerProvider*
+- `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
+- `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
+- `phase-padding` **[integer]**: Phase padding is by default applied to the end of the phase to capture the last sampling tick, which might be cut-off. GMT applies one extra tick to the end of the phase. If your phase cut-offs must me microsecond exact you can turn this off. Typically not recommended and should be left on. See [https://github.com/green-coding-solutions/green-metrics-tool/issues/1129](https://github.com/green-coding-solutions/green-metrics-tool/issues/1129) for details.
+- `dev-no-sleeps` **[integer]**: Does not sleep in between phases and for cool-down periods. Beware that this will speed up runs on the cluster but render them invalid.
+- `dev-no-optimizations` **[integer]**: De-activates running the optimizations after a measurement.
+
+<center><img style="width: 600px;" src="/img/dashboard-settings.webp" alt="Dashboard Settings for GMT Measurements"></center>

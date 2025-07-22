@@ -3,7 +3,7 @@ title: "Containerizing own applications"
 description: ""
 lead: ""
 date: 2022-06-20T07:49:15+00:00
-weight: 801
+weight: 401
 toc: true
 ---
 
@@ -115,7 +115,9 @@ COPY ./wordpress.conf /etc/apache2/sites-enabled/wordpress.conf
 By copying the `wordpress.conf` to the apache vhost directory we let webserver know  
 to deliver the website on port `9875` for host `green-coding-wordpress-apache-data-container`
 
-{{< alert icon="💡" text="As you can see we are letting the container expose port 9875. This is usually very helpful for debugging to let internal/testing containers be run at ports greater 1024" />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+As you can see we are letting the container expose port 9875. This is usually very helpful for debugging to let internal/testing containers be run at ports greater 1024
+{{< /callout >}}
 
 We will also dump the filesystem of our existing Wordpress app,  
 so we can ingest it into the container:
@@ -186,13 +188,15 @@ services:
       - db
 ```
 
-{{< alert icon="👉" text="Please change the passwords accordingly to the ones that your wordpress wp-config.php has if you supply one. Otherwise the MariaDB magic will create the database for you." />}}
+{{< callout context="note" icon="outline/hand-finger-right" >}}
+Please change the passwords accordingly to the ones that your wordpress wp-config.php has if you supply one. Otherwise the MariaDB magic will create the database for you.
+{{< /callout >}}
 
 ### Puppeteer for client side
 
 In order to simulate a client we need a container running a headless browser.
 
-We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-firefox-chrome](https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-firefox-chrome)
+We choose Puppeteer and provide an example container to build here: [https://github.com/green-coding-solutions/example-applications/tree/main/puppeteer-firefox-chrome](https://github.com/green-coding-solutions/example-applications/tree/main/puppeteer-firefox-chrome)
 
 You can also download the container directly from docker hub here: [Docker Hub](https://hub.docker.com/r/greencoding/puppeteer-chrome)
 
@@ -254,7 +258,7 @@ Afterwards run the measurements.
 
 An example how to run a measurement locally can be found here: [Measuring locally →]({{< relref "measuring-locally" >}})
 
-To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-berlin/simple-example-application)
+To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-solutions/simple-example-application)
 
 ### Help / Debugging
 If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.

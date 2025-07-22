@@ -3,7 +3,8 @@ title: "Server Calibration"
 description: "A description on how to calibrate the system"
 lead: ""
 date: 2023-06-26T01:49:15+00:00
-weight: 903
+weight: 305
+toc: true
 ---
 
 ## Problem
@@ -15,7 +16,7 @@ we have the `sleep_time_after_job` parameter in the [`config.py`](/docs/installa
 where you can set how long to sleep between jobs.
 
 To find out this value we have a script `tools/calibrate.py` in the Green Metrics Tool
-[repo](https://github.com/green-coding-berlin/green-metrics-tool). On the system that you want to run your benchmarks on
+[repo](https://github.com/green-coding-solutions/green-metrics-tool). On the system that you want to run your benchmarks on
 you can execute this script to get the cool down period. The script is called with `python3 calibrate.py`
 
 You can then either get the script to set the correct value for you or set it yourself.

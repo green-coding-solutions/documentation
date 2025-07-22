@@ -3,11 +3,11 @@ title: "Example Applications"
 description: "Contributing to the Example Applications 🥳🎉😍"
 lead: "Contributing to the Example Applications 🥳🎉😍"
 date: 2022-06-10T09:49:15+00:00
-weight: 201
+weight: 801
 toc: true
 ---
 
-We welcome everybody to provide example applications with a Pull Requests on [GitHub](https://github.com/green-coding-berlin/example-applications)
+We welcome everybody to provide example applications with a Pull Requests on [GitHub](https://github.com/green-coding-solutions/example-applications)
 
 Please be aware that in order to achieve the most gain for the community and
 the goal to keep measurements reproducible and comparable we provide some
@@ -31,7 +31,7 @@ If your application uses of one the service below, please use the recommended co
 
 ### Interacting with Web Applications
 
-- [Our Puppeteer Containers](https://github.com/green-coding-berlin/example-applications/tree/main/puppeteer-firefox-chrome)
+- [Our Puppeteer Containers](https://github.com/green-coding-solutions/example-applications/tree/main/puppeteer-firefox-chrome)
 
 ### Web Applications
 
@@ -45,4 +45,4 @@ to overlay an existing filesystem.
 - We recommend using [PHP Official + Apache](https://hub.docker.com/_/php) &raquo; Please use the tag: `php:8.0-apache`.
 
 To see an example where we use this container and also add some PHP modules / Apache modules have a look
-at our [PHP-Apache Example Application](https://github.com/green-coding-berlin/example-applications/tree/main/apache-mariadb-php)
+at our [PHP-Apache Example Application](https://github.com/green-coding-solutions/example-applications/tree/main/apache-mariadb-php)

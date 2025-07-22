@@ -5,18 +5,17 @@ lead: "Green Metrics API documentation"
 date: 2022-06-15T08:49:15+00:00
 draft: false
 images: []
-menu:
-  docs:
-    parent: "help"
-weight: 610
+weight: 510
 toc: true
 ---
 
 ## Live documentation
 
-Go to: [https://api.green-coding.io/doc](https://api.green-coding.io/docs)
+Go to: [https://api.green-coding.io/docs](https://api.green-coding.io/docs)
 
-{{< alert icon="💡" text="The FastAPI is self-documenting and thus will always be most up to date. It even contains a playground to try out requests." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+The FastAPI is self-documenting and thus will always be most up to date. It even contains a playground to try out requests.
+{{< /callout >}}
 
 ## Playbooks
 

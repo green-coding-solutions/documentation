@@ -5,7 +5,7 @@ lead: ""
 date: 2022-06-16T08:48:23+00:00
 lastmod: 2022-06-16T08:48:23+00:00
 draft: false
-weight: 201
+weight: 601
 
 images: []
 ---
@@ -44,12 +44,6 @@ The sidebar is done in flexbox.
 - The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
 
-## HUGO
-
-Internally we use HUGO for the development of the frontend, which provides a better separation of
-all the HTML files for us.
-
-Currently we do not have this repository published, but will do so in the next weeks.
 
 ## Charts
 
@@ -80,4 +74,4 @@ it looked way nicer.
 
 So if you plan on measurements < 30 Minutes than ApexCharts might be a good choice for a frontend charting library.
 Please checkout our old release where we still used the library if you need a
-starting point how to integrate it: [Release v0.1-beta](https://github.com/green-coding-berlin/green-metrics-tool/releases/tag/v0.1-beta)
+starting point how to integrate it: [Release v0.1-beta](https://github.com/green-coding-solutions/green-metrics-tool/releases/tag/v0.1-beta)

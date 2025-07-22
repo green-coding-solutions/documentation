@@ -3,7 +3,8 @@ title: "Cron Jobs"
 description: "Cron Jobs to be executed in the Green Metrics Tool"
 lead: ""
 date: 2024-10-25T01:49:15+00:00
-weight: 102
+weight: 1002
+toc: false
 ---
 
 All *cron jobs* can be found in the `/cron` directory.
@@ -25,7 +26,7 @@ SHELL=/bin/bash
 
 ## If you only run daily or weekly projects this needs to only run once a day
 ## If you use the commit or tag feature we recommend every 15 minutes
-15     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/timeline_projects.py schedule &>> /var/log/green-metrics-jobs.log
+15     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/watchlist.py schedule &>> /var/log/green-metrics-jobs.log
 
 ## If you use CarbonDB you must at least update and compress once a day. 
 ## If you want more current data run this more often.

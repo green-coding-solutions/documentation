@@ -9,7 +9,7 @@ services:
     image: klakegg/hugo:0.101.0-alpine
     commmand: shell
     setup-commands:
-      - cp -R /tmp/repo /src
+      - command: cp -R /tmp/repo /src
 
 flow:
   - name: Build Hugo

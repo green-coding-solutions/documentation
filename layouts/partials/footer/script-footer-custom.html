@@ -1,0 +1,4 @@
+{{/* Custom script footer - add any custom JavaScript here */}}
+
+{{/* Load clipboard.js for code fences  */}}
+{{ partial "footer/esbuild-no-integrity" (dict "src" "js/clipboard.js" "load" "async" "transpile" false) }}

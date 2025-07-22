@@ -3,11 +3,13 @@ title: "Measuring GUI applications"
 description: ""
 lead: ""
 date: 2024-08-20T01:49:15+00:00
-weight: 839
+weight: 439
 toc: true
 ---
 
-GMT can also measure GUI applications. We only support Linux atm but will update this page once further OS are supported.
+GMT can also measure GUI applications that need an active Window Manager (X11 / Wayland etc).
+
+We only support Linux atm but will update this page once further OS are supported.
 
 ### Linux
 
@@ -90,6 +92,43 @@ Currently not supported
 Theoretically macOS should be possible if you install *X Server* on your system. This however is untested.
 
 Let us know if you try it out and it works!
+
+### Automating for cluster
+
+If you are running GMT unattended in cluster mode you must ensure two things:
+- The user that the GMT runs with must be automatically also logged into a GUI session. This typically happens in the user settings of the desktop (for instance Gnome).
+- Futhermore the `xhost +local:docker` must be set also in the Desktop. In an unattended mode this must happen with files that are loaded via autostart.
+
+#### X11 autostart file
+Add `xhost +local:docker` to `~/.xprofile`
+
+Example: `$ xhost +" >> ~/.xprofile`
+
+#### Wayland autostart file
+Create a file `~/.config/autostart/xhost-docker.desktop`
+
+Content:
+```config
+[Desktop Entry]
+Type=Application
+Exec=xhost +local:docker
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Allow Docker X11 / Wayland
+```
+
+#### Starting with a selected window manager
+
+On Ubuntu, our reference distribution for cluster setups, this is chosen in the *GDM* config.
+
+Open `/etc/gdm3/custom.conf` and add:
+```conf
+# this will activate Wayland
+WaylandEnable=true
+```
+
+If you want *X.org* just set the variable to `false`.
 
 ### Help / Debugging
 If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.

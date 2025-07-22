@@ -3,7 +3,7 @@ title: "Cluster Installation"
 description: "A description on how to run the GMT in a cluster with NOP Linux"
 lead: ""
 date: 2023-06-26T01:49:15+00:00
-weight: 101
+weight: 1001
 ---
 
 ## Cluster setup
@@ -26,13 +26,10 @@ client:
 
 You can also set a time that the script should wait after a job has finished execution to give the system time to cool down. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune this value.
 
-After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the `tools/cluster/cleanup.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
-{{< tabs groupId="mode">}}
-{{% tab name="Docker-Rootless-Mode" %}}
-\
 Create a file under: `~/.config/systemd/user/green-coding-client.service`:
 
 ```init
@@ -43,8 +40,7 @@ After=docker.target
 [Service]
 Type=simple
 WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/tools/client.py
-StandardOutput=append:/var/log/green-metrics-client-service.log
+ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 -u /home/gc/green-metrics-tool/cron/client.py
 Restart=always
 RestartSec=30s
 TimeoutStopSec=600
@@ -58,67 +54,21 @@ WantedBy=default.target
 
 Then activate the service
 ```bash
-sudo touch /var/log/green-metrics-client-service.log
-sudo chown gc:gc /var/log/green-metrics-client-service.log
 systemctl --user daemon-reload # Reload the systemd configuration
-systemctl --ser enable green-coding-client # enable on boot
+systemctl --user enable green-coding-client # enable on boot
 systemctl --user start green-coding-client # start service
 
 systemctl --user status green-coding-client # check status
 ```
 
-{{% /tab %}}
-{{% tab name="Docker-Root-Mode" %}}
-\
-Create a file under: `/etc/systemd/system/green-coding-client.service`:
-
-
-```init
-[Unit]
-Description=The Green Metrics Client Service
-After=network.target
-
-[Service]
-Type=simple
-User=gc
-Group=gc
-WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 /home/gc/green-metrics-tool/tools/client.py
-StandardOutput=append:/var/log/green-metrics-client-service.log
-Restart=always
-RestartSec=30s
-TimeoutStopSec=600
-KillSignal=SIGINT
-RestartKillSignal=SIGINT
-FinalKillSignal=SIGKILL
-
-Environment="DOCKER_HOST=unix:///run/user/1000/docker.sock"
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Then activate the service
-```bash
-sudo systemctl daemon-reload # Reload the systemd configuration
-sudo systemctl enable green-coding-client # enable on boot
-sudo systemctl start green-coding-client # start service
-
-sudo systemctl status green-coding-client # check status
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
 You should now see the client reporting it's status on the server. It is important to note that only the client ever talks to the server (polling). The server never tries to contact the client. This is to not create any interrupts while a measurement might be running.
 
-After running a job the client program executes the `tools/cluster/cleanup.sh` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the `tools/cluster/cleanup.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
 This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. We recommend the following:
 
 ```bash
-echo 'ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.sh ""' | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
+echo 'ALL ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/cleanup.py ""' | sudo tee /etc/sudoers.d/green-coding-cluster-cleanup
 sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
 ```
 
@@ -129,13 +79,13 @@ sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
 The Green Metrics Tool comes with an implemented queueing and locking mechanism. In contrast to the NOP Linux implementation this way of checking for jobs doesn't poll with a process all the time but relies on cron which is not available on NOP Linux.
 
 You can install a cronjob on your system to periodically call:
-- `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
-- `python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
 
 The `jobs.py` uses the *Python* faulthandler mechanism and will also report to *STDERR* in case of a segfault.
 When running the cronjob we advice you to append all the output combined to a log file like so:
 
-`* * * * * python3 PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
+`* * * * * python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
 
 Be sure to give the `green-metrics-jobs.log` file write access rights.
 
