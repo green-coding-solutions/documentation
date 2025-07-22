@@ -21,7 +21,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--user-id` Execute run as a specific user (Default: 1) - See also [User Management →]({{< relref "/docs/cluster/user-management.md" >}})
 - `--config-override` Override the configuration file with the passed in yml file.
   + Must be located in the same directory as the regular configuration file. Pass in only the name.
-- `--file-cleanup` flag to delete the metric provider data in `/tmp/green-metrics-tool`
+- `--file-cleanup` flag to delete the metric provider data in `/tmp/green-metrics-tool`. Normally this folder is only purged on a new run start and files are left in `/tmp/green-metrics-tool`.
 - `--debug` flag to activate steppable debug mode
   + This allows you to enter the containers and debug them if necessary.
 - `--allow-unsafe` flag to activate unsafe volume bindings, ports, and complex env vars

@@ -17,7 +17,7 @@ The first approach is to use the `--dev-*` switches as defined in the [runner sw
 Here you can turn on many switches that speed up a run. Please note that no useful measurement
 will come out of the tool. These flags should only be used when debugging.
 
-Especially the `--dev-flow-timetravel` is extremely useful as it will let you retry a step in 
+Especially the `--dev-flow-timetravel` is extremely useful as it will let you retry a step in
 the *usage scenario* without having to go through all previous steps. It will also keep the container state so that if you can do live edits to the files in your local filesystem that are mounted then writeable into the container.
 Please note that this only works with a local repository. If your repository is online only atm clone it first to your local filesystem. This allows for editing files while running a *usage scenario*
 
@@ -25,13 +25,13 @@ A typical call looks like this:
 `python3 --uri MY_LOCAL_PATH --name Testing --allow-unsafe --dev-no-metrics --dev-no-sleeps --dev-cache-build --dev-flow-timetravel`
 
 ### --debug flag
-The second approach in debugging a *usage_scenario* is to  
+The second approach in debugging a *usage_scenario* is to
 turn the `--debug` flag of the `runner.py` on.
 
-When you call the `runner.py` locally it will turn into  
+When you call the `runner.py` locally it will turn into
 a steppable mode where you continue to the next step by pressing enter.
 
-You can then enter one of the containers to see if  
+You can then enter one of the containers to see if
 the required services are running correctly.
 
 An example call would be:
@@ -40,7 +40,7 @@ An example call would be:
 docker exec -it MY_CONTAINER_NAME bash
 ```
 
-Some container do not have `bash`. However `sh`, which has less capabilities,  
+Some container do not have `bash`. However `sh`, which has less capabilities,
 should be available in most cases.
 
 ### --print-logs
@@ -61,8 +61,8 @@ on the flow commands to debug them.
 
 ## Debugging containers via HTTP / exposed ports
 
-If entering the container looks fine and you need to access them through some of their  
-exposed ports (ex. via Browser through HTTP) turn on the `--allow-unsafe` flag to bind  
+If entering the container looks fine and you need to access them through some of their
+exposed ports (ex. via Browser through HTTP) turn on the `--allow-unsafe` flag to bind
 the ports specified in the `usage_scenario.yml`.
 
 ## Debugging metric providers
@@ -70,7 +70,7 @@ the ports specified in the `usage_scenario.yml`.
 To see if the [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) are working correctly you have two options:
 
 - Start them manually from their respective folder under `/metric-providers/...` and look if the output is as expected
-- Turn on the `--no-file-cleanup` switch to see if the files generated in `/tmp/green-metrics-tool/[...].log` are in expected format
+- Check the  `/tmp/green-metrics-tool/[...].log` files, after a run to see if there is some data being reported
 
 ## Debugging flow commands not ending
 
@@ -80,3 +80,4 @@ Typically when a *flow command* does not end it is because the process is really
 We recommend you check if the container ran into configured memory / cpu limits of the docker orchestrator. Either through linux system tools or through *docker stats* if you have system access.
 
 If you are using the **GMT Cluster / SaaS** you can let the process run into the maximum time limit to see the metrics timelines to understand memory and CPU usage and possible limits hit.
+>>>>>>> main
