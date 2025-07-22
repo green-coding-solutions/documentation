@@ -14,11 +14,23 @@ With WSL you are working with a real Linux distribution (e.g. Ubuntu). Therefore
 
 If you ever get stuck during this installation, be sure to reboot WSL once. It may help to correctly load some configurations and/or daemons.
 
-## Docker Desktop for Windows
+## Installation of Docker
 
-Docker provides a great installation help on their website: [https://docs.docker.com/desktop/install/windows-install/](https://docs.docker.com/desktop/install/windows-install/)
+There are two different ways to install and use Docker:
 
-You can just use the Docker Desktop for Windows bundle. Make sure the WSL 2 feature is enabled.
+- Docker Desktop for Windows (with WSL 2 backend)
+- Native Docker installation inside of WSL 2
+
+[Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/) provides an easy way to install Docker on your system.
+Using it for GMT comes with the following issues:
+
+- possible license issues (commercial use of Docker Desktop in larger enterprises required a paid subscription)
+- resource overhead (due to extra VM `docker-desktop`)
+- the metric provider [Network IO - cgroup - container]({{< relref "/docs/measuring/metric-providers/network-io-cgroup-container" >}}) does not work due to the virtualization barrier between the container processes (running inside the special environment `docker-desktop`) and the default WSL environment (e.g. `ubuntu`)
+  - PID resolution fails: `cgroup.procs` files contain placeholder values (typically "0") instead of actual container PIDs
+  - Namespace access blocked: `/proc/PID/ns/net` files don't exist in WSL2's filesystem
+
+If one of the mentioned issues is a problem for you, consider installing Docker natively inside of your prefered WSL 2 distribution (e.g. [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)).
 
 ## Setup
 
@@ -29,7 +41,7 @@ Before following the setup instructions given in [Installation on Linux →]({{<
 Required changes:
 
 - Disable automatic generation of hosts file
-- Enable systemd (install script currently enforces the usage of systemd)
+- Enable systemd (if that's not already the case)
 
 ```bash
 sudo vim /etc/wsl.conf
@@ -52,6 +64,7 @@ wsl.exe --shutdown
 ```
 
 References:
+
 - [https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/](https://devblogs.microsoft.com/commandline/automatically-configuring-wsl/)
 - [https://learn.microsoft.com/en-us/windows/wsl/systemd](https://learn.microsoft.com/en-us/windows/wsl/systemd)
 
@@ -66,7 +79,7 @@ To be able to access the frontend and the API of the GMT, you have to add the UR
 
 ### Enable CGroups v2
 
-This is an optional step, but necessary to be able to get container specific metrics like CPU utilization and memory usage (see section [Metric providers](#metric-providers) below for more information).
+This is an optional step, but necessary to be able to get container specific metrics like CPU utilization, memory usage, network transfer and disk I/O (see section [Metric providers](#metric-providers) below for more information).
 
 Create the file `%USERPROFILE%\.wslconfig` (or edit it) and add the following content:
 
@@ -97,6 +110,13 @@ However, for testing your usage scenarios you can use at least the following met
 - Container memory usage via cgroupv2
   - Config: `memory.used.cgroup.container.provider.MemoryUsedCgroupContainerProvider`
   - Documentation: [Measuring/Metric Providers/Memory Used - cgroup - container]({{< relref "/docs/measuring/metric-providers/memory-used-cgroup-container" >}})
+- Container network I/O via cgroupv2
+  - **only available with native Docker installation, not Docker Desktop for Windows**
+  - Config: `network.io.cgroup.container.provider.NetworkIoCgroupContainerProvider`
+  - Documentation: [Measuring/Metric Providers/Network IO - cgroup - container]({{< relref "/docs/measuring/metric-providers/network-io-cgroup-container" >}})
+- Container disk I/O via cgroupv2
+  - Config: `disk.io.cgroup.container.provider.DiskIoCgroupContainerProvider`
+  - Documentation: tbd.
 - Machine energy consumption via XGBoost (ML-based estimation)
   - Config: `psu.energy.ac.xgboost.machine.provider.PsuEnergyAcXgboostMachineProvider`
   - Documentation: [Measuring/Metric Providers/PSU Energy - AC - XGBoost - Machine]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}})
