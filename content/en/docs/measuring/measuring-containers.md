@@ -55,7 +55,7 @@ So, if you execute strange CPU instructions, such as AVX instructions or CPU ste
 
 We currently have a beta feature to be launched in Summer 2025 that utilizes AMD RAPL per-core energy registers and core-pinning to report individial container CPU energy metrics.
 
-The GMT will utilize a `taskset` to pin the container to a distinct core. Since no other processes are running on your benchmarking systems in [Green Metrics Tool Cluster Hosted Service →]({{< relref "/docs/measuring/measuring-service/" >}}) the values are very reliable.
+The GMT will utilize a `taskset` to pin the container to a distinct core. Since no other processes are running on your benchmarking systems in [Green Metrics Tool Cluster Hosted Service →]({{< relref "/docs/measuring/measuring-service" >}}) the values are very reliable.
 
 Private beta opens Summer 2025. If you are interested shoot us an email to [info@green-coding.io](mailto:info@green-coding.io)
 - The energy of the browser is measured to display and render the page
