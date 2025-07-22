@@ -5,10 +5,7 @@ lead: "Solutions to common problems."
 date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
-menu: 
-  docs:
-    parent: "help"
-weight: 620
+weight: 920
 toc: true
 ---
 

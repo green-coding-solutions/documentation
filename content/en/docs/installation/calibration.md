@@ -3,7 +3,8 @@ title: "Server Calibration"
 description: "A description on how to calibrate the system"
 lead: ""
 date: 2023-06-26T01:49:15+00:00
-weight: 903
+weight: 305
+toc: true
 ---
 
 ## Problem

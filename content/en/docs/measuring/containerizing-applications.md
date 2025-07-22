@@ -3,7 +3,7 @@ title: "Containerizing own applications"
 description: ""
 lead: ""
 date: 2022-06-20T07:49:15+00:00
-weight: 801
+weight: 401
 toc: true
 ---
 
@@ -115,7 +115,9 @@ COPY ./wordpress.conf /etc/apache2/sites-enabled/wordpress.conf
 By copying the `wordpress.conf` to the apache vhost directory we let webserver know  
 to deliver the website on port `9875` for host `green-coding-wordpress-apache-data-container`
 
-{{< alert icon="💡" text="As you can see we are letting the container expose port 9875. This is usually very helpful for debugging to let internal/testing containers be run at ports greater 1024" />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+As you can see we are letting the container expose port 9875. This is usually very helpful for debugging to let internal/testing containers be run at ports greater 1024
+{{< /callout >}}
 
 We will also dump the filesystem of our existing Wordpress app,  
 so we can ingest it into the container:
@@ -186,7 +188,9 @@ services:
       - db
 ```
 
-{{< alert icon="👉" text="Please change the passwords accordingly to the ones that your wordpress wp-config.php has if you supply one. Otherwise the MariaDB magic will create the database for you." />}}
+{{< callout context="note" icon="outline/hand-finger-right" >}}
+Please change the passwords accordingly to the ones that your wordpress wp-config.php has if you supply one. Otherwise the MariaDB magic will create the database for you.
+{{< /callout >}}
 
 ### Puppeteer for client side
 

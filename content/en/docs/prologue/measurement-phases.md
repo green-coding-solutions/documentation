@@ -2,7 +2,7 @@
 title: "Measurement Phases"
 description: "Measurement phases of the Green Metrics Tool"
 date: 2023-05-04T08:49:15+00:00
-weight: 1004
+weight: 104
 toc: true
 ---
 

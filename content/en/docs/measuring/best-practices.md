@@ -3,13 +3,15 @@ title: "Best practices"
 description: "Best practices for measuring with the Green Metrics Tool"
 lead: "Best practices for measuring with the Green Metrics Tool"
 date: 2022-06-14T08:49:15+00:00
-weight: 890
+weight: 490
 toc: true
 ---
 
 One very important note, that serves as a general rule for all usage of the Green Metrics Tool:
 
-{{< alert icon="❗️" text="All energy measurements and / or benchmarks on a normal operating system are by nature error prone and incomparable with different systems. Please never compare our values with values on your system. Measurements of software can only be compared on the exact same system." />}}
+{{< callout context="danger" icon="outline/exclamation-mark" >}}
+All energy measurements and / or benchmarks on a normal operating system are by nature error prone and incomparable with different systems. Please never compare our values with values on your system. Measurements of software can only be compared on the exact same system.
+{{< /callout >}}
 
 Having said that: If you have a proper transfer function between systems or just want to estimate the general **overhead** a 100-core machine compared to an Arduino for just running an email server you can still do a comparison ... just keep in mind, it will have caveats and can only provide guidance.
 

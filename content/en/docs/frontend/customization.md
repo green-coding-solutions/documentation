@@ -5,8 +5,9 @@ lead: ""
 date: 2023-07-12T08:48:23+00:00
 lastmod: 2023-07-12T08:48:23+00:00
 draft: false
-weight: 202
+weight: 602
 images: []
+toc: false
 ---
 
 The Dashboard and the graphs that are shown are customizable in the metrics they display.

@@ -1,13 +1,10 @@
-# Meta Data for SEO
-
-## Homepage
+## Hugo
 title = "Green Metrics Tool"
 titleSeparator = "-"
 titleAddition = "Green Metrics Tool"
-description = "Description"
+description = "Documentation of the Green Metrics Tool"
 
-## Documentation
-# docsVersion = "0.3"
+mainSections = ["docs"]
 
 ## Open Graph
 #images = ["doks.png"]
@@ -39,57 +36,55 @@ titleHome = "Green Metrics Tool Documentation"
 #schemaGitHub = "https://github.com/h-enk/doks"
 #schemaSection = "blog"
 
-## Sitelinks Search Box
-siteLinksSearchBox = false
-
-## Chrome Browser
-themeColor = "#fff"
-
-# Images
-quality = 85
-bgColor = "#fff"
-landscapePhotoWidths = [900, 800, 700, 600, 500]
-portraitPhotoWidths = [800, 700, 600, 500]
-lqipWidth = "20x"
-smallLimit = "300"
-
 # Footer
 footer = "Powered by <a class=\"text-muted\" href=\"https://www.cloudlare.com/\">Cloudflare</a>, <a class=\"text-muted\" href=\"https://gohugo.io/\">Hugo</a>, and <a class=\"text-muted\" href=\"https://getdoks.org/\">Doks</a>"
 
-# Feed
-copyRight = "Copyright (c) Green Coding Berlin"
-
-# Alert
-alert = false
-alertDismissable = true
-# alertText = "Introducing the Doks child theme, several DX + UX updates, and more! <a class=\"alert-link stretched-link\" href=\"https://getdoks.org/blog/doks-v0.2/\" target=\"_blank\" rel=\"noopener\">Check out Doks v0.2</a>"
-alertText = "Introducing the Doks child theme, several DX + UX updates, and more! <a class=\"alert-link stretched-link\" href=\"https://getdoks.org/blog/doks-v0.2/\">Check out Doks v0.2</a>"
-
-# Edit Page
-# repoHost [Github | Gitea | GitLab | Bitbucket | BitbucketServer ] is used for building the edit link based on git hoster
-repoHost = "GitHub"
-#repoHost = "Gitea"
-docsRepo = "https://github.com/green-coding-solutions/documentation"
-docsRepoBranch = "master"
-docsRepoSubPath = ""
-editPage = false
-lastMod = false
-
-[options]
-  lazySizes = true
-  clipBoard = true
-  instantPage = true
+# Doks configuration for thulite/doks v1
+[doks]
+  # Color mode
+  colorMode = "auto"  # auto (default), light or dark
+  colorModeToggler = true  # true (default) or false
+  
+  # Navbar
+  navbarSticky = true
+  containerBreakpoint = "lg"
+  
+  # Search
   flexSearch = true
-  darkMode = true
-  bootStrapJs = true
-  breadCrumb = false
-  highLight = true
-  kaTex = false
-  multilingualMode = false
-  docsVersioning = false
-  fullWidth = false
+  searchExclKinds = []
+  searchExclTypes = []
+  showSearch = []
+  indexSummary = false
 
-[menu]
-  [menu.section]
-    auto = true
-    collapsibleSidebar = true
+  # Search results
+  showDate = false
+  showSummary = true
+  searchLimit = 10 # 0 (no limit, default)
+  
+  # Global alert
+  alert = false
+  alertDismissable = true
+
+  # Bootstrap
+  bootstrapJavascript = true # false (default)
+  
+  # Navigation
+  sectionNav = ["docs"]
+  toTopButton = false
+  breadcrumbTrail = false
+  headlineHash = true
+  scrollSpy = true
+
+  # Multilingual
+  multilingualMode = false
+
+  # Versioning
+  docsVersioning = false
+
+  # Repository
+  editPage = false
+  lastMod = false
+  repoHost = "GitHub"
+  docsRepo = "https://github.com/green-coding-solutions/documentation/"
+  docsRepoBranch = "main"
+  docsRepoSubPath = ""

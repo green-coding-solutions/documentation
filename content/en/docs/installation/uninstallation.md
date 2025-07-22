@@ -3,7 +3,8 @@ title: "Uninstallation"
 description: "Uninstallation"
 lead: ""
 date: 2024-09-30T01:49:15+00:00
-weight: 1005
+weight: 307
+toc: false
 ---
 
 Green Metrics Tool provides an `uninstall.sh` script in the root of the repository. [Direct link](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/uninstall.sh)

@@ -3,7 +3,7 @@ title: "Measuring Websites"
 description: ""
 lead: ""
 date: 2025-05-23T01:49:15+00:00
-weight: 841
+weight: 441
 toc: true
 ---
 
@@ -13,7 +13,7 @@ GMT can also measure websites and takes a multi-dimensional approach here:
 
 To isolate this as best as possible GMT orchestrates a reverse proxy, warms up the cache by pre-loading the full page once and only then does the final measurement.
 
-**Warning:** Measuring websites is very tricky! GMT shaves off some of the caveats by using reverse proxys and cache pre-loading to make results more reliable. Since measurement load times are in milliseconds range you must have [Metric Providers]({{< relref "/docs/measuring/metric-providers/" >}}) with very high *sampling_rates* connected. **2ms** is a good value. Also website measurements are really only realiable in a [controlled cluster]({{< relref "/docs/cluster/" >}}) with [accuracy control]({{< relref "/docs/cluster/accuracy-control/" >}}).
+**Warning:** Measuring websites is very tricky! GMT shaves off some of the caveats by using reverse proxys and cache pre-loading to make results more reliable. Since measurement load times are in milliseconds range you must have [Metric Providers]({{< relref "/docs/measuring/metric-providers/" >}}) with very high *sampling_rates* connected. **2ms** is a good value. Also website measurements are really only realiable in a [controlled cluster]({{< relref "/docs/cluster/" >}}) with [accuracy control]({{< relref "/docs/cluster/accuracy-control" >}}).
 
 #### Quick website measuring
 
@@ -29,6 +29,6 @@ Bonus tip: If you apply `--quick` to the `run-template.sh` call the measurement 
 
 #### Trying out our hosted service
 
-We operate [website-tester.green-coding.io](https://website-tester.green-coding.io) as a simple demo vertical that uses the underlying [Green Metrics Tool Cluster Hosted Service →]({{< relref "/docs/measuring/measuring-service/" >}}).
+We operate [website-tester.green-coding.io](https://website-tester.green-coding.io) as a simple demo vertical that uses the underlying [Green Metrics Tool Cluster Hosted Service →]({{< relref "/docs/measuring/measuring-service" >}}).
 
 Check it out if you do not feel like installing the GMT and just want to get carbon and energy info on a single page.

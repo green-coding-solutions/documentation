@@ -3,7 +3,8 @@ title: "Installation on Linux"
 description: "Installation"
 lead: ""
 date: 2022-06-15T01:49:15+00:00
-weight: 901
+weight: 302
+toc: true
 ---
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
@@ -20,15 +21,17 @@ The following distributions have been tested, but require manual work:
 - Ubuntu 20.04 (works, but Python3 has to be updated to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html))
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "/docs/cluster/installation" >}}) has different names for timers)
 
-{{< alert icon="💡" text="If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>" />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>
+{{< /callout >}}
 
 ## Downloading and installing required packages
 
 For the sake of this manual we put the green metrics tool into your home directory. Of course you can place it anywhere.
 Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different path for the tool please modify the commands accordingly.
 
-{{< tabs >}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "install-packages" >}}
+{{< tab "Ubuntu" >}}
 
 ```bash
 sudo apt update && \
@@ -39,8 +42,8 @@ cd ~/green-metrics-tool
 
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 
 ```bash
 sudo dnf upgrade -y && \
@@ -49,7 +52,7 @@ git clone https://github.com/green-coding-solutions/green-metrics-tool ~/green-m
 cd ~/green-metrics-tool
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Docker
@@ -62,8 +65,8 @@ However, we provide here what we used in on our systems, but be sure to double c
 
 ### Docker base install
 
-{{< tabs groupId="docker">}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "docker" >}}
+{{< tab "Ubuntu" >}}
 
 ```bash
 sudo apt install ca-certificates curl gnupg lsb-release -y && \
@@ -78,8 +81,8 @@ sudo apt remove docker docker.io docker-doc docker-compose docker-compose-v2 pod
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 
 ```bash
 sudo dnf remove docker \
@@ -100,7 +103,7 @@ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo systemctl start docker
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now. You can also run
@@ -121,7 +124,9 @@ Please follow this explanation how to do it: [Official docker docs on docker gro
 
 Rootless mode allows the docker container to not inherit `root` rights when they run.
 
-{{< alert icon="💡" text="We recommend this mode when you have the Green Metrics Tool on a public machine, running somebody elses benchmarks or somewhere, where security is a concern. For development and try-out purposes of the Green Metrics Tool however you can safely skip this step." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+We recommend this mode when you have the Green Metrics Tool on a public machine, running somebody elses benchmarks or somewhere, where security is a concern. For development and try-out purposes of the Green Metrics Tool however you can safely skip this step.
+{{< /callout >}}
 
 In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/)
 
@@ -129,8 +134,8 @@ In order to use rootless mode you must have a non-root user on your system (see 
 
 **Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user` will not work.**
 
-{{< tabs groupId="rootless">}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "rootless" >}}
+{{< tab "Ubuntu" >}}
 The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 
 ```bash
@@ -152,8 +157,8 @@ systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 The `docker-ce-rootless-extras` package on Fedora provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 
 ```bash
@@ -173,7 +178,7 @@ systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/).
@@ -201,7 +206,9 @@ is running on port `80` or `443`
 
 Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`.
 
-{{< alert icon="💡" text="Note for ARM systems: Please use the '-r' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+Note for ARM systems: Please use the '-r' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems.
+{{< /callout >}}
 
 What you might want to add:
 
@@ -223,7 +230,9 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 
 ### Restarting Docker containers on system reboot
 
-{{< alert icon="💡" text="This explanation is for docker rootless mode only." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+This explanation is for docker rootless mode only.
+{{< /callout >}}
 
 We recommend `systemd`. Please use the following service file and change the **USERNAME** accordingly to the ones on your system.
 

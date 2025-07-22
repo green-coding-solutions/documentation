@@ -1,33 +1,37 @@
+// Source: https://getbootstrap.com/docs/5.3/customize/sass/#importing
+
 /** Import Bootstrap functions */
 @import "bootstrap/scss/functions";
 
 /** Import theme variables */
-@import "common/variables";
+@import "common/colors";
+@import "common/variables-overrides";
+@import "common/variables-custom";
 
 /** Import Bootstrap */
-@import "bootstrap/scss/bootstrap";
-
-/** Import highlight.js */
-// @import "highlight.js/scss/github-dark-dimmed";
-
-/** Import KaTeX */
-@import "katex/dist/katex";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 /** Import theme styles */
 @import "common/fonts";
 @import "common/global";
+@import "common/syntax";
 @import "common/dark";
 @import "components/alerts";
 @import "components/buttons";
+@import "components/callouts";
+@import "components/expressive-code";
 @import "components/code";
-@import "components/details";
-@import "components/syntax";
 @import "components/comments";
+@import "components/details";
 @import "components/forms";
 @import "components/images";
 @import "components/mermaid";
+@import "components/modals";
 @import "components/search";
+@import "components/section-nav";
+@import "components/steps";
 @import "components/tables";
+@import "components/tabs";
 @import "layouts/footer";
 @import "layouts/header";
 @import "layouts/pages";

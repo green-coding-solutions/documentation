@@ -3,7 +3,7 @@ title: "usage_scenario.yml"
 description: "Specification of the usage_scenario.yml file"
 lead: ""
 date: 2022-06-16T08:48:45+00:00
-weight: 815
+weight: 415
 ---
 
 The `usage_scenario.yml` consists of these main blocks:
@@ -341,6 +341,6 @@ A run where we want the variable to be *1* as example can be started like this:
 ```bash
 $ python3 runner.py --uri PATH_TO_SCENARIO --variables "__GMT_VAR_DURATION__=1"
 ```
-See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches/" >}})
+See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches" >}})
 
 The API accepts these variables as arguments also to the `/v1/software/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.

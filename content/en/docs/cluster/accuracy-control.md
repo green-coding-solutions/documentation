@@ -3,7 +3,8 @@ title: "Accuracy Control"
 description: "How to ensure that measurements in cluster always have low deviation"
 lead: ""
 date: 2023-06-26T01:49:15+00:00
-weight: 104
+weight: 1004
+toc: false
 ---
 
 When using the *client* mode the cluster expects a *Measurement Control Workload* to be set to determine if the cluster accuracy has deviated from the expected baseline.
