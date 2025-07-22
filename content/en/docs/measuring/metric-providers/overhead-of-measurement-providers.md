@@ -3,7 +3,7 @@ title: "Overhead of Measurement Providers"
 description: "How much CPU % and energy does the metric providers itself draw"
 lead: ""
 date: 2022-08-04T08:49:15+00:00
-weight: 102
+weight: 999
 ---
 
 The Green Metrics Tools measurement providers run on the same system as the software
@@ -36,14 +36,14 @@ The script produces a lot of output, but what you want to look out for is:
 ## Results for Esprimo P956 - Measurement #1 Machine Power
 
 Configured reporters
-- PsuEnergyAcMCPMachineProvider: 99 ms resolution
-- NetworkIoCgroupContainerProvider: 99 ms resolution
-- CpuEnergyRaplMsrComponentProvider: 99 ms resolution
-- MemoryEnergyRaplMsrComponentProvider: 99 ms resolution
-- CpuUtilizationProcfsSystemProvider: 99 ms resolution
-- MemoryTotalCgroupContainerProvider: 99 ms resolution
-- CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- PsuEnergyAcMCPMachineProvider: 99 ms sampling_rate
+- NetworkIoCgroupContainerProvider: 99 ms sampling_rate
+- CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
+- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
+- LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
 ```console
 [INFO] 2024-02-16 10:56:49,208 - System Baseline measurement successful
@@ -91,13 +91,13 @@ Read on for the CPU only values, which give some more insights, but are less gen
 ## Results for Esprimo P956 - Measurement #2 CPU Energy
 
 Configured reporters
-- NetworkIoCgroupContainerProvider: 99 ms resolution
-- CpuEnergyRaplMsrComponentProvider: 99 ms resolution
-- MemoryEnergyRaplMsrComponentProvider: 99 ms resolution
-- CpuUtilizationProcfsSystemProvider: 99 ms resolution
-- MemoryTotalCgroupContainerProvider: 99 ms resolution
-- CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- NetworkIoCgroupContainerProvider: 99 ms sampling_rate
+- CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
+- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
+- LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
 ```console
 [INFO] 2024-02-16 12:08:32,652 - System Baseline measurement successful
@@ -140,14 +140,14 @@ Configured reporters
 ## Fujitsu TX1330 M2 - Measurement #1 Machine Power
 
 Configured reporters
-- PsuEnergyAcMCPMachineProvider: 99 ms resolution
-- NetworkIoCgroupContainerProvider: 99 ms resolution
-- CpuEnergyRaplMsrComponentProvider: 99 ms resolution
-- MemoryEnergyRaplMsrComponentProvider: 99 ms resolution
-- CpuUtilizationProcfsSystemProvider: 99 ms resolution
-- MemoryTotalCgroupContainerProvider: 99 ms resolution
-- CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- PsuEnergyAcMCPMachineProvider: 99 ms sampling_rate
+- NetworkIoCgroupContainerProvider: 99 ms sampling_rate
+- CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
+- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
+- LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
 ```console
 [INFO] 2024-02-16 10:13:26,496 - System Baseline measurement successful
@@ -190,13 +190,13 @@ The nature of a switching power supply is that the machine power, when polled in
 ## Fujitsu TX1330 M2 - Measurement #2 CPU Power
 
 Configured reporters
-- NetworkIoCgroupContainerProvider: 99 ms resolution
-- CpuEnergyRaplMsrComponentProvider: 99 ms resolution
-- MemoryEnergyRaplMsrComponentProvider: 99 ms resolution
-- CpuUtilizationProcfsSystemProvider: 99 ms resolution
-- MemoryTotalCgroupContainerProvider: 99 ms resolution
-- CpuUtilizationCgroupContainerProvider: 99 ms resolution
-- LmSensorsTemperatureComponentProvider: 99 ms resolution
+- NetworkIoCgroupContainerProvider: 99 ms sampling_rate
+- CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
+- CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
+- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
+- LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
 ```console
 [INFO] 2024-02-16 12:26:02,660 - System Baseline measurement successful

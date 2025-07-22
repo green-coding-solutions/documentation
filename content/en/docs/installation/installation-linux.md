@@ -3,7 +3,8 @@ title: "Installation on Linux"
 description: "Installation"
 lead: ""
 date: 2022-06-15T01:49:15+00:00
-weight: 901
+weight: 302
+toc: true
 ---
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
@@ -11,43 +12,47 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
 Currently the following distributions have been tested and are fully supported:
+- Ubuntu 24.04
 - Ubuntu 22.04
 - Fedora 38
 
 The following distributions have been tested, but require manual work:
-- Ubuntu 20.04 (works, but *libglib* has to be manually updated to *libglib2.0-dev*)
-- Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "installation-cluster" >}}) has different names for timers)
+- Ubuntu 18.04 (works, but Python3 has to be updated to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html) and *libsensors* has to be updated to *libsensors 3.6.0* to support [SENSORS_SUBFEATURE_POWER_MIN](https://github.com/lm-sensors/lm-sensors/commit/dcf23676cc264927ad58ae7960f518689372741a))
+- Ubuntu 20.04 (works, but Python3 has to be updated to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html))
+- Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "/docs/cluster/installation" >}}) has different names for timers)
 
-{{< alert icon="💡" text="If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>" />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>
+{{< /callout >}}
 
 ## Downloading and installing required packages
 
 For the sake of this manual we put the green metrics tool into your home directory. Of course you can place it anywhere.
 Also we trigger a `apt-upgrade`. If you do not want that upgrade or a different path for the tool please modify the commands accordingly.
 
-{{< tabs >}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "install-packages" >}}
+{{< tab "Ubuntu" >}}
 
 ```bash
 sudo apt update && \
 sudo apt upgrade -y && \
 sudo apt install -y curl git make gcc python3 python3-pip python3-venv && \
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+git clone https://github.com/green-coding-solutions/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool
 
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 
 ```bash
 sudo dnf upgrade -y && \
-sudo dnf install -y curl git make gcc python3 python3-devel python3-venv && \
-git clone https://github.com/green-coding-berlin/green-metrics-tool ~/green-metrics-tool && \
+sudo dnf install -y curl git make gcc python3 python3-devel && \
+git clone https://github.com/green-coding-solutions/green-metrics-tool ~/green-metrics-tool && \
 cd ~/green-metrics-tool
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Docker
@@ -60,8 +65,8 @@ However, we provide here what we used in on our systems, but be sure to double c
 
 ### Docker base install
 
-{{< tabs groupId="docker">}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "docker" >}}
+{{< tab "Ubuntu" >}}
 
 ```bash
 sudo apt install ca-certificates curl gnupg lsb-release -y && \
@@ -76,8 +81,8 @@ sudo apt remove docker docker.io docker-doc docker-compose docker-compose-v2 pod
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 
 ```bash
 sudo dnf remove docker \
@@ -98,7 +103,7 @@ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo systemctl start docker
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now. You can also run
@@ -119,7 +124,9 @@ Please follow this explanation how to do it: [Official docker docs on docker gro
 
 Rootless mode allows the docker container to not inherit `root` rights when they run.
 
-{{< alert icon="💡" text="We recommend this mode when you have the Green Metrics Tool on a public machine, running somebody elses benchmarks or somewhere, where security is a concern. For development and try-out purposes of the Green Metrics Tool however you can safely skip this step." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+We recommend this mode when you have the Green Metrics Tool on a public machine, running somebody elses benchmarks or somewhere, where security is a concern. For development and try-out purposes of the Green Metrics Tool however you can safely skip this step.
+{{< /callout >}}
 
 In order to use rootless mode you must have a non-root user on your system (see [https://docs.docker.com/engine/security/rootless/](https://docs.docker.com/engine/security/rootless/)
 
@@ -127,12 +134,13 @@ In order to use rootless mode you must have a non-root user on your system (see 
 
 **Important: If you have just created a non root user be sure to relog into your system (either through relogging, or a new ssh login) with the non-root user. A switch with just `su my_user` will not work.**
 
-{{< tabs groupId="rootless">}}
-{{% tab name="Ubuntu" %}}
+{{< tabs "rootless" >}}
+{{< tab "Ubuntu" >}}
 The `docker-ce-rootless-extras` package on Ubuntu provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 
 ```bash
 sudo systemctl disable --now docker.service docker.socket && \
+sudo rm /var/run/docker.sock && \
 sudo apt install uidmap && \
 sudo apt update && \
 sudo apt-get install -y docker-ce-rootless-extras dbus-user-session && \
@@ -149,8 +157,8 @@ systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
 
-{{% /tab %}}
-{{% tab name="Fedora" %}}
+{{< /tab >}}
+{{< tab "Fedora" >}}
 The `docker-ce-rootless-extras` package on Fedora provides a *dockerd-rootless-setuptool.sh* script, which must be installed and run:
 
 ```bash
@@ -170,7 +178,7 @@ systemctl --user enable docker
 sudo loginctl enable-linger $(whoami)
 ```
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 You must also enable the cgroup2 support with the metrics granted for the user: [https://rootlesscontaine.rs/getting-started/common/cgroup2/](https://rootlesscontaine.rs/getting-started/common/cgroup2/).
@@ -198,6 +206,10 @@ is running on port `80` or `443`
 
 Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`.
 
+{{< callout context="note" icon="outline/info-circle" >}}
+Note for ARM systems: Please use the '-r' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems.
+{{< /callout >}}
+
 What you might want to add:
 
 - SMTP mail sending is by default deactivated, so for a quick-start you do not have to change that in the `config.yml`
@@ -218,7 +230,9 @@ The database name is `green-coding`, user is `postgres`, and the password is wha
 
 ### Restarting Docker containers on system reboot
 
-{{< alert icon="💡" text="This explanation is for docker rootless mode only." />}}
+{{< callout context="note" icon="outline/info-circle" >}}
+This explanation is for docker rootless mode only.
+{{< /callout >}}
 
 We recommend `systemd`. Please use the following service file and change the **USERNAME** accordingly to the ones on your system.
 
@@ -232,13 +246,16 @@ After=docker.service
 [Service]
 Type=simple
 ExecStart=/home/USERNAME/startup-docker.sh
-Restart=never
+Restart=on-failure
+RestartSec=5s
+StartLimitBurst=10
+StartLimitInterval=0
 
 [Install]
 WantedBy=default.target
 ```
 
-As you can see *Restart* is set to never. The reason is that the docker dameon will restart the containers by itself. The `systemd` script is only needed to start the container once on reboot.
+As you can see *Restart* is set to *on-failure*. The reason is that the docker dameon will restart the containers by itself. The `systemd` script is only needed to start the container once on reboot.
 
 As you can see we also reference the `/home/USERNAME/startup-docker.sh` file which `systemd` expects to be in your green metrics tool directory.
 
@@ -247,7 +264,7 @@ Please create the following file in your home directory:
 ```bash
 #!/bin/bash
 docker context use rootless
-docker compose -f /home/USERNAME/docker/compose.yml up -d
+docker compose -f PATH_TO_GREEN_METRICS_TOOL/docker/compose.yml up -d
 ```
 
 Now you can reload and enable the daemon:
@@ -255,6 +272,13 @@ Now you can reload and enable the daemon:
 ```bash
 systemctl --user daemon-reload
 systemctl --user enable green-coding-service
+```
+
+Since the service runs as a user it might be the case that the user is not logged in. So we also enable lingering
+which guarantees that processes can be started when no user is logged in:
+
+```bash
+loginctl enable-linger $(whoami)
 ```
 
 ### Dockerfiles architecture explanation:
@@ -277,9 +301,12 @@ The required libraries are installed automatically via the `install-linux.sh` ca
 The XGBoost metrics provider can estimate the power consumption of the total
 system (AC-Energy). It is included as a submodule in the Green Metrics Tool and should have been checked out with the initial install command of this manual. The `config.yml` file also needs additional details which are detailed in the metric provider [documentation→]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}}).
 
-### NVIDIA SMI
+### GPU measurement (NVIDIA NVML)
 
-The *NVIDIA SMI* metrics reporter can read the power draw of an *NVIDIA* GPU. Some libraries need to be installed in order for the  [NVIDIA SMI metric provider]({{< relref "/docs/measuring/metric-providers/gpu-energy-nvidia-smi-component" >}}) to work.
+The *NVIDIA NVML* metrics reporter can read the power draw of an *NVIDIA* GPU.
+See [NVIDIA NVML metric provider]({{< relref "/docs/measuring/metric-providers/gpu-energy-nvidia-nvml-component" >}}) detail page on details which additional libraries need to be installed.
+
+On *Ubuntu* and *Fedora* you can just append `--nvidia-gpu` to the install script to try an auto-install.
 
 
 ### DC Metrics Provider
@@ -294,9 +321,16 @@ On kernels > 2.6 all the kernel modules should automatically be loaded.
 However just in case run:
 
 ```bash
-sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
-sudo modprobe intel_rapl_msr
-sudo modprobe rapl
+# this should be all you need to use the GMT metric providers
+sudo modprobe msr
+
+# this is optional if you want to debug stuff
+
+sudo modprobe intel_rapl_msr # activates /sys/devices/virtual/powercap/intel-rapl subsystem
+sudo modprobe intel_rapl_common # needed common code for powercap subsystem above
+sudo modprobe intel_rapl # same thing but for kernels < 5
+
+sudo modprobe rapl # activates kernel events to read RAPL via perf cli tool and perf_events lib
 ```
 
 ## Live system
@@ -320,8 +354,11 @@ green-coding-nginx:
 
 ### SSL
 
-TODO!
+SSL is an option you can activate in the install process directly.
 
-No thorough documentation on this yet! However you have to configure NGINX
-accordingly so that it finds the SSL credentials and certificate.
-This is done in the `/docker/nginx/frontend.conf`.
+The install script will ask if you want to activate it or not. In case you select yes
+you must supply the path for the certificate file and the key file where they will copied into the correct locations to be accessible by the NGINX container.
+
+At the moment an SSL active installation must be supplied a **https://** url and the webserver will be listening on port 443. You can manually change that in the `frontend.conf` and the `api.conf` files if necessary.
+
+If your certificates change just re-run the install script and supply the new filenames.

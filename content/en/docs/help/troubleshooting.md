@@ -5,10 +5,7 @@ lead: "Solutions to common problems."
 date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
-menu: 
-  docs:
-    parent: "help"
-weight: 620
+weight: 920
 toc: true
 ---
 
@@ -54,7 +51,7 @@ This is due to a current bug with the reading of the XML output of the powermetr
 
 Easiest fix: Just try the run again. The error happens seldomly and is random.
 
-[Please consult this ticket for current status of the bugfix](https://github.com/green-coding-berlin/green-metrics-tool/issues/286)
+[Please consult this ticket for current status of the bugfix](https://github.com/green-coding-solutions/green-metrics-tool/issues/286)
 
 ## Submodule issues
 
@@ -80,7 +77,7 @@ This is because a container has exited during the run of the GMT or you are runn
 
 A way to do this with the GMT directly without changing your containers would be the `command` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
 
-An example where we use this command to keep a container alive is here: https://github.com/green-coding-berlin/example-applications/blob/main/idle/usage_scenario.yml
+An example where we use this command to keep a container alive is here: https://github.com/green-coding-solutions/example-applications/blob/main/idle/usage_scenario.yml
 
 ## Stderr on {metric_provider.__class__.__name__} was NOT empty
 
@@ -127,8 +124,8 @@ On Ubuntu 20.04, the `glib` does not contain the function `g_string_replace`:
 
 ```bash
 Building binaries ...
-Installing ./metric_providers/lm_sensors/metric-provider-binary ...
-make: Entering directory '/home/user/green-metrics-tool/metric_providers/lm_sensors'
+Installing ./metric_providers/lmsensors/metric-provider-binary ...
+make: Entering directory '/home/user/green-metrics-tool/metric_providers/lmsensors'
 gcc source.c chips.c -o3 -Wall -Llib -lsensors -lglib-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -o metric-provider-binary
 source.c: In function ‘main’:
 source.c:326:17: warning: implicit declaration of function ‘g_string_replace’; did you mean ‘g_tree_replace’? [-Wimplicit-function-declaration]
@@ -139,7 +136,7 @@ source.c:326:17: warning: implicit declaration of function ‘g_string_replace�
 source.c:(.text+0xbcc): undefined reference to `g_string_replace'
 collect2: error: ld returned 1 exit status
 make: *** [Makefile:8: binary] Error 1
-make: Leaving directory '/home/user/green-metrics-tool/metric_providers/lm_sensors'
+make: Leaving directory '/home/user/green-metrics-tool/metric_providers/lmsensors'
 ```
 
 To resolve this, update the `glib` package:
@@ -149,7 +146,7 @@ sudo apt install libglib2.0-dev
 ```
 
 However, if the error is still present after this command, it might be that  
-it is not possible to use lm_sensors on your system. Comment out the section of the  
+it is not possible to use `lm-sensors` on your system. Comment out the section of the  
 install script that mentions it and comment it out of your `config.yml`.
 
 ## General tips

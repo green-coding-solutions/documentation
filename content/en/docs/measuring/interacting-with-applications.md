@@ -3,7 +3,7 @@ title : "Interacting with applications"
 description: "Interacting with applications"
 lead: ""
 date: 2022-06-18T08:48:45+00:00
-weight: 810
+weight: 410
 ---
 
 When your application is prepared in containers you need to provide a starting  
@@ -44,7 +44,7 @@ services:
   simple-load-container:
     image: alpine
     setup-commands:
-      - apk add stress-ng
+      - command: apk add stress-ng
  
  flow:
   - name: Stress
@@ -109,7 +109,7 @@ services:
   puppeteer-container:
     image: greencoding/puppeteer-chrome
     setup-commands:
-      - cp /tmp/repo/puppeteer-flow.js /var/www/puppeteer-flow.js
+      - command: cp /tmp/repo/puppeteer-flow.js /var/www/puppeteer-flow.js
     networks:
       - example-network
 

@@ -1,11 +1,11 @@
 ---
-title: "GPU energy - NVIDIA SMI - Component"
-description: "Documentation for GpuEnergyNvidiaSmiComponentProvider of the Green Metrics Tool"
+title: "GPU energy - NVIDIA NVML - Component"
+description: "Documentation for GpuEnergyNvidiaNvmlComponentProvider of the Green Metrics Tool"
 lead: ""
 date: 2024-01-06T08:49:15+00:00
 draft: false
 images: []
-weight: 180
+weight: 150
 ---
 
 ### What it does
@@ -14,27 +14,25 @@ This metric provider gets the current GPU power draw from the NVIDIA SMI softwar
 
 ### Classname
 
-- `GpuEnergyNvidiaSmiComponentProvider`
+- `GpuEnergyNvidiaNvmlComponentProvider`
 
 ### Metric Name
 
-- `gpu_energy_nvidia_smi_component`
+- `gpu_energy_nvidia_nvml_component`
 
 ### Prerequisites & Installation
 
-You first must install the *CUDA Toolkit* from *NVIDIA* for the metric provider to have the needed libraries and binars. The URL at the time of writing is here: [https://developer.nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads)
+We assume that the NVIDIA graphics card and the associated drivers are installed on your system.
 
-You need both:
-- Base Installer
-- Driver Installer
+Please resort to [NVIDIA Docs](https://developer.nvidia.com) for installation if you still need to install.
 
-To check if the installation has succeeded you can run:
-```console
-$ nvidia-smi -q
-```
+GMT will try to install the needed C header and development files for the *Metrics Provider* to compile.
 
-After the installation you system can use language bindings for your matching *CUDA* version. 
-Please check on our [Measurement Cluster]({{< relref "/docs/measuring/measurement-cluster" >}}) page which *CUDA* version is installed.
+You can trigger this by adding `--nvidia-gpu` to the install script. If the installation fails, please resort to your OS documentation. e.g.: [NVIDIA Linux docs](https://docs.nvidia.com/cuda/cuda-installation-guide-linux)
+
+### Running your code on our hosted service
+
+Please check on our [Measurement Cluster]({{< relref "/docs/measuring/measurement-cluster" >}}) page which *CUDA* version is installed. You must use the same CUDA version if you have compiled artifacts in your containers.
 
 #### Debugging
 
@@ -61,7 +59,7 @@ Check in `sudo dmesg` if the kernel module could correctly be lodaded and then v
 By default the measurement interval is 100 ms.
 
 ```bash
-./metric-provider-nvidia-smi-wrapper.sh -i 100
+./metric-provider-binary -i 100
 ```
 
 ### Output
@@ -72,11 +70,16 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The estimated % CPU used
+- `READING`: The energy used by the GPU in milliWatts (Ex: 12230 for 12.23 Watts)
+- `CARD NAME`: The name of the graphics card as reported by the driver
 
 Any errors are printed to Stderr.
 
+Example:
+```console
+1748166115636640 17757 "NVIDIA GeForce GTX 1080-0"
+```
 
 ### How it works
 
-The provider uses the `nvidia-smi` tool to read the data.
+The provider uses the *NVIDIA* native C libraries to read directly from a syscall.

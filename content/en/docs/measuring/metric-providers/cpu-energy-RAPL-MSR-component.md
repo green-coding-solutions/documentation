@@ -5,30 +5,22 @@ lead: ""
 date: 2022-06-02T08:49:15+00:00
 draft: false
 images: []
-weight: 114
+weight: 110
 ---
 
 ### What it does
 
 This metric provider reads the energy of the CPU Package from the Running Average Power Limit (RAPL) interface via a machine specific register (MSR) that is present on most modern Intel processors. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
-This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
+This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the cumulatove energy used by the domains `energy-cores`, `energy-gpu` and some extra parts like the voltage regulator and such that also reside on the package.
 
-### System Setup
-On kernels > 2.6 all the kernel modules should automatically be loaded.
-
-However just in case run:
-
-```bash
-sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
-sudo modprobe intel_rapl_msr
-sudo modprobe rapl
-```
+### Setup
+Please look at [RAPL installation]({{< relref "/docs/installation/installation-linux" >}})
 
 ### Technical specs
 
-- Time resolution: 976 micro-seconds
-- Energy resolution: 15.3 micro-Joules
+- Time resolution: up to 976 micro-seconds (depending on production year of the CPU)
+- Energy resolution: up to 15.3 micro-Joules (depending on production year of the CPU)
 
 ### Classname
 
@@ -56,11 +48,14 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `ENERGY_OUTPUT`: Energy used during interval, in micro Joules
+- `PACKAGE_ID`: ID of the package in case you have multiple CPU chips installed. Otherwise always *Package_0*
 
 Example output:
 
 ```txt
-screenshot example
+1712641603443421 8092 Package_0
+1712641604443831 8047 Package_0
+.....
 ```
 
 Any errors are printed to Stderr.

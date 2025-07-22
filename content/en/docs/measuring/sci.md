@@ -3,7 +3,7 @@ title: "SCI (Green Software Foundation)"
 description: "How to measure the Green Software Foundation's SCI metric with the Green Metrics Tool"
 lead: "How to measure the Green Software Foundation's SCI metric with the Green Metrics Tool"
 date: 2023-08-04T08:49:15+00:00
-weight: 842
+weight: 442
 toc: true
 ---
 
@@ -23,7 +23,7 @@ The actual ticks for the unit of work (*R*) are captured from the containers and
 
 ### Setup in usage_scenario
 
-Please see an example how to configure in our [example applications repository for SCI apps](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci).
+Please see an example how to configure in our [example applications repository for SCI apps](https://github.com/green-coding-solutions/example-applications/tree/main/green-software-foundation-sci).
 
 A simple integration for an CLI based application might for instance look like this:
 
@@ -52,13 +52,21 @@ If you have an API or similar the output might not happen on the CLI directly, b
 
 ### Setup in config.yml
 
-An [example configuration](https://github.com/green-coding-berlin/green-metrics-tool/blob/main/config.yml.example) for the `config.yml` is provided when the Green Metrics Tool is installed.
+An [example configuration](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/config.yml.example) for the `config.yml` is provided when the Green Metrics Tool is installed.
 The values for the respective variables have to be either defined to best knowledge (like lifetime for instance) and / or
 from official databases like:
 - [https://dataviz.boavizta.org/manufacturerdata](https://dataviz.boavizta.org/manufacturerdata)
 - [https://tco.exploresurface.com/sustainability/calculator](https://tco.exploresurface.com/sustainability/calculator)
 - [https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf](https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf)
 
+Example:
+```yml
+sci:
+    EL: 4 # means 4 years of usage
+    RS: 1 # means we use 1/1 = 100% of the machine. Bare metal. No virtualization
+    TE: 181000 # Example value for a laptop taken from https://dataviz.boavizta.org/terminalimpact. Value is in g
+    I: 436 # The number 436 that comes as default is for Germany from 2022. Value in gCO2e/kWh
+```
 
 ## Display
 
@@ -70,13 +78,27 @@ If an SCI was configured also the parameters will be shown in the *Measurements*
 
 <img src="/img/sci_measurement_tab.webp">
 
+## Formula
+
+The [SCI formula](https://sci-guide.greensoftware.foundation/) is specified by the [Green Software Foundation](https://greensoftware.foundation/)
+
+The components of the SCI are attributed by the GMT as follows:
+
+- *E*: The energy of the total machine + the energy of the network. 
+    - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) etc. 
+        - If none is activated machine energy will be excluded from the SCI.
+    - A *Network IO* provider must be activated to populate this value with the network energy. 
+        - If none is activated network energy will be excluded from the SCI.
+- *I:* Configured in the `config.yml`. Set the intensity of your used grid location
+- *M:* Configured in the `config.yml`. Set the embodied carbon of your used machine
+
 ## Example applications
 
 We provide quite some example applications that showcase how the SCI can be measured with the Green Metrics Tool for APIs, CLI tools etc.
 
-[Example applications on GitHub](https://github.com/green-coding-berlin/example-applications/tree/main/green-software-foundation-sci)
+[Example applications on GitHub](https://github.com/green-coding-solutions/example-applications/tree/main/green-software-foundation-sci)
 
-[Example data with runs](https://metrics.green-coding.io/?uri=green-coding-berlin/example-applications&filename=green-software)
+[Example data with runs](https://metrics.green-coding.io/?uri=green-coding-solutions/example-applications&filename=green-software)
 
 ## Caveats and future work
 
@@ -84,5 +106,5 @@ At the moment the SCI is only measured in the *RUNTIME* phase and no sub-phase m
 
 Future work will include making the SCI an actual *Metric Provider* and thus allowing to capture it in every phase, optionally with having different dimensions per phase even.
 
-The work on this task is tracked in [this GitHub Issue](https://github.com/green-coding-berlin/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
+The work on this task is tracked in [this GitHub Issue](https://github.com/green-coding-solutions/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
 

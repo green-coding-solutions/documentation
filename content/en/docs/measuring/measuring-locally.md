@@ -3,7 +3,7 @@ title : "Measuring locally"
 description: "Measuring locally with the runner.py"
 lead: ""
 date: 2022-06-18T08:48:45+00:00
-weight: 820
+weight: 420
 ---
 
 Before starting to measure you must first install some prerequisites.
@@ -51,7 +51,7 @@ services:
   simple-load-container:
     image: alpine
     setup-commands:
-      - apk add stress-ng
+      - command: apk add stress-ng
  
 flow:
   - name: Stress
@@ -82,9 +82,9 @@ Please access your report with the ID: XXXX-XXXX ...
 
 Now you can view the report as the first item in your metrics dashboard at [http://metrics.green-coding.internal:9142/index.html](http://metrics.green-coding.internal:9142/index.html)
 
-## Cron mode
+## Cron mode / Cluster-Client mode
 
-If you have [installed a cronjob →]({{< relref "/docs/installation/installation-linux" >}}) you can insert a new job at [http://metrics.green-coding.internal:9142/request.html](http://metrics.green-coding.internal:9142/request.html)
+If you have [installed a cronjob or run in cluster-client mode →]({{< relref "/docs/cluster/installation" >}}) you can insert a new job at [http://metrics.green-coding.internal:9142/request.html](http://metrics.green-coding.internal:9142/request.html)
 
 <p align="center">
   <img src="/img/add-new-project.webp" width="80%" title="Cron mode job insertion for green metrics tool">

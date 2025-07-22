@@ -5,25 +5,26 @@ lead: "Answers to frequently asked questions."
 date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
-menu:
-  docs:
-    parent: "help"
-weight: 630
+weight: 930
 toc: true
 ---
 
-## Other documentation?
+## Is the API documented?
 
 - [API](https://api.green-coding.io)
 
-## Where can I get the lastest features
+## How can I uninstall?
 
-- Look at our [dev branch](https://github.com/green-coding-berlin/green-metrics-tool/tree/dev). As soon as some of our feature branches reach a "ready for developers" level we merge them into this branch.
-  + We do not recommend to check out the feature branches, as they may contain a broken state / WIP
+See [Uninstall →]({{< relref "/docs/installation/uninstallation" >}})
+
+## Where can I get the latest features
+
+- The finalized milestones are publised as [Releases](https://github.com/green-coding-solutions/green-metrics-tool/releases). If you want something newer always tested and current fetatures are in the [main branch](https://github.com/green-coding-solutions/green-metrics-tool/tree/main). If you want even newer features you can check out WIPs on the [Pull Requests](https://github.com/green-coding-solutions/green-metrics-tool/pulls)
+  + We do not recommend to check out the feature branches for production work, as they may contain a broken state / WIP
 
 ## Do you provide sample data / CSV exports
 
-- We do provide [sample data on Github](https://github.com/green-coding-berlin/sample-data).
+- We do provide [sample data on Github](https://github.com/green-coding-solutions/green-metrics-tool/tree/main/data).
   + Since we use postgresql, it is in this format. We do not provide CSV.
 
 ## Can I get support?

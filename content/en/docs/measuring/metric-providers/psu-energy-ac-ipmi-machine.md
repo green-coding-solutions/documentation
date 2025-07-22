@@ -5,7 +5,7 @@ lead: ""
 date: 2023-06-23T11:01:35+0000
 draft: false
 images: []
-weight: 171
+weight: 210
 ---
 
 ### What it does
@@ -58,6 +58,6 @@ This metric provider prints to stdout a continuous stream of data every `interva
 
 Where:
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The value taken from sensors.
+- `READING`: The value taken from sensors in milliWatts with two significant digits (Ex. 14000 for 14 Watts)
 
 Any errors are printed to stderr.

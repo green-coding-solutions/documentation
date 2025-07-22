@@ -5,7 +5,7 @@ lead: ""
 date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []
-weight: 101
+weight: 2
 toc: true
 ---
 
@@ -38,11 +38,11 @@ measurement:
   metric-providers:
     linux:
       cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
-        resolution: 100
+        sampling_rate: 100
       cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
-        resolution: 100
+        sampling_rate: 100
 #      psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
-#        resolution: 100
+#        sampling_rate: 100
          # This is a default configuration. Please change this to your system!
 #        CPUChips: 1
 #        HW_CPUFreq: 3100
@@ -51,7 +51,7 @@ measurement:
 #        HW_MemAmountGB: 16
 ```
 
-The dimension of the resolution is milliseconds. Change this number to have a smaller or larger time window between measurements for that specific provider.
+The dimension of the sampling_rate is milliseconds. Change this number to have a smaller or larger time window between measurements for that specific provider.
 
 The metric providers are written as C programs with a Python wrapper, and live under `metric_providers/` in the subdirectory that matches the `config.yml`. The directory contains the following files:
 
@@ -69,6 +69,8 @@ The `source.c` is the main sourcecode for the metric provider, the `Makefile` ca
 The `runner.py` will instrument all the metric providers automatically for you. It will save all the measured data into the postgres database.
 
 If you wish to run them independently however, you can do so as a C program or with the python wrapper. The C program will output all of its data as a continuous stream to Stdout.
+
+To activate a metric provider simply uncomment the line where it's name appears. To de-activate it comment it out.
 
 #### C
 

@@ -3,14 +3,14 @@ title: "PSU Energy - AC - XGBoost - Machine"
 description: "Documentation for PsuEnergyAcXgboostMachineProvider of the Green Metrics Tool"
 lead: ""
 date: 2022-08-04T08:49:15+00:00
-weight: 162
+weight: 216
 ---
 
 ### What it does
 
 It estimates the total machine energy consumption (AC Power) based on training
 data from the [SPECPower database](https://www.spec.org/power_ssj2008).
-The underlying XGBoost model can be found [on our GitHub](https://github.com/green-coding-berlin/spec-power-model).
+The underlying XGBoost model can be found [on our GitHub](https://github.com/green-coding-solutions/spec-power-model).
 
 ### Classname
 
@@ -43,11 +43,12 @@ The provider must be configured in the `config.yml`. It must be supplied with th
 - TDP
 - HW_MemAmountGB
 
-Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}})
-for further info.
+You can find these parameters in your data sheet of the used machine. In case you are using a VM please check 
+[this repository](https://github.com/green-coding-solutions/carbondb-agent) for an example how to derive the values.
 
-In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be activated
- for the *PsuEnergyAcXgboostMachineProvider* to work.
+Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}}) for further info.
+
+In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be activated for the *PsuEnergyAcXgboostMachineProvider* to work.
 
 ### Input Parameters
 
@@ -55,7 +56,7 @@ In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be a
     - Takes no arguments
 
 If you want to run the provider directly we advise that you rather check
-out it's main repository: [XGBoost SPECPower Model documentation](https://github.com/green-coding-berlin/spec-power-model)
+out it's main repository: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
 
 The provider reads the `/tmp/green-metrics-tool/cpu_utilization_procfs_system.log` file
 from the *CpuUtilizationProcfsSystemProvider* in order to keep overhead low and
