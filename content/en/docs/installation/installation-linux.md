@@ -312,9 +312,16 @@ On kernels > 2.6 all the kernel modules should automatically be loaded.
 However just in case run:
 
 ```bash
-sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
-sudo modprobe intel_rapl_msr
-sudo modprobe rapl
+# this should be all you need to use the GMT metric providers
+sudo modprobe msr
+
+# this is optional if you want to debug stuff
+
+sudo modprobe intel_rapl_msr # activates /sys/devices/virtual/powercap/intel-rapl subsystem
+sudo modprobe intel_rapl_common # needed common code for powercap subsystem above
+sudo modprobe intel_rapl # same thing but for kernels < 5
+
+sudo modprobe rapl # activates kernel events to read RAPL via perf cli tool and perf_events lib
 ```
 
 ## Live system

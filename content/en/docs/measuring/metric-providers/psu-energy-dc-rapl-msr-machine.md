@@ -18,16 +18,8 @@ This MSR keeps a running count of the energy used in a specified domain in micro
 
 We have tested this domain on modern [Framework](https://frame.work/de/en) notebooks and the domain includes here at least all of the CPU, DRAM as well as the display.
 
-### System Setup
-On kernels > 2.6 all the kernel modules should automatically be loaded.
-
-However just in case run:
-
-```bash
-sudo modprobe intel_rapl_common # or intel_rapl for kernels < 5
-sudo modprobe intel_rapl_msr
-sudo modprobe rapl
-```
+### Setup
+Please look at [RAPL installation]({{< relref "/docs/installation/installation-linux" >}})
 
 ### Technical specs
 
