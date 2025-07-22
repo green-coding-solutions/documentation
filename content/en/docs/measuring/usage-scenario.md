@@ -85,7 +85,7 @@ services:
   gcb-wordpress-dummy:
     # ...
     depends_on:
-      - gcb-wordpress-mariadb      
+      - gcb-wordpress-mariadb
 ```
 
 - `services` **[dict]**: (Dictionary of container dictionaries for orchestration)
@@ -147,7 +147,9 @@ services:
     - `read-sci-stdout:` **[bool]** *(optional)*
       + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
       + Please see [SCI (Green Software Foundation) →]({{< relref "sci" >}}) for more information.
-
+    - `docker-run-args:` **[list]** *(optional)*
+      + A list of string that should be added to the `docker run` command of that container.
+      + The argument needs to be listed in the `user.capabilities` json under `measurement:orchestrators:docker:allow-args`. The string in the `user.capabilities` can be a regex. Opening this up could be a potential security issue!
 
 Please note that every key below `services` will serve as the name of the
 container later on. You can overwrite the container name with the key `container_name`.
