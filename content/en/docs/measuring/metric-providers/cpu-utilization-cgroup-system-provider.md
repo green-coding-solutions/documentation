@@ -1,7 +1,6 @@
 ---
 title: "CPU % - cgroup - sytem"
 description: "Documentation for CpuUtilizationCgroupSystemProvider of the Green Metrics Tool"
-lead: ""
 date: 2025-01-15T08:49:15+00:00
 draft: false
 images: []
