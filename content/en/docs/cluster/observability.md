@@ -1,7 +1,6 @@
 ---
 title: "Observability"
 description: "Observability in cluster mode"
-lead: ""
 date: 2024-06-26T01:49:15+00:00
 weight: 1007
 ---

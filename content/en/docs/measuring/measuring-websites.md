@@ -1,7 +1,6 @@
 ---
 title: "Measuring Websites"
 description: ""
-lead: ""
 date: 2025-05-23T01:49:15+00:00
 weight: 441
 toc: true

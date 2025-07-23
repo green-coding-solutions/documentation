@@ -1,7 +1,6 @@
 ---
 title: "CPU % - procfs - system"
 description: "Documentation for CpuUtilizationProcfsSystemProvider of the Green Metrics Tool"
-lead: ""
 date: 2022-10-07T08:49:15+00:00
 draft: false
 images: []

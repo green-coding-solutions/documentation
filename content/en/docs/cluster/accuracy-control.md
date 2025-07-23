@@ -1,7 +1,6 @@
 ---
 title: "Accuracy Control"
 description: "How to ensure that measurements in cluster always have low deviation"
-lead: ""
 date: 2023-06-26T01:49:15+00:00
 weight: 1004
 toc: false

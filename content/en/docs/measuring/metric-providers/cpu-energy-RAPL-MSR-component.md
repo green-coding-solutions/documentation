@@ -1,7 +1,6 @@
 ---
 title: "CPU Energy Package - RAPL Component"
 description: "Documentation for CpuEnergyRaplMsrComponentProvider of the Green Metrics Tool"
-lead: ""
 date: 2022-06-02T08:49:15+00:00
 draft: false
 images: []

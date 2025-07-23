@@ -1,7 +1,6 @@
 ---
 title: "Green Metrics API"
 description: "Green Metrics API documentation"
-lead: "Green Metrics API documentation"
 date: 2022-06-15T08:49:15+00:00
 draft: false
 images: []

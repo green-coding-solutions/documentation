@@ -1,7 +1,6 @@
 ---
 title: "SCI (Green Software Foundation)"
 description: "How to measure the Green Software Foundation's SCI metric with the Green Metrics Tool"
-lead: "How to measure the Green Software Foundation's SCI metric with the Green Metrics Tool"
 date: 2023-08-04T08:49:15+00:00
 weight: 442
 toc: true

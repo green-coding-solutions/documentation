@@ -1,7 +1,6 @@
 ---
 title : "Configuration"
 description: ""
-lead: ""
 date: 2022-06-20T08:48:45+00:00
 weight: 425
 ---

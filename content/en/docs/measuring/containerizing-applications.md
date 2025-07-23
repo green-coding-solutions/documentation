@@ -1,7 +1,6 @@
 ---
 title: "Containerizing own applications"
 description: ""
-lead: ""
 date: 2022-06-20T07:49:15+00:00
 weight: 401
 toc: true

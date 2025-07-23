@@ -1,7 +1,6 @@
 ---
 title: "FAQ"
 description: "Answers to frequently asked questions."
-lead: "Answers to frequently asked questions."
 date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []

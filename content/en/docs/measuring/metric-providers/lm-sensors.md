@@ -1,7 +1,6 @@
 ---
 title: "LM Sensors - temp - fanspeed"
 description: "Documentation for LmsensorsProvider of the Green Metrics Tool"
-lead: ""
 date: 2022-12-29T20:16:35+0000
 draft: false
 images: []

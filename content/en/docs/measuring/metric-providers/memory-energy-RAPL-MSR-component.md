@@ -1,7 +1,6 @@
 ---
 title: "Memory Energy - RAPL Component"
 description: "Documentation for MemoryEnergyRaplMsrComponentProvider of the Green Metrics Tool"
-lead: ""
 date: 2022-06-02T08:49:15+00:00
 draft: false
 images: []

@@ -1,7 +1,6 @@
 ---
 title: "Files & Folders"
 description: "Infos on the directory structure and important files in the GMT"
-lead: ""
 date: 2024-10-25T07:49:15+00:00
 weight: 202
 toc: true

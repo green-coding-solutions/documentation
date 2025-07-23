@@ -1,7 +1,6 @@
 ---
 title : "Libraries and components"
 description: "Libraries and components"
-lead: ""
 date: 2022-06-16T08:48:23+00:00
 lastmod: 2022-06-16T08:48:23+00:00
 draft: false

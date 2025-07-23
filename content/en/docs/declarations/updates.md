@@ -1,7 +1,6 @@
 ---
 title: "Update policies"
 description: "Update policies for the Green Metrics Tool"
-lead: "Update policies for the Green Metrics Tool"
 date: 2024-09-30T01:49:15+00:00
 draft: false
 images: []

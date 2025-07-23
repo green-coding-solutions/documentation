@@ -1,7 +1,6 @@
 ---
 title: "Measuring GUI applications"
 description: ""
-lead: ""
 date: 2024-08-20T01:49:15+00:00
 weight: 439
 toc: true

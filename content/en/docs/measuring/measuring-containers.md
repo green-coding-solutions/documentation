@@ -1,7 +1,6 @@
 ---
 title: "Estimating Containers"
 description: ""
-lead: ""
 date: 2025-05-25T01:49:15+00:00
 weight: 442
 toc: false

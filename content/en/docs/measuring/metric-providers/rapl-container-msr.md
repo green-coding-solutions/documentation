@@ -1,7 +1,6 @@
 ---
 title: "RAPL container MSR"
 description: "RAPL container MSR metrics provider documentation"
-lead: ""
 date: 2022-06-24T08:49:15+00:00
 draft: true
 images: []

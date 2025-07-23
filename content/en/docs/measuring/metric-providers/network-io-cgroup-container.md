@@ -1,7 +1,6 @@
 ---
 title: "Network IO - cgroup - container"
 description: "Documentation for NetworkIoCgroupContainerProvider of the Green Metrics Tool"
-lead: ""
 date: 2022-08-04T08:49:15+00:00
 weight: 200
 ---

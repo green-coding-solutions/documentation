@@ -1,7 +1,6 @@
 ---
 title : "Measuring locally"
 description: "Measuring locally with the runner.py"
-lead: ""
 date: 2022-06-18T08:48:45+00:00
 weight: 420
 ---

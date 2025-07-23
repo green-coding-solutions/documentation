@@ -1,7 +1,6 @@
 ---
 title: "GPU energy - NVIDIA NVML - Component"
 description: "Documentation for GpuEnergyNvidiaNvmlComponentProvider of the Green Metrics Tool"
-lead: ""
 date: 2024-01-06T08:49:15+00:00
 draft: false
 images: []

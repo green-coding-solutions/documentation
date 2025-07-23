@@ -1,7 +1,6 @@
 ---
 title: "NOP Linux"
 description: "NOP Linux setup for machines in the Green Metrics Tool cluster"
-lead: ""
 date: 2024-10-25T01:49:15+00:00
 weight: 1003
 toc: false

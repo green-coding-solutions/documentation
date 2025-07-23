@@ -1,7 +1,6 @@
 ---
 title: "Overhead of Measurement Providers"
 description: "How much CPU % and energy does the metric providers itself draw"
-lead: ""
 date: 2022-08-04T08:49:15+00:00
 weight: 999
 ---

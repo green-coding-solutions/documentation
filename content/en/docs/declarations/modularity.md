@@ -1,7 +1,6 @@
 ---
 title: "Modularity"
 description: "Modularity and re-usability of components"
-lead: "Modularity and re-usability of components"
 date: 2024-09-30T01:49:15+00:00
 draft: false
 images: []

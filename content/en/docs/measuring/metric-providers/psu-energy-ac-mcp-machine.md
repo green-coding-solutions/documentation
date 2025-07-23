@@ -1,7 +1,6 @@
 ---
 title: "PSU Energy - AC - MCP (MCP39F511N)"
 description: "Documentation for PsuEnergyAcMcpMachineProvider of the Green Metrics Tool"
-lead: ""
 date: 2023-10-20T08:16:35+0000
 draft: false
 images: []

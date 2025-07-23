@@ -1,7 +1,6 @@
 ---
 title: "Installation on Linux"
 description: "Installation"
-lead: ""
 date: 2022-06-15T01:49:15+00:00
 weight: 302
 toc: true

@@ -1,7 +1,6 @@
 ---
 title: "Green Metrics Tool Framework"
 description: "Contributing to the Green Metrics Tool"
-lead: "Contributing to the Green Metrics Tool "
 date: 2022-06-10T09:49:15+00:00
 weight: 802
 toc: false

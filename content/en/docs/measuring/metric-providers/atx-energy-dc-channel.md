@@ -1,7 +1,6 @@
 ---
 title: "ATX Energy DC Channel"
 description: "Documentation for the DC energy metrics provider of the Green Metrics Tool"
-lead: ""
 date: 2022-08-13
 draft: false
 images: []

@@ -1,7 +1,6 @@
 ---
 title: "Units & Dimensions"
 description: "Units and dimensions in the Green Metrics Tool"
-lead: ""
 date: 2024-10-25T07:49:15+00:00
 weight: 201
 toc: true

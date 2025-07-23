@@ -1,7 +1,6 @@
 ---
 title: "Installation on MacOS"
 description: "A description on how to install the GMT on Apple machines"
-lead: ""
 date: 2023-01-30T01:49:15+00:00
 weight: 303
 ---

@@ -1,7 +1,6 @@
 ---
 title: "Troubleshooting"
 description: "Solutions to common problems."
-lead: "Solutions to common problems."
 date: 2022-06-18T08:49:15+00:00
 draft: false
 images: []

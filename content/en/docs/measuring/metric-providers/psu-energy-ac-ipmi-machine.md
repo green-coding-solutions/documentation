@@ -1,7 +1,6 @@
 ---
 title: "PSU Energy AC - IPMI machine"
 description: "Documentation for PsuEnergyAcIpmiMachineProvider of the Green Metrics Tool"
-lead: ""
 date: 2023-06-23T11:01:35+0000
 draft: false
 images: []

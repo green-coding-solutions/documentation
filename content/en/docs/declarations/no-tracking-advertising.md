@@ -1,7 +1,6 @@
 ---
 title: "Freedom of tracking & advertising"
 description: "Freedom of tracking & advertising policies for the Green Metrics Tool"
-lead: "Freedom of tracking & advertising policies for the Green Metrics Tool"
 date: 2024-09-30T01:49:15+00:00
 draft: false
 images: []

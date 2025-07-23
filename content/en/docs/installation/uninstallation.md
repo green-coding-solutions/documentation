@@ -1,7 +1,6 @@
 ---
 title: "Uninstallation"
 description: "Uninstallation"
-lead: ""
 date: 2024-09-30T01:49:15+00:00
 weight: 307
 toc: false
