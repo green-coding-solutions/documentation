@@ -58,25 +58,12 @@ After having entered the namespace the provider reads from `/proc/net/dev` and:
 - sums up the `r_bytes` and `t_bytes` of all other interfaces
 - does NOT count dropped packets (we assume since most of the traffic is internal, that a dropped received packet shows up in another interface as sent anyway and a dropped sent packet does not attribute much to the energy consumption).
 
-#### Attribution of network traffic
+### Attribution of network traffic
 
 Currently all incoming and outgoing traffic is attributed to every container that sends or receives it.
 
 This may lead to unexpected results when you process the results, but is a design decision.
 
-In our [Green Metrics Dashboard](https://metrics.green-coding.io) we simply accumulate all the network traffic of all containers and then
-apply the [CO2-Formula](https://www.green-coding.io/co2-formulas) on top.
+In our [Green Metrics Dashboard](https://metrics.green-coding.io) we simply accumulate all the network traffic of all containers and calculate CO2 emissions by applying the [CO2-Formula](https://www.green-coding.io/co2-formulas) on top.
 
-This however assumes that all traffic is with external services. If your containers are however only
-communicating with each other and are in production all on one machine, this number will not
-represent the real CO2 emissions, but is rather greatly overstating them.
-
-This design decision was made cause we cannot know during benchmarking how your containers
-would be orchestrated in production.
-They can very well be all on one machine (which would have zero network emissions), but they also could be distributed in an internal network
-of a datacenter (which would have only marginal network CO2 emissions) or really distributed globally (which would then have the maximum of CO2 emissions).
-
-Since our reporters should give you an optimization baseline we opted for the worst-case scenario to report in our Dashboard.
-
-When processing the metrics you own you may well use a different approach given your knowledge of the network topology.
-
+The page [Network Carbon Intensity →]({{< relref "../carbon/network-carbon-intensity" >}}) provides more information and discusses the advantages and disadvantages of this approach.

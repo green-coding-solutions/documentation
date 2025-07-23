@@ -1,8 +1,8 @@
 ---
-title: "SCI (Green Software Foundation)"
+title: "Software Carbon Intensity (SCI)"
 description: "How to measure the Green Software Foundation's SCI metric with the Green Metrics Tool"
 date: 2023-08-04T08:49:15+00:00
-weight: 442
+weight: 550
 toc: true
 ---
 
@@ -53,10 +53,7 @@ If you have an API or similar the output might not happen on the CLI directly, b
 
 An [example configuration](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/config.yml.example) for the `config.yml` is provided when the Green Metrics Tool is installed.
 The values for the respective variables have to be either defined to best knowledge (like lifetime for instance) and / or
-from official databases like:
-- [https://dataviz.boavizta.org/manufacturerdata](https://dataviz.boavizta.org/manufacturerdata)
-- [https://tco.exploresurface.com/sustainability/calculator](https://tco.exploresurface.com/sustainability/calculator)
-- [https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf](https://www.delltechnologies.com/asset/en-us/products/servers/technical-support/Full_LCA_Dell_R740.pdf)
+from official databases (like [Embodied Carbon →]({{< relref "embodied-carbon" >}}) and [Grid Carbon Intensity →]({{< relref "grid-carbon-intensity" >}})). See the respective documentation page for possible sources.
 
 Example:
 ```yml
@@ -64,7 +61,7 @@ sci:
     EL: 4 # means 4 years of usage
     RS: 1 # means we use 1/1 = 100% of the machine. Bare metal. No virtualization
     TE: 181000 # Example value for a laptop taken from https://dataviz.boavizta.org/terminalimpact. Value is in g
-    I: 436 # The number 436 that comes as default is for Germany from 2022. Value in gCO2e/kWh
+    I: 334 # The number 334 that comes as default is for Germany from 2024. Value in gCO2e/kWh
 ```
 
 ## Display
@@ -84,7 +81,7 @@ The [SCI formula](https://sci-guide.greensoftware.foundation/) is specified by t
 The components of the SCI are attributed by the GMT as follows:
 
 - *E*: The energy of the total machine + the energy of the network. 
-    - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) etc. 
+    - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "../metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "../metric-providers/psu-energy-ac-mcp-machine" >}}), etc. 
         - If none is activated machine energy will be excluded from the SCI.
     - A *Network IO* provider must be activated to populate this value with the network energy. 
         - If none is activated network energy will be excluded from the SCI.

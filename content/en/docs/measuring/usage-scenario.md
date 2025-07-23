@@ -145,7 +145,7 @@ services:
       + Make sure to also set `log-stdout` to `true`. Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
     - `read-sci-stdout:` **[bool]** *(optional)*
       + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
-      + Please see [SCI (Green Software Foundation) →]({{< relref "sci" >}}) for more information.
+      + Please see [Software Carbon Intensity (SCI) →]({{< relref "carbon/sci" >}}) for more information.
     - `docker-run-args:` **[list]** *(optional)*
       + A list of string that should be added to the `docker run` command of that container.
       + The argument needs to be listed in the `user.capabilities` json under `measurement:orchestrators:docker:allow-args`. The string in the `user.capabilities` can be a regex. Opening this up could be a potential security issue!
@@ -221,7 +221,7 @@ flow:
       + Make sure to also set `log-stdout` to `true`. Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
     - `read-sci-stdout:` **[bool]** *(optional)*
       + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
-      + Please see [SCI (Green Software Foundation) →]({{< relref "sci" >}}) for more information.
+      + Please see [Software Carbon Intensity (SCI) →]({{< relref "carbon/sci" >}}) for more information.
 
 ### compose-file:
 
