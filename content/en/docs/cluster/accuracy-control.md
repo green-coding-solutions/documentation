@@ -11,6 +11,7 @@ When using the *client* mode the cluster expects a *Measurement Control Workload
 This is done by running a defined workload and checking the standard deviation over a defined window of measurements.
 
 We recommend having your machines setup with our [NOP Linux changes →]({{< relref "nop-linux" >}}) and utilize the following setting by using our provided control workload:
+
 ```yml
 cluster:
   client:
@@ -64,5 +65,3 @@ cluster:
   + `metrics` **[dict]**: Contains a dictionary of all the metrics you want to check the STDDEV or relative STDDEV. Every metric is looked at individually and if the thresshold is exceeded of any of them the cluster will pause further job processing. Checks can be either relative or absolute. We recommend using relative where possible and absolute only of you very small values for the relevant metric and even small changes will lead to high relative changes. We further recommend using the default set as defined above if you have these metric providers enabled. If you do not have these providers available we recommend choosing at least one `psu_energy_...` provider that actually measures and does not estimation. The names are found in the *Metric Name* section of the respective metric provider.\
   Example: [RAPL CPU →]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}}) is `cpu_energy_rapl_msr_component`
   
-
-

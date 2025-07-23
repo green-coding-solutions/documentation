@@ -14,7 +14,7 @@ You can run it like this:
 bash uninstall.sh
 ```
 
-The script will remove all installed python libraries, all docker containers and optional 
+The script will remove all installed python libraries, all docker containers and optional
 also the pre-install requirements like docker etc.
 
 It has the option to keep your data by leaving *PostgreSQL* and it's *docker volume* installed

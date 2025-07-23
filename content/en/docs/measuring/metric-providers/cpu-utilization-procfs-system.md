@@ -19,11 +19,10 @@ This metric provider calculates an estimate of the % total CPU usage based of th
 
 - `cpu_utilization_procfs_system`
 
-
 ### Input Parameters
 
 - args
-    - `-i`: interval in milliseconds
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
 
@@ -38,6 +37,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The estimated % CPU used
 

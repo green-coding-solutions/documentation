@@ -22,8 +22,8 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 ### Input Parameters
 
 - args
-    - `-s`: container-ids seperated by commas
-    - `-i`: interval in milliseconds
+  - `-s`: container-ids seperated by commas
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
 
@@ -38,6 +38,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING CONTAINER-ID`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`:The time spent, in microseconds, by this container in the CPU
 - `CONTAINER-ID`: The container ID that this reading is for

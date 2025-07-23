@@ -57,7 +57,6 @@ to the [usage scenario specification]({{< relref "/docs/measuring/usage-scenario
 
 After that you can look at our [Example Apps Repository](https://github.com/green-coding-solutions/example-applications) to see some prepared apps that can be directly measured.
 
-
 ## Help: FAQ / Troubleshooting
 
 - [FAQ →]({{< relref "/docs/help/faq" >}})

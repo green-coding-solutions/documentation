@@ -41,7 +41,7 @@ Energy data by the current metrics reporters we support comes at different level
 
 When optimizing an application it might be interesting to get the energy value per container and not only for the component that the whole machine is utilizing.
 Such splittings can be theoretically done as for instance [Scaphandre](https://github.com/hubblo-org/scaphandre)
- can split a whole CPU energy signal by the CPU utilization (see also below for caveats). Other tools like 
+ can split a whole CPU energy signal by the CPU utilization (see also below for caveats). Other tools like
  [Kepler](https://github.com/sustainable-computing-io/kepler) use for instance *CPU Instructions* to derive a per container or per process energy value.
 
  These values, although theoretically intriguing, have multiple caveats attached like for instance speculative execution, out of order execution, instable instruction counting etc. that make the non-exact and still only an approximation to what the process / container is actually in energy.
@@ -55,8 +55,6 @@ Example: You have a driver (JMeter, a Webbrowser, curl etc.) and an API. At the 
 
 We have a dicussion on if an implementation is useful here if you want to contribute and maybe have an implementation
 of this functionality in the GMT in a future version: https://github.com/green-coding-solutions/green-metrics-tool/discussions/562
-
-
 
 ## Architecture & Technology
 
@@ -159,4 +157,3 @@ Therefore we decided to pursue a different path with our tool and not reuse [Sca
 {{< callout context="note" icon="outline/hand-finger-right" >}}
 If you however have more the need for observability and measuring on a process level please check out <a href='https://github.com/hubblo-org/scaphandre'>Scaphandre</a> which may fit your needs better than our tool.
 {{< /callout >}}
-

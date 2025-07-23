@@ -14,6 +14,7 @@ This metric provider reads the energy of the CPU Package from the Running Averag
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the cumulatove energy used by the domains `energy-cores`, `energy-gpu` and some extra parts like the voltage regulator and such that also reside on the package.
 
 ### Setup
+
 Please look at [RAPL installation]({{< relref "/docs/installation/installation-linux" >}})
 
 ### Technical specs
@@ -32,7 +33,7 @@ Please look at [RAPL installation]({{< relref "/docs/installation/installation-l
 ### Input Parameters
 
 - Args:
-    - i: specifies interval in milliseconds between measurements
+  - i: specifies interval in milliseconds between measurements
 
 ```bash
 ./metric-provider-binary -i 100
@@ -45,6 +46,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP ENERGY_OUTPUT`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `ENERGY_OUTPUT`: Energy used during interval, in micro Joules
 - `PACKAGE_ID`: ID of the package in case you have multiple CPU chips installed. Otherwise always *Package_0*
@@ -68,6 +70,7 @@ First we check if the CPU is compatible by reading the cpu info from `/proc/cpui
 ```txt
 CPU_SANDYBRIDGE, CPU_SANDYBRIDGE_EP, CPU_IVYBRIDGE, CPU_IVYBRIDGE_EP, CPU_HASWELL, CPU_HASWELL_ULT, CPU_HASWELL_GT3E, CPU_HASWELL_EP, CPU_BROADWELL, CPU_BROADWELL_GT3E, CPU_BROADWELL_EP, CPU_BROADWELL_DE, CPU_SKYLAKE, CPU_SKYLAKE_HS, CPU_SKYLAKE_X, CPU_KNIGHTS_LANDING, CPU_KNIGHTS_MILL, CPU_KABYLAKE_MOBILE, CPU_KABYLAKE, CPU_ATOM_SILVERMONT, CPU_ATOM_AIRMONT, CPU_ATOM_MERRIFIELD, CPU_ATOM_MOOREFIELD, CPU_ATOM_GOLDMONT, CPU_ATOM_GEMINI_LAKE, CPU_TIGER_LAKE
 ```
+
 It reads the values from `/dev/cpu/%d/msr`
 
 Note that since it reads the energy used by the entire system, any other load that your system has during a program's usage run will also be captured in the energy measurement.

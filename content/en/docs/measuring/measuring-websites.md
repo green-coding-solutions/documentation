@@ -7,6 +7,7 @@ toc: true
 ---
 
 GMT can also measure websites and takes a multi-dimensional approach here:
+
 - The energy of the browser is measured to display and render the page
 - The network transfer energy is measured that was needed to download the HTML and page assets
 

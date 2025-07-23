@@ -37,7 +37,6 @@ The script will detect the measurement resolution automatically though if you al
 
 <img src="/img/picolog_hdr_adc_24_fujitsu_esprimo_P956.webp">
 
-
 ### Example call
 
 ```bash

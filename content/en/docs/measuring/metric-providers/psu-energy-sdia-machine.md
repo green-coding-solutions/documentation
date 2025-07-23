@@ -24,7 +24,6 @@ total energy consumption of a non-GPU server.
 
 - `psu_energy_ac_sdia_machine`
 
-
 ### Prerequisites
 
 The provider must be configured in the `config.yml`. Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}})
@@ -36,7 +35,7 @@ In the `config.yml` file also the *CpuUtilizationProcfsSystemProvider* must be a
 ### Input Parameters
 
 - args
-    - Takes no arguments
+  - Takes no arguments
 
 The provider cannot be run directly, it only works in conjunction with a run
 of the Green Metrics Tool.
@@ -55,4 +54,3 @@ This value has the same granularity as the one configured in the `config.yml` fo
 *CpuUtilizationProcfsSystemProvider*
 
 Any errors are printed to Stderr.
-

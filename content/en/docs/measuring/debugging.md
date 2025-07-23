@@ -11,6 +11,7 @@ The GMT offers two approaches to debugging that can be used
 separately or in conjunction
 
 ### --dev flags
+
 The first approach is to use the `--dev-*` switches as defined in the [runner switches →]({{< relref "/docs/measuring/runner-switches" >}}).
 
 Here you can turn on many switches that speed up a run. Please note that no useful measurement
@@ -24,6 +25,7 @@ A typical call looks like this:
 `python3 --uri MY_LOCAL_PATH --name Testing --allow-unsafe --dev-no-metrics --dev-no-sleeps --dev-cache-build --dev-flow-timetravel`
 
 ### --debug flag
+
 The second approach in debugging a *usage_scenario* is to
 turn the `--debug` flag of the `runner.py` on.
 
@@ -52,10 +54,12 @@ by adding `--print-logs`
 ## Debug flow commands
 
 Be sure to activate:
+
 ```docker
 log-stderr: true
 log-stdout: true
 ```
+
 on the flow commands to debug them.
 
 ## Debugging containers via HTTP / exposed ports

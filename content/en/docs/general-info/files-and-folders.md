@@ -20,26 +20,26 @@ Alternatively in the future we might consider running GMT as a module command (`
 ## Folder structure
 
 - `api`
-    - Contains all python files for the FastAPI api and will be linked into the running docker container
+  - Contains all python files for the FastAPI api and will be linked into the running docker container
 - `cron`
-    - Contains runnable scripts that are executed as cron jobs 
+  - Contains runnable scripts that are executed as cron jobs
 - `data`
-    - Contains demo data to import for testing and debugging
+  - Contains demo data to import for testing and debugging
 - `docker`
-    - Includes the docker container Dockerfiles and compose files as well as the NGINX configurations
+  - Includes the docker container Dockerfiles and compose files as well as the NGINX configurations
 - `frontend`
-    - Includess all HTML and JS files including JS libraries for the Dashboard
+  - Includess all HTML and JS files including JS libraries for the Dashboard
 - `lib`
-    - Includes *Python* and *C* libraries the GMT includes during installation and execution
+  - Includes *Python* and *C* libraries the GMT includes during installation and execution
 - `metric_providers`
-    - Includes the modular *metric providers*
+  - Includes the modular *metric providers*
 - `migrations`
-    - Includes DB migrations in *SQL* format to run after upgrading from one version to another
+  - Includes DB migrations in *SQL* format to run after upgrading from one version to another
 - `optimization_providers`
-    - Includes the modular *optimization providers*
+  - Includes the modular *optimization providers*
 - `tests`
-    - Includes the *Python* unit- and E2E-tests
+  - Includes the *Python* unit- and E2E-tests
 - `tools`
-    - Includes maintenance and debugging scripts to be executed via CLI
+  - Includes maintenance and debugging scripts to be executed via CLI
 - `venv`
-    - Contains the `python3` virtual environment
+  - Contains the `python3` virtual environment

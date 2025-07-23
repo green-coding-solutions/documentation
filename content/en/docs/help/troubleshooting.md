@@ -70,26 +70,28 @@ The full error looks something like this:
 Error:  RuntimeError occured in runner.py:  Stderr on CpuUtilizationCgroupContainerProvider was NOT empty: b'Error - file /sys/fs/cgroup/user.slice/user-1003.slice/user@1003.service/user.slice/docker-6e18a15cbc237c9ff76af70cc8ef16c3c5b9f002a989f74cf0c7a22b5c8e4c9f.scope/cpu.stat failed to open: errno: 2'
 ```
 
-This is because a container has exited during the run of the GMT or you are running your docker client not in rootless mode. 
-- If not using rootless mode: Please turn all **cgroup** providers off, by commenting them out in the `config.yml`
-- If using rootless mode: Please keep the container alive by having a shell always open 
+This is because a container has exited during the run of the GMT or you are running your docker client not in rootless mode.
 
-A way to do this with the GMT directly without changing your containers would be the `command` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) 
+- If not using rootless mode: Please turn all **cgroup** providers off, by commenting them out in the `config.yml`
+- If using rootless mode: Please keep the container alive by having a shell always open
+
+A way to do this with the GMT directly without changing your containers would be the `command` command. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}})
 
 An example where we use this command to keep a container alive is here: https://github.com/green-coding-solutions/example-applications/blob/main/idle/usage_scenario.yml
 
-## Stderr on {metric_provider.__class__.__name__} was NOT empty
+## Stderr on {metric_provider.**class**.**name**} was NOT empty
 
 An error occured in a metric provider either during boot or during the runtime.
 
 This is most likely because the metric provider is not working on your system:
+
 - You turned on a metrics provider for a different OS (Linux / macOS / Windows)
-- You did not configure the metric provide correctly. See [metric-providers →]({{< relref "/docs/measuring/metric-providers" >}}) 
+- You did not configure the metric provide correctly. See [metric-providers →]({{< relref "/docs/measuring/metric-providers" >}})
 - The metric provider cannot be run on your system. This happens for instance in VMs when CPU frequency, cgroups, RAPL or something else is not readable. Please turn the corresponding metric provider off in the `config.yml` and try again. If you think the provider should work, please shoot us an email.
 
 ## Process had bad returncode: 1
 
-If your process fails in the GMT and it has a format in which quotes are present, for example like this: 
+If your process fails in the GMT and it has a format in which quotes are present, for example like this:
 
 `command: grep "asd" /tmp/myfile`
 

@@ -52,6 +52,7 @@ WantedBy=default.target
 ```
 
 Then activate the service
+
 ```bash
 systemctl --user daemon-reload # Reload the systemd configuration
 systemctl --user enable green-coding-client # enable on boot
@@ -78,6 +79,7 @@ sudo chmod 500 /etc/sudoers.d/green-coding-cluster-cleanup
 The Green Metrics Tool comes with an implemented queueing and locking mechanism. In contrast to the NOP Linux implementation this way of checking for jobs doesn't poll with a process all the time but relies on cron which is not available on NOP Linux.
 
 You can install a cronjob on your system to periodically call:
+
 - `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
 - `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
 
@@ -105,6 +107,7 @@ machine:
   base_temperature_chip: "coretemp-isa-0000"
   base_temperature_feature: "Package id 0"
 ```
+
 The `id` and the `description` must be unique so that they do not conflict with the other machines in the cluster.
 
 If you are using the *NOP Linux* setup with the `client.py` service you must also setup the temperature checking. Find out what your system has when it is cool. You can either use our calibration script or just let the machine sit for a while until the temperature does not change anymore. Then set the value `base_temperature_value`. It has no unit, but is rather just a value in degree (°). It should have the same unit as your output of `sensors` on your Linux box.
@@ -114,13 +117,13 @@ Since we are using our [lm_sensors provider →]({{< relref "/docs/measuring/met
 #### Profiling Machines
 
 Machines that are intended to create a carbon profile *as it would be seen in a user machine* should have:
+
 - Turbo Boost turned on
 - Hyper Threading turned on
 - DVFS turned on
 - Allow C8-C0 states
 
 This is the minium set we deem reasonable. Please note that this resembles a user machine the best. For server machines some of these configurations should be changed. For servers Hyper Threading is often turned on whereas DVFS is often turned off.
-
 
 #### Benchmarking Machines
 
@@ -174,4 +177,3 @@ The GMT refers to *client* when it is talking about the settings for the `client
 When using the *client* mode the cluster expects a *Measurement Control Workload* to be set to determine if the cluster accuracy has deviated from the expected baseline.
 
 Please see [Accuracy Control →]({{< relref "accuracy-control" >}}) for details.
-

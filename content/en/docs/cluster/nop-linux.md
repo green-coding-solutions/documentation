@@ -13,7 +13,7 @@ We recommend tuning the Linux OS on all linux measurement machines that you have
 The following script configures an Ubuntu 22.04+ system to have no active timers running, remove all unneeded services and disable also
 NTP.
 
-The goal is to keep the system still very close to a production / user setup, but remove invariances from the system without 
+The goal is to keep the system still very close to a production / user setup, but remove invariances from the system without
 decreasing idle power draw and skewing results.
 
 Please further note that you must execute certain service still periodically. The [client.py](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/cron/client.py) cluster service will periodically run [a cleanup script](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/tools/cluster/cleanup_original.py)

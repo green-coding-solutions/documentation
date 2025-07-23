@@ -99,10 +99,10 @@ admin:
 The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "/docs/installation/installation-linux" >}}) part.
 
 ### machine
+
 If you run locally nothing needs to be configured here. But if you run a *cluster* you must set the base temperature values for the accuracy control to work
 
 Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}) and [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}})
-
 
 ### cluster
 
@@ -113,7 +113,6 @@ Only the following three variables are important for a local installation:
 - `cors_allowed_orgins` **[list]**: Allowed URLs for CORS requests to the API. It should at least include your chosen `api_url` and `metrics_url`
 
 For the rest please see [installation →]({{< relref "/docs/cluster/installation" >}})
-
 
 ### measurement
 
@@ -142,10 +141,9 @@ Once you have set them up you can uncomment the line. In this example for instan
 the line `psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider` and all
 the lines directly below it.
 
-
 ### admin
 
-The `admin` key provides no configuration for essential configurations like for instance error handling and 
+The `admin` key provides no configuration for essential configurations like for instance error handling and
 email behaviour if configured
 
 - `notification_email` **[str|bool]**: This address will get an email, for any error or new project added etc.
@@ -153,13 +151,14 @@ email behaviour if configured
 - `error_file` **[str|bool]**: Takes a file path to log all the errors to it. This is disabled if False
 - `error_email` **[str|bool]**: Sends an error notification also via email. This is disabled if False
 
-
 ## optimization
+
 Here you can ignore certain optimizations to not run.
 
 All possible optimizations are found in the `/optimization_providers` folder of the GMT.
 
 To disable for instance the *container_build_time* optimization you could set:
+
 ```yml
 optimization:
   ignore:
@@ -177,6 +176,7 @@ If you are using [Eco CI](https://www.green-coding.io/products/eco-ci) or [Carbo
 The value is a string.
 
 Example:
+
 ```yml
 electricity_maps_token: 'MY_TOKEN'
 ```

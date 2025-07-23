@@ -23,7 +23,6 @@ This paragraph looks at the units and dimensions when using the measurement func
 - Frequency - Hz  (64-bit int)
 - Time - micro-Seconds [us]  (64-bit int)
 
-
 ### Bytes / Bytes/s are SI-Units
 
 It is very important to note that GMT uses SI-Units for Bytes.
@@ -52,5 +51,3 @@ CarbonDB stores all values as 64-bit floating point values. Respectively:
 - Energy - micro-Joules (64-bit double precision)
 
 Thus the lowest resolution is directly derived from the storage scheme and to keep it brief: It is absurdly large, as well as absurdly small :)
-
-

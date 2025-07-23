@@ -42,7 +42,7 @@ The provider must be configured in the `config.yml`. It must be supplied with th
 - TDP
 - HW_MemAmountGB
 
-You can find these parameters in your data sheet of the used machine. In case you are using a VM please check 
+You can find these parameters in your data sheet of the used machine. In case you are using a VM please check
 [this repository](https://github.com/green-coding-solutions/carbondb-agent) for an example how to derive the values.
 
 Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}}) for further info.
@@ -52,7 +52,7 @@ In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be a
 ### Input Parameters
 
 - args
-    - Takes no arguments
+  - Takes no arguments
 
 If you want to run the provider directly we advise that you rather check
 out it's main repository: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
@@ -71,4 +71,3 @@ This value has the same granularity as the one configured in the `config.yml` fo
 *CpuUtilizationProcfsSystemProvider*
 
 Any errors are printed to Stderr.
-

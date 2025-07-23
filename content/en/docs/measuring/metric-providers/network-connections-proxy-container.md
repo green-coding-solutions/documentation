@@ -29,7 +29,6 @@ proxy program and then adds the corresponding values to the `network_intercepts`
 
 - `network_connections_proxy_container`
 
-
 ### How it works
 
 When starting the metric provider the `tinyproxy` program is started in the user space and mapped to the port 8889.

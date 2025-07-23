@@ -38,11 +38,9 @@ in your computer and creates the config file.
 
 - `psu_energy_ac_ipmi_machine`
 
-
 ### Input Parameters
 
 - `-i`: interval in milliseconds. By default the measurement interval is 100 ms.
-
 
 ```bash
 > ./ipmi-get-machine-energy-stat.sh -i 100
@@ -56,6 +54,7 @@ This metric provider prints to stdout a continuous stream of data every `interva
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The value taken from sensors in milliWatts with two significant digits (Ex. 14000 for 14 Watts)
 

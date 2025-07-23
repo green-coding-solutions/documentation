@@ -40,7 +40,7 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 ### 2. An application should NEVER come to the bounds of its resources
 
 - Analyze the peak load of your application. If the system runs at >80% typically scheduling and queuing problems can kick in.
-    + If that is however what your application is design to operate it, then do not alter it. However most applications assume an
+  + If that is however what your application is design to operate it, then do not alter it. However most applications assume an
    infinite amout of resources and behave weirdly if they run into resource limitations
 
 ### 3. The application you want to test must run at least twice as long as the minimal sampling rate
@@ -100,11 +100,11 @@ You can either use our service with a free tier or set the cluster up yourself. 
 
 ### 11. Your system should not overheat
 
-- Most modern processors have features that limit their processing power if the heat of the system is too high. 
-    + This is at the moment a manual task in the GMT, however we are working on a feature that will check if the CPU has run
+- Most modern processors have features that limit their processing power if the heat of the system is too high.
+  + This is at the moment a manual task in the GMT, however we are working on a feature that will check if the CPU has run
 into a heat limiting.
-- Also you should take waiting times between test runs to make sure that the system has cooled down again and your 
-energy measurements are not false-high. A good number for this has emerged in our testing which is **180 s**. However on 
+- Also you should take waiting times between test runs to make sure that the system has cooled down again and your
+energy measurements are not false-high. A good number for this has emerged in our testing which is **180 s**. However on
 a 30+ core machine this value might be higher. We are currently working on a [calibration script](https://github.com/green-coding-solutions/green-metrics-tool/issues/355) to determine this exact
 value for a particular system.
 
@@ -137,10 +137,11 @@ Downside: It will remove all stopped containers. So if you regularly keep stoppe
 rather run `docker volume prune` once in a while.
 
 ### 15. Use non standard sampling intervals and avoid undersampling
+
 If the effect you are looking for in your code is likely only a 200 ms activity you should at least
 use a sampling rate of 100 ms.
 
-Having said that: It is also good practice to use an odd number here, which is slightly lower. For instance 99 ms or even 95 ms. 
+Having said that: It is also good practice to use an odd number here, which is slightly lower. For instance 99 ms or even 95 ms.
 
 The reason for this is that you do not want to run into a lock-step sampling error, where you always look at the machine just after a load has happened, and since no jitter is on the machine you always miss the actual load. By sliding your sampling intervals in relation to the frequency of the event frequency that you want to observe you will still see the event sometimes.
 
@@ -151,11 +152,13 @@ The GMT comes with many sytem checks that only issue a warning in the default co
 We recommend setting `system_check_treshold` to **2** in your production setup of the [Configuration]({{< relref "configuration" >}})
 
 ### 17. Idle Duration
+
 If you are trying to calculate an energy per container you should set the `idle-duration` configuration value high enough so you get a stable value to base the offset on.
 
 We recommend at least *120 s*.
 
 ### 18. Internal Networking Only
+
 External networking introduces variable latency in your benchmarks and thus should be avoided whereever possible.
 
 One method to achieve this is to set the network to internal only. See [Docker Compose directive](https://docs.docker.com/reference/compose-file/networks/#internal).

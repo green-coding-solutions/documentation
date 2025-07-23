@@ -9,7 +9,6 @@ weight: 213
 
 This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
 
-
 ### What it does
 
 It measures the DC energy by intercepting the cable pathway from the PSU
@@ -23,10 +22,10 @@ to the ATX mainboard connector.
 
 - `psu_energy_dc_picolog_machine`
 
-
 ### Prerequisites
 
 The provider requires special hardware to work:
+
 - [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 - [Terminal board](https://www.picotech.com/accessories/terminal-boards/adc-20-24-terminal-board)
 - Custom ATX Y-cable
@@ -67,7 +66,7 @@ The provider will configure the PicoLog HRDL ADC-24 into streaming mode with
 ### Input Parameters
 
 - args
-    - `-i`: interval in milliseconds
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is *1000 ms*, which however is only for testing
 purposes.
@@ -85,6 +84,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The measured energy in millijoules
 

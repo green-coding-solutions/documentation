@@ -1,9 +1,7 @@
 
-
 Here the calculation of CPU and memory is shown:
 
 https://github.com/docker/cli/blob/53f8ed4bec07084db4208f55987a2ea94b7f01d6/cli/command/container/stats_helpers.go
-
 
 ```cpu
 func calculateCPUPercentUnix(previousCPU, previousSystem uint64, v *types.StatsJSON) float64 {
@@ -26,7 +24,6 @@ func calculateCPUPercentUnix(previousCPU, previousSystem uint64, v *types.StatsJ
 }
 ```
 
-
 ```memory
 func calculateMemUsageUnixNoCache(mem types.MemoryStats) float64 {
     // cgroup v1
@@ -40,4 +37,5 @@ func calculateMemUsageUnixNoCache(mem types.MemoryStats) float64 {
     return float64(mem.Usage)
 }
 ```
+
 => This is on cgroup v2 identical to our cgroup-memory provider

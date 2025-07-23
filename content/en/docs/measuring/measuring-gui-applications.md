@@ -23,6 +23,7 @@ We will create a temporary folder in `/tmp/my_test` and initialize *git* inside 
 Create a usage scenario as follows:
 
 **usage_scenario.yml**
+
 ```yaml
 ---
 name: Sample GMT Firefox headed demo
@@ -51,6 +52,7 @@ As said in the comment the `DISPLAY` variable should be set to the output of `$ 
 Here is also the short boilerplate code of the `test.py` that we need for this example.
 
 **test.py**
+
 ```python
 import sys
 import time
@@ -74,6 +76,7 @@ if __name__ == '__main__':
 As a final step we must allow docker to access the X11 / Wayland connection via: `$ xhost +local:docker`
 
 The we can run this line:
+
 ```bash
 python3 runner.py --uri /tmp/my_test --name "Testing Firefox GUI" --allow-unsafe
 ```
@@ -95,18 +98,22 @@ Let us know if you try it out and it works!
 ### Automating for cluster
 
 If you are running GMT unattended in cluster mode you must ensure two things:
+
 - The user that the GMT runs with must be automatically also logged into a GUI session. This typically happens in the user settings of the desktop (for instance Gnome).
 - Futhermore the `xhost +local:docker` must be set also in the Desktop. In an unattended mode this must happen with files that are loaded via autostart.
 
 #### X11 autostart file
+
 Add `xhost +local:docker` to `~/.xprofile`
 
 Example: `$ xhost +" >> ~/.xprofile`
 
 #### Wayland autostart file
+
 Create a file `~/.config/autostart/xhost-docker.desktop`
 
 Content:
+
 ```config
 [Desktop Entry]
 Type=Application
@@ -122,6 +129,7 @@ Name=Allow Docker X11 / Wayland
 On Ubuntu, our reference distribution for cluster setups, this is chosen in the *GDM* config.
 
 Open `/etc/gdm3/custom.conf` and add:
+
 ```conf
 # this will activate Wayland
 WaylandEnable=true
@@ -130,4 +138,5 @@ WaylandEnable=true
 If you want *X.org* just set the variable to `false`.
 
 ### Help / Debugging
+
 If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.

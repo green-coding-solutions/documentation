@@ -9,7 +9,7 @@ weight: 601
 images: []
 ---
 
-The Dashboard is the part of our tool that displays the raw unprocessed and aggretaged 
+The Dashboard is the part of our tool that displays the raw unprocessed and aggretaged
 data from the API in a nice visual form.
 
 The frontend relies on a [Fomantic UI Template](https://fomantic-ui.com/) and uses [eCharts](https://echarts.apache.org/en/index.html)
@@ -42,7 +42,6 @@ The sidebar is done in flexbox.
   + We then concatenated all the minified file into a `semantic_reduced.min.css`
 - The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
-
 
 ## Charts
 

@@ -64,7 +64,7 @@ GRANT USAGE, SELECT ON SEQUENCE jobs_new_id_seq TO manager;
 GRANT SELECT, INSERT ON TABLE jobs TO manager;
 ```
 
-To complement the configuration you need also have a different `config.yml` file present to read the credentials from. 
+To complement the configuration you need also have a different `config.yml` file present to read the credentials from.
 
 You need to create a file called `manager-config.yml` in the GMT root directory, which will automatically be picked up by the cron jobs in `./cron/`
 

@@ -44,6 +44,7 @@ If the program exits because of an error you can use the return code to see why:
 ## Output
 
 Important values that are extracted:
+
 ```
 [INFO] -  Cool down time is 4 seconds
 [DEBUG] - Power mean is {'Package_0': 3224.3333333333335}
