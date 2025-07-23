@@ -1,7 +1,6 @@
 ---
 title: "Disk IO - procfs - system"
 description: "Documentation for DiskIoProcfsSystemProvider of the Green Metrics Tool"
-lead: ""
 date: 2025-07-07T16:10:00+00:00
 weight: 206
 ---

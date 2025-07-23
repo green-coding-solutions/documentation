@@ -1,7 +1,6 @@
 ---
 title: "Disk IO - cgroup - container"
 description: "Documentation for DiskIoCgroupContainerProvider of the Green Metrics Tool"
-lead: ""
 date: 2025-07-07T15:52:00+00:00
 weight: 205
 ---
@@ -50,8 +49,6 @@ Any errors are printed to Stderr.
 The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-pages/man7/cgroups.7.html) enabled on your system.
 
 It reads from the cgroup's `io.stat` file which provides per-device I/O statistics for the container.
-
-The relevant file it uses is: `/sys/fs/cgroup/system.slice/docker-<CONTAINER-ID>.scope/io.stat`
 
 The provider:
 
