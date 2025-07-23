@@ -7,9 +7,9 @@ images: []
 weight: 100
 ---
 
-## ⚠️Warning - LEGACY PROVIDER⚠️
-
+{{< callout context="caution" icon="outline/alert-triangle" >}}
 This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
+{{< /callout >}}
 
 ## What it does
 
