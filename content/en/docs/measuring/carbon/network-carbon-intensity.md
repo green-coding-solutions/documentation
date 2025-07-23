@@ -30,7 +30,7 @@ We made this design choice because, during benchmarking, we can't predict how yo
 
 ### Configuration
 
-You can configure the network energy intensity as part of the [SCI]({{< relref "sci" >}}) configuration:
+You can configure the network energy intensity as part of the [SCI]({{< relref "sci" >}}) configuration in `config.yml`:
 
 ```yml
 sci:

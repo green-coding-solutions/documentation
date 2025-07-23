@@ -22,7 +22,7 @@ Grid carbon intensity is the **I** parameter in the [Software Carbon Intensity (
 
 ### Configuration
 
-You can configure the grid carbon intensity as part of the [SCI]({{< relref "sci" >}}) configuration:
+You can configure the grid carbon intensity as part of the [SCI]({{< relref "sci" >}}) configuration in `config.yml`:
 
 ```yml
 sci:

@@ -43,7 +43,7 @@ The tool displays embodied carbon emissions for every measurement run, making it
 
 ### Configuration
 
-You can configure the embodied carbon parameters as part of the [SCI]({{< relref "sci" >}}) configuration:
+You can configure the embodied carbon parameters as part of the [SCI]({{< relref "sci" >}}) configuration in `config.yml`:
 
 ```yml
 sci:
