@@ -189,7 +189,7 @@ flow:
 
 - `flow:` **[list]** (List of flows to interact with containers)
   + `name:` **[\.\s0-9a-zA-Z_\(\)-]+** An arbitrary name, that helps you distinguish later on where the load happend in the chart
-  + `container:` `[a-zA-Z0-9][a-zA-Z0-9_.-]+` The name of the container specified on `setup` which you want the run the flow
+  + `container:` **\[a-zA-Z0-9\]\[a-zA-Z0-9_.-\]+** The name of the container specified on `setup` which you want the run the flow
   + `commands:` **[list]**
     - `type:` **[console]** (Only console currently supported)
       + `console` will execute a shell command inside the container
