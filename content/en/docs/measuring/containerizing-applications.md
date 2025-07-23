@@ -28,7 +28,7 @@ all been orchestrated and does not support one-off container starts with paramet
 
 Our architecture looks like the following:
 
-<img src="/img/server-architecture-banana.webp">
+<img src="/img/server-architecture-banana.webp" alt="Server architecture diagram showing webserver, database, and client components">
 
 We will now containerize the webserver, database, and client inside separate containers.
 

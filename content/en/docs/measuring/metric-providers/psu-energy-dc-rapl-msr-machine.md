@@ -11,7 +11,7 @@ weight: 214
 ### What it does
 
 This metric provider reads the energy of the Platform (PSYS) domain from the Running Average Power Limit (RAPL) interface via a machine specific register (MSR) that is present on some Intel processor based notebook devices.
-In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
+In depth information about RAPL can be found in the [Intel Software Developer Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-psys` domain, which gives you the energy used by potentially the whole machine. The exact implementation what exactly falls under the *PSYS* domain is up to the manufacturer of the machine and in doubt you should contact the manufacturer.
 

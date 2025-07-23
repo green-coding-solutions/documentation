@@ -49,7 +49,7 @@ The provider reads all the entries of the first line of the [`/proc/stat` file](
 uses the argument the same way `htop` does it. This means that CPU Utilization is
 calcuated as:
 
-**user_time+nice_time+system_time+irq_time+softirq_time+steal_time / wait_time,iowait_time+user_time+nice_time+system_time+irq_time+softirq_time+steal_time**
+`user_time+nice_time+system_time+irq_time+softirq_time+steal_time / wait_time,iowait_time+user_time+nice_time+system_time+irq_time+softirq_time+steal_time`
 
 **io_wait** and **wait** are counted both as idle.
 

@@ -8,7 +8,7 @@ weight: 170
 ---
 ### What it does
 
-This metric provider reads the DRAM energy from the Running Average Power Limit (RAPL) interface via a machine specific registers (MSR) that is present on most modern Intel processers. In depth information about RAPL can be found [here](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
+This metric provider reads the DRAM energy from the Running Average Power Limit (RAPL) interface via a machine specific registers (MSR) that is present on most modern Intel processers. In depth information about RAPL can be found in the [Intel Software Developer Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
 

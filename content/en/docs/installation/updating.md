@@ -77,7 +77,7 @@ It may help to correctly load some configurations and/or daemons.
 
 ---
 
-# Maintainer section
+## Maintainer section
 
 ## Submodules
 

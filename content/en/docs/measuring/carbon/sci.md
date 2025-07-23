@@ -69,11 +69,11 @@ sci:
 ## Display
 
 The metric will atm only be calculated for the **RUNTIME** phase and be shown in the Dashboard.
-<img src="/img/sci_dashboard.webp">
+<img src="/img/sci_dashboard.webp" alt="SCI (Software Carbon Intensity) dashboard showing carbon metrics">
 
 If an SCI was configured also the parameters will be shown in the *Measurements* Tab.
 
-<img src="/img/sci_measurement_tab.webp">
+<img src="/img/sci_measurement_tab.webp" alt="SCI measurement tab showing detailed carbon intensity parameters">
 
 ## Formula
 

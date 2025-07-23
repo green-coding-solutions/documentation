@@ -7,7 +7,7 @@ weight: 200
 
 ### What it does
 
-It reads the total amount of sent and received bytes from the network interface inside the assigned namespace by the cgroup of the container. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+It reads the total amount of sent and received bytes from the network interface inside the assigned namespace by the cgroup of the container. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
 

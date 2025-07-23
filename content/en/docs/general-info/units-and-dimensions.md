@@ -6,11 +6,11 @@ weight: 201
 toc: true
 ---
 
-# Measurement
+## Measurement
 
 This paragraph looks at the units and dimensions when using the measurement functionality of GMT.
 
-## Units and dimensions
+### Units and dimensions
 
 - Energy - micro-Joules [uJ] (64-bit int)
 - Power - milli-Watts [mW] (64-bit int)
@@ -23,7 +23,7 @@ This paragraph looks at the units and dimensions when using the measurement func
 - Frequency - Hz  (64-bit int)
 - Time - micro-Seconds [us]  (64-bit int)
 
-### Bytes / Bytes/s are SI-Units
+#### Bytes / Bytes/s are SI-Units
 
 It is very important to note that GMT uses SI-Units for Bytes.
 
@@ -33,7 +33,7 @@ This notation is in line with newest international number standards.
 
 See the [Wikipedia Page](https://de.wikipedia.org/wiki/Byte) for details.
 
-## Lowest possible resolution / precision
+### Lowest possible resolution / precision
 
 Since all values are stored as 64-bit integer values the smallest resolution the GMT can understand is dicretly derived from the dimension that we store.
 
@@ -43,7 +43,7 @@ For temperature it is similar. Since we store in centi°C the smallest resolutio
 
 Identical for Utilization where 0.01 is the smallest value.
 
-# CarbonDB
+## CarbonDB
 
 CarbonDB stores all values as 64-bit floating point values. Respectively:
 

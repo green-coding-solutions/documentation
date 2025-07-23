@@ -5,11 +5,11 @@ date: 2022-08-04T08:49:15+00:00
 weight: 213
 ---
 
-# ⚠️Warning - LEGACY PROVIDER⚠️
+## ⚠️Warning - LEGACY PROVIDER⚠️
 
 This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
 
-### What it does
+## What it does
 
 It measures the DC energy by intercepting the cable pathway from the PSU
 to the ATX mainboard connector.
@@ -39,17 +39,17 @@ The *11 Vsb* and *PWR_ON, PWR_OK* rails are ignored as they carry not load.
 The resistor is assumed to be a [Isabellenhütte PBV 0,005 Ohm](Isabellenhütte PBV 0,005 Ohm).
 
 <figure>
-  <img src="/img/fujitsu_esprimo_p956_ATX_pinout.webp">
+  <img src="/img/fujitsu_esprimo_p956_ATX_pinout.webp" alt="Fujitsu Esprimo P956 ATX pinout diagram">
   <figcaption>ATX original pinout</figcaption>
 </figure>
 
 <figure>
-  <img src="/img/atx_y_cable.webp">
+  <img src="/img/atx_y_cable.webp" alt="ATX Y-cable for connecting shunt resistor and mainboard">
   <figcaption>ATX Y-Cable to connect shunt resistor and mainboard</figcaption>
 </figure>
 
 <figure>
-  <img src="/img/shunt_resistor_wiring.webp">
+  <img src="/img/shunt_resistor_wiring.webp" alt="Shunt resistor wiring on terminal board">
   <figcaption>Shunt resistor wiring on Terminal Board</figcaption>
 </figure>
 

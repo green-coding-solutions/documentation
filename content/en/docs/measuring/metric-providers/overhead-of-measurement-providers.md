@@ -75,7 +75,7 @@ Configured reporters
 [INFO] 2024-02-16 12:00:18,431 - -----------------------------------------------------------------------------------------
 ```
 
-#### Summary:
+### Summary:
 
 - Used reporter for Machine energy was [MCP]({{< relref "/docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}})
 - Effective total machine energy overhead in a loaded system is **-0.17 %**
@@ -130,7 +130,7 @@ Configured reporters
 [INFO] 2024-02-16 13:02:54,985 - -----------------------------------------------------------------------------------------
 ```
 
-#### Summary:
+### Summary:
 
 - Used reporter for CPU energy was [MCP]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
 - Effective CPU energy overhead in a loaded system is **0.65 %**
@@ -181,7 +181,7 @@ Configured reporters
 [INFO] 2024-02-16 10:39:58,504 - Effective energy overhead (rel.) is: 0.48526554056358817 %
 ```
 
-#### Summary:
+### Summary:
 
 - Used reporter for Machine energy was [MCP]({{< relref "/docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}})
 - Effective total machine energy overhead in a loaded system is **0.4 %**
@@ -233,7 +233,7 @@ Configured reporters
 [INFO] 2024-02-16 13:18:28,068 - -----------------------------------------------------------------------------------------
 ```
 
-#### Summary:
+### Summary:
 
 - Used reporter for CPU energy was [MCP]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
 - The effective CPU energy overhead in a loaded system is **0.9 %**

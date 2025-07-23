@@ -22,7 +22,7 @@ We will create a temporary folder in `/tmp/my_test` and initialize *git* inside 
 
 Create a usage scenario as follows:
 
-**usage_scenario.yml**
+##### usage_scenario.yml
 
 ```yaml
 ---
@@ -51,7 +51,7 @@ As said in the comment the `DISPLAY` variable should be set to the output of `$ 
 
 Here is also the short boilerplate code of the `test.py` that we need for this example.
 
-**test.py**
+##### test.py
 
 ```python
 import sys

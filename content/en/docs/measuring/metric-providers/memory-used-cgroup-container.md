@@ -9,7 +9,7 @@ weight: 180
 
 ### What it does
 
-It reads the amount of memory, in bytes, used by the cgroup of a container. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+It reads the amount of memory, in bytes, used by the cgroup of a container. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
 

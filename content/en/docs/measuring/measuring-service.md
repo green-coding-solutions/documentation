@@ -19,7 +19,7 @@ You can supply the GitHub link to our provided [easy example application](https:
 
 This example highlights that in order to measure an application you really need to only have a repository with a [usage_scenario.yml →]({{< relref "usage-scenario" >}}) file.
 
-<img class="ui centered rounded bordered image" src="/img/add-new-project.webp">
+<img class="ui centered rounded bordered image" src="/img/add-new-project.webp" alt="Add new project interface showing project configuration options">
 
 ## Measuring your applications
 

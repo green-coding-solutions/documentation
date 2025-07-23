@@ -90,7 +90,7 @@ GMT will provide the *p-value* directly in the API output of the comparison.
 In the frontend it will be shown with a green / red indicator for the significance. Green meaning significant.
 Or it will tell you if a comparison could not be made in case there where too many missing values or the metric was not present in all runs.
 
-<img class="ui centered rounded bordered" src="/img/measuring/gmt_t_test_two_samples.webp">
+<img class="ui centered rounded bordered" src="/img/measuring/gmt_t_test_two_samples.webp" alt="Green Metrics Tool T-test comparison showing statistical significance indicators">
 
 ### Comparing repeated runs
 

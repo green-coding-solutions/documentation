@@ -12,7 +12,7 @@ They must be run periodically through an external trigger, for instance through 
 
 This page provides examples how we setup the *cron jobs*. Adjust the times and frequency to your needs.
 
-```
+```bash
 # m h  dom mon dow   command
 SHELL=/bin/bash
 

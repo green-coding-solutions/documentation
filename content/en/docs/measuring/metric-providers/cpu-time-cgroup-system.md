@@ -9,7 +9,7 @@ weight: 131
 
 ### What it does
 
-This metric provider reads time spent in the CPU based on the cgroups stats file for all your cgroups. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+This metric provider reads time spent in the CPU based on the cgroups stats file for all your cgroups. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
 

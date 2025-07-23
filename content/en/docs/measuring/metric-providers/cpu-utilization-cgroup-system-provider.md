@@ -8,7 +8,7 @@ weight: 141
 ---
 ### What it does
 
-This metric provider calculates an estimate of the % total CPU usage based on the cgroups stats file of your docker containers. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+This metric provider calculates an estimate of the % total CPU usage based on the cgroups stats file of your docker containers. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Technical Details
 
@@ -54,11 +54,11 @@ The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-p
 
 The provider reads from two files. To get the number of microseconds spent in the CPU by the container, during the interval, it reads from:
 
-```
+```text
 /sys/fs/cgroup/user.slice/user-<USER-ID>.slice/user@<USER-ID>.service/user.slice/docker-<CONTAINER-ID>.scope/cpu.stat
 ```
 
-To get the total time spent by the cpu during that time interval, in Jiffies, you read from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal** (see definitions [here](https://www.idnt.net/en-US/kb/941772)), add them together, divide by _SC_CLK_TCK_ (typically 100 Hz). The percentage of the cgroup time divided by this sum is the total percentage of CPU time spent by the container.
+To get the total time spent by the cpu during that time interval, in Jiffies, you read from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal** (see definitions in [CPU stats documentation](https://www.idnt.net/en-US/kb/941772)), add them together, divide by _SC_CLK_TCK_ (typically 100 Hz). The percentage of the cgroup time divided by this sum is the total percentage of CPU time spent by the container.
 
 Then it calculates the % cpu used via this formula: `container_reading * 10000 / main_cpu_reading`
 

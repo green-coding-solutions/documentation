@@ -7,11 +7,11 @@ images: []
 weight: 100
 ---
 
-# ⚠️Warning - LEGACY PROVIDER⚠️
+## ⚠️Warning - LEGACY PROVIDER⚠️
 
 This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
 
-### What it does
+## What it does
 
 This metric provider reads the the voltage from the DC channels of the ATX connector
 on the mainboard through shunt resistors and converts the voltage to an energy reading.
@@ -35,7 +35,7 @@ Furthermore the output should show as `mV`
 
 The script will detect the measurement resolution automatically though if you alter it.
 
-<img src="/img/picolog_hdr_adc_24_fujitsu_esprimo_P956.webp">
+<img src="/img/picolog_hdr_adc_24_fujitsu_esprimo_P956.webp" alt="PicoLog HDR ADC 24 connected to Fujitsu Esprimo P956 for DC power measurement">
 
 ### Example call
 

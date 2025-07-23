@@ -9,7 +9,7 @@ weight: 130
 
 ### What it does
 
-This metric provider reads time spent in the CPU based on the cgroups stats file of your docker containers. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+This metric provider reads time spent in the CPU based on the cgroups stats file of your docker containers. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
 
@@ -51,7 +51,7 @@ The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-p
 
 The provider reads from the `cpu.stat` file used by your container here:
 
-```
+```text
 /sys/fs/cgroup/user.slice/user-<USER-ID>.slice/user@<USER-ID>.service/user.slice/docker-<CONTAINER-ID>.scope/cpu.stat
 ```
 

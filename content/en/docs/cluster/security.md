@@ -18,7 +18,7 @@ We recommend having the default user active for the API to only have *SELECT* an
 
 That way if your are victim to an SQL injection or code injection the resulting injection cannot modifiy existing data.
 
-```
+```sql
 CREATE USER manager WITH PASSWORD 'YOUR_PASSWORD';
 
 REVOKE ALL PRIVILEGES ON DATABASE "green-coding" FROM manager;
@@ -94,7 +94,7 @@ Since a rogue user can always escape from the docker container and infiltrate th
 
 We recommend NOT to have SMTP credentials on the machines and also connect to the database with a very restrcted user.
 
-```
+```sql
 CREATE USER client WITH PASSWORD 'YOUR_PASSWORD';
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM client;
 

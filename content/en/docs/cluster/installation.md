@@ -136,7 +136,7 @@ To have the most stable result benchmarking machines or if you want to use Conta
 
 All of these settings can be tweaked best in the BIOS. Additionally for turning DVFS off we recommend booting the kernel with `intel_pstate` CPU frequency driver deactived and using the `acpi` one which allows for setting the `userspace` govenor.
 
-```
+```bash
 $ sudo nano /etc/default/grub
 
 # Change this line
