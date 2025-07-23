@@ -1,16 +1,16 @@
 ---
 title: "Network Carbon Intensity"
 description: "How to estimate the carbon emissions of network transfer"
-lead: "How to estimate the carbon emissions of network transfer"
 date: 2025-07-18T08:49:15+00:00
 weight: 530
 toc: true
 ---
 
-## What is Network Carbon Intensity?
-
 Network carbon intensity measures the amount of carbon dioxide equivalent (CO₂e) emissions generated per unit of data transferred across network infrastructure.
-Since carbon emissions from network transfers cannot be directly measured, they must be estimated. Network carbon intensity is calculated using two key factors: the *Network Energy Intensity* (kWh/GB) and the *[Grid Carbon Intensity]({{< relref "grid-carbon-intensity" >}})* (g CO₂e/kWh).
+Since carbon emissions from network transfers cannot be directly measured, they must be estimated. Network carbon intensity is calculated using two factors:
+
+- Network Energy Intensity (kWh/GB)
+- [Grid Carbon Intensity]({{< relref "grid-carbon-intensity" >}}) (g CO₂e/kWh).
 
 ## Methodology
 

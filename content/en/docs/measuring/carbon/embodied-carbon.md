@@ -1,13 +1,10 @@
 ---
 title: "Embodied Carbon"
 description: "How to account for carbon emissions caused by the manufacturing of IT devices"
-lead: "How to account for carbon emissions caused by the manufacturing of IT devices"
 date: 2025-07-18T08:49:15+00:00
 weight: 540
 toc: true
 ---
-
-## What is Embodied Carbon?
 
 Embodied carbon refers to the greenhouse gas emissions generated throughout the entire lifecycle of IT hardware — from raw material extraction and manufacturing through transportation and disposal — as opposed to operational carbon from running the device. For many IT devices like smartphones, laptops, etc., embodied carbon represents 50-80% of total lifecycle emissions.
 
