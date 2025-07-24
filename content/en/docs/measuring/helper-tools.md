@@ -12,17 +12,17 @@ shall be regenerated etc.
 
 This page provides an overview:
 
-
 ## 1. Abort a measurement
 
 If you want to abort a measurement but did start GMT as a disowned process or in *cron* mode, then you can use the
 `tools/kill_gmt.sh` script.
 
 It will effectively kill all know processes of GMT that are active when a measurement is executed like:
+
 - Metric Providers
 - stand-alone tools like `tcpdump` or `tinyproxy`
 - docker containers
-- *Python* interpreters 
+- *Python* interpreters
 - etc.
 
 => Please note that it might be needed to run the script two times in a row as processes might respawn.
@@ -65,6 +65,7 @@ FLUSHALL
 When you have data from a backup or you want to import measurements or general data from a CSV file we have you covered.
 
 Just use the:
+
 - `tools/import_backup.sh` - Clears database and imports SQL files from *./backup* folder
 - `tools/import_data.py` - Imports arbitrary SQL data without clearing the database
 - `tools/import_measurements.py` - Imports a log file from a metrics provider as metric data

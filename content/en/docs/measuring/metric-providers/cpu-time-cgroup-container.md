@@ -9,7 +9,7 @@ weight: 130
 
 ### What it does
 
-This metric provider reads time spent in the CPU based on the cgroups stats file of your docker containers. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+This metric provider reads time spent in the CPU based on the cgroups stats file of your docker containers. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
 
@@ -22,8 +22,8 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 ### Input Parameters
 
 - args
-    - `-s`: container-ids seperated by commas
-    - `-i`: interval in milliseconds
+  - `-s`: container-ids seperated by commas
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
 
@@ -38,6 +38,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING CONTAINER-ID`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`:The time spent, in microseconds, by this container in the CPU
 - `CONTAINER-ID`: The container ID that this reading is for
@@ -50,7 +51,7 @@ The provider assumes that you have [cgroups v2](https://www.man7.org/linux/man-p
 
 The provider reads from the `cpu.stat` file used by your container here:
 
-```
+```text
 /sys/fs/cgroup/user.slice/user-<USER-ID>.slice/user@<USER-ID>.service/user.slice/docker-<CONTAINER-ID>.scope/cpu.stat
 ```
 

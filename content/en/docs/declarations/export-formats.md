@@ -20,4 +20,3 @@ All data is exposed through API endpoints documented for local installs under [h
 or if you use the hosted service under [https://api.green-coding.io](https://api.green-coding.io).
 
 By issueing *GET* queries to the relevant endpoints all data can be exported as *JSON* format.
-

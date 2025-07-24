@@ -12,7 +12,6 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 
 We have tested the tool on Intel as well as on Apple Silicon chips. Results may vary.
 
-
 ## Downloading and installing required packages
 
 ```bash

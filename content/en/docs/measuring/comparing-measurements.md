@@ -37,7 +37,6 @@ To trigger a comparison in the frontend just tick the boxes of the runs you wish
 
 <img class="ui centered rounded bordered" src="/img/measuring/triggering_compare_mode.webp" alt="Triggering Compare mode">
 
-
 Example of a comparison display
 
 <img class="ui centered rounded bordered" src="/img/overview/comparison.webp" alt="Comparison">
@@ -72,12 +71,14 @@ will effectively compare them as being just repeated runs on the same machine.
 <img class="ui centered rounded bordered" src="/img/measuring/expert_compare_mode.webp" alt="Expert compare mode">
 
 Your runs must in any case have one common demoniator, that has at max two values. For instance:
+
 - Different repositories and branches but run on one machine
 - Many different machines and branches, but only two different repositories
 
 ## Statistical significance
 
 ### Comparing runs with differentiating features
+
 When running a comparison between different commits, different machines etc. the GMT will
 also compute a *T-test* for the two samples.
 
@@ -89,8 +90,7 @@ GMT will provide the *p-value* directly in the API output of the comparison.
 In the frontend it will be shown with a green / red indicator for the significance. Green meaning significant.
 Or it will tell you if a comparison could not be made in case there where too many missing values or the metric was not present in all runs.
 
-<img class="ui centered rounded bordered" src="/img/measuring/gmt_t_test_two_samples.webp">
-
+<img class="ui centered rounded bordered" src="/img/measuring/gmt_t_test_two_samples.webp" alt="Green Metrics Tool T-test comparison showing statistical significance indicators">
 
 ### Comparing repeated runs
 

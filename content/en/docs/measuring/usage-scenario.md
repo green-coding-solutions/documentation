@@ -18,8 +18,6 @@ See also the note on [unsupported features](#unsupported-docker-compose-features
 
 Inside the `usage_scenario.yml` you can use variables. See [variables](#variables) for details.
 
-
-
 ### Basic root level keys
 
 Example for the start of a `usage_scenario.yml`
@@ -31,14 +29,12 @@ author: Arne Tarara <arne@green-coding.io>
 description: This is just an example usage_scenario ...
 ```
 
-
-- `name` **[str]**: Name of the scenario 
-- `description` **[str]**: Detailed description of the scenario 
+- `name` **[str]**: Name of the scenario
+- `description` **[str]**: Detailed description of the scenario
 - `author` **[str]**: Author of the scenario
 - `architecture` **[str]** *(optional)*: If your *usage_scenario* runs only on a specific architecture you can instruct the GMT to check if the architecture of the machine matches. You can specify **Linux**, **Windows** and **Darwin**. Omit this key if your scenario has no architecture restriction.
-    + Note: Windows with WSL2 and Linux containers would be **Linux** as architecture
+  + Note: Windows with WSL2 and Linux containers would be **Linux** as architecture
 - `ignore-unsupported-compose` **[bool]** *(optional)*: Ignore unsupported [Docker Compose](https://docs.docker.com/compose/compose-file) features and still run usage_scenario
-
 
 Please note that when running the measurement you can supply an additional name,
 which can and should be different from the name in the `usage_scenario.yml`.
@@ -46,7 +42,6 @@ which can and should be different from the name in the `usage_scenario.yml`.
 The idea is to have a general name for the `usage_scenario.yml` and another one for the specific measurement run.
 
 When running the `runner.py` we would then set `--name` for instance to: *Hugo Test run on my Macbook*
-
 
 ### Services
 
@@ -194,7 +189,7 @@ flow:
 
 - `flow:` **[list]** (List of flows to interact with containers)
   + `name:` **[\.\s0-9a-zA-Z_\(\)-]+** An arbitrary name, that helps you distinguish later on where the load happend in the chart
-  + `container:` **[a-zA-Z0-9][a-zA-Z0-9_.-]+** The name of the container specified on `setup` which you want the run the flow
+  + `container:` **\[a-zA-Z0-9\]\[a-zA-Z0-9_.-\]+** The name of the container specified on `setup` which you want the run the flow
   + `commands:` **[list]**
     - `type:` **[console]** (Only console currently supported)
       + `console` will execute a shell command inside the container
@@ -296,7 +291,6 @@ Since we allow the import of [Docker Compose](https://docs.docker.com/compose/co
 
 GMT will error in this case. If you do not want that add the `ignore-unsupported-compose` key after you have tested your *usage_scenario.yml* file.
 
-
 ## Variables
 
 A variable must adhere to the format `__GMT_VAR_[\w]+__`. An example would be `__GMT_VAR_NUMBER__`.
@@ -304,6 +298,7 @@ A variable must adhere to the format `__GMT_VAR_[\w]+__`. An example would be `_
 The value of the variable is a string. It will be replaced as is without adding " or ' though.
 
 Example in a `usage_scenario.yml`:
+
 ```yml
 ---
 name: Test Stress
@@ -339,9 +334,11 @@ command: "stress-ng -c 1 -t __GMT_VAR_DURATION__ -q"
 The reason being that when your variable contains *YAML* control characters like a *:* you might get into parsing errors.
 
 A run where we want the variable to be *1* as example can be started like this:
+
 ```bash
-$ python3 runner.py --uri PATH_TO_SCENARIO --variables "__GMT_VAR_DURATION__=1"
+python3 runner.py --uri PATH_TO_SCENARIO --variables "__GMT_VAR_DURATION__=1"
 ```
+
 See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches" >}})
 
 The API accepts these variables as arguments also to the `/v1/software/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.

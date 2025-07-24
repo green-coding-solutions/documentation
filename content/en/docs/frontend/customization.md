@@ -11,7 +11,7 @@ toc: false
 
 The Dashboard and the graphs that are shown are customizable in the metrics they display.
 
-When installing the tool we provide a basic configuration that you can find in the 
+When installing the tool we provide a basic configuration that you can find in the
 generated `frontend/js/helpers/config.js` .
 
 For comparison, here is the template file that is checked into the repository: [config.js.example](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/frontend/js/helpers/config.js.example)
@@ -25,6 +25,7 @@ METRICS_URL = "__METRICS_URL__"
 
 The later part you can customize. If you for instance want to have the top chart not display all energy metrics, but
 rather only the RAPL energy metrics, change accordingly:
+
 ```js
 // old
 // title and filter function for the top left most chart in the Detailed Metrics / Compare view
@@ -44,4 +45,3 @@ const top_bar_chart_condition = (metric) => {
 ````
 
 Happy customizing :)
-

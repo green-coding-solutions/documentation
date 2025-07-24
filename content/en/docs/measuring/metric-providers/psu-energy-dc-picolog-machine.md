@@ -5,12 +5,11 @@ date: 2022-08-04T08:49:15+00:00
 weight: 213
 ---
 
-# ⚠️Warning - LEGACY PROVIDER⚠️
-
+{{< callout context="caution" icon="outline/alert-triangle" >}}
 This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
+{{< /callout >}}
 
-
-### What it does
+## What it does
 
 It measures the DC energy by intercepting the cable pathway from the PSU
 to the ATX mainboard connector.
@@ -23,10 +22,10 @@ to the ATX mainboard connector.
 
 - `psu_energy_dc_picolog_machine`
 
-
 ### Prerequisites
 
 The provider requires special hardware to work:
+
 - [PicoLog HRDL ADC-24](https://www.picotech.com/data-logger/adc-20-adc-24/precision-data-acquisition)
 - [Terminal board](https://www.picotech.com/accessories/terminal-boards/adc-20-24-terminal-board)
 - Custom ATX Y-cable
@@ -40,17 +39,17 @@ The *11 Vsb* and *PWR_ON, PWR_OK* rails are ignored as they carry not load.
 The resistor is assumed to be a [Isabellenhütte PBV 0,005 Ohm](Isabellenhütte PBV 0,005 Ohm).
 
 <figure>
-  <img src="/img/fujitsu_esprimo_p956_ATX_pinout.webp">
+  <img src="/img/fujitsu_esprimo_p956_ATX_pinout.webp" alt="Fujitsu Esprimo P956 ATX pinout diagram">
   <figcaption>ATX original pinout</figcaption>
 </figure>
 
 <figure>
-  <img src="/img/atx_y_cable.webp">
+  <img src="/img/atx_y_cable.webp" alt="ATX Y-cable for connecting shunt resistor and mainboard">
   <figcaption>ATX Y-Cable to connect shunt resistor and mainboard</figcaption>
 </figure>
 
 <figure>
-  <img src="/img/shunt_resistor_wiring.webp">
+  <img src="/img/shunt_resistor_wiring.webp" alt="Shunt resistor wiring on terminal board">
   <figcaption>Shunt resistor wiring on Terminal Board</figcaption>
 </figure>
 
@@ -67,7 +66,7 @@ The provider will configure the PicoLog HRDL ADC-24 into streaming mode with
 ### Input Parameters
 
 - args
-    - `-i`: interval in milliseconds
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is *1000 ms*, which however is only for testing
 purposes.
@@ -85,6 +84,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The measured energy in millijoules
 

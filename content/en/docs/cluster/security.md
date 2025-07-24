@@ -18,7 +18,7 @@ We recommend having the default user active for the API to only have *SELECT* an
 
 That way if your are victim to an SQL injection or code injection the resulting injection cannot modifiy existing data.
 
-```
+```sql
 CREATE USER manager WITH PASSWORD 'YOUR_PASSWORD';
 
 REVOKE ALL PRIVILEGES ON DATABASE "green-coding" FROM manager;
@@ -64,7 +64,7 @@ GRANT USAGE, SELECT ON SEQUENCE jobs_new_id_seq TO manager;
 GRANT SELECT, INSERT ON TABLE jobs TO manager;
 ```
 
-To complement the configuration you need also have a different `config.yml` file present to read the credentials from. 
+To complement the configuration you need also have a different `config.yml` file present to read the credentials from.
 
 You need to create a file called `manager-config.yml` in the GMT root directory, which will automatically be picked up by the cron jobs in `./cron/`
 
@@ -94,7 +94,7 @@ Since a rogue user can always escape from the docker container and infiltrate th
 
 We recommend NOT to have SMTP credentials on the machines and also connect to the database with a very restrcted user.
 
-```
+```sql
 CREATE USER client WITH PASSWORD 'YOUR_PASSWORD';
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM client;
 

@@ -78,7 +78,6 @@ As the matching is open ended you could also only use `'Core'` instead of naming
 these both extend the `LmsensorsProvider` which makes it very easy to add new specific providers. We need to separate
 fan and temperature because they both come in different units. Temp in °C or °F and fan speeds in RPM.
 
-
 ### Metric Name
 
 - `lmsensors_fan_component`
@@ -123,6 +122,7 @@ This metric provider prints to stdout a continuous stream of data every `interva
 `TIMESTAMP READING FEATURE-NAME`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The value taken from sensors.
 - `FEATURE-NAME`: Which feature the reading comes from

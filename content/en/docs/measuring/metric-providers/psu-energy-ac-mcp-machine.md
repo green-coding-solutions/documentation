@@ -15,11 +15,11 @@ This metric provider uses the [MCP39F511N chip](https://www.microchip.com/en-us/
 We use the board implementation here: [AMD00706](https://www.microchip.com/en-us/development-tool/ADM00706)
 
 **Spec highlights:**
+
 - 0,5% Accuracy on active power measurements in a 1:4000 dynamic range (~ 3.75 mW minimum resolution)
 - 8 MHz internal processing clock (theoretical maximum of 12.5 us resolution)
-    - Power is averaged over multiples of 20 ms (Selectable from N={1,2,3,4})
+  - Power is averaged over multiples of 20 ms (Selectable from N={1,2,3,4})
 - Internal accumulation of energy in register (currently not active in our setup. We use active power only atm.)
-
 
 Implementation of the source code is mostly copied from https://github.com/osmhpi/pinpoint/blob/master/src/data_sources/mcp_com.c
 Credits to Sven Köhler and the OSM group from the HPI
@@ -38,11 +38,9 @@ After that just plug it into your USB and please use Channel 1.
 
 - `psu_energy_ac_mcp_machine`
 
-
 ### Input Parameters
 
 - `-i`: interval in milliseconds. By default the measurement interval is 100 ms.
-
 
 ```bash
 ./metric-provider-binary -i 100
@@ -56,6 +54,7 @@ This metric provider prints to stdout a continuous stream of data every `interva
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The value taken from sensor in the unit supplied or mW if no unit is specified.
 

@@ -29,14 +29,13 @@ proxy program and then adds the corresponding values to the `network_intercepts`
 
 - `network_connections_proxy_container`
 
-
 ### How it works
 
 When starting the metric provider the `tinyproxy` program is started in the user space and mapped to the port 8889.
 All log are written the the GMT log folder for later processing as the aim is to do the absolute minimal while
 measuring. Once the `tinyproxy` has loaded all docker containers are started with the `httpProxy` and the `httpsProxy`
 command line argument. A detailed description how to use docker proxies can be found
-[here](https://docs.docker.com/network/proxy/). It is important to note that we don't set the proxy for the whole
+in the [Docker documentation](https://docs.docker.com/network/proxy/). It is important to note that we don't set the proxy for the whole
 docker daemon as this might interfere with other docker containers running on the same system but are not part
 of our benchmark.
 

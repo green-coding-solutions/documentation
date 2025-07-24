@@ -86,7 +86,7 @@ Now you can view the report as the first item in your metrics dashboard at [http
 If you have [installed a cronjob or run in cluster-client mode →]({{< relref "/docs/cluster/installation" >}}) you can insert a new job at [http://metrics.green-coding.internal:9142/request.html](http://metrics.green-coding.internal:9142/request.html)
 
 <p align="center">
-  <img src="/img/add-new-project.webp" width="80%" title="Cron mode job insertion for green metrics tool">
+  <img src="/img/add-new-project.webp" width="80%" title="Cron mode job insertion for green metrics tool" alt="Add new project interface showing project configuration options">
 </p>
 
 It will be automatically picked up and you will get sent an email with the link to the results.

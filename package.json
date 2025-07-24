@@ -27,6 +27,7 @@
     "lint:styles": "stylelint \"assets/scss/**/*.{css,sass,scss,sss,less}\"",
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
     "lint:markdown-fix": "markdownlint-cli2 --fix \"*.md\" \"content/**/*.md\"",
+    "lint:markdown-fix:staged": "shx echo $(git diff --diff-filter=d --cached --name-only | grep -E '\\.md$') | xargs markdownlint-cli2 --fix",
     "server": "exec-bin node_modules/.bin/hugo/hugo server",
     "test": "npm run -s lint",
     "env": "env",

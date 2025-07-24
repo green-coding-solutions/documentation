@@ -11,7 +11,7 @@ When the cluster is setup it is often not needed to have the machines powered wh
 
 What you can setup is a simple Wake-on-LAN script that will only wakeup the machines when there is job in the queue waiting.
 
-For examplary purposes we document a script here that works on a low power *Raspberry PI* that we have active in our 
+For examplary purposes we document a script here that works on a low power *Raspberry PI* that we have active in our
 local network, but any simple microcontroller that has HTTP capabilites will.
 
 ```bash
@@ -45,6 +45,7 @@ fi
 ```
 
 ### Turning machine off on empty queue
+
 To use this functionality you should have *Wake-on-LAN* activated.
 
 You can then set the `shutdown_on_job_no` to either "*poweroff*" or "*suspend*" and the machine will turn off when the job queue is empty.
@@ -60,6 +61,7 @@ In order for the shutdown to be triggered by the `client.py` you must allow the 
 Please choose the line that is appropriate for you depending on if you want to suspend or poweroff.
 
 Example:
+
 ```bash
 echo 'ALL ALL=(ALL) NOPASSWD:/usr/bin/systemctl suspend' | sudo tee /etc/sudoers.d/green-coding-shutdown # for systems that support suspend
 echo 'ALL ALL=(ALL) NOPASSWD:/usr/bin/systemctl poweroff' | sudo tee -a /etc/sudoers.d/green-coding-shutdown # for systems that only can shutdown
@@ -71,6 +73,7 @@ sudo chmod 500 /etc/sudoers.d/green-coding-shutdown
 In rare circumstances Wake-On-Lan is not active on the machine.
 
 Check the following:
+
 - Check the BIOS if Wake-On-Lan is enabled.
   + If no option is present it might not be configurable through the BIOS
 - Check `$ sudo ethtool <YOUR_INTERFACE>`
@@ -106,6 +109,7 @@ Check `$ cat /sys/power/state`. It should list `mem` as part of the output.
 This means the OS supports bringing the system to *Suspend to RAM*.
 
 Now check `$ cat /sys/power/mem_sleep`. A sample output looks like this:
+
 ```log
 s2idle [deep]
 ```

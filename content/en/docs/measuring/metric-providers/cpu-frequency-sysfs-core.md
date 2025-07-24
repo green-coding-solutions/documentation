@@ -23,7 +23,7 @@ It does this throug a simple bash script just *cat-ting* the file endpoint.
 ### Input Parameters
 
 - args
-    - `-i`: interval in milliseconds
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
 
@@ -38,6 +38,7 @@ This metric provider prints to *Stdout* a continuous stream of data. The format 
 `TIMESTAMP READING CORE`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The current frequency of the core in *Hz*
 - `CORE`: The core ID assigned by the Linux *sysfs*
@@ -51,12 +52,12 @@ Linux offers the current frequency of the cores as a read-out of a processor int
 
 ### Caveats
 
-If you have very many cores you will generate a lot of data which is tricky to interpret as Linux constantly swaps 
+If you have very many cores you will generate a lot of data which is tricky to interpret as Linux constantly swaps
 cores and measurements are not directly comparable core-to-core to each other.
 
 For most user the detail output of this provider will rather be noise than valuable data.
 
-We recommend to either only look at the aggregate data to understand how the cores behave individually or only 
+We recommend to either only look at the aggregate data to understand how the cores behave individually or only
 turn the provider on if you want to debug the behaviour of your measurement.
 
 ### Troubleshooting

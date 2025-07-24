@@ -19,11 +19,10 @@ This metric provider calculates an estimate of the % total CPU usage based of th
 
 - `cpu_utilization_procfs_system`
 
-
 ### Input Parameters
 
 - args
-    - `-i`: interval in milliseconds
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
 
@@ -38,6 +37,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The estimated % CPU used
 
@@ -49,7 +49,7 @@ The provider reads all the entries of the first line of the [`/proc/stat` file](
 uses the argument the same way `htop` does it. This means that CPU Utilization is
 calcuated as:
 
-**user_time+nice_time+system_time+irq_time+softirq_time+steal_time / wait_time,iowait_time+user_time+nice_time+system_time+irq_time+softirq_time+steal_time**
+`user_time+nice_time+system_time+irq_time+softirq_time+steal_time / wait_time,iowait_time+user_time+nice_time+system_time+irq_time+softirq_time+steal_time`
 
 **io_wait** and **wait** are counted both as idle.
 

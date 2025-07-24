@@ -23,7 +23,6 @@ The protocol documentation can be found under:
 We opted for using the streaming solution which has some disadvantages because we couldn't get the logging to internal
 memory to work reliable.
 
-
 ### Install
 
 A detailed description can be found under [https://invent.kde.org](https://invent.kde.org/vkrause/powerspy2-tools)
@@ -54,7 +53,6 @@ if you are on a shared machine!
 
 - `psu_energy_ac_powerspy2_machine`
 
-
 ### Input Parameters
 
 To make the tool as useful as possible it takes multiple filter parameters:
@@ -64,7 +62,6 @@ To make the tool as useful as possible it takes multiple filter parameters:
   writeable by the calling process.
 - `--interval`: Measurement interval in number of ms. Defaults to 1 second.
 - `--unit`: Specify the unit, which should be one of: mW, W, mJ, J. Defaults to mW
-
 
 ```bash
 > python3 metric-provider.py --unit mj --interval 250
@@ -78,6 +75,7 @@ This metric provider prints to stdout a continuous stream of data every `interva
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The value taken from sensor in the unit supplied or mW if no unit is specified.
 

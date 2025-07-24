@@ -11,11 +11,13 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
 Currently the following distributions have been tested and are fully supported:
+
 - Ubuntu 24.04
 - Ubuntu 22.04
 - Fedora 38
 
 The following distributions have been tested, but require manual work:
+
 - Ubuntu 18.04 (works, but Python3 has to be updated to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html) and *libsensors* has to be updated to *libsensors 3.6.0* to support [SENSORS_SUBFEATURE_POWER_MIN](https://github.com/lm-sensors/lm-sensors/commit/dcf23676cc264927ad58ae7960f518689372741a))
 - Ubuntu 20.04 (works, but Python3 has to be updated to 3.10, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html))
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "/docs/cluster/installation" >}}) has different names for timers)
@@ -117,7 +119,6 @@ However you need to add your current user to the `docker` group. We need this so
 Please follow this explanation how to do it: [Official docker docs on docker group add](https://docs.docker.com/engine/install/linux-postinstall/)
 
 => If you want to use the rootless mode anyway you do not have to to that. Just read the next paragraph.
-
 
 ### Rootless mode (optional)
 
@@ -307,11 +308,9 @@ See [NVIDIA NVML metric provider]({{< relref "/docs/measuring/metric-providers/g
 
 On *Ubuntu* and *Fedora* you can just append `--nvidia-gpu` to the install script to try an auto-install.
 
-
 ### DC Metrics Provider
 
 Some of our PSU metrics providers may need specific hardware attached to your machine in order to run. These include the [Powerspy]({{< relref "docs/measuring/metric-providers/psu-energy-ac-powerspy2-machine" >}}), [MCP]({{< relref "docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}}), and [Picolog]({{< relref "docs/measuring/metric-providers/psu-energy-dc-picolog-machine" >}}) metric providers. Please look for details in each provider's corresponding documentation
-
 
 ### RAPL
 

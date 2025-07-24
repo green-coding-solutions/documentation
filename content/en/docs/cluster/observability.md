@@ -29,8 +29,9 @@ To provide insights and execute net-gain analysis we provide an extension to the
 In essence it is an aggregate dashboard that gathers all energy and carbon data from our tools that submit their data to the GMT API.
 
 In the *CarbonDB Dashboard* you can find:
+
 - CI/CD energy and carbon data from Eco-CI
 - Benchmarking energy and carbon data from Green Metrics Tool runs
 - Developer machine energy and carbon data from PowerHOG
-- Custom energy and carbon data from [CarbonDB Agents](https://github.com/green-coding-solutions/carbondb-agent) configured 
-    - A typical setup for instance is to install a [CarbonDB Agent](https://github.com/green-coding-solutions/carbondb-agent) on the database server as well as the Frontend / Dashboard server
+- Custom energy and carbon data from [CarbonDB Agents](https://github.com/green-coding-solutions/carbondb-agent) configured
+  - A typical setup for instance is to install a [CarbonDB Agent](https://github.com/green-coding-solutions/carbondb-agent) on the database server as well as the Frontend / Dashboard server

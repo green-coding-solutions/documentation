@@ -6,6 +6,7 @@ weight: 1005
 ---
 
 In the FOSS version of GMT only two base users are configured and every action can be executed with them:
+
 - USER 1 - The default user
 - USER 0 - The GMT system user running control workloads and sending e-mails
 
@@ -29,11 +30,12 @@ Here is an example cURL request:
          -H "X-Authentication: ${API_TOKEN}"
 ```
 
-**Important:** If no *X-Authentication* header is supplied the API will still authenticate *USER 1* by default. 
+**Important:** If no *X-Authentication* header is supplied the API will still authenticate *USER 1* by default.
 
 ## Features of User Management
 
 For complex usage cases GMT comes with a user management system that allows:
+
 - Restricting certain routes to view content (GET)
 - Restricting certain routes for submission of measurements, CI runs, Hog Data etc. (POST)
 - Allowing longer / shorter data retention times for certain users

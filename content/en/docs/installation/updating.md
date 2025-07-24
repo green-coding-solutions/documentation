@@ -77,7 +77,7 @@ It may help to correctly load some configurations and/or daemons.
 
 ---
 
-# Maintainer section
+## Maintainer section
 
 ## Submodules
 
@@ -94,7 +94,6 @@ git push
 ## Update PostgreSQL
 
 An update is only necessary for major versions, for example from PostgreSQL 15.3 to 16.0, but not from 15.2 to 15.3
-
 
 Although running PostgreSQL in a container provides many benfits updating to a major version is **not** one of them.
 Sadly in order to update the DB the only proper way is exporting and importing.

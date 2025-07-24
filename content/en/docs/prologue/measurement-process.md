@@ -18,7 +18,7 @@ the Green Metrics Tool attaches the [Metric Providers →]({{< relref "/docs/mea
 The [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}}) are modular plugins
 that query a certain metric source, such as the CPU energy, DRAM energy, machine power, network traffic etc.
 
-<img src="/img/green-metrics-tool-orchestration.webp">
+<img src="/img/green-metrics-tool-orchestration.webp" alt="Green Metrics Tool orchestration workflow diagram">
 
 ## General Measurement Workflow
 

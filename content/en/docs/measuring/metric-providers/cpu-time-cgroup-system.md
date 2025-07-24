@@ -9,7 +9,7 @@ weight: 131
 
 ### What it does
 
-This metric provider reads time spent in the CPU based on the cgroups stats file for all your cgroups. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+This metric provider reads time spent in the CPU based on the cgroups stats file for all your cgroups. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
 
@@ -22,7 +22,7 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 ### Input Parameters
 
 - args
-    - `-i`: interval in milliseconds
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
 
@@ -37,6 +37,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`:The time spent in the CPU, in microseconds, by all cgroup containers
 

@@ -22,19 +22,19 @@ It will use the configured *metric providers* from your `config.yml` and then ca
 The script produces a lot of output, but what you want to look out for is:
 
 - System Baseline measurement successful
-    - **Mean Power**: This is your baseline power. This means the power of the system with only one energy metrics provider attached
+  - **Mean Power**: This is your baseline power. This means the power of the system with only one energy metrics provider attached
 - System Idle measurement successful (second time)
-    - **Mean Power**: This is your idle power. This means the power of the system with all configured metric providers attached
-    - **Idle Energy overhead (rel.)**: This is the realtive overhead to the baseline energy. This value helps quantifying the reporters in low power systems and is rather a general debug info
-    - **Idle Power overhead**: This is the power in Watts that your providers draw additionally.
+  - **Mean Power**: This is your idle power. This means the power of the system with all configured metric providers attached
+  - **Idle Energy overhead (rel.)**: This is the realtive overhead to the baseline energy. This value helps quantifying the reporters in low power systems and is rather a general debug info
+  - **Idle Power overhead**: This is the power in Watts that your providers draw additionally.
 - Provider effective energy overhead measurement successful
-    - **Peak system power**: This is what your system is drawing when fully loaded
-    - **Effective energy overhead (rel.)**: This is the most important value. It tells you how much relative amount of power the metric providers use when the system is loaded. The share is calculated on the difference between *max power* and *baseline power*. So the effective dynamic range of the system.
-
+  - **Peak system power**: This is what your system is drawing when fully loaded
+  - **Effective energy overhead (rel.)**: This is the most important value. It tells you how much relative amount of power the metric providers use when the system is loaded. The share is calculated on the difference between *max power* and *baseline power*. So the effective dynamic range of the system.
 
 ## Results for Esprimo P956 - Measurement #1 Machine Power
 
 Configured reporters
+
 - PsuEnergyAcMCPMachineProvider: 99 ms sampling_rate
 - NetworkIoCgroupContainerProvider: 99 ms sampling_rate
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
@@ -75,7 +75,8 @@ Configured reporters
 [INFO] 2024-02-16 12:00:18,431 - -----------------------------------------------------------------------------------------
 ```
 
-#### Summary:
+### Summary:
+
 - Used reporter for Machine energy was [MCP]({{< relref "/docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}})
 - Effective total machine energy overhead in a loaded system is **-0.17 %**
 - Idle total machine energy overhead in an idle system is **-0.63 %**
@@ -86,10 +87,10 @@ The nature of a switching power supply is that the machine power, when polled in
 
 Read on for the CPU only values, which give some more insights, but are less general.
 
-
 ## Results for Esprimo P956 - Measurement #2 CPU Energy
 
 Configured reporters
+
 - NetworkIoCgroupContainerProvider: 99 ms sampling_rate
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
@@ -129,16 +130,18 @@ Configured reporters
 [INFO] 2024-02-16 13:02:54,985 - -----------------------------------------------------------------------------------------
 ```
 
-#### Summary:
+### Summary:
+
 - Used reporter for CPU energy was [MCP]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
 - Effective CPU energy overhead in a loaded system is **0.65 %**
 - Idle CPU energy overhead in an idle system is **126 %**
-    - As stated before, use this value only for debugging in low power systems
+  - As stated before, use this value only for debugging in low power systems
 - CPU power overhead is **0.26 W**
 
 ## Fujitsu TX1330 M2 - Measurement #1 Machine Power
 
 Configured reporters
+
 - PsuEnergyAcMCPMachineProvider: 99 ms sampling_rate
 - NetworkIoCgroupContainerProvider: 99 ms sampling_rate
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
@@ -178,7 +181,8 @@ Configured reporters
 [INFO] 2024-02-16 10:39:58,504 - Effective energy overhead (rel.) is: 0.48526554056358817 %
 ```
 
-#### Summary:
+### Summary:
+
 - Used reporter for Machine energy was [MCP]({{< relref "/docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}})
 - Effective total machine energy overhead in a loaded system is **0.4 %**
 - Idle total machine energy overhead in an idle system is **0.9 %**
@@ -189,6 +193,7 @@ The nature of a switching power supply is that the machine power, when polled in
 ## Fujitsu TX1330 M2 - Measurement #2 CPU Power
 
 Configured reporters
+
 - NetworkIoCgroupContainerProvider: 99 ms sampling_rate
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
@@ -228,9 +233,10 @@ Configured reporters
 [INFO] 2024-02-16 13:18:28,068 - -----------------------------------------------------------------------------------------
 ```
 
-#### Summary:
+### Summary:
+
 - Used reporter for CPU energy was [MCP]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
 - The effective CPU energy overhead in a loaded system is **0.9 %**
 - The idle CPU energy overhead in an idle system is **153 %**
-    - As stated before, use this value only for debugging in low power systems
+  - As stated before, use this value only for debugging in low power systems
 - CPU Power overhead is **0.25 W**

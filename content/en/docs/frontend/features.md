@@ -25,4 +25,3 @@ Example:
 
 - https://metrics.green-coding.io/stats.html?id=1ec10430-a789-44c9-8f7e-c394fc708b25#RUNTIME__Stress
   + This would open the *Runtime* phase tab with the *Stress* sub-phase
-

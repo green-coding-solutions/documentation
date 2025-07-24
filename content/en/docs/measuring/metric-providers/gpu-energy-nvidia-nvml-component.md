@@ -38,7 +38,8 @@ Please check on our [Measurement Cluster]({{< relref "/docs/measuring/measuremen
 If you cannot generate any output you should first check if your GPU is supported by *NVIDIA CUDA* on their [list for *CUDA* support](https://developer.nvidia.com/cuda-gpus).
 
 Then you should check if the kernel module was corretly loaded with `dmesg`.
-Sometimes a message like this appears: 
+Sometimes a message like this appears:
+
 ```log
 The NVIDIA GPU 0000:01:00.0 (PCI ID: 10de:1081)
 NVRM: installed in this system is not supported by open
@@ -46,14 +47,14 @@ NVRM: nvidia.ko because it does not include the required GPU
 NVRM: System Processor (GSP).
 ```
 
-In this case you should [switch to the legacy kernel module](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#switching-between-driver-module-flavors) 
+In this case you should [switch to the legacy kernel module](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#switching-between-driver-module-flavors)
 
 Check in `sudo dmesg` if the kernel module could correctly be lodaded and then verify through `cat /proc/driver/nvidia/version`. See also details on the [NVIDIA support page](https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/kernel_open.html)
 
 ### Input Parameters
 
 - args
-    - `-i`: interval in milliseconds
+  - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
 
@@ -68,6 +69,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP READING`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `READING`: The energy used by the GPU in milliWatts (Ex: 12230 for 12.23 Watts)
 - `CARD NAME`: The name of the graphics card as reported by the driver
@@ -75,6 +77,7 @@ Where:
 Any errors are printed to Stderr.
 
 Example:
+
 ```console
 1748166115636640 17757 "NVIDIA GeForce GTX 1080-0"
 ```

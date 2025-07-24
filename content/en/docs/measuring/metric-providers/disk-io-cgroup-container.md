@@ -7,7 +7,7 @@ weight: 205
 
 ### What it does
 
-It reads the total amount of read and written bytes from disk devices by the cgroup of the container. More information about cgroups can be found [here](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
+It reads the total amount of read and written bytes from disk devices by the cgroup of the container. More information about cgroups can be found in the [cgroups man page](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
 
 ### Classname
 

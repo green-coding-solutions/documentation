@@ -44,7 +44,8 @@ If the program exits because of an error you can use the return code to see why:
 ## Output
 
 Important values that are extracted:
-```
+
+```text
 [INFO] -  Cool down time is 4 seconds
 [DEBUG] - Power mean is {'Package_0': 3224.3333333333335}
 [DEBUG] - Temperature means are {'acpitz-acpi-0_temp1': 5433.333333333333, 'coretemp-isa-0000_Package-id-0': 5400.0}
@@ -52,7 +53,7 @@ Important values that are extracted:
 
 Please remember that we multiply the values with 100 to avoid integers in the database
 
-<img class="ui centered rounded bordered image" src="/img/calibration.webp">
+<img class="ui centered rounded bordered image" src="/img/calibration.webp" alt="Calibration process showing power measurement values">
 
 ## Future work
 

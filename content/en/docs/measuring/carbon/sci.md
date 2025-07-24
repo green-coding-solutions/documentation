@@ -15,6 +15,7 @@ energy / carbon per usage_scenario, but also the concept of work done.
 ## Setup
 
 The parts to derive the metric have to be defined in two places:
+
 - The `usage_scenario.yml` (which sets the dimension *R_d*)
 - The `config.yml`, which sets the machine specific parameters like *TE*, *RS* etc.
 
@@ -56,6 +57,7 @@ The values for the respective variables have to be either defined to best knowle
 from official databases (like [Embodied Carbon →]({{< relref "embodied-carbon" >}}) and [Grid Carbon Intensity →]({{< relref "grid-carbon-intensity" >}})). See the respective documentation page for possible sources.
 
 Example:
+
 ```yml
 sci:
     EL: 4 # means 4 years of usage
@@ -67,12 +69,11 @@ sci:
 ## Display
 
 The metric will atm only be calculated for the **RUNTIME** phase and be shown in the Dashboard.
-<img src="/img/sci_dashboard.webp">
-
+<img src="/img/sci_dashboard.webp" alt="SCI (Software Carbon Intensity) dashboard showing carbon metrics">
 
 If an SCI was configured also the parameters will be shown in the *Measurements* Tab.
 
-<img src="/img/sci_measurement_tab.webp">
+<img src="/img/sci_measurement_tab.webp" alt="SCI measurement tab showing detailed carbon intensity parameters">
 
 ## Formula
 
@@ -80,11 +81,11 @@ The [SCI formula](https://sci-guide.greensoftware.foundation/) is specified by t
 
 The components of the SCI are attributed by the GMT as follows:
 
-- *E*: The energy of the total machine + the energy of the network. 
-    - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "../metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "../metric-providers/psu-energy-ac-mcp-machine" >}}), etc. 
-        - If none is activated machine energy will be excluded from the SCI.
-    - A *Network IO* provider must be activated to populate this value with the network energy. 
-        - If none is activated network energy will be excluded from the SCI.
+- *E*: The energy of the total machine + the energy of the network.
+  - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "../metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "../metric-providers/psu-energy-ac-mcp-machine" >}}), etc.
+    - If none is activated machine energy will be excluded from the SCI.
+  - A *Network IO* provider must be activated to populate this value with the network energy.
+    - If none is activated network energy will be excluded from the SCI.
 - *I:* Configured in the `config.yml`. Set the intensity of your used grid location
 - *M:* Configured in the `config.yml`. Set the embodied carbon of your used machine
 
@@ -103,4 +104,3 @@ At the moment the SCI is only measured in the *RUNTIME* phase and no sub-phase m
 Future work will include making the SCI an actual *Metric Provider* and thus allowing to capture it in every phase, optionally with having different dimensions per phase even.
 
 The work on this task is tracked in [this GitHub Issue](https://github.com/green-coding-solutions/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)
-

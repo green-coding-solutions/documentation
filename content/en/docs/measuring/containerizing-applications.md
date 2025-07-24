@@ -28,7 +28,7 @@ all been orchestrated and does not support one-off container starts with paramet
 
 Our architecture looks like the following:
 
-<img src="/img/server-architecture-banana.webp">
+<img src="/img/server-architecture-banana.webp" alt="Server architecture diagram showing webserver, database, and client components">
 
 We will now containerize the webserver, database, and client inside separate containers.
 
@@ -260,4 +260,5 @@ An example how to run a measurement locally can be found here: [Measuring locall
 To see all final files in an example of what we introduced here go to the [Example app](https://github.com/green-coding-solutions/simple-example-application)
 
 ### Help / Debugging
+
 If you run into any errors see the [Debugging →]({{< relref "debugging" >}}) page.

@@ -8,7 +8,7 @@ toc: true
 
 ### CPU
 
-At least an SSE2-compatible processor is required; 
+At least an SSE2-compatible processor is required;
 For macOS a 64bit-compatible Intel processor (Core2Duo or newer) or an M1 ARM or newer is required.
 
 ### Memory
@@ -31,7 +31,6 @@ This disk space is however only determined by the size of the measured software 
 - Windows: Windows 10 or newer
 - macOS: 10.15 or newer
 
-
 ### Additional software
 
 The Green Metrics Tool is utilizing *Python3*, *git* and *docker* as it's core components.
@@ -42,7 +41,6 @@ You need these tools installed and a build chain to compile C programs.
 
 Please look in the respective installation details for the OS, where all these programs will be listed and how to install them.
 
-- [Installation Linux]({{< relref "installation-linux" >}}) 
-- [Installation macOS]({{< relref "installation-macos" >}}) 
-- [Installation Windows]({{< relref "installation-windows" >}}) 
-
+- [Installation Linux]({{< relref "installation-linux" >}})
+- [Installation macOS]({{< relref "installation-macos" >}})
+- [Installation Windows]({{< relref "installation-windows" >}})
