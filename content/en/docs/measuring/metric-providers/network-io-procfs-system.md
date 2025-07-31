@@ -38,6 +38,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 `TIMESTAMP RECEIVED_BYTES TRANSMITTED_BYTES INTERFACE`
 
 Where:
+
 - `TIMESTAMP`: Unix timestamp, in microseconds
 - `RECEIVED_BYTES`: Total bytes received by the interface since system boot
 - `TRANSMITTED_BYTES`: Total bytes transmitted by the interface since system boot
