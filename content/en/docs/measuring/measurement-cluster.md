@@ -18,7 +18,6 @@ We have the following machines available for running measurements in our cluster
   + Vendor: Fujitsu ESPRIMO P956
   + OS: Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
   + Type: Single-Tenant Server
-  + Special: **Blue Angel compatible**
   + CPU: Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz
   + Cores: 4
   + Threads: 4
@@ -28,6 +27,7 @@ We have the following machines available for running measurements in our cluster
   + C-States: All
   + Memory: 16 GB
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+  + Special: **Blue Angel compatible**
 
 ---
 
@@ -46,6 +46,7 @@ We have the following machines available for running measurements in our cluster
   + Memory: 8 GB
   + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=9784422b-f4c6-42f3-addd-9e4c0833da74)
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+  + Special: **Blue Angel compatible**
 
 ---
 
@@ -81,6 +82,7 @@ We have the following machines available for running measurements in our cluster
   + C-States: C0 only
   + Memory: 16 GB
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) / [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+  + Special: **Blue Angel compatible**
 
 ---
 
@@ -98,6 +100,7 @@ We have the following machines available for running measurements in our cluster
     * Installed *CUDA* version: 12.2
     * *NVIDIA* kernel driver version 535.230.02
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+  + Special: **Blue Angel compatible**
 
 ### Old Machines
 
@@ -122,7 +125,6 @@ We have the following machines available for running measurements in our cluster
   + Use Case: Heavy parallelized workloads / HPC
   + Type: 48-Thread Multi-Tenant Server
   + OS: Ubuntu 22.04 (default)
-  + Special: **SoftAWERE compatible**
   + CPU: Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz (2x)
   + Cores: 24
   + Threads: 48
@@ -131,6 +133,7 @@ We have the following machines available for running measurements in our cluster
   + Memory: 32 GB
   + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=72596fdf-b393-4cef-bb98-45679ae928f5)
   + Metrics Provider for Machine Power: [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+  + Special: **SoftAWERE compatible**
 
 ## Setting up your own measurement cluster
 
