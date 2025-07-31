@@ -27,7 +27,7 @@ We have the following machines available for running measurements in our cluster
   + C-States: All
   + Memory: 16 GB
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
-  + Special: **Blue Angel compatible**
+  + Special: **Blue Angel compatible** for Server applications
 
 ---
 
@@ -46,7 +46,7 @@ We have the following machines available for running measurements in our cluster
   + Memory: 8 GB
   + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=9784422b-f4c6-42f3-addd-9e4c0833da74)
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
-  + Special: **Blue Angel compatible**
+  + Special: **Blue Angel compatible** for Client-Server and Server applications
 
 ---
 
@@ -71,7 +71,7 @@ We have the following machines available for running measurements in our cluster
 - **GUI/Desktop Applications (DVFS ON, TB ON, HT OFF) - TX1330 M3**
   + Use Case: For profiling of a GUI / Desktop software that uses X11 or Wayland window management systems
   + Vendor: Fujitsu TX1330 M3
-  + OS: Ubuntu 24.04 (default)
+  + OS: Ubuntu 24.04 (default) with Wayland Window manager
   + Type: Single-Tenant Server
   + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
   + Cores: 4
@@ -82,7 +82,7 @@ We have the following machines available for running measurements in our cluster
   + C-States: C0 only
   + Memory: 16 GB
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) / [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
-  + Special: **Blue Angel compatible**
+  + Special: **Blue Angel compatible** for Client-Server, Server and Desktop applications
 
 ---
 
@@ -100,7 +100,7 @@ We have the following machines available for running measurements in our cluster
     * Installed *CUDA* version: 12.2
     * *NVIDIA* kernel driver version 535.230.02
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
-  + Special: **Blue Angel compatible**
+  + Special: **Blue Angel compatible** for Server applications
 
 ### Old Machines
 
