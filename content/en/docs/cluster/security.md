@@ -135,6 +135,10 @@ GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
 
 GRANT INSERT on changelog to client;
 GRANT SELECT, USAGE on changelog_id_seq to client;
+
+GRANT INSERT on warnings to client;
+GRANT SELECT, USAGE on warnings_id_seq to client;
+
 ```
 
 ### Visibility / Deactivating the Default User
