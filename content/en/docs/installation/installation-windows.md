@@ -108,7 +108,7 @@ However, for testing your usage scenarios you can use at least the following met
   - Documentation: [Measuring/Metric Providers/CPU % - procfs - system]({{< relref "/docs/measuring/metric-providers/cpu-utilization-procfs-system" >}})
 - Container CPU utilization via cgroupv2
   - Config: `cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider`
-  - Documentation: [Measuring/Metric Providers/CPU % - cgroup - container]({{< relref "/docs/measuring/metric-providers/cpu-utilization-cgroup-container-provider" >}})
+  - Documentation: [Measuring/Metric Providers/CPU % - cgroup - container]({{< relref "/docs/measuring/metric-providers/cpu-utilization-cgroup-container" >}})
 - Container memory usage via cgroupv2
   - Config: `memory.used.cgroup.container.provider.MemoryUsedCgroupContainerProvider`
   - Documentation: [Measuring/Metric Providers/Memory Used - cgroup - container]({{< relref "/docs/measuring/metric-providers/memory-used-cgroup-container" >}})

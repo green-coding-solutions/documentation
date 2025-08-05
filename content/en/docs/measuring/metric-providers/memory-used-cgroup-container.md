@@ -22,7 +22,7 @@ It reads the amount of memory, in bytes, used by the cgroup of a container. More
 ### Input Parameters
 
 - args
-  - `-s`: container-ids seperated by commas
+  - `-s`: container-ids separated by commas
   - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.

@@ -20,7 +20,7 @@ It reads the total amount of sent and received bytes from the network interface 
 ### Input Parameters
 
 - args
-  - `-s`: container-ids seperated by commas
+  - `-s`: container-ids separated by commas
   - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
