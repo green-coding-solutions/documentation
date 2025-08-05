@@ -14,6 +14,10 @@ Apart from the `config.yml` some additional configuration is possible when manua
   + If given a local directory starting with `/`, this will be used instead.
 - `--branch` When providing a git repository, optionally specify a branch
 - `--filename` An optional alternative filename if you do not want to use "usage_scenario.yml"
+  + Multiple filenames can be provided, e.g. `--filename A.yml --filename B.yml` (both scenarios are executed sequencially)
+    * Duplicated filenames are allowed (if you want to repeat the same file(s) multiple times, consider using `--iterations`)
+  + Relative paths are supported, e.g. "../usage_scenario.yml"
+  + Wildcard characters '\*' and '?' are supported, e.g. "*.yml" (all yml files in the current directory are executed sequencially)
 - `--variables` A list of string key-value pairs with variables to be replaced in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
   + e.g.: `--variables '__GMT_VAR_MY_VALUE_=cats are cool'`
 - `--commit-hash-folder` Use a different folder than the repository root to determine the commit hash for the run
@@ -49,6 +53,9 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--dev-no-optimizations` Disables the creation of potential optimization recommendations based on the measurement run.
 - `--print-phase-stats PHASE_NAME` Prints the stats of the given phase to the CLI. Typical argument would be "\[RUNTIME\]" to see all runtime phases combined
 - `--print-logs` Prints the container and process logs to stdout
+- `--iterations` Specify how many times each scenario should be executed (Default: 1)
+  + With multiple files (see `--filename`), all files are processed sequentially, then the entire sequence is repeated N times
+    * Example: with files A.yml, B.yml and `--iterations 2`, the execution order is A, B, A, B.
 
 These options are not available when doing cron runs.
 
