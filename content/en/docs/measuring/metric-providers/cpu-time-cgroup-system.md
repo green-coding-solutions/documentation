@@ -7,6 +7,10 @@ images: []
 weight: 131
 ---
 
+{{< callout context="caution" icon="outline/alert-triangle" >}}
+This metric provider is only for debug purposes and prone to change!
+{{< /callout >}}
+
 ### What it does
 
 This metric provider reads time spent in the CPU based on the cgroups stats file for all your cgroups. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
@@ -20,6 +24,10 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 - `cpu_time_cgroup_system`
 
 ### Input Parameters
+
+{{< callout context="note" icon="outline/info-circle" >}}
+Unlike the other cgroup system metric providers, this metric provider does not currently accept the ‘-s’ argument for cgroup filtering. Instead, it can only read system-wide stats.
+{{< /callout >}}
 
 - args
   - `-i`: interval in milliseconds
