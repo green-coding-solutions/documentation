@@ -14,10 +14,10 @@ Apart from the `config.yml` some additional configuration is possible when manua
   + If given a local directory starting with `/`, this will be used instead.
 - `--branch` When providing a git repository, optionally specify a branch
 - `--filename` An optional alternative filename if you do not want to use "usage_scenario.yml"
-  + Multiple filenames can be provided, e.g. `--filename A.yml --filename B.yml` (both scenarios are executed sequencially)
+  + Multiple filenames can be provided, e.g. `--filename A.yml --filename B.yml` (both scenarios are executed sequentially)
     * Duplicated filenames are allowed (if you want to repeat the same file(s) multiple times, consider using `--iterations`)
   + Relative paths are supported, e.g. "../usage_scenario.yml"
-  + Wildcard characters '\*' and '?' are supported, e.g. "*.yml" (all yml files in the current directory are executed sequencially)
+  + Wildcard characters '\*' and '?' are supported, e.g. "*.yml" (all yml files in the current directory are executed sequentially)
 - `--variables` A list of string key-value pairs with variables to be replaced in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
   + e.g.: `--variables '__GMT_VAR_MY_VALUE_=cats are cool'`
 - `--commit-hash-folder` Use a different folder than the repository root to determine the commit hash for the run
