@@ -2,7 +2,7 @@
 title: "Network IO - procfs - system"
 description: "Documentation for NetworkIoProcfsSystemProvider of the Green Metrics Tool"
 date: 2025-07-22T17:50:00+00:00
-weight: 201
+weight: 202
 ---
 
 ### What it does

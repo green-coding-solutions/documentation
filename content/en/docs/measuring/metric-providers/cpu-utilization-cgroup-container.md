@@ -1,18 +1,14 @@
 ---
-title: "CPU % - cgroup - sytem"
-description: "Documentation for CpuUtilizationCgroupSystemProvider of the Green Metrics Tool"
-date: 2025-01-15T08:49:15+00:00
+title: "CPU % - cgroup - container"
+description: "Documentation for CpuUtilizationCgroupContainerProvider of the Green Metrics Tool"
+date: 2022-06-01T08:49:15+00:00
 draft: false
 images: []
-weight: 141
+weight: 140
 ---
 ### What it does
 
 This metric provider calculates an estimate of the % total CPU usage based on the cgroups stats file of your docker containers. More information about cgroups can be found in the [Linux manual pages](https://www.man7.org/linux/man-pages/man7/cgroups.7.html).
-
-### Technical Details
-
-- Reads `/proc/stat` all CPU entry .... blah blah blah
 
 ### Classname
 
@@ -25,7 +21,7 @@ This metric provider calculates an estimate of the % total CPU usage based on th
 ### Input Parameters
 
 - args
-  - `-s`: container-ids seperated by commas
+  - `-s`: container-ids separated by commas
   - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.

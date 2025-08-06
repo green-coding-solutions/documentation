@@ -2,7 +2,7 @@
 title: "Disk Used - statvfs - system"
 description: "Documentation for DiskUsedStatvfsSystemProvider of the Green Metrics Tool"
 date: 2025-07-07T16:15:00+00:00
-weight: 207
+weight: 208
 ---
 
 ### What it does

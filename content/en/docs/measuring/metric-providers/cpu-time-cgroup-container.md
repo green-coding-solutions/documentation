@@ -22,7 +22,7 @@ This metric provider reads time spent in the CPU based on the cgroups stats file
 ### Input Parameters
 
 - args
-  - `-s`: container-ids seperated by commas
+  - `-s`: container-ids separated by commas
   - `-i`: interval in milliseconds
 
 By default the measurement interval is 100 ms.
