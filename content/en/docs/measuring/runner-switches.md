@@ -43,8 +43,8 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--full-docker-prune` Stop and remove all containers, build caches, volumes and images on the system
 - `--docker-prune` Prune all unassociated build caches, networks volumes and stopped containers on the system
 - `--skip-volume-inspect` Disable docker volume inspection. Can help if you encounter permission issues.
-- `--dev-flow-timetravel` Allows to repeat a failed flow or timetravel to beginning of flows or restart services
-
+- `--dev-flow-timetravel` Allows to repeat a failed flow or timetravel to beginning of flows.
+  + Note that process logging, SCI calculations, and notes extraction may be incomplete in timetravel mode
 - `--dev-no-metrics` Skips loading the metric providers. Runs will be faster, but you will have no metric
 - `--dev-no-sleeps` Removes all sleeps. Resulting measurement data will be skewed.
 - `--dev-no-phase-stats` Do not calculate phase stats.
