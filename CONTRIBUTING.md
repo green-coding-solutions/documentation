@@ -26,6 +26,8 @@ We recommend that you set a pre-commit hook to lint and fix issues automatically
 
 ```sh
 npm run lint:markdown-fix:staged
+# or, if you want to fix manually
+npm run lint:markdown:staged
 ```
 
 to a file named `./.git/hooks/pre-commit` and making it executable `chmod +x ./.git/hooks/pre-commit`
