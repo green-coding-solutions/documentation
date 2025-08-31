@@ -77,7 +77,8 @@ Install *Kata Containers* and the just supply `--runtime io.containerd.kata.v2` 
 - Networking for *docker-in-docker* workloads seems to fail when containers are put on custom network. Network connection on the normal docker containers seems to work though. Suprisingly direct IP connects work, but DNS resolution fails for the *docker-in-docker* workloads
   - This can be mitigated at the moment by putting the containers on the *default bridge* network. This should have no further security implications
   - Alternatively one can also set a proxy for the docker container and forward the *HTTP_PROXY* variables to all applications that are started in the *docker-in-docker* containers.
-  - Why the mitigations work is not exactly clear, but it might be related to this: https://github.com/nestybox/sysbox/issues/456
+  - Also alternatively all inner created docker containers in the container can be created with `--network=host` and will also retain connectivity.
+  - Why the mitigations work is not exactly clear, but it might be related to this: https://github.com/nestybox/sysbox/issues/456. It seems clear however that it is a routing issue from the inner container to the internet but it suprising that either changing how the interface for the outer container is created can fix it as well as skipping creation the inner network adapter with `--network=host`.
 
 ### Activating
 
