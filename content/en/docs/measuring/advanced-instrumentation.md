@@ -8,7 +8,7 @@ toc: true
 
 GMT is designed to provide extremly low overhead as a measurement tool.
 
-This is achieved by leveraging classic *docker* containers with native runtimes like *runc*.
+This is achieved by leveraging classic *docker* containers with native runtimes like *runc* (optionally with rootless, see down below).
 
 To benchmark more complex applications however it might be necessary to use alternative
 runtimes to leverage functionalities like:
@@ -120,6 +120,22 @@ Install *sysbox* and the just supply `--runtime sysbox-runc` as a `docker-run-ar
 - Unclear if it can load other kernels or kernel modules
 
 **Note**: Currently in alpha and not officially supported. Ping us if you want to help developing this feature to a stable version :)
+
+## Docker Rootless
+
+*Docker Rootless* is the endorsed default runtime configuration of the *runc* runtime that ships with *docker* and is officially endorsed by GMT.
+
+Making containers rootless comes with some trade-offs:
+
+### Pros
+
+- Higher security. If containers are escaped no true root is possible
+- No *bridges* or *nftables* rules are created and might pollute host networking rules
+
+### Cons
+
+- Docker networking is completely done in user space via *slirp4netns* and thus very inefficient
+- Configuration of *slirp4netns* is another tool to learn to create custom networking rules for docker containers
 
 ## More runtimes?
 
