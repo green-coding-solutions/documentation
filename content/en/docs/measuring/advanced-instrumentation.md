@@ -149,3 +149,31 @@ This requirements comes from the fact that many native *docker* functionalities 
 - `docker run`
 - `docker images`
 - etc.
+
+## Security
+
+When setting your system up with alternative runtimes that need a *docker* root daemon you might want to lock out the default runtimes that ship with *docker*. Typically these are:
+
+- *runc*
+- *io.containerd.runc.v2*
+
+But double check with `docker info`
+
+### Disable run
+
+The easiest way to disable `runc` is to introduce an *AppArmor* or *SELinux* rule. Since GMT favors *Ubuntu/Debian* here is an example for *AppArmor*.
+
+First check where your `runc` binary is with `$ realpath $(which runc)`. The typical location is `/usr/local/bin/runc`.
+
+Then create a file at `/etc/apparmor.d/runc`:
+
+```AppArmor
+# Block execution of runc
+profile runc-deny /usr/local/bin/runc {
+    /usr/local/bin/runc ix,
+    deny /** mrwklx,
+}
+```
+
+Test with `runc` or `docker run --rm -it --runtime runc ubuntu bash`. It should fail.
+Also `docker run --rm -it --runtime io.containerd.runc.v2 ubuntu bash` should fail.
