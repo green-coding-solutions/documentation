@@ -5,11 +5,18 @@ date: 2025-06-26T01:49:15+00:00
 weight: 1009
 ---
 
-GMT does **not** come with a container registry bundled. But since it builds on *docker* it can benefit from it's capability
-to query a private container registry.
+GMT does **not** come with a container registry bundled. But since it builds on *docker* it can benefit from it's capability to query a private container registry.
 
-Here we just want to show you the steps we took to get it running. Please consult the manuals of the respective tool vendors
-for configuration details
+Here we just want to show you the steps we took to get it running. Please consult the manuals of the respective tool vendors for configuration details
+
+## Why would you set up a container registry
+
+GMT will download images on measurement and keep them in the cache by default. If you just measure software inside their containers this usually poses no issue.
+But if you also want to caputre and evaluate host level metrics you will notice that over time the disk will fill up with images.
+
+To always have a clean system you can instruct GMT to delete images on every run and pull images fresh. To not incur the costly network traffic every time you can pull these images only from the local network, effectively centralizing the location where images are kept.
+
+If you run GMT in cluster mode you will then benefit from having the machines always with a clean file sytem and pulling from a central registry that keeps the images cached.
 
 ## Container Registry
 
