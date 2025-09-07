@@ -118,7 +118,7 @@ However you need to add your current user to the `docker` group. We need this so
 
 Please follow this explanation how to do it: [Official docker docs on docker group add](https://docs.docker.com/engine/install/linux-postinstall/)
 
-=> If you want to use the rootless mode anyway you do not have to to that. Just read the next paragraph.
+=> Rootless mode is recommended if you run GMT in cluster mode. If you want to install that just read the next paragraph. In case you want to run root mode also in a cluster be sure to read the Security paragraph under [Advanced Instrumentation →]({{< relref "measuring/advanced-instrumentation" >}})
 
 ### Rootless mode (optional)
 
