@@ -67,6 +67,11 @@ machine:
   base_temperature_chip: False
   base_temperature_feature: False
 
+container_registry:
+  hostname: index.docker.io
+  default_namespace: library
+  insecure: False
+
 measurement:
   system_check_threshold: 3 # Can be 1=INFO, 2=WARN or 3=ERROR
   pre-test-sleep: 5
@@ -98,12 +103,6 @@ admin:
 
 The `postgresql`, `smtp` and `cluster` key were already discussed in the [installation →]({{< relref "/docs/installation/installation-linux" >}}) part.
 
-### machine
-
-If you run locally nothing needs to be configured here. But if you run a *cluster* you must set the base temperature values for the accuracy control to work
-
-Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}) and [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}})
-
 ### cluster
 
 Only the following three variables are important for a local installation:
@@ -113,6 +112,22 @@ Only the following three variables are important for a local installation:
 - `cors_allowed_orgins` **[list]**: Allowed URLs for CORS requests to the API. It should at least include your chosen `api_url` and `metrics_url`
 
 For the rest please see [installation →]({{< relref "/docs/cluster/installation" >}})
+
+### machine
+
+If you run locally nothing needs to be configured here. But if you run a *cluster* you must set the base temperature values for the accuracy control to work
+
+Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}) and [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}})
+
+#### container_registry
+
+This key defines how GMT pulls images to run and which registry it uses to build images.
+
+The default configuration contains the settings for *Docker Hub*.
+
+- `hostname` **[string]**: URI of the registry. Can contain a port: e.g. my-registry.io:5000
+- `default_namespace` **[string]**: Can be empty. Many custom registries use `library`. So does *Docker Hub*
+- `insecure` **[bool]**: *True* if you use TLS. *False* otherwise
 
 ### measurement
 
