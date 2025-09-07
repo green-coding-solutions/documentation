@@ -113,7 +113,7 @@ In the `daemon.json`:
 
 It is highly recommended to have docker rootless active for the docker daemon on the machine that runs the registry!
 
-See [Docker Rootless →]({{< relref "installation/installation-linux" >}}) how to do that.
+See [Docker Rootless →]({{< relref "/docs/installation/installation-linux" >}}) how to do that.
 
 TLS is only required if your registry is public accessible. If you have it local or behind a NAT with only
 controlled machines, it is not needed.
