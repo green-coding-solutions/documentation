@@ -129,15 +129,17 @@ services:
       + Declares the default entrypoint for the service container. This overrides the ENTRYPOINT instruction from the service's Dockerfile.
       + The value of `entrypoint` can either be an empty string (ENTRYPOINT instruction will be ignored) or a single word (helpful to provide a script).
       + If you need an entrypoint that consists of multiple commands/arguments, either provide a script (e.g. `entrypoint.sh`) or set it to an empty string and provide your commands via `command`.
-    - `log-stdout:` **[boolean]** *(optional)*
-      + Will log the *stdout* and make it available through the frontend in the *Logs* tab.
-      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
-    - `log-stderr:` **[boolean]** *(optional)*
-      + Will log the *stderr* and make it available through the frontend in the *Logs* tab and in error messages.
-      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
+    - `log-stdout:` **[boolean]** *(optional, default: `true`)*
+      + Will log the *stdout* of the container and make it available through the frontend in the *Logs* tab.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when to disable the logging.
+    - `log-stderr:` **[boolean]** *(optional, default: `true`)*
+      + Will log the *stderr* of the container and make it available through the frontend in the *Logs* tab and in error messages.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when to disable the logging.
     - `read-notes-stdout:` **[bool]** *(optional)*
-      + Read notes from *stdout*. Most likely you do not need this, as it also requires customization of your application (writing of a log message in a specific format). It may be helpful if your application has asynchronous operations and you want to know when they have finished.
-      + Make sure to also set `log-stdout` to `true`. Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
+      + Read notes from *stdout* of the container.
+      + Most likely you do not need this, as it also requires customization of your application (writing of a log message in a specific format). It may be helpful if your application has asynchronous operations and you want to know when they have finished. In most cases, it is more appropriate to read the notes from the command's *stdout* in your flow (see below).
+      + Note that `log-stdout` has to be enabled (it is the default).
+      + Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
     - `read-sci-stdout:` **[bool]** *(optional)*
       + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
       + Please see [Software Carbon Intensity (SCI) →]({{< relref "carbon/sci" >}}) for more information.
@@ -195,7 +197,7 @@ flow:
       + `console` will execute a shell command inside the container
     - `command:` **[str]**
       + The command to be executed. If type is `console` then piping or moving to background is not supported.
-    - `detach:` **[bool]** (optional. default false)
+    - `detach:` **[bool]** (optional, default: `false`)
       + When the command is detached it will get sent to the background. This allows to run commands in parallel if needed, for instance if you want to stress the DB in parallel with a web request
     - `note:` **[str]** *(optional)*
       + A string that will appear as note attached to the datapoint of measurement (optional)
@@ -205,15 +207,17 @@ flow:
     - `shell:` **[str]** *(optional)*
       + Will execute the `command` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
       + Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
-    - `log-stdout:` **[boolean]** *(optional)*
-      + Will log the *stdout* and make it available through the frontend in the *Logs* tab.
-      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
-    - `log-stderr:` **[boolean]** *(optional)*
-      + Will log the *stderr* and make it available through the frontend in the *Logs* tab and in error messages.
-      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when and how to log.
+    - `log-stdout:` **[boolean]** *(optional, default: `true`)*
+      + Will log the *stdout* of the command and make it available through the frontend in the *Logs* tab.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when to disable the logging.
+    - `log-stderr:` **[boolean]** *(optional, default: `true`)*
+      + Will log the *stderr* of the command and make it available through the frontend in the *Logs* tab and in error messages.
+      + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when to disable the logging.
     - `read-notes-stdout:` **[bool]** *(optional)*
-      + Read notes from the *stdout* of the command. This is helpful if you have a long running command that does multiple steps and you want to log every step.
-      + Make sure to also set `log-stdout` to `true`. Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
+      + Read notes from the *stdout* of the command.
+      + This is helpful if you have a long running command that does multiple steps and you want to log every step.
+      + Note that `log-stdout` has to be enabled (it is the default).
+      + Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
     - `read-sci-stdout:` **[bool]** *(optional)*
       + Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
       + Please see [Software Carbon Intensity (SCI) →]({{< relref "carbon/sci" >}}) for more information.
