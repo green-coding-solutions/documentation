@@ -155,7 +155,7 @@ We recommend setting `system_check_treshold` to **2** in your production setup o
 
 If you are trying to calculate an energy per container you should set the `idle-duration` configuration value high enough so you get a stable value to base the offset on.
 
-We recommend at least *120 s*.
+We recommend at least *120 s* if you have a non-controlled cluster system. *60 s* if you are running on an [accuracy controlled]({{< relref "accuracy-control" >}}) cluster like for instance our [Measurement Cluster]({{< relref "measurement-cluster" >}})
 
 ### 18. Internal Networking Only
 
