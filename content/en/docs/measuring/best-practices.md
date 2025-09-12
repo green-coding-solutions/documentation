@@ -117,16 +117,16 @@ filesystem. Otherwise it might skew with your measurement as disk-writes can be 
 
 On Ubuntu you can use `sudo systemctl enable /usr/share/systemd/tmp.mount`
 
-### 13. Turn logging off
+### 13. Manage logging appropriately
 
-Generally logging of either `stdout` or `stderr` through the `log-stdout` and `log-stderr` keys in the `usage_scenario`
- should be turned off, because it generally creates overhead.
+Logging of either `stdout` or `stderr` through the `log-stdout` and `log-stderr` keys in the `usage_scenario`
+is enabled by default in the GMT. In many cases the overhead of logging is small.
 
-You should only have it turned on when you are developing or debugging.
+However, you should consider turning logging off when there is extensive logging output, as it can create overhead.
 
 Since the logs will be captured into a memory buffer there is a limit to how much this buffer can hold.
 If you really log excessive amounts (100 MB+) then at some point the buffer might get exhausted and either you will
-loose data or the run with the GMT will fail.
+lose data or the run with the GMT will fail.
 
 ### 14. Use `--docker-prune`
 
