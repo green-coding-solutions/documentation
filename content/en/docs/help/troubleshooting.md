@@ -33,6 +33,13 @@ in the *RUNTIME* phase.
 
 Sometimes containers do not have *daemon* processes that keeps them open and / or the workload starts directly on container
 boot.
+
+You might then see a message like:
+
+- **Container 'test-container' exited during runtime phase**
+- or
+- **Container 'test-container' exited during runtime phase**
+
 In order to properly your container you must instrument it to *just* instantiate and not start anything than *daemons* or background processes.
 
 The easiest way to do so is to overwrite the *CMD* or *ENTRYPOINT* attribute in your container via the `usage_scenario.yml`file.
@@ -63,6 +70,19 @@ ENTRYPOINT ["tail", "-f", "/dev/null"]
 ```
 
 GMT can then build the *Dockerfile* for you. Just supply the `build` command in your [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}.
+
+## Container already running on system
+
+A typical error message for this is:
+
+- **Container 'test-container' is already running on system. Please close it before running the tool.**
+
+This indicates an unclean shutdown of the GMT.
+
+Please close all containers you have running, restart GMT DB and Dashboard containers, and close all metric providers
+with `tools/kill_gmt.sh`.
+
+See also *1.* on [Helper Tools →]({{< relref "helper-tools" >}}) for more info on this.
 
 ## ERR_NAME_NOT_RESOLVED / DNS_PROBE_POSSIBLE
 
