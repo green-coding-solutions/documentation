@@ -18,11 +18,11 @@ When containerizing apps for the Green Metrics Tool,
 the containers *must not* shut down after starting them.
 
 So you either must have a daemon / process running inside the container  
-that keeps the container running or use the `command` option in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})  
-file to start a shell that keeps the container running.
+that keeps the container running or use the `command` or `entrypoint` option in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
+file to start a process that will keep the container running.
+See [Troubleshooting - Keeping containers running for GMT to measure →]({{< relref "troubleshooting" >}}) for an example.
 
-This is because our tool sends the commands to the containers after they have  
-all been orchestrated and does not support one-off container starts with parameters.
+This is because our tool sends the commands to the containers after they have all been orchestrated and must precisely time the moment when the container starts running a workload.
 
 ## Containerizing
 

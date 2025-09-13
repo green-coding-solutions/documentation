@@ -26,6 +26,64 @@ When you are getting an unexpected result when accessing localhost / \*.internal
 other service serves content on that port. Check your `docker ps -a`
 - Also check `lsof -i | grep PORTNUMBER` to look if something on your host OS is serving content on that port
 
+## Container not running anymore / Keeping containers running for GMT to measure
+
+GMT will start a container with `docker run` in the *BOOT* phase and then start the workload defined in the *flows*
+in the *RUNTIME* phase.
+
+Sometimes containers do not have *daemon* processes that keeps them open and / or the workload starts directly on container
+boot.
+
+You might then see a message like:
+
+- **Container 'test-container' exited during runtime phase**
+- or
+- **Container 'test-container' exited during runtime phase**
+
+In order to properly your container you must instrument it to *just* instantiate and not start anything than *daemons* or background processes.
+
+The easiest way to do so is to overwrite the *CMD* or *ENTRYPOINT* attribute in your container via the `usage_scenario.yml`file.
+
+Example:
+
+```yml
+services:
+    my-cool-service:
+        image: static-binary-image
+        entrypoint: tail -f /dev/null
+```
+
+If you do not have the `tail` binary in your container alternatives are to open a shell (`sh`) or to make a `sleep 100000000`.
+
+Sometimes however you only have a static binary in a *distroless container* and nothing else. In that case we recommend
+wrapping your container in a *busybox*, which is extremely low overhead.
+
+Example for a *Dockerfile*:
+
+```Dockerfile
+FROM your-org/your-static-image AS build # your container image
+
+FROM busybox AS runtime
+COPY --from=build /bin/my-static-binary /bin/my-static-binary
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+```
+
+GMT can then build the *Dockerfile* for you. Just supply the `build` command in your [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}.
+
+## Container already running on system
+
+A typical error message for this is:
+
+- **Container 'test-container' is already running on system. Please close it before running the tool.**
+
+This indicates an unclean shutdown of the GMT.
+
+Please close all containers you have running, restart GMT DB and Dashboard containers, and close all metric providers
+with `tools/kill_gmt.sh`.
+
+See also *1.* on [Helper Tools →]({{< relref "helper-tools" >}}) for more info on this.
+
 ## ERR_NAME_NOT_RESOLVED / DNS_PROBE_POSSIBLE
 
 - Hostname of container correct? `docker ps` tells you the container name, which is also the hostname
