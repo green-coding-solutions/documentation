@@ -135,6 +135,12 @@ services:
     - `log-stderr:` **[boolean]** *(optional, default: `true`)*
       + Will log the *stderr* of the container and make it available through the frontend in the *Logs* tab and in error messages.
       + Please see the [Best Practices →]({{< relref "best-practices" >}}) for when to disable the logging.
+    - `stream-stdout:` **[boolean]** *(optional, default: `false`)*
+      + Will stream the *stdout* directly to the attached output stream. The typical use-case for this is if you are developing locally and start the GMT in a tty.
+      + If output is streamed it will not be logged.
+    - `stream-stderr:` **[boolean]** *(optional, default: `false`)*
+      + Will stream the *stderr* directly to the attached output stream. The typical use-case for this is if you are developing locally and start the GMT in a tty.
+      + If output is streamed it will not be logged.
     - `read-notes-stdout:` **[bool]** *(optional)*
       + Read notes from *stdout* of the container.
       + Most likely you do not need this, as it also requires customization of your application (writing of a log message in a specific format). It may be helpful if your application has asynchronous operations and you want to know when they have finished. In most cases, it is more appropriate to read the notes from the command's *stdout* in your flow (see below).
