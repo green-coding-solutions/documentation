@@ -98,7 +98,7 @@ We have the following machines available for running measurements in our cluster
   + Memory: 32 GB
   + Graphics: GeForce GTX 1080
     * Installed *CUDA* version: 12.2
-    * *NVIDIA* kernel driver version 535.261.03
+    * *NVIDIA* kernel driver version 535.274.02
     * VRAM: 8 GB
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
   + Special: **Blue Angel compatible** for Server applications
