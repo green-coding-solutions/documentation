@@ -43,9 +43,13 @@ cluster:
   client:
     sleep_time_no_job: 300
     jobs_processing: "random"
+    shutdown_on_job_no: False
+    # These two parameters have only effect in cluster mode. When using CLI they will be set via flags --docker-prune and --full-docker-prune only
+    docker_prune: True
+    full_docker_prune: False
+    # define a workload to check cluster noise floor
     time_between_control_workload_validations: 21600
     send_control_workload_status_mail: False
-    shutdown_on_job_no: False
     control_workload:
       name: "Measurement control Workload"
       uri: "https://github.com/green-coding-solutions/measurement-control-workload"
@@ -67,20 +71,10 @@ machine:
   base_temperature_chip: False
   base_temperature_feature: False
 
-container_registry:
-  hostname: index.docker.io
-  default_namespace: library
-  insecure: False
 
 measurement:
-  system_check_threshold: 3 # Can be 1=INFO, 2=WARN or 3=ERROR
-  pre-test-sleep: 5
-  idle-duration: 5
-  baseline-duration: 5
-  post-test-sleep: 5
-  phase-transition-time: 1
-  boot:
-    wait_time_dependencies: 60
+  full_docker_prune_whitelist:
+    - gcr.io/kaniko-project/executor
   metric-providers:
     linux:
       cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
@@ -119,26 +113,9 @@ If you run locally nothing needs to be configured here. But if you run a *cluste
 
 Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}) and [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}})
 
-#### container_registry
-
-This key defines how GMT pulls images to run and which registry it uses to build images.
-
-The default configuration contains the settings for *Docker Hub*.
-
-- `hostname` **[string]**: URI of the registry. Can contain a port: e.g. my-registry.io:5000
-- `default_namespace` **[string]**: Can be empty. Many custom registries use `library`. So does *Docker Hub*
-- `insecure` **[bool]**: *True* if you use TLS. *False* otherwise
-
 ### measurement
 
-- `system_check_threshold` **[integer]: Level at which an exception will be raised for system checks. The lower the more restrictive system checks are. We recommend *3* for development and *2* for cluster setups. *1* only for debugging.
-- `pre-test-sleep` **[integer]**: Seconds to idle containers after orchestrating but before start of measurement
-- `post-test-sleep` **[integer]**: Seconds to idle containers after measurement
-- `idle-duration` **[integer]**: Duration in seconds for the idle phase
-- `baseline-duration` **[integer]**: Duration in seconds for the baseline phase
-- `phase-transition-time` **[integer]**: Seconds to idle between phases
-- `boot`:
-  + `wait_time_dependencies`: **[integer]**: Max. duration in seconds to wait for dependencies (defined with `depends_on`) to be ready. If duration is reached and a dependency is not ready, the measurement will fail.
+- `full_docker_prune_whitelist`  **[list]**: A list of image names (without tag) or image IDs (short form) that will be whitelisted when `--full-docker-prune` is active. Images listed here will not be pruned. Useful for cluster installations where non security critical images shall be kept that take long to download.
 - `metric-providers`:
   + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
     * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
