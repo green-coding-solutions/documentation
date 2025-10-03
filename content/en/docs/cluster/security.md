@@ -101,7 +101,7 @@ REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM client;
 GRANT SELECT(id, name, uri, filename, branch, commit_hash, categories, machine_id, job_id, start_measurement, end_measurement, measurement_config, machine_specs, machine_id, usage_scenario, created_at, invalid_run, phases, logs, failed) on TABLE runs TO client;
 
 GRANT INSERT ON TABLE runs TO client;
-GRANT UPDATE(start_measurement, end_measurement, phases, logs, machine_id, machine_specs, measurement_config, usage_scenario, gmt_hash, invalid_run, failed) ON TABLE runs TO client;
+GRANT UPDATE(start_measurement, end_measurement, phases, logs, machine_id, machine_specs, measurement_config, usage_scenario, gmt_hash, invalid_run, failed, usage_scenario_dependencies) ON TABLE runs TO client;
 
 GRANT SELECT, INSERT, UPDATE ON TABLE machines TO client;
 
