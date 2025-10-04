@@ -46,6 +46,9 @@ TimeoutStopSec=600
 KillSignal=SIGINT
 RestartKillSignal=SIGINT
 FinalKillSignal=SIGKILL
+# this is needed for the python docker package to find the socket endpoint when running
+# in non standard locations like for instance docker rootless
+Environment="DOCKER_HOST=unix:///%t/docker.sock"
 
 [Install]
 WantedBy=default.target
