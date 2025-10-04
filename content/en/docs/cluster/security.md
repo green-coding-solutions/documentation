@@ -98,7 +98,7 @@ We recommend NOT to have SMTP credentials on the machines and also connect to th
 CREATE USER client WITH PASSWORD 'YOUR_PASSWORD';
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM client;
 
-GRANT SELECT(id, name, uri, filename, branch, commit_hash, categories, machine_id, job_id, start_measurement, end_measurement, measurement_config, machine_specs, machine_id, usage_scenario, created_at, invalid_run, phases, logs, failed) on TABLE runs TO client;
+GRANT SELECT ON TABLE runs TO client; -- only needs a full select if optimizations are run on the measurement machines. Otherwise can be locked down
 
 GRANT INSERT ON TABLE runs TO client;
 GRANT UPDATE(start_measurement, end_measurement, phases, logs, machine_id, machine_specs, measurement_config, usage_scenario, gmt_hash, invalid_run, failed, usage_scenario_dependencies) ON TABLE runs TO client;
