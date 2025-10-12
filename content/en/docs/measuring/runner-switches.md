@@ -18,8 +18,9 @@ Apart from the `config.yml` some additional configuration is possible when manua
     * Duplicated filenames are allowed (if you want to repeat the same file(s) multiple times, consider using `--iterations`)
   + Relative paths are supported, e.g. "../usage_scenario.yml"
   + Wildcard characters '\*' and '?' are supported, e.g. "*.yml" (all yml files in the current directory are executed sequentially)
-- `--variables` A list of string key-value pairs with variables to be replaced in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
-  + e.g.: `--variables '__GMT_VAR_MY_VALUE_=cats are cool'`
+- `--variable` A key-value pair with a variable to be replaced in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
+  + e.g.: `--variable '__GMT_VAR_MY_VALUE_=cats are cool'`
+  + Can be used multiple times if more than one variable shall be submitted
 - `--commit-hash-folder` Use a different folder than the repository root to determine the commit hash for the run
 - `--user-id` Execute run as a specific user (Default: 1) - See also [User Management →]({{< relref "/docs/cluster/user-management.md" >}})
 - `--config-override` Override the configuration file with the passed in yml file.

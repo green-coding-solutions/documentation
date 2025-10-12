@@ -346,7 +346,7 @@ The reason being that when your variable contains *YAML* control characters like
 A run where we want the variable to be *1* as example can be started like this:
 
 ```bash
-python3 runner.py --uri PATH_TO_SCENARIO --variables "__GMT_VAR_DURATION__=1"
+python3 runner.py --uri PATH_TO_SCENARIO --variable "__GMT_VAR_DURATION__=1"
 ```
 
 See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches" >}})
