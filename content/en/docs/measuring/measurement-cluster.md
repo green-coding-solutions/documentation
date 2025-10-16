@@ -9,7 +9,7 @@ toc: true
 
 ## Our Measurement Cluster
 
-Our Measurement Cluster runs on [NOP Linux](https://www.green-coding.io/blog/nop-linux/) and is the driver behind our [Hosted Service]({{< relref "measuring-service" >}}).
+Our Measurement Cluster runs on [NOP Linux changes →]({{< relref "nop-linux" >}}) and is the driver behind our [Hosted Service]({{< relref "measuring-service" >}}).
 
 We have the following machines available for running measurements in our cluster:
 
