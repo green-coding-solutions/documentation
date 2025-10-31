@@ -79,9 +79,14 @@ To be able to access the frontend and the API of the GMT, you have to add the UR
 127.0.0.1 api.green-coding.internal metrics.green-coding.internal
 ```
 
-### Enable CGroups v2
+### Enable cgroup v2
 
-This is an optional step, but necessary to be able to get container specific metrics like CPU utilization, memory usage, network transfer and disk I/O (see section [Metric providers](#metric-providers) below for more information).
+{{< callout context="note" icon="outline/info-circle" >}}
+Since WSL version 2.5.1, cgroup v2 is the standard. The following is only relevant, if you use an older WSL version.
+{{< /callout >}}
+
+cgroup v2 is necessary to be able to get container specific metrics like CPU utilization, memory usage, network transfer and disk I/O (see section [Metric providers](#metric-providers) below for more information).
+If you don't need these metric providers, you can skip this.
 
 Create the file `%USERPROFILE%\.wslconfig` (or edit it) and add the following content:
 
