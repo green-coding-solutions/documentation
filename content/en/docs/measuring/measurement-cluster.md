@@ -42,7 +42,7 @@ We have the following machines available for running measurements in our cluster
   + Hyper-Threading: Off
   + Turbo Boost: Off
   + DVFS: Off (Fixed to 2.1 GHz)
-  + C-States: C0 only
+  + C-States: All
   + Memory: 8 GB
   + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=9784422b-f4c6-42f3-addd-9e4c0833da74)
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
@@ -61,7 +61,7 @@ We have the following machines available for running measurements in our cluster
   + Hyper-Threading: Off
   + Turbo Boost: Off
   + DVFS: Off (Fixed to 2.1 GHz)
-  + C-States: C0 only
+  + C-States: C0-C1
   + Memory: 8 GB
   + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=262f1df0-ac6c-4e74-8d08-9c13c0b25293)
   + Metrics Provider for Machine Power: None
@@ -79,7 +79,7 @@ We have the following machines available for running measurements in our cluster
   + Hyper-Threading: N/A
   + Turbo Boost: On
   + DVFS: Off (Fixed to 3.0 GHz)
-  + C-States: C0 only
+  + C-States: All
   + Memory: 16 GB
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) / [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
   + Special: **Blue Angel compatible** for Client-Server, Server and Desktop applications
