@@ -322,6 +322,9 @@ However just in case run:
 # this should be all you need to use the GMT metric providers
 sudo modprobe msr
 
+# To make it permanent you should add it to systemd
+echo "msr" | sudo tee /etc/modules-load.d/msr.conf
+
 # this is optional if you want to debug stuff
 
 sudo modprobe intel_rapl_msr # activates /sys/devices/virtual/powercap/intel-rapl subsystem
