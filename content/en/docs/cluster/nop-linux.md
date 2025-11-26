@@ -136,6 +136,13 @@ else
     echo "NetworkManager configuration file seems not to exist. Probably non desktop system"
 fi
 
+# Check swap
+output=$(swapon --show)
+if [[ "$output" != "" ]]; then
+    echo -e "\e[31mFAIL: Your system has swap active. Please uncomment all in /etc/fstab and then turn off: sudo swapoff -a\e[0m" >&2
+    exit 1
+fi
+
 # List all timers and services to validate we have nothing left
 
 output=$(sudo systemctl --all list-timers)
