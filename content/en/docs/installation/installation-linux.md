@@ -12,9 +12,11 @@ To get correct measurements, the tool requires a linux distribution as foundatio
 
 Currently the following distributions have been tested and are fully supported:
 
-- Ubuntu 24.04
-- Ubuntu 22.04
+- Ubuntu 24.04 (Desktop and Server)
+- Ubuntu 22.04 (Desktop and Server)
 - Fedora 38
+
+For the server variants we recommend installing with the *minimal* option set for best reliability.
 
 The following distributions have been tested, but require manual work:
 
