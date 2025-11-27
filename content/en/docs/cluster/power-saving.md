@@ -16,27 +16,22 @@ local network, but any simple microcontroller that has HTTP capabilites will.
 
 ```bash
 #!/bin/bash
-# filename: wake_machine.sh
+
+MACHINE_ID=1
+MACHINE_MAC_ADDRESS='90:80:bb:aa:8d:33'
+AUTHENTICATION_TOKEN='DEFAULT'
+LOCAL_NETWORK_SUBMASK='192.168.178.255'
+API_HOST='api.green-coding.io'
 
 
-# Install this script as a cronjob
-# m h  dom mon dow   command
-# 15\/* * * * * bash /home/pi/wake_machine.sh
-
-## You need the wakeonlan and the jq package installed
-## sudo apt install wakeonlan jq -y
-
-
-output=$(curl "https://api.green-coding.io/v1/jobs?machine_id=7&state=WAITING" --silent  |  jq '.["data"] | length')
+# Run your command and capture the output
+output=$(curl "https://${API_HOST}/v2/jobs?machine_id=${MACHINE_ID}&state=WAITING" -H 'X-Authentication: ${AUTHENTICATION_TOKEN}' --silent  |  jq '.["data"] | length')
 
 # Check if the output is a specific string
 if [[ "$output" =~ ^[0-9]+$ && $output -ne 0 ]]; then
-    echo "Having waiting jobs. Sending Wake on LAN magic packet ..."
+    echo "Having waiting jobs. Starting another program..."
 
-    # Please replace '80:1B:3E:A8:26:19' with your machines MAC address
-    # Using port 1234 will usually work. If you run into issues try port 9, 8 or 7 also
-    # Do not use the IP address of the machine, but the broadcast address (usually the last number block must be replaced by 255)
-    wakeonlan -i 10.1.0.255 -p 1234 80:1B:3E:A8:26:19
+    wakeonlan -i $LOCAL_NETWORK_SUBMASK -p 1234 $MACHINE_MAC_ADDRESS
 
     echo "Wake on LAN magic packet send!"
 else
