@@ -16,7 +16,7 @@ Currently the following distributions have been tested and are fully supported:
 - Ubuntu 22.04 (Desktop and Server)
 - Fedora 38
 
-For the server variants we recommend installing with the *minimal* option set for best reliability.
+For the server variants we recommend installing with the *minimal* option set for a low overhead system with best reproducability of measurements and apply [NOP Linux]({{< relref "/docs/cluster/nop-liunx" >}}) enhancements after.
 
 The following distributions have been tested, but require manual work:
 
