@@ -9,7 +9,7 @@ toc: true
 One very important note, that serves as a general rule for all usage of the Green Metrics Tool:
 
 {{< callout context="danger" icon="outline/exclamation-mark" >}}
-All energy measurements and / or benchmarks on a normal operating system are by nature error prone and incomparable with different systems. Please never compare our values with values on your system. Measurements of software can only be compared on the exact same system.
+All energy measurements and / or benchmarks on a normal operating system are by nature error prone and often incomparable with different systems. Please never do exact comparisons of published values with values on your system - Only use them as orientation. Measurements of software can only be compared on the exact same system.
 {{< /callout >}}
 
 Having said that: If you have a proper transfer function between systems or just want to estimate the general **overhead** a 100-core machine compared to an Arduino for just running an email server you can still do a comparison ... just keep in mind, it will have caveats and can only provide guidance.
@@ -43,10 +43,21 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
   + If that is however what your application is design to operate it, then do not alter it. However most applications assume an
    infinite amout of resources and behave weirdly if they run into resource limitations
 
-### 3. The application you want to test must run at least twice as long as the minimal sampling rate
+### 3. Sampling Rate
 
-- The minimal sampling rate is the one you have configured with your [Metric Providers]({{< relref "metric-providers" >}})
-  + Also be aware that Intel RAPL has a minimum time resolution of ~10ms and CPU time resolution is typically around 1 microsecond.
+- The sampling rate of your application should be 1/2 of the smallest event you want to capture
+and
+- The application / effect you want to measure must run at least twice as long as the minimal sampling rate
+
+Both basically mean the same thing, but for different audiences one is better understandable than the other.
+So e.g. if you want to test a web page load, which can be ~10 ms you should sample with 5 ms interval or less.
+
+The minimal sampling rate is the one you have configured with your [Metric Providers]({{< relref "metric-providers" >}})
+
+Be aware that some providers like for instance Wall Power measurement devices have a minimum time resolution of ~ 20ms, which is
+by definition the smallest possible sampling frequency due to it's requirement to capture a full 50 Hz waveform.
+Other metric providers like RAPL can also capture down to 1 ms and CPU Utilization can be even below that depending on your kernel
+configuration.
 
 ### 4. When running tests your disk load should not go over 50%
 
@@ -56,8 +67,10 @@ Our [Hosted Service]({{< relref "measuring-service" >}}) on our [Measurement Clu
 ### 5. Limit amount and sampling rate of Metric Providers to what you absolutely need
 
 - Do not exceed 10 Metric Reporters on 100 ms sampling rate,
-- or 2 metric reporters on 10 ms sampling rate as this will produce a non-significant load on the system and might skew results.
+- or 5 metric reporters on < 10 ms sampling rate as this will produce a non-significant load on the system and might skew results.
 - Try to keep the sampling rate of all metric reporters identical. This allows for easier data drill-down later.
+
+You can check the current overhead (CPU%, Memory, Disk) of the GMT if you activate a *\*_cgroup_system* metrics provider.
 
 ### 6. Always check STDDEV
 
