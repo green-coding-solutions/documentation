@@ -76,6 +76,7 @@ sudo systemctl disable --now motd-news.timer
 sudo systemctl disable --now e2scrub_reap.service
 sudo systemctl disable --now tinyproxy.service # from previous GMT installs
 sudo systemctl disable --now anacron.timer
+sudo systemctl disable --now smartd # sometimes installed
 
 
 # systemd own timers - must be masked as they cannot be disabled
