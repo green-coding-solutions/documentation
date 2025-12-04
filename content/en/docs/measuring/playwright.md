@@ -10,16 +10,23 @@ The Green Metrics Tool supports **Playwright** as a first-class command type in 
 
 ---
 
-## Defining Playwright Commands
+## Simplified Setup with GMT Helper
 
-In addition to `console` commands, you can define steps of type `playwright`.  
+Getting started with Playwright is easy using the `!include-gmt-helper`. By including `gmt-playwright-v1.0.0.yml`, the Green Metrics Tool automatically:
 
-Example:
+1.  Configures the Playwright service container (`gmt-playwright-nodejs`) with the official Microsoft Playwright image.
+2.  Installs all necessary Playwright libraries.
+3.  Starts the Playwright browser and an IPC listener in the background.
+
+To get started, add the following to your `usage_scenario.yml`:
 
 ```yaml
+!include-gmt-helper: gmt-playwright-v1.0.0.yml
+
+# Your flow can now use the gmt-playwright-nodejs container
 flow:
-  - name: "Go to home page simple"
-    container: gcb-playwright
+  - name: "Go to home page"
+    container: gmt-playwright-nodejs
     commands:
       - type: playwright
         command: await page.goto("https://green-coding.io")
@@ -27,8 +34,18 @@ flow:
         command: sleep 5
 ```
 
+This helper significantly simplifies your workflow by handling the setup for you.
+
+---
+
+## Defining Playwright Commands
+
+As shown above, you can define steps of type `playwright` in your flow.
+
 - `type: playwright`  
   Defines a Playwright step instead of a shell command.  
+- `container: gmt-playwright-nodejs`  
+  This must match the container provided by the GMT Playwright helper.
 - `command:` **[str]**  
   A JavaScript/TypeScript snippet that is executed via Playwright inside the container.
 
@@ -36,66 +53,55 @@ This allows you to inline browser interactions alongside other commands for fine
 
 ---
 
-## Container Setup
+## Caching with a Reverse Proxy
 
-Playwright requires a container with the Playwright runtime installed. You can either install Playwright in your own container or use the [official Microsoft Playwright container](https://mcr.microsoft.com/en-us/product/playwright/about).  
-
-Example:
+For scenarios where you want to cache browser requests to minimize network variability, use the `gmt-playwright-with-cache-v1.0.0.yml` helper. It sets up an additional `squid` reverse proxy service and configures Playwright to use it.
 
 ```yaml
-services:
-  gcb-playwright:
-    image: mcr.microsoft.com/playwright:v1.55.0-noble
-#    volumes:
-#       - /tmp/.X11-unix:/tmp/.X11-unix # for debugging in non-headless mode
-#    environment:
-#      DISPLAY: ":0" # for debugging in non-headless mode
-    setup-commands:
-        # install playwright libraries
-      - command: mkdir /tmp/something
-      - command: cp -R /tmp/repo/. /tmp/something
-      - command: cd /tmp/something && npm init -y && npm install playwright # You can select the browser here if you only want one
-        shell: bash
-```
+!include-gmt-helper: gmt-playwright-with-cache-v1.0.0.yml
 
----
-
-## Running the Playwright IPC Listener
-
-Internally, Playwright commands are executed through an **inter-process communication (IPC) listener** that the Green Metrics Tool connects to.  
-You need to start this listener in your container before running Playwright steps.  
-
-Example:
-
-```yaml
 flow:
-  - name: "Start Playwright"
-    container: gcb-playwright
+  - name: "Go to home page with cache"
+    container: gmt-playwright-nodejs
     commands:
-      - type: console
-        command: node /tmp/something/playwright-ipc.js --browser firefox
-        note: Starting browser in background process with IPC
-        detach: true
-      - type: console
-        command: until [ -p "/tmp/playwright-ipc-ready" ]; do sleep 1; done && echo "Browser ready!"
-        shell: bash
-        note: Waiting for browser IPC listener to be ready
+      - type: playwright
+        command: await page.goto("https://green-coding.io")
 ```
-
-- The IPC script is available [here](https://raw.githubusercontent.com/green-coding-solutions/branch-magazine-energy-tests/refs/heads/main/playwright-ipc.js).  
-- The rendezvous file `/tmp/playwright-ipc-ready` is used as a readiness indicator.  
 
 ---
 
 ## Full Example
 
-You can find a complete `usage_scenario.yml` example here:  
-[Branch Magazine energy tests – usage_scenario_default_homepage.yml](https://github.com/green-coding-solutions/branch-magazine-energy-tests/blob/main/usage_scenario_default_homepage.yml)  
+Here is a complete `usage_scenario.yml` that measures the homepage of `green-coding.io`:
+
+```yaml
+!include-gmt-helper: gmt-playwright-v1.0.0.yml
+
+name: "Measure homepage of green-coding.io"
+description: "A simple example that measures the energy consumption of a website's homepage."
+
+flow:
+  - name: "Navigate to green-coding.io"
+    container: gmt-playwright-nodejs
+    commands:
+      - type: playwright
+        command: await page.goto("https://green-coding.io")
+        note: "Navigate to the website"
+      - type: console
+        command: sleep 10
+        note: "Wait for 10 seconds to allow for idle load"
+
+  - name: "Take a screenshot"
+    container: gmt-playwright-nodejs
+    commands:
+      - type: playwright
+        command: await page.screenshot({ path: '/tmp/repo/screenshot.png' })
+        note: "Take a screenshot to verify the page loaded"
+```
 
 ---
 
 
 ## See also:  
 - [usage_scenario.yml Specification →](/docs/measuring/usage-scenario/)  
-- [Variables →](/docs/measuring/usage-scenario/#variables)  
-- [Branch Magazine Energy Tests](https://github.com/green-coding-solutions/branch-magazine-energy-tests/tree/main)  
+- [Variables →](/docs/measuring/usage-scenario/#variables)
