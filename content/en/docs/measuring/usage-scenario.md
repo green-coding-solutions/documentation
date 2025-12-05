@@ -199,8 +199,9 @@ flow:
   + `name:` **[\.\s0-9a-zA-Z_\(\)-]+** An arbitrary name, that helps you distinguish later on where the load happend in the chart
   + `container:` **\[a-zA-Z0-9\]\[a-zA-Z0-9_.-\]+** The name of the container specified on `setup` which you want the run the flow
   + `commands:` **[list]**
-    - `type:` **[console]** (Only console currently supported)
+    - `type:` **[console|playwright]**
       + `console` will execute a shell command inside the container
+      + `playwright` will execute the playwright command in the container. See the [documentation](/docs/measuring/playwright/) for more details.
     - `command:` **[str]**
       + The command to be executed. If type is `console` then piping or moving to background is not supported.
     - `detach:` **[bool]** (optional, default: `false`)
