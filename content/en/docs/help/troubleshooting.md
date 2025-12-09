@@ -168,6 +168,35 @@ Or, if you can, also ditch the quotes:
 command: grep asd /tmp/myfile
 ```
 
+## Process had bad return code: 137
+
+Sometimes this means that your process simply ran out of memory (OOM). Check if your container memory limits and your host available memory are big enough.
+
+Another more unintuive cause for this is when the *Entrypoint* process ended / died effectively
+forcing the whole container to shut down.
+
+Example `compose.yml`:
+
+```yml
+services:
+    my-service:
+        image: alpine
+        entrypoint: sleep 5
+
+
+flow:
+  - name: Will fail
+    container: my-service
+    commands:
+        - type: console
+          command: stress-ng -c 1
+```
+
+Here the flow execution will reach the `stress-ng` command effectively starting an infinte stress.
+However after 5 seconds the `sleep` in the entrypoint ends and the whole container shuts down.
+
+This can be mitigated by setting an entrypoint that keeps the container up. See [Container not running anymore](#container-not-running-anymore--keeping-containers-running-for-gmt-to-measure) on this page for example solutions.
+
 ## rdmsr:open: No such file or directory
 
 Your `msr` kernel module is not loaded. Since this is an uncommon setup for the distributions we support this is not
