@@ -109,9 +109,13 @@ For the rest please see [installation →]({{< relref "/docs/cluster/installatio
 
 ### machine
 
-If you run locally nothing needs to be configured here. But if you run a *cluster* you must set the base temperature values for the accuracy control to work
+If you run locally nothing needs to be configured here.
 
-Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}) and [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}})
+But if you run a *cluster* you must set the base temperature values for the accuracy control to work as well as configure the host reservation for CPU and memory.
+
+Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}}), [accuracy control →]({{< relref "/docs/cluster/accuracy-control" >}}) and [host resource reservations]({{< relref "/docs/cluster/host-resource-reservations" >}}).
+
+Also see [Resource Limits]({{< relref "/docs/measuring/resource-limits" >}}) to better understand how GMT enforces resource limits on its orchestrated containers.
 
 ### measurement
 
