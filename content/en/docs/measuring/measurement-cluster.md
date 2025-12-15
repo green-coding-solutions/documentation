@@ -51,7 +51,7 @@ We have the following machines available for running measurements in our cluster
 ---
 
 - **Micro Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2**
-  + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 1ms sampling_rate and limited to RAPL CPU / Memory
+  + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 2 ms sampling_rate and limited to RAPL CPU / Memory as well as network I/O per cgroup
   + Vendor: Fujitsu TX1330 M2
   + Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
   + Type: Single-Tenant Server
