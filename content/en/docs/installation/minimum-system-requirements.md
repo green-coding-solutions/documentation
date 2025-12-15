@@ -11,6 +11,8 @@ toc: true
 At least an SSE2-compatible processor is required;
 For macOS a 64bit-compatible Intel processor (Core2Duo or newer) or an M1 ARM or newer is required.
 
+The CPU must have at least **two physical threads** available (in case of SMT / Hyperthreading it should be 4 threads).
+
 ### Memory
 
 - 1 GB
