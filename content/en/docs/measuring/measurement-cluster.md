@@ -136,6 +136,43 @@ We have the following machines available for running measurements in our cluster
   + Metrics Provider for Machine Power: [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
   + Special: **SoftAWERE compatible**
 
+## How to choose
+
+### Profiling Machines
+
+These machines are configured to be best representative of an off-the-shelf energy configuration.
+
+This means:
+
+- CPU Power Hungry but user friendly features like TurboBoost are on
+- Low-Load multi-tasking optimizing features like HyperThreading are turned on
+- Frequency Limits and C-State-Limits which typically make workloads more reproducible
+  for all tenants (and thus are typically activated in the cloud) are not set.
+
+You should choose these kind of machines to get an idea of how much actual energy an application might be using on an off-the-shelf installation. This energy value is thus very representative for desktop, home user or shared hosting situations.
+
+It is also very good to show how good your software can leverage sleep states or how good it mitigates wakeups and thus highlight it's power saving features.
+
+### Benchmarking Machines
+
+These machines are configured to increase reproducability by turning off some variance introducing features but still allow a reasonable difference between low load and high load scenarios on the machine
+
+- Strongly non linear features like TurboBoost and DVFS are turned off
+- Frequency is limited to only the base clock rate of the CPU
+- C-States are limited to C1 reduce latency from wakeups, but still let CPU not stay in a spin-lock
+
+You should choose these machine types if you want have strongly reproducible runs that are not impacted by home user configurations like power saving features. This also corresponds to configurations of most cloud vendors and thus are more represeantative of a cloud workload.
+
+Also consider to choose a machine that has the metric providers with sampling rates apt for the effect you want to capture. See [Sampling Rate Best Practices]({{< relref "best-practices/#3-sampling-rate">}})for more details.
+
+Drawbacks are that it cannot show the full potential how good an application leverages power saving features.
+
+### HPC Benchmarking
+
+These machines are configured for extreme compute scenarios effectively turning off all latency introducing features completely. Optionally some compute power improvements features like Pre-Fetching can be enabled
+
+HPC Benchmarking machines are only available in the enterprise plan as the must be configured to the users request. If you plan to make HPC Benchmarking on our cluster please contact us and send us your desired CPU, DRAM and GPU configuration and power capping settings.
+
 ## Setting up your own measurement cluster
 
 Please refer to the page [Installation of a Cluster]({{< relref "/docs/cluster/installation" >}})
