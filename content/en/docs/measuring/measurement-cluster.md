@@ -103,6 +103,20 @@ We have the following machines available for running measurements in our cluster
   + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
   + Special: **Blue Angel compatible** for Server applications
 
+---
+
+- **High Performance Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M4 - [PREMIUM]**
+  + Use Case: For workloads with higher CPU count, higher clock frequency or high memory requirements
+  + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
+  + Type: Single-Tenant Server
+  + CPU: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
+  + Cores: 6
+  + Threads: 6
+  + Hyper-Threading: Off
+  + Turbo Boost: Off
+  + Memory: 64 GB
+  + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+
 ### Old Machines
 
 - **Palit GPU - (Phased out Early 2025)**
