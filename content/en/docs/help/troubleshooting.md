@@ -69,7 +69,7 @@ COPY --from=build /bin/my-static-binary /bin/my-static-binary
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 ```
 
-GMT can then build the *Dockerfile* for you. Just supply the `build` command in your [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}.
+GMT can then build the *Dockerfile* for you. Just supply the `build` command in your [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}).
 
 ## Container already running on system
 
