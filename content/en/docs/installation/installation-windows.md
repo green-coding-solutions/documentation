@@ -29,8 +29,8 @@ Using it for GMT comes with the following issues:
 - possible license issues (commercial use of Docker Desktop in larger enterprises required a paid subscription)
 - resource overhead (due to extra VM `docker-desktop`)
 - the metric provider [Network IO - cgroup - container]({{< relref "/docs/measuring/metric-providers/network-io-cgroup-container" >}}) does not work due to the virtualization barrier between the container processes (running inside the special environment `docker-desktop`) and the default WSL environment (e.g. `ubuntu`)
-  - PID resolution fails: `cgroup.procs` files contain placeholder values (typically "0") instead of actual container PIDs
-  - Namespace access blocked: `/proc/PID/ns/net` files don't exist in WSL2's filesystem
+    - PID resolution fails: `cgroup.procs` files contain placeholder values (typically "0") instead of actual container PIDs
+    - Namespace access blocked: `/proc/PID/ns/net` files don't exist in WSL2's filesystem
 
 If one of the mentioned issues is a problem for you, consider installing Docker natively inside of your prefered WSL 2 distribution (e.g. [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)).
 
@@ -106,26 +106,26 @@ mount -l | grep cgroup
 ### Metric providers
 
 With WSL hardware-near metric providers like RAPL are not available.
-However, for testing your usage scenarios you can use at least the following metric providers:
+However, for testing your usage scenarios you can use at least the following metric providers by uncommenting them in the `config.yml:
 
 - System CPU utilization via procfs
-  - Config: `cpu.utilization.procfs.system.provider.CpuUtilizationProcfsSystemProvider`
-  - Documentation: [Measuring/Metric Providers/CPU % - procfs - system]({{< relref "/docs/measuring/metric-providers/cpu-utilization-procfs-system" >}})
+    - Config: `cpu.utilization.procfs.system.provider.CpuUtilizationProcfsSystemProvider`
+    - Documentation: [Measuring/Metric Providers/CPU % - procfs - system]({{< relref "/docs/measuring/metric-providers/cpu-utilization-procfs-system" >}})
 - Container CPU utilization via cgroupv2
-  - Config: `cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider`
-  - Documentation: [Measuring/Metric Providers/CPU % - cgroup - container]({{< relref "/docs/measuring/metric-providers/cpu-utilization-cgroup-container" >}})
+    - Config: `cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider`
+    - Documentation: [Measuring/Metric Providers/CPU % - cgroup - container]({{< relref "/docs/measuring/metric-providers/cpu-utilization-cgroup-container" >}})
 - Container memory usage via cgroupv2
-  - Config: `memory.used.cgroup.container.provider.MemoryUsedCgroupContainerProvider`
-  - Documentation: [Measuring/Metric Providers/Memory Used - cgroup - container]({{< relref "/docs/measuring/metric-providers/memory-used-cgroup-container" >}})
+    - Config: `memory.used.cgroup.container.provider.MemoryUsedCgroupContainerProvider`
+    - Documentation: [Measuring/Metric Providers/Memory Used - cgroup - container]({{< relref "/docs/measuring/metric-providers/memory-used-cgroup-container" >}})
 - Container network I/O via cgroupv2
-  - **only available with native Docker installation, not Docker Desktop for Windows**
-  - Config: `network.io.cgroup.container.provider.NetworkIoCgroupContainerProvider`
-  - Documentation: [Measuring/Metric Providers/Network IO - cgroup - container]({{< relref "/docs/measuring/metric-providers/network-io-cgroup-container" >}})
+    - **only available with native Docker installation, not Docker Desktop for Windows**
+    - Config: `network.io.cgroup.container.provider.NetworkIoCgroupContainerProvider`
+    - Documentation: [Measuring/Metric Providers/Network IO - cgroup - container]({{< relref "/docs/measuring/metric-providers/network-io-cgroup-container" >}})
 - Container disk I/O via cgroupv2
-  - Config: `disk.io.cgroup.container.provider.DiskIoCgroupContainerProvider`
-  - Documentation: tbd.
+    - Config: `disk.io.cgroup.container.provider.DiskIoCgroupContainerProvider`
+    - Documentation: tbd.
 - Machine energy consumption via XGBoost (ML-based estimation)
-  - Config: `psu.energy.ac.xgboost.machine.provider.PsuEnergyAcXgboostMachineProvider`
-  - Documentation: [Measuring/Metric Providers/PSU Energy - AC - XGBoost - Machine]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}})
+    - Config: `psu.energy.ac.xgboost.machine.provider.PsuEnergyAcXgboostMachineProvider`
+    - Documentation: [Measuring/Metric Providers/PSU Energy - AC - XGBoost - Machine]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}})
 
 You have to disable all other providers in your `config.yml`.

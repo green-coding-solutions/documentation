@@ -194,11 +194,11 @@ Please run the `install_linux.sh` script in the root folder.
 This script will:
 
 - Ask for the URLs of where to deploy the frontend and API
-  + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
-  + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
+    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
+    + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
 is running on port `80` or `443`
 - Set the database password for the containers
-  + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+    + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Initialize and update git submodules
 - Install a python `venv` and activate it
 - Create the needed `/etc/hosts` entries for development
@@ -292,7 +292,20 @@ loginctl enable-linger $(whoami)
 
 ## Metric providers
 
-Some metric providers need extra setup before they work.
+Metric Providers are all configured in the `config.yml` file (See also [Configuration →]({{< relref "/docs/measuring/configuration" >}})).
+
+Only a limited subset is activated by default, which are know to work guaranteed on Linux systems. If you want for instance Energy metrics or Temperature metrics you need to activate activate the providers explicitely.
+
+This is done by un-commenting the respective lines in the `config.yml`. To activate the RAPL CPU energy provider you would have to uncomment these two lines for instance:
+
+```yml
+cpu.energy.rapl.msr.component.provider.CpuEnergyRaplMsrComponentProvider:
+  sampling_rate: 99
+```
+
+The names and all available providers you find under [Metric Providers →]({{< relref "/docs/measuring/metric-providers" >}})
+
+Also - Some metric providers need extra setup before they work:
 
 ### LM-Sensors
 

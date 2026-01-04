@@ -33,11 +33,11 @@ Please run the `install_mac.sh` script in the installed folder (if you followed 
 This script will:
 
 - Ask for the URLs of where to deploy the frontend and API
-  + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
-  + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
+    + If you are working locally we strongly encourage you to use the defaults of `http://metrics.green-coding.internal:9142` and `http://api.green-coding.internal:9142`. All other local domains are not supported out of the box.
+    + If you plan to deploy on an outside visible URL please type the URL including `https://` but omitting port if it
 is running on port `80` or `443`
 - Set the database password for the containers
-  + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
+    + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Initialize and update git submodules
 - Install a python `venv` and activate it
 - Create the needed `/etc/hosts` entries for development
@@ -53,9 +53,22 @@ After that you can start the containers:
 
 ### Metric Providers
 
-On Linux we use a multitude of metric providers to give us statistics we use to benchmark programs. On MacOS correct
-values are not easy to come by so we use the `powermetrics` tool to get some relevant data. In the future we might
-include more providers but for now you only need to use the one.
+On Linux we use a multitude of metric providers to give us statistics we use to benchmark programs.
+
+On macOS you have two options for metric provider setups:
+
+- Powermetrics
+    + macOS onboard solution to get machine level metrics.
+    + Benefits: Many metrics and CPU and GPU level power inspection
+    + Drawbacks: High overhead. Does not include Machine Level metrics.
+- CPU Utilization & XGBoost Energy Model
+    + Benefits: Low overhead. Machine level power estimation
+    + Drawbacks: Uses a model and not direct measurement. Model is not trained for macOS machines and thus heavily biased. Only for testing GMT functionalities recommended.
+- CPU Utilization & SDIA Energy Model
+    + Benefits: Low overhead. Machine level power estimation
+    + Drawbacks: Uses a model and not direct measurement. Model is linear and provides only limited further information that CPU Utilization itself.
+
+
 
 You will need to disable all providers and enable the:
 
@@ -64,7 +77,22 @@ powermetrics.provider.PowermetricsProvider:
     sampling_rate: 100
 ```
 
+Or to use the model approach use:
+
+```yml
+  cpu.utilization.mach.system.provider.CpuUtilizationMachSystemProvider:
+    sampling_rate: 99
+# and either one of the model providers
+psu.energy.ac.xgboost.machine.provider.PsuEnergyAcXgboostMachineProvider:
+    # ... including its configuration options
+psu.energy.ac.sdia.machine.provider.PsuEnergyAcSdiaMachineProvider:
+    # ... including its configuration options
+```
+
 in the `config.yml`.
+
+None of the providers provide insights into the Docker VM directly. Only host level metrics.
+ Since macOS uses Docker in a VM it is anyway not really suitable for proper benchmarking. Thus currently it is not planned to increase macOS support further.
 
 ### Connecting to DB
 
