@@ -6,7 +6,9 @@
     "MD024": false,
     "MD026": false,
     "MD033": false,
-    "MD034": false
+    "MD034": false,
+    "MD012": false,
+    "MD007": { "indent": 4 }
   },
   "ignores": ["node_modules", "CHANGELOG.md", "README.md"]
 }
