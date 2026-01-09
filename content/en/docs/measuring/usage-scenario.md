@@ -198,6 +198,7 @@ flow:
 - `flow:` **[list]** (List of flows to interact with containers)
   + `name:` **[\.\s0-9a-zA-Z_\(\)-]+** An arbitrary name, that helps you distinguish later on where the load happend in the chart
   + `container:` **\[a-zA-Z0-9\]\[a-zA-Z0-9_.-\]+** The name of the container specified on `setup` which you want the run the flow
+  + `hidden:` **true** Minimizes a flow set in the frontend
   + `commands:` **[list]**
     - `type:` **[console|playwright]**
       + `console` will execute a shell command inside the container
