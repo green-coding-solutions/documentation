@@ -323,6 +323,13 @@ See [NVIDIA NVML metric provider]({{< relref "/docs/measuring/metric-providers/g
 
 On *Ubuntu* and *Fedora* you can just append `--nvidia-gpu` to the install script to try an auto-install.
 
+#### Using a GPU inside the container
+
+If the GPU is accessed inside the container directly you also need to install the [NVIDIA container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) and activate the GPU via a docker run arg.
+
+See the [Measuring AI/ML Applications]({{< relref "docs/measuring/measuring-ai-ml-applications" >}}) sub-page for more details.
+
+
 ### DC Metrics Provider
 
 Some of our PSU metrics providers may need specific hardware attached to your machine in order to run. These include the [Powerspy]({{< relref "docs/measuring/metric-providers/psu-energy-ac-powerspy2-machine" >}}), [MCP]({{< relref "docs/measuring/metric-providers/psu-energy-ac-mcp-machine" >}}), and [Picolog]({{< relref "docs/measuring/metric-providers/psu-energy-dc-picolog-machine" >}}) metric providers. Please look for details in each provider's corresponding documentation

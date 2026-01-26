@@ -17,6 +17,10 @@ See [our example ML example application](https://github.com/green-coding-solutio
 The simplest way is to use [ollama](https://ollama.com) as a manager and encapsulate it inside of the GMT.
 
 See [our example ollama LLM example application](https://github.com/green-coding-solutions/example-applications/tree/main/ai-model) to have a usage scenario to get started.
+This contains a [usage scenario to run on the CPU only](https://github.com/green-coding-solutions/example-applications/blob/main/ai-model/usage_scenario_gpu.yml) and one
+that [runs on the GPU](https://github.com/green-coding-solutions/example-applications/blob/main/ai-model/usage_scenario_gpu.yml).
+
+For the latter scenario you can see that the GPU must be activated for the docker container by passing the *docker run arg* `--gpus=all`. This functionaly requires the [NVIDIA container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) to be installed on your host.
 
 #### Quick LLM query measuring
 
