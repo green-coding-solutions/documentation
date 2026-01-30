@@ -15,13 +15,14 @@ The CPU must have at least **two physical threads** available (in case of SMT / 
 
 ### Memory
 
-- 1 GB
+- ~ 1 GB
 
-Please note that this only covers the running of the Green Metrics Tool itself. If you instruct it to measure your software it will reserve more memory according to the needs of your measured application.
+Please note that this only covers the running of the Green Metrics Tool itself. Typical overhead just for orchestrating the container will be an additonal ~500 MB
+If you instruct it to measure your software the system will use more memory according to the needs of your measured application.
 
 ### Hard-Disk
 
-- 2.5 GB
+- ~ 3 GB GB
 
 Please note that this only covers the installation of the Green Metrics Tool itself. If you instruct it to measure your software it will pull the relevenat docker containers and check out the given *git* repository which will require more disk space during usage.
 
