@@ -313,7 +313,6 @@ description: test
 
 services:
   test-container:
-    type: container
     image: gcb_stress
     build:
       context: ../stress-application
