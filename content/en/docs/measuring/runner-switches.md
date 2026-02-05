@@ -53,6 +53,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--dev-no-save` Will save no data to the DB. This implicitly activates `--dev-no-phase-stats`, `--dev-no-metrics` and `--dev-no-optimizations`
 - `--dev-cache-build` Checks if a container image is already in the local cache and will then not build it. Also doesn't clear the images after a run. Please note that skipping builds only works the second time you make a run since the image has to be built at least initially to work.
 - `--dev-no-optimizations` Disables the creation of potential optimization recommendations based on the measurement run.
+- `--dev-stream-outputs` Stream the output of the container build and the called processes in flows and setup-commands to the terminal. Note that this disallows capturing of errors and build outputs in logs and error messages.
 - `--print-phase-stats PHASE_NAME` Prints the stats of the given phase to the CLI. Typical argument would be "\[RUNTIME\]" to see all runtime phases combined
 - `--print-logs` Prints the container and process logs to stdout
 - `--iterations` Specify how many times each scenario should be executed (Default: 1)
