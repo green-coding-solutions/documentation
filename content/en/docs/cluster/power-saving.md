@@ -58,8 +58,8 @@ Please choose the line that is appropriate for you depending on if you want to s
 Example:
 
 ```bash
-echo 'ALL ALL=(ALL) NOPASSWD:/usr/bin/systemctl suspend' | sudo tee /etc/sudoers.d/green-coding-shutdown # for systems that support suspend
-echo 'ALL ALL=(ALL) NOPASSWD:/usr/bin/systemctl poweroff' | sudo tee -a /etc/sudoers.d/green-coding-shutdown # for systems that only can shutdown
+echo "${USER} ALL=(ALL) NOPASSWD:/usr/bin/systemctl suspend" | sudo tee /etc/sudoers.d/green-coding-shutdown # for systems that support suspend
+echo "${USER} ALL=(ALL) NOPASSWD:/usr/bin/systemctl poweroff" | sudo tee -a /etc/sudoers.d/green-coding-shutdown # for systems that only can shutdown
 sudo chmod 500 /etc/sudoers.d/green-coding-shutdown
 ```
 
@@ -70,9 +70,9 @@ In rare circumstances Wake-On-Lan is not active on the machine.
 Check the following:
 
 - Check the BIOS if Wake-On-Lan is enabled.
-  + If no option is present it might not be configurable through the BIOS
+    + If no option is present it might not be configurable through the BIOS
 - Check `$ sudo ethtool <YOUR_INTERFACE>`
-  + Output should list: `Wake-on: g`
+    + Output should list: `Wake-on: g`
 
 If the value is `d` it is disabled. You can activate it temporarily until the next suspend / reboot with: `$ sudo ethtool -s <YOUR_INTERFACE> wol g`
 

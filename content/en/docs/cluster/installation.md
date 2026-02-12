@@ -71,8 +71,8 @@ After running a job the client program executes the `tools/cluster/maintenance.p
 This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. We recommend the following:
 
 ```bash
-echo "${USER} ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/maintenance.py ''" | sudo tee /etc/sudoers.d/green-coding-cluster-maintenance
-echo "${USER} ALL=(ALL) NOPASSWD:/home/gc/green-metrics-tool/tools/cluster/maintenance.py --update-os-packages" | sudo tee -a /etc/sudoers.d/green-coding-cluster-maintenance
+echo "${USER} ALL=(ALL) NOPASSWD:$(realpath /usr/bin/python3) -I -B -S /usr/local/bin/green-metrics-tool/maintenance.py" | sudo tee /etc/sudoers.d/green-coding-cluster-maintenance
+echo "${USER} ALL=(ALL) NOPASSWD:$(realpath /usr/bin/python3) -I -B -S /usr/local/bin/green-metrics-tool/maintenance.py --update-os-packages" | sudo tee -a /etc/sudoers.d/green-coding-cluster-maintenance
 sudo chmod 500 /etc/sudoers.d/green-coding-cluster-maintenance
 ```
 
