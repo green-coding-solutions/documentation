@@ -9,9 +9,10 @@ The `usage_scenario.yml` consists of these main blocks:
 
 - Start of the file with some basic root level keys
 - `services` - Handles the orchestration of containers
-- `networks` - (optional) Handles the orchestration of networks
 - `flow` - Handles the interaction with the containers
 - `compose-file` - (optional) A compose file to include
+- `relations` - (optional) Additional repositories to check out
+- `networks` - (optional) Handles the orchestration of networks
 
 Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
 See also the note on [unsupported features](#unsupported-docker-compose-features) to disable the warning about that.
@@ -149,6 +150,41 @@ services:
 
 Please note that every key below `services` will serve as the name of the
 container later on. You can overwrite the container name with the key `container_name`.
+
+### Relations
+
+```yml
+relations:
+  server: # will be put in /tmp/relations/server
+    url: https://github.com/nextcloud/server
+    branch: master
+    # no commit hash given means HEAD is checked out
+  k6:
+    url: https://github.com/grafana/k6
+    branch: main
+    commit_hash: 352991e5acdf50728a7c8ea7350c33d0de65dfc1
+```
+
+Often it is needed to have additional repositories checked out that you do not want to include in your core repository.
+
+Example: Your software is a HTTP server and you include the benchmarks in your repository. However you need *k6* as a
+helper library also somewhere present.
+
+You can of course include it as a service. But sometimes it is needed to have the repository available for building some
+stuff or for supplementing your services.
+
+Relations are checked out at a specific branch and revision that you specify. If you do not specify a revision HEAD
+is always checked out.
+
+All relations are mounted into every container at the mountpoint `/tmp/relations/X` whereas *X* represesents the key the
+relations object from your *usage_scenario.yml* file.
+
+- `relations:` **[dict]** (Dictionary of relations, aka additional git repositories, to check out)
+    + `KEY:` **[a-zA-Z0-9_]** The name of the relation. Will later be the location in `/tmp/relation/KEY` of the container
+        - `url:` **URL** URL of the repository. Technically can also be SSH URI if you have the git client configured to send credentials. No filesystem paths are allowed though as usage_scenario.yml files should be transportable to different systems and shareable.
+        - `branch:` **Allowed git branch characters**: The branch to check out for the git repository
+        - `commit_hash:` **SHA-1 hash**: The revision to check out. HEAD if not specified
+
 
 ### Networks
 
