@@ -18,11 +18,13 @@ We use the board implementation here: [AMD00706](https://www.microchip.com/en-us
 
 - 0,5% Accuracy on active power measurements in a 1:4000 dynamic range (~ 3.75 mW minimum resolution)
 - 8 MHz internal processing clock (theoretical maximum of 12.5 us resolution)
-  - Power is averaged over multiples of 20 ms (Selectable from N={1,2,3,4})
+    - Power is averaged over multiples of 20 ms (Selectable from N={0,1,2,3,4})
 - Internal accumulation of energy in register (currently not active in our setup. We use active power only atm.)
 
 Implementation of the source code is mostly copied from https://github.com/osmhpi/pinpoint/blob/master/src/data_sources/mcp_com.c
-Credits to Sven Köhler and the OSM group from the HPI
+Credits to Sven Köhler and the OSM group from the HPI.
+
+Additons have been made by setting the MCP to a custom resultion for the energy and power registers.
 
 ### Install
 
@@ -41,6 +43,9 @@ After that just plug it into your USB and please use Channel 1.
 ### Input Parameters
 
 - `-i`: interval in milliseconds. By default the measurement interval is 100 ms.
+- `-e`: Output energy instead of power
+- `-o`: One-Shot mode. Ouput only one reading (In case `-e` is also supplied the first value is non-sensical and will be 0. Only subsequent calls are useful)
+- `-x`: Dump Range1 (0x00AE) and Range2 (0x00BE) register contents and
 
 ```bash
 ./metric-provider-binary -i 100
@@ -56,7 +61,7 @@ This metric provider prints to stdout a continuous stream of data every `interva
 Where:
 
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The value taken from sensor in the unit supplied or mW if no unit is specified.
+- `READING`: Integer value in uW in default power output mode. Otherwise in case of energy output mode, uJ.
 
 Any errors are printed to stderr.
 
