@@ -29,16 +29,20 @@ A simple integration for an CLI based application might for instance look like t
 
 ```yaml
 
+name: SCI Test
+author: A wizard
+description: SCI test scenario
+
 services:
-  ubuntu:
+  gcb-alpine-sysbench:
     image: alpine
     setup-commands:
       - command: apk add sysbench coreutils gawk
 
-custom_metric:
+custom_metrics:
   calculated_prime_numbers:
     unit: CPN
-    sci: True # optional. Will created additional metric gCO2e/CPN
+    sci: True # optional. Will create an addtional metric gCO2e/CPN
 
 flow:
   - name: Stress
