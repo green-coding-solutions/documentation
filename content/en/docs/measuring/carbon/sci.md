@@ -6,7 +6,7 @@ weight: 550
 toc: true
 ---
 
-Since version v0.18 the Green Metrics Tool can measure the [Green Software Foundation's SCI](https://sci-guide.greensoftware.foundation/)
+Green Metrics Tool supports custom metrics including the [Green Software Foundation's SCI](https://sci-guide.greensoftware.foundation/)
 
 The metric is essentially a Carbon per Unit of work metric and thus is very flexible in it's application. Supplemental
 to the various metric providers that the Green Metrics Tool support this introduces not only the concept of total
@@ -16,10 +16,10 @@ energy / carbon per usage_scenario, but also the concept of work done.
 
 The parts to derive the metric have to be defined in two places:
 
-- The `usage_scenario.yml` (which sets the dimension *R_d*)
+- The `usage_scenario.yml` (which sets the custom metric and its unit)
 - The `config.yml`, which sets the machine specific parameters like *TE*, *RS* etc.
 
-The actual ticks for the unit of work (*R*) are captured from the containers and processes STDOUT. This has to be activated by setting `log-stdout` and `read-sci-stdout` to **True**.
+The actual ticks for the unit of work (*R*) are captured from the containers and processes STDOUT. This has to be activated by setting `log-stdout` (on by default).
 
 ### Setup in usage_scenario
 
@@ -28,10 +28,17 @@ Please see an example how to configure in our [example applications repository f
 A simple integration for an CLI based application might for instance look like this:
 
 ```yaml
-...
-sci:
-  R_d: calculated prime number
-  # defined as the Carbon intensity per event that sysbench produces
+
+services:
+  ubuntu:
+    image: alpine
+    setup-commands:
+      - command: apk add sysbench coreutils gawk
+
+custom_metric:
+  calculated_prime_numbers:
+    unit: CPN
+    sci: True # optional. Will created additional metric gCO2e/CPN
 
 flow:
   - name: Stress
@@ -39,14 +46,12 @@ flow:
     commands:
       - type: console
         note: Starting sysbench
-        command: sysbench --cpu-max-prime=25000 --threads=1 --time=3 --test=cpu run --events=0 --rate=0 --debug=off | gawk '/total number of events:/{print "GMT_SCI_R="$NF}'
+        command: sysbench --cpu-max-prime=25000 --threads=1 --time=3 cpu run --debug=off | gawk '/total number of events:/ {cmd="date +%s%N"; cmd | getline ts; close(cmd); print ts " calculated_prime_numbers=" $NF}'
         shell: sh
-        log-stdout: True
-        log-stderr: True
-        read-sci-stdout: True
+
 ```
 
-As you can see we directly parse the output of a CLI command and the output the variable **GMT_SCI_R=...** to STDOUT.
+As you can see we directly parse the output of a CLI command and the output the variable **calculated_prime_numbers=...** to STDOUT.
 
 If you have an API or similar the output might not happen on the CLI directly, but rather inside a node script or similar.
 
@@ -68,10 +73,10 @@ sci:
 
 ## Display
 
-The metric will atm only be calculated for the **RUNTIME** phase and be shown in the Dashboard.
+The metric will is calculated per phase in which it occures and then aggregated in the RUNTIME as total.
 <img src="/img/sci_dashboard.webp" alt="SCI (Software Carbon Intensity) dashboard showing carbon metrics">
 
-If an SCI was configured also the parameters will be shown in the *Measurements* Tab.
+If an SCI was configured and `sci: True` was set also the parameters will be shown in the *Measurements* Tab.
 
 <img src="/img/sci_measurement_tab.webp" alt="SCI measurement tab showing detailed carbon intensity parameters">
 
@@ -82,9 +87,9 @@ The [SCI formula](https://sci-guide.greensoftware.foundation/) is specified by t
 The components of the SCI are attributed by the GMT as follows:
 
 - *E*: The energy of the total machine + the energy of the network.
-  - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "../metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "../metric-providers/psu-energy-ac-mcp-machine" >}}), etc.
-    - If none is activated machine energy will be excluded from the SCI.
-  - A *Network IO* provider must be activated to populate this value with the network energy.
+    - A *PSU Energy* provider must be activated to populate this value with the machine energy like [PSU Energy XGBoost]({{< relref "../metric-providers/psu-energy-xgboost-machine" >}}), [PSU Energy MCP]({{< relref "../metric-providers/psu-energy-ac-mcp-machine" >}}), etc.
+        - If none is activated machine energy will be excluded from the SCI.
+    - A *Network IO* provider must be activated to populate this value with the network energy.
     - If none is activated network energy will be excluded from the SCI.
 - *I:* Configured in the `config.yml`. Set the intensity of your used grid location
 - *M:* Configured in the `config.yml`. Set the embodied carbon of your used machine
@@ -97,10 +102,3 @@ We provide quite some example applications that showcase how the SCI can be meas
 
 [Example data with runs](https://metrics.green-coding.io/?uri=green-coding-solutions/example-applications&filename=green-software)
 
-## Caveats and future work
-
-At the moment the SCI is only measured in the *RUNTIME* phase and no sub-phase measurement is possible.
-
-Future work will include making the SCI an actual *Metric Provider* and thus allowing to capture it in every phase, optionally with having different dimensions per phase even.
-
-The work on this task is tracked in [this GitHub Issue](https://github.com/green-coding-solutions/green-metrics-tool/issues/451). We would love to get some contributions on this if you are willing to help :)

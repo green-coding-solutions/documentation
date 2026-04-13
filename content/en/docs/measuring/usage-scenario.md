@@ -13,6 +13,7 @@ The `usage_scenario.yml` consists of these main blocks:
 - `compose-file` - (optional) A compose file to include
 - `relations` - (optional) Additional repositories to check out
 - `networks` - (optional) Handles the orchestration of networks
+- `custom_metrics` - (optional) Handles Custom Metrics and SCI
 
 Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
 See also the note on [unsupported features](#unsupported-docker-compose-features) to disable the warning about that.
@@ -141,9 +142,6 @@ services:
         - Most likely you do not need this, as it also requires customization of your application (writing of a log message in a specific format). It may be helpful if your application has asynchronous operations and you want to know when they have finished. In most cases, it is more appropriate to read the notes from the command's *stdout* in your flow (see below).
         - Note that `log-stdout` has to be enabled (it is the default).
         - Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
-    - `read-sci-stdout:` **[bool]** *(optional)*
-        - Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
-        - Please see [Software Carbon Intensity (SCI) →]({{< relref "carbon/sci" >}}) for more information.
     - `docker-run-args:` **[list]** *(optional)*
         - A list of string that should be added to the `docker run` command of that container.
         - The argument needs to be listed in the `user.capabilities` json under `measurement:orchestrators:docker:allow-args`. The string in the `user.capabilities` can be a regex. Opening this up could be a potential security issue!
@@ -256,9 +254,6 @@ flow:
         - This is helpful if you have a long running command that does multiple steps and you want to log every step.
         - Note that `log-stdout` has to be enabled (it is the default).
         - Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
-    + `read-sci-stdout:` **[bool]** *(optional)*
-        - Enables the reading of ticks for the unit of work (*R*) required to calculate the SCI metric.
-        - Please see [Software Carbon Intensity (SCI) →]({{< relref "carbon/sci" >}}) for more information.
 
 ### compose-file:
 
@@ -383,3 +378,9 @@ python3 runner.py --uri PATH_TO_SCENARIO --variable "__GMT_VAR_DURATION__=1"
 See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches" >}})
 
 The API accepts these variables as arguments also to the `/v1/software/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.
+
+### Custom Metrics
+
+Custom Metrics are a super set of the SCI metrics which however are configured identically.
+
+Please see [Software Carbon Intensity (SCI) →]({{< relref "carbon/sci" >}}) for more information.
