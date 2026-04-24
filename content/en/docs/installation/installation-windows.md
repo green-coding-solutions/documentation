@@ -1,5 +1,5 @@
 ---
-title: "Installation on Windows"
+title: "Installation on Windows (WSL)"
 description: "A description on how to install the GMT on Windows machines"
 date: 2023-12-04T01:49:15+00:00
 weight: 304
