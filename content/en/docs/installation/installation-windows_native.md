@@ -126,7 +126,7 @@ Follow the instructions in that repository to install it. In short:
 With the driver loaded, the following provider is available and already configured in `config.yml` under the `windows:` section:
 
 - CPU energy via Intel/AMD RAPL (ScaphandreDrv)
-    - Config: `cpu.energy.rapl.scaphandre.component.provider.CpuEnergyRaplScaphandreComponentProvider`
+    - Config: `cpu_energy_rapl_scaphandre_component`
     - Sampling rate: `99` ms (default)
     - Domains: `cpu_package`, `cpu_cores`, `cpu_gpu`, `dram`, `psys` — individual domains can be disabled in `config.yml`
 
