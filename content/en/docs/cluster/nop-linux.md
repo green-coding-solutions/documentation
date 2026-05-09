@@ -96,8 +96,8 @@ sudo systemctl disable --now power-profiles-daemon.service
 sudo systemctl disable --now thermald.service
 sudo systemctl disable --now anacron.service
 
-# Packages to install for editing. some of us prefer nano, some vim. We install bot to keep wild opinionated mobs away :)
-sudo apt install -y vim nano
+# Packages to install for editing and inspection. some of us prefer nano, some vim. We install bot to keep wild opinionated mobs away :)
+sudo apt install -y vim nano iproute2
 
 # Setup networking
 NET_NAME=$(sudo networkctl list "en*" --no-legend | cut -f 4 -d " ")
