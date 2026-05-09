@@ -152,11 +152,10 @@ dockerd-rootless-setuptool.sh install
 After the installation the install script will tell you to add some `export` statements to your `.bashrc` file.
 Please do so to always have the correct paths referenced if you open a new terminal.
 
-Lastly please run the following commands to have the docker daemon always lingering:
+Lastly enable the docker user daemon:
 
 ```bash
-systemctl --user enable docker
-sudo loginctl enable-linger $(whoami)
+systemctl --user enable --now docker
 ```
 
 {{< /tab >}}

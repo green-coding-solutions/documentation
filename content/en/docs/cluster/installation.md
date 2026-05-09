@@ -11,7 +11,19 @@ For production setups it is possible to run the Green Metrics Tool (GMT) in a cl
 
 When submitting a job, a specific machine can be specified on which this job is then exclusively run. The configuration can be machine specific, as we want certain machines to have specific metric providers. We advise to not have unutilized machines running all the time for the case if a job might be submitted. Please think about switching off a machine when it is not used and power it up once a day or when the sun is shining.
 
-There are two main ways to configure a cluster:
+## 0) Pre-Requisites
+
+No matter which route you choose the execution will run as the *USER* of the system.
+
+So your user must *linger* although you are not logged in. Even if it is a *systemd* service.
+
+To enable *USER* linger do:
+
+```bash
+sudo loginctl enable-linger $(whoami)
+```
+
+Now you can choose between two modes:
 
 ## 1) Systemd Service - Client mode
 
