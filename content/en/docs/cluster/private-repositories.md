@@ -1,5 +1,5 @@
 ---
-title: "SSH Keys"
+title: "Private repositories"
 description: "Configure user supplied SSH keys for private repository measurements"
 date: 2026-04-27T00:00:00+00:00
 weight: 1006
@@ -9,21 +9,21 @@ GMT can use SSH keys submitted by users through the Dashboard or the command lin
 
 There are two different key types involved, and they are used on different machines:
 
-- The GMT web/API server uses an RSA PEM public key configured in `config.yml` to encrypt user supplied SSH keys before storing them.
+- The GMT Dashboard server uses an RSA PEM public key configured in `config.yml` to encrypt user supplied SSH keys before storing them.
 - Each runner or cluster machine that executes measurements uses the matching RSA PEM private key configured in `config.yml` to decrypt the stored SSH key before cloning a repository.
 - The user submits an OpenSSH private key through the Dashboard or command line. This is the key used by Git, through ssh, when cloning the measured repository.
 
-We do this so that when the GMT Web machine or the database is leaked we do not expose any SSH keys.
+We do this so that when the Dashboard machine or the database is leaked we do not expose any SSH keys.
 
 Do not mix these formats. The encryption keys configured in `config.yml` must be RSA PEM files. The user supplied SSH key submitted through the Dashboard or passed on the command line must be an OpenSSH private key block.
 
 ## Configure the web server to accept SSH keys from users
 
-On the GMT web/API server, configure an RSA PEM-format public key in `config.yml`:
+On the GMT Dashboard server, configure an RSA PEM-format public key in `config.yml`:
 
 ```yml
 security:
-  encryption_public_key_file: ./.rsa/public_key.pem
+  encryption_public_key_file: /var/www/rsa/public_key.pem
 ```
 
 Create the RSA key pair with:
@@ -36,12 +36,12 @@ openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:204
 openssl rsa -pubout -in private_key.pem -out public_key.pem
 ```
 
-Recommended placement on the web/API server:
+Recommended placement on the Dashboard server:
 
 ```bash
-mkdir -p ./.rsa
-mv public_key.pem ./.rsa/public_key.pem
-chmod 755 ./.rsa/public_key.pem
+mkdir -p /var/www/rsa
+mv public_key.pem /var/www/rsa/public_key.pem
+chmod 755 /var/www/rsa/public_key.pem
 ```
 
 The file must be readable by the GMT API process. In the default container setup the Gunicorn container runs as root, and a restrictive mode such as `400` can make the mounted file unreadable inside the container. Use `755` for the public key file.
@@ -52,10 +52,10 @@ On each runner that needs to execute jobs with user supplied SSH keys, configure
 
 ```yml
 security:
-  encryption_private_key_file: ./.rsa/private_key.pem
+  encryption_private_key_file: /path/to/repo/rsa/private_key.pem
 ```
 
-The private key must match the public key configured as `security.encryption_public_key_file` on the GMT web/API server. Keep this private key available only to runner or cluster machines that execute measurements and to administrators who need runner access.
+The private key must match the public key configured as `security.encryption_public_key_file` on the GMT Dashboard server. Keep this private key available only to runner or cluster machines that execute measurements and to administrators who need runner access.
 
 ## Allow users to save SSH keys
 
