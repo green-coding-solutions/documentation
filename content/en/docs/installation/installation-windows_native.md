@@ -84,14 +84,12 @@ The Windows RAPL provider is a native C binary that GMT compiles during installa
 
 Install either of:
 
-- **Visual Studio 2022 Community** (free) — during installation select the workload **"Desktop development with C++"**.
-- **Build Tools for Visual Studio 2022** — a smaller standalone installer that only ships the command-line toolchain.
-
-Download from [visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/).
+- **Visual Studio 2026 Community** (free) — during installation select the workload **"Desktop development with C++"**. Download from [visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/).
+- **Using winget** — `winget install -e --id Microsoft.VisualStudio.BuildTools`
 
 There are two ways to make `cl.exe` available to the install script:
 
-1. **Recommended:** run `install_windows.ps1` from an **"x64 Native Tools Command Prompt for VS 2022"** (or the equivalent Developer PowerShell). In this shell `cl.exe` is already on `PATH`.
+1. **Recommended:** run `install_windows.ps1` from an **"x64 Native Tools Command Prompt for VS 2026"** (or the equivalent Developer PowerShell). In this shell `cl.exe` is already on `PATH`.
 2. **Alternative:** run from a regular PowerShell. The installer will locate Visual Studio via `vswhere.exe` and invoke `vcvarsall.bat` automatically before compiling. This works for most default installations.
 
 If the installer cannot find the compiler, it will print a warning and skip building the RAPL binary — the rest of the install still succeeds, and you can build the binary later by running `build.bat` in [metric_providers/cpu/energy/rapl/scaphandre/component/](metric_providers/cpu/energy/rapl/scaphandre/component/) from an "x64 Native Tools Command Prompt".
@@ -185,6 +183,6 @@ The frontend is reachable at the `metrics_url` you configured (defaults to `http
 
 - **"Docker was not found in PATH"** — start Docker Desktop and verify `docker version` runs cleanly in the same PowerShell session.
 - **"Python version is NOT greater than or equal to 3.10"** — activate the correct version with `pyenv global <version>` and open a new shell.
-- **"MSVC compiler (cl.exe) not found"** — either rerun the installer from an "x64 Native Tools Command Prompt for VS 2022", or run `build.bat` manually in [metric_providers/cpu/energy/rapl/scaphandre/component/](metric_providers/cpu/energy/rapl/scaphandre/component/).
+- **"MSVC compiler (cl.exe) not found"** — either rerun the installer from an "x64 Native Tools Command Prompt for VS 2026", or run `build.bat` manually in [metric_providers/cpu/energy/rapl/scaphandre/component/](metric_providers/cpu/energy/rapl/scaphandre/component/).
 - **RAPL provider fails with "device not found"** — the ScaphandreDrv driver is not loaded. Run `DriverLoader.exe start` and check that `\\.\ScaphandreDriver` exists.
 - **Hosts entries missing** — rerun the installer as Administrator, or add the two lines listed in Step 6 to `C:\Windows\System32\drivers\etc\hosts` by hand.
