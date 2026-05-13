@@ -10,7 +10,7 @@ weight: 221
 This provider fetches the carbon intensity (gCO2e/kWh) of the electricity grid from a self-hosted
 or remotely hosted [Elephant](https://github.com/green-coding-solutions/elephant) service.
 Elephant is a small HTTP service developed by us which aggregates carbon
-intensity data from multiple upstream sources (e.g. Bundesnetzagentur, Electrcity Maps, ...) and exposes
+intensity data from multiple upstream sources (e.g. Bundesnetzagentur, Electricity Maps, ...) and exposes
 them through a uniform REST interface. It also offers the ability to *simulate* arbitrary carbon
 intensity curves so that the same workload can be re-evaluated under different grid scenarios.
 
