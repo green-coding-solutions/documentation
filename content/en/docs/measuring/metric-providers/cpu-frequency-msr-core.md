@@ -33,6 +33,14 @@ By default the measurement interval is 1000 ms.
 ./metric-provider-binary -i 100 -f 2.4
 ```
 
+Both `sampling_rate` and `base_ghz` can be configured in `config.yml`:
+
+```yaml
+cpu_frequency_msr_core:
+  sampling_rate: 100
+  base_ghz: 3.6  # set to the nominal base clock of your CPU
+```
+
 ### Output
 
 This metric provider prints to *Stdout* a continuous stream of data. The format of the data is as follows:
