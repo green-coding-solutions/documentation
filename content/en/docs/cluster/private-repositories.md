@@ -23,7 +23,7 @@ On the GMT Dashboard server, configure an RSA PEM-format public key in `config.y
 
 ```yml
 security:
-  encryption_public_key_file: /var/www/rsa/public_key.pem
+  encryption_public_key_file: /var/www/green-metrics-tool/.rsa/public_key.pem
 ```
 
 Create the RSA key pair with:
@@ -39,9 +39,9 @@ openssl rsa -pubout -in private_key.pem -out public_key.pem
 Recommended placement on the Dashboard server:
 
 ```bash
-mkdir -p /var/www/rsa
-mv public_key.pem /var/www/rsa/public_key.pem
-chmod 755 /var/www/rsa/public_key.pem
+mkdir -p /var/www/green-metrics-tool/.rsa/
+mv public_key.pem /var/www/green-metrics-tool/.rsa/public_key.pem
+chmod 755 /var/www/green-metrics-tool/.rsa/public_key.pem
 ```
 
 The file must be readable by the GMT API process. In the default container setup the Gunicorn container runs as root, and a restrictive mode such as `400` can make the mounted file unreadable inside the container. Use `755` for the public key file.
