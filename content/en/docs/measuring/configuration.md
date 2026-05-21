@@ -44,6 +44,8 @@ cluster:
     sleep_time_no_job: 300
     jobs_processing: "random"
     shutdown_on_job_no: False
+    update_os_packages: True
+    reboot_after_seconds: False
     # These two parameters have only effect in cluster mode. When using CLI they will be set via flags --docker-prune and --full-docker-prune only
     docker_prune: True
     full_docker_prune: False
@@ -121,14 +123,14 @@ Also see [Resource Limits]({{< relref "/docs/measuring/resource-limits" >}}) to 
 
 - `full_docker_prune_whitelist`  **[list]**: A list of image names (without tag) or image IDs (short form) that will be whitelisted when `--full-docker-prune` is active. Images listed here will not be pruned. Useful for cluster installations where non security critical images shall be kept that take long to download.
 - `metric-providers`:
-  + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
-    * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
-    * `METRIC_PROVIDER_NAME.sampling_rate` **[integer]**: sampling rate in ms
+    + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
+        * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
+        * `METRIC_PROVIDER_NAME.sampling_rate` **[integer]**: sampling rate in ms
 
 Some metric providers have unique configuration params:
 
 - PsuEnergyAcXgboostSystemProvider
-  + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
+    + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
 
 Also note that some providers are deactivated by default, because they either need
 additional configuration parameters, extra hardware or a specially configured system.
@@ -183,7 +185,7 @@ Settings that are specifc to a user and apply to all machines that you are measu
 For local installations these are to be found under [https://metrics.green-coding.internal:9142/settings.html](https://metrics.green-coding.internal:9142/settings.html). If you use our [Hosted Service](https://metrics.green-coding.io/) you find it at [https://metrics.green-coding.io/settings.html](https://metrics.green-coding.io/settings.html)
 
 - `disabled_metric_providers` **[list]**: Providers to disable in CamelCase format.
-  + Example: *NetworkConnectionsProxyContainerProvider*
+    + Example: *NetworkConnectionsProxyContainerProvider*
 - `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
 - `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
 - `phase-padding` **[integer]**: Phase padding is by default applied to the end of the phase to capture the last sampling tick, which might be cut-off. GMT applies one extra tick to the end of the phase. If your phase cut-offs must me microsecond exact you can turn this off. Typically not recommended and should be left on. See [https://github.com/green-coding-solutions/green-metrics-tool/issues/1129](https://github.com/green-coding-solutions/green-metrics-tool/issues/1129) for details.

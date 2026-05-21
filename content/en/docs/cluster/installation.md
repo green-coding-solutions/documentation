@@ -130,6 +130,33 @@ If you are using the *NOP Linux* setup with the `client.py` service you must als
 
 Since we are using our [lm_sensors provider →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}) to query the temperature you must also set the `base_temperature_chip` and `base_temperature_feature` to query from. Refer to the [provider documentation →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}) for more details.
 
+#### Auto-Updating
+
+The cluster is capable of automatically running updates. You can trigger this behaviour by setting
+the `update_os_packages` to *true* in the `config.yml`.
+
+The permissions to run the OS package manager updates are automatically given by giving sudo permissions to the
+`maintenance.sh` file during installation.
+
+#### Regular Reboots
+
+We recommend having your machines to undergo regular reboots especially when you have auto-updating enabled
+via `update_os_packages`.
+
+This ensures that in case for instance a new kernel is installed the machine will load it at some point.
+
+To enable this behaviour you need to set the `reboot_after_seconds` flag in the `config.yml` to a time in seconds.
+Setting it to `0`, `False`, `None` or `null` will disable it.
+A typical setting is `86400` to reboot every 24 hours.
+
+Furthermore you must allow the parameter to be run without sudo password entry:
+
+```bash
+echo "${USER} ALL=(ALL) NOPASSWD:/usr/bin/systemctl reboot" | sudo tee /etc/sudoers.d/green-coding-reboot
+sudo chmod 500 /etc/sudoers.d/green-coding-reboot
+```
+
+
 #### Profiling Machines
 
 Machines that are intended to create a carbon profile *as it would be seen in a user machine* should have:
