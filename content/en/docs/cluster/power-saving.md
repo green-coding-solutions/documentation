@@ -117,3 +117,23 @@ Then `$ sudo update-grub` and reboot.
 
 If your output is only *[s2idle]* then your network card driver or some other component does not support *Suspend to Ram* or is prohibiting it's activation.
 For instance disabling CPU power saving modes can block this setting.
+
+### Power Capping Machines
+
+*IMPORTANT:* Please be aware that power capping is a highly non-linear feature. The machines wil typically be
+able to draw a higher amount of power for a very short time and then be restricted to a lower amount after a
+few seconds. When this happens is not fully deterministic as it als depends on heat of the CPU when
+it reaches the power draw exactly. You are advised to have a pre-heating workload that triggers the power cap
+and only then run your benchmark workload.
+
+Power Capping can be done by using *RAPL* to limit power draw of the machines. It is recommended to set short and
+long-term power to the same value for better explainability.
+
+To persist it it is best to create a systemd-tmpfile rule:
+
+```bash
+# This will limit power constraint to 75 W for short term and long power.
+echo "w /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw - - - - 75000000" | sudo tee /etc/tmpfiles.d/rapl.conf
+echo "w /sys/class/powercap/intel-rapl:0/constraint_1_power_limit_uw - - - - 75000000" | sudo tee -a /etc/tmpfiles.d/rapl.conf
+sudo systemd-tmpfiles --create
+```
