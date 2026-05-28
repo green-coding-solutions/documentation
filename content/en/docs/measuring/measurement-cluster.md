@@ -68,7 +68,7 @@ We have the following machines available for running measurements in our cluster
 
 ---
 
-- **GUI/Desktop Applications (DVFS ON, TB ON, HT OFF) - TX1330 M3**
+- **GUI/Desktop Applications (DVFS OFF, TB OFF, HT OFF) - TX1330 M3**
     + Use Case: For profiling of a GUI / Desktop software that uses X11 or Wayland window management systems
     + Vendor: Fujitsu TX1330 M3
     + OS: Ubuntu 24.04 (default) with Wayland Window manager
@@ -76,8 +76,8 @@ We have the following machines available for running measurements in our cluster
     + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
     + Cores: 4
     + Threads: 4
-    + Hyper-Threading: N/A
-    + Turbo Boost: On
+    + Hyper-Threading: Off
+    + Turbo Boost: Off
     + DVFS: Off (Fixed to 3.0 GHz)
     + C-States: All
     + Memory: 16 GB
