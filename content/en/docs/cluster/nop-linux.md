@@ -37,6 +37,7 @@ systemctl --user disable --now snap.snapd-desktop-integration.snapd-desktop-inte
 sudo systemctl disable --now wpa_supplicant.service
 sudo systemctl disable --now launchpadlib-cache-clean.timer
 sudo rm /etc/systemd/user/timers.target.wants/launchpadlib-cache-clean.timer # launchpad timer is a heavy beast and must be disabled in global scope
+systemctl --user disable --now launchpadlib-cache-clean.timer # can also be in user space sometimes
 sudo systemctl disable --now snapd.snap-repair.timer
 
 ### END Window manager systems
