@@ -43,6 +43,7 @@ custom_metrics:
   calculated_prime_numbers:
     unit: CPN
     sci: True # optional. Will create an addtional metric gCO2e/CPN
+    # regex: "^(\d{{16,19}}) {key}=(\d+)$" # You can supply a custom capture regex. By default it is a 16-19 digit timestamp followed by *metric_name*, an equal sign and a numeric value
 
 flow:
   - name: Stress
@@ -58,6 +59,13 @@ flow:
 As you can see we directly parse the output of a CLI command and the output the variable **calculated_prime_numbers=...** to STDOUT.
 
 If you have an API or similar the output might not happen on the CLI directly, but rather inside a node script or similar.
+
+Custom metrics are defined under the `custom_metrics` root level key and has the following sub-keys:
+
+- `metric_name` **[a-zA-Z0-9_]**: Name of the metric internally and in regex captures
+    + `unit` **[str]**: Name for the unit to display in frontend
+    + `sci` **[bool]** *(optional)*: Switch if metric should als be displayed as SCI. GMT will then divide the metric by the total carbon emissions of the run effetively returning a <custom_metric>/gCO2e
+    + `regex` **[regex]** *(optional)*: A catpure regex. If not supplied the default capture regex will be used: *^(\d{{16,19}}) {key}=(\d+)$* . A 16-19 digit timestamp followed by *metric_name*, an equal sign and a numeric value.
 
 ### Setup in config.yml
 
