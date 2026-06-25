@@ -46,7 +46,7 @@ Here you find:
 ## Run
 
 The run is what is created when a new measurement with the GMT shall be done.
-Either via the web submit form or directly via the `/vX/software/add` endpoint.
+Either via the web submit form or directly via the `/vX/runs/add` endpoint.
 
 Here dynamic data shall be submitted that is NOT unique to the machine and is also not part of the software infrastructure or executed flow. It contains information about which software to benchmark and how to dynamically alter the measurement.
 
@@ -63,8 +63,8 @@ Metrics should always be added through a new metrics provider.
 A metric provider should always have:
 
 - **metric-provider-binary** - A binary or script that captures metrics from somewhere in the host system (for instance procfs for CPU utilization)
-  - This file should **always** work standalone and not require a running GMT. Very often this is a native compiled C files.
-  - See also the `libs/c` directory for some convenience library files that ship with GMT.
+    - This file should **always** work standalone and not require a running GMT. Very often this is a native compiled C files.
+    - See also the `libs/c` directory for some convenience library files that ship with GMT.
 - **provider.py** - File containing Python class derived from *BaseMetricProvider* which implements how data is ingested into GMT
 - **README.md** - An info file specifying what is the ouput of the metric provider in terms of unit and dimension as well as how to execute it on a CLI and what arguments exist.
 
