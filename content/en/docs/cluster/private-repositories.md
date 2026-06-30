@@ -116,3 +116,22 @@ python3 runner.py \
   --filename usage_scenario.yml \
   --ssh-private-key ~/.ssh/id_ed25519
 ```
+
+## Use the SSH URL, not the HTTPS URL
+
+{{< callout context="caution" icon="outline/alert-triangle" >}}
+When measuring a private repository you **must** supply the SSH URL (`git@github.com:owner/repo.git`), not the HTTPS URL (`https://github.com/owner/repo`). The SSH key configured in your settings is only used by the Git clone step; the HTTPS URL bypasses it and will fail with a "Could not find repository" error because the repository is not publicly accessible over HTTPS.
+{{< /callout >}}
+
+| Correct (SSH URL) | Wrong (HTTPS URL) |
+|---|---|
+| `git@github.com:myorg/myrepo.git` | `https://github.com/myorg/myrepo` |
+| `git@gitlab.com:myorg/myrepo.git` | `https://gitlab.com/myorg/myrepo` |
+
+You can copy the SSH URL from the repository's clone dialog on GitHub or GitLab by switching to the **SSH** tab.
+
+## Troubleshooting
+
+- **Error: "Could not find repository … Is the repo publicly accessible, not empty and does the branch … exist?"**
+
+This error appears when GMT cannot access the repository through the public API. The most common cause when using private repositories is supplying the HTTPS URL instead of the SSH URL. Switch to the SSH URL format (`git@github.com:owner/repo.git`) and retry.
