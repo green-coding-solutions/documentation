@@ -41,8 +41,6 @@ GRANT SELECT, INSERT ON TABLE carbondb_tags TO manager;
 GRANT USAGE, SELECT ON SEQUENCE carbondb_projects_id_seq TO manager;
 GRANT SELECT, INSERT ON TABLE carbondb_projects TO manager;
 
-GRANT SELECT, INSERT, DELETE ON TABLE system_logs TO manager;
-
 GRANT USAGE, SELECT ON SEQUENCE carbondb_sources_id_seq TO manager;
 GRANT SELECT, INSERT ON TABLE carbondb_sources TO manager;
 
@@ -59,7 +57,6 @@ GRANT SELECT ON TABLE runs TO manager;
 GRANT SELECT ON TABLE phase_stats TO manager;
 
 GRANT SELECT ON TABLE machines TO manager;
-
 
 -- to insert errors
 GRANT USAGE, SELECT ON SEQUENCE jobs_new_id_seq TO manager;
@@ -141,7 +138,7 @@ GRANT SELECT, USAGE on changelog_id_seq to client;
 GRANT SELECT,INSERT on warnings to client;
 GRANT SELECT, USAGE on warnings_id_seq to client;
 
-GRANT INSERT ON TABLE system_logs TO manager;
+GRANT INSERT ON TABLE system_logs TO client;
 
 ```
 
