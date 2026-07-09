@@ -119,6 +119,10 @@ Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}
 
 Also see [Resource Limits]({{< relref "/docs/measuring/resource-limits" >}}) to better understand how GMT enforces resource limits on its orchestrated containers.
 
+GMT can also verify a range of optional hardware and OS properties before each measurement run — CPU governor, turbo boost, SMT state, installed RAM, connected USB/PCI devices, RAPL power limits, and more. All are opt-in via keys under `machine:` in `config.yml`.
+
+See [Machine Baseline Checks →]({{< relref "/docs/cluster/machine-baseline-checks" >}}) for the full list and configuration reference.
+
 ### measurement
 
 - `full_docker_prune_whitelist`  **[list]**: A list of image names (without tag) or image IDs (short form) that will be whitelisted when `--full-docker-prune` is active. Images listed here will not be pruned. Useful for cluster installations where non security critical images shall be kept that take long to download.
@@ -188,7 +192,6 @@ For local installations these are to be found under [https://metrics.green-codin
     + Example: *NetworkConnectionsProxyContainerProvider*
 - `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
 - `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
-- `phase-padding` **[integer]**: Phase padding is by default applied to the end of the phase to capture the last sampling tick, which might be cut-off. GMT applies one extra tick to the end of the phase. If your phase cut-offs must me microsecond exact you can turn this off. Typically not recommended and should be left on. See [https://github.com/green-coding-solutions/green-metrics-tool/issues/1129](https://github.com/green-coding-solutions/green-metrics-tool/issues/1129) for details.
 - `dev-no-sleeps` **[integer]**: Does not sleep in between phases and for cool-down periods. Beware that this will speed up runs on the cluster but render them invalid.
 - `dev-no-optimizations` **[integer]**: De-activates running the optimizations after a measurement.
 

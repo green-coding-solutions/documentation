@@ -59,3 +59,14 @@ the `usage-scenario.yml` are run within the orchestrated application.
 In this phase the application architecture is being taken down  
 and metric providers are being stopped.  
 The system returns back to baseline and the measurement process is finished.
+
+## Phase Boundaries and Sampling
+
+Metric providers sample continuously in the background at their own configured  
+interval, independent of when a phase starts or ends. Because a phase boundary  
+can fall anywhere between two sampling ticks, the very last reading before the  
+boundary could otherwise be cut off and lost from the phase it actually belongs to.
+
+To avoid this, GMT automatically pads the end of every phase by one extra  
+sampling tick, so that a reading which happened just before the boundary is  
+still included. This is done transparently and needs no configuration.
