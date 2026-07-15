@@ -6,9 +6,18 @@ weight: 1005
 toc: false
 ---
 
-GMT can verify a set of hardware and OS properties before every measurement run. All checks are configured under the `machine:` key in `config.yml`.
+GMT can verify a set of hardware and OS properties before every measurement run. Most checks are configured under the `machine:` key in `config.yml`; a few (systemd timers, cron files, kernel watchdogs) need no configuration at all and always run on Linux — see [Unconditional Checks](#unconditional-checks) below.
 
-Every check is **opt-in**: omitting a key (or setting it to `null` / `False`) silently skips that check. A failed check emits a `WARN` and, depending on `system_check_threshold`, may abort the run.
+Every config-driven check is **opt-in**: omitting a key (leaving it unset / `null`) always skips that check, and is now reported as `INFO` (not `OK`), so a `system_check` run makes it obvious which checks are not yet configured on a given machine.
+
+For most keys, explicitly setting `false` also just skips the check, same as leaving it unset. There are two kinds of exceptions:
+
+- `cpu_smt` and `cpu_turbo_boost` are plain booleans by nature: `false` asserts the feature is **off**, `true` asserts it is **on**, and only leaving the key unset (`null`) skips the check.
+- `cpu_governor`, `cpu_scaling_driver`, and `docker_registry_url` take a string when you want to match a specific value, but `false` has a special meaning for them — it asserts that the feature must be **absent** altogether (e.g. "no scaling governor is active on any core") rather than skipping the check.
+
+A failed check emits a `WARN` and, depending on `system_check_threshold`, may abort the run.
+
+If you don't yet know the right value for a given key, each section below shows the exact command to read it off the current machine. There is no single script that detects and writes out all of these `machine:` values at once — they describe the fixed identity/capacity of a specific machine (its RAM size, its RAPL wattage caps, its expected CPU governor, etc.) and are meant to be set once, deliberately, per machine. The one place a script *does* auto-prepare values for you is the [Unconditional Checks](#unconditional-checks) below, via the [NOP Linux script →]({{< relref "nop-linux" >}}).
 
 ## Temperature
 
@@ -59,11 +68,11 @@ To read the current limits on your machine:
 cat /sys/devices/virtual/powercap/intel-rapl/intel-rapl:*/constraint_0_power_limit_uw
 ```
 
-Also see [NOP Linux →]({{< relref "nop-linux" >}}) for how to make these limits persistent across reboots.
+Also see [Power Saving →]({{< relref "power-saving#power-capping-machines" >}}) for how to make these limits persistent across reboots via a systemd service.
 
 ## Docker Registry Mirror
 
-Confirms that the Docker daemon is configured to use a specific registry mirror (e.g. a local cache).
+Confirms that the Docker daemon's registry mirror configuration matches what you expect.
 
 ```yaml
 machine:
@@ -71,6 +80,9 @@ machine:
 ```
 
 The check runs `docker info` and looks for the URL in the `Registry Mirrors` section.
+
+Set `docker_registry_url: false` to instead assert that **no** registry mirror is configured at all — the check then fails if a `Registry Mirrors:` section is present in `docker info` output.
+
 Also see [Container Registry →]({{< relref "container-registry" >}}).
 
 ## CPU Core Count
@@ -140,7 +152,7 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governo
 sudo cpupower frequency-set -g performance
 ```
 
-Also see [NOP Linux →]({{< relref "nop-linux" >}}).
+Set `cpu_governor: false` to instead assert that **no** core exposes a `scaling_governor` file at all (i.e. cpufreq is not active/available on this machine).
 
 ## CPU Frequency
 
@@ -160,7 +172,9 @@ machine:
   cpu_scaling_driver: "intel_pstate"   # or "acpi-cpufreq", "cppc_cpufreq", etc.
 ```
 
-A different driver can apply different power and frequency policies even when the governor setting appears identical.
+Reads `/sys/devices/system/cpu/cpu*/cpufreq/scaling_driver`. A different driver can apply different power and frequency policies even when the governor setting appears identical.
+
+Set `cpu_scaling_driver: false` to instead assert that **no** core exposes a `scaling_driver` file at all.
 
 ## SMT / Hyper-Threading
 
@@ -193,36 +207,101 @@ To disable Turbo Boost (Intel):
 echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
 ```
 
-## System-wide Systemd Timers
+## Unconditional Checks
 
-This check runs as root and warns when any active system-wide `systemd` timer is detected. Timers can wake the system and create measurement noise.
+The following three checks need **no** `config.yml` entry at all — they always run on Linux (they are skipped, returning `None`/`OK`, on macOS and Windows) and simply verify that nothing on the machine can silently interrupt or bias a measurement.
 
-This check is not configured via `config.yml` — it always runs on Linux. To inspect active timers:
+The [NOP Linux script →]({{< relref "nop-linux" >}}) auto-prepares a machine so that all three of these pass: it disables/masks system and user `systemd` timers, deletes all cron files, and zeroes out the kernel watchdog sysctls, in addition to disabling NTP and removing swap-adjacent packages. Run it once on a fresh cluster machine instead of doing the steps below by hand.
+
+### System-wide Systemd Timers
+
+Runs as root and warns when any active system-wide `systemd` timer is detected. Timers can wake the system and create measurement noise. To inspect active timers:
 
 ```sh
 systemctl --all list-timers
 ```
 
-Also see [NOP Linux →]({{< relref "nop-linux" >}}) for a full list of services and timers to disable on cluster machines.
+### Cron Files
+
+Runs as root and warns when any cron file is found under `/var/spool/cron` or `/etc/cron*`. To inspect and remove them:
+
+```sh
+ls -la /etc/cron* /var/spool/cron* 2>/dev/null
+sudo rm -fR /etc/cron* /var/spool/cron*
+```
+
+### Kernel Watchdog
+
+Warns when the kernel's hard/soft lockup watchdog is active (any of `kernel.watchdog`, `kernel.nmi_watchdog`, or `kernel.soft_watchdog` reads non-zero). These watchdogs periodically fire NMIs/interrupts to detect a hung kernel, which can add noise to measurements.
+
+To check the current values:
+
+```sh
+sysctl kernel.watchdog kernel.nmi_watchdog kernel.soft_watchdog
+```
+
+To disable them immediately (until the next reboot):
+
+```sh
+sudo sysctl -w kernel.watchdog=0 kernel.nmi_watchdog=0 kernel.soft_watchdog=0
+```
+
+To make this persist across reboots, drop a file in `/etc/sysctl.d/` and apply it:
+
+```sh
+cat <<'EOF' | sudo tee /etc/sysctl.d/99-gmt-watchdog.conf
+kernel.watchdog = 0
+kernel.nmi_watchdog = 0
+kernel.soft_watchdog = 0
+EOF
+sudo sysctl --system
+```
 
 ---
 
 ## All checks at a glance
 
-| Config key | Default | Severity |
-|---|---|---|
-| `base_temperature_{chip,feature,value}` | `False` (skipped) | WARN (blocks run until stable) |
-| `rapl_power_capping.package` | `null` (skipped) | WARN |
-| `rapl_power_capping.dram` | `null` (skipped) | WARN |
-| `rapl_power_capping.psys` | `null` (skipped) | WARN |
-| `docker_registry_url` | `null` (skipped) | WARN |
-| `cpu_cores` | `null` (skipped) | WARN |
-| `dram_gb` | `null` (skipped) | WARN |
-| `usb_devices` | absent (skipped) | WARN |
-| `pci_devices` | absent (skipped) | WARN |
-| `cpu_governor` | `null` (skipped) | WARN |
-| `cpu_frequency_mhz` | `null` (skipped) | WARN |
-| `cpu_scaling_driver` | `null` (skipped) | WARN |
-| `cpu_smt` | `null` (skipped) | WARN |
-| `cpu_turbo_boost` | `null` (skipped) | WARN |
-| systemd timers (root, always on) | — | WARN |
+Leaving a config-driven key unset (or `null`) always reports `INFO` — not `OK` — so it's visible at a glance which checks aren't configured yet. Checks marked "assert absence" in the last column treat `false` specially: instead of skipping, they require the feature to be completely absent from the machine.
+
+| Config key | Unset behaviour | Severity | `false` behaviour |
+|---|---|---|---|
+| `base_temperature_{chip,feature,value}` | `INFO` (skipped) | WARN (blocks run until stable) | skipped |
+| `rapl_power_capping.package` | `INFO` (skipped) | WARN | skipped |
+| `rapl_power_capping.dram` | `INFO` (skipped) | WARN | skipped |
+| `rapl_power_capping.psys` | `INFO` (skipped) | WARN | skipped |
+| `docker_registry_url` | `INFO` (skipped) | WARN | assert absence |
+| `cpu_cores` | `INFO` (skipped) | WARN | skipped |
+| `dram_gb` | `INFO` (skipped) | WARN | skipped |
+| `usb_devices` | `INFO` (skipped) | WARN | skipped |
+| `pci_devices` | `INFO` (skipped) | WARN | skipped |
+| `cpu_governor` | `INFO` (skipped) | WARN | assert absence |
+| `cpu_frequency_mhz` | `INFO` (skipped) | WARN | skipped |
+| `cpu_scaling_driver` | `INFO` (skipped) | WARN | assert absence |
+| `cpu_smt` | `INFO` (skipped) | WARN | asserts SMT is off |
+| `cpu_turbo_boost` | `INFO` (skipped) | WARN | asserts boost is off |
+
+| Unconditional check (no config key, always on for Linux) | Severity |
+|---|---|
+| systemd timers | WARN |
+| cron files | WARN |
+| kernel watchdog | WARN |
+
+## Auto-Dump template script
+
+If you want to get a quick template of the current settings you can run this `bash` script (tested only on Ubuntu):
+
+```bash
+echo "  cpu_cores: $(nproc)"
+echo "  cpu_frequency_mhz: $(grep -m1 MHz /proc/cpuinfo | awk -F: '{printf "%.0f", $2}')"
+echo -e "  rapl_power_capping:\n    package: $(echo "scale=2; $(cat /sys/devices/virtual/powercap/intel-rapl/intel-rapl\:0/constraint_0_power_limit_uw) / 1000000" | bc)"
+echo "  dram_gb: $(lsmem | awk '/Total online memory:/{print $NF}' | tr -d 'GiB')"
+echo "  cpu_smt: false"
+echo "  cpu_turbo_boost: false"
+echo "  cpu_governor: $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null || echo "false")"
+echo "  cpu_scaling_driver: $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver 2>/dev/null || echo "false")"
+echo "  docker_registry_url: http://192.168.30.10:5000/"
+echo "  usb_devices:"
+lsusb | awk '{print "    - " $6}'
+echo "  pci_devices:"
+lspci | awk -F': ' '{print "    - \"" $2 "\""}'
+```
