@@ -119,7 +119,7 @@ Please see [cluster installation →]({{< relref "/docs/cluster/installation" >}
 
 Also see [Resource Limits]({{< relref "/docs/measuring/resource-limits" >}}) to better understand how GMT enforces resource limits on its orchestrated containers.
 
-GMT can also verify a range of optional hardware and OS properties before each measurement run — CPU governor, turbo boost, SMT state, installed RAM, connected USB/PCI devices, RAPL power limits, and more. All are opt-in via keys under `machine:` in `config.yml`.
+GMT can also verify a range of optional hardware and OS properties before each measurement run — CPU governor, turbo boost, SMT state, installed RAM, connected USB/PCI devices, RAPL power limits, and more. All are opt-in via keys under `machine:` in `config.yml`; a couple of checks (systemd timers, cron files, kernel watchdog) need no key at all and always run on Linux.
 
 See [Machine Baseline Checks →]({{< relref "/docs/cluster/machine-baseline-checks" >}}) for the full list and configuration reference.
 
