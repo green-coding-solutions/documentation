@@ -129,11 +129,32 @@ and only then run your benchmark workload.
 Power Capping can be done by using *RAPL* to limit power draw of the machines. It is recommended to set short and
 long-term power to the same value for better explainability.
 
-To persist it it is best to create a systemd-tmpfile rule:
+To persist it across reboots, do **not** use a `systemd-tmpfiles` `w` rule: `systemd-tmpfiles-setup.service` runs very
+early at boot and can race with the `intel_rapl`/`intel_rapl_msr` kernel modules being loaded, so the write can
+silently fail to apply on some machines. Instead create a small oneshot systemd service that is ordered after the
+RAPL sysfs interface is guaranteed to exist:
 
 ```bash
 # This will limit power constraint to 75 W for short term and long power.
-echo "w /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw - - - - 75000000" | sudo tee /etc/tmpfiles.d/rapl.conf
-echo "w /sys/class/powercap/intel-rapl:0/constraint_1_power_limit_uw - - - - 75000000" | sudo tee -a /etc/tmpfiles.d/rapl.conf
-sudo systemd-tmpfiles --create
+sudo tee /etc/systemd/system/rapl-power-cap.service > /dev/null <<'EOF'
+[Unit]
+Description=Set RAPL power capping limits
+After=sysinit.target
+Before=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh -c 'echo 75000000 > /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw'
+ExecStart=/bin/sh -c 'echo 75000000 > /sys/class/powercap/intel-rapl:0/constraint_1_power_limit_uw'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now rapl-power-cap.service
 ```
+
+This also makes it trivial to verify the limit was actually applied: `systemctl status rapl-power-cap.service` will
+report a failure if the sysfs path did not exist or the write was rejected, which a `tmpfiles.d` rule does not.
