@@ -166,6 +166,9 @@ GRANT UPDATE ON public.carbondb_sources TO manager;
 GRANT UPDATE ON public.carbondb_tags TO manager;
 GRANT UPDATE ON public.carbondb_types TO manager;
 
+GRANT UPDATE (latitude, longitude, carbon_intensity_g, carbon_ug) ON ci_measurements TO manager;
+GRANT UPDATE (latitude, longitude, carbon_intensity_g, operational_carbon_ug) ON hog_simplified_measurements TO manager;
+
 ```
 
 To complement the configuration you need also have a different `config.yml` file present to read the credentials from.
