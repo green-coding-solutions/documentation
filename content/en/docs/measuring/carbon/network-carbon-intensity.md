@@ -34,7 +34,7 @@ You can configure the network energy intensity as part of the [SCI]({{< relref "
 
 ```yml
 sci:
-    N: 0.001875 # unit: kWh/GB
+    N: 0.04106063 # unit: kWh/GB
 ```
 
 GMT calculates the network carbon intensity as:

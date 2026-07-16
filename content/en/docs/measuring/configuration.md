@@ -43,8 +43,9 @@ cluster:
   client:
     sleep_time_no_job: 300
     jobs_processing: "random"
-    shutdown_on_job_no: False
     update_os_packages: True
+    # the value is passed to systemctl, so it must be a verb like "suspend" or "poweroff". False disables it
+    shutdown_on_job_no: suspend
     reboot_after_seconds: False
     # These two parameters have only effect in cluster mode. When using CLI they will be set via flags --docker-prune and --full-docker-prune only
     docker_prune: True
@@ -56,15 +57,25 @@ cluster:
       name: "Measurement control Workload"
       uri: "https://github.com/green-coding-solutions/measurement-control-workload"
       filename: "usage_scenario.yml"
-      branch: "main"
+      branch: "event-bound"
       comparison_window: 5
-      threshold: 0.01
       phase: "004_[RUNTIME]"
       metrics:
-        - "psu_energy_ac_mcp_machine"
-        - "psu_power_ac_mcp_machine"
-        - "cpu_power_rapl_msr_component"
-        - "cpu_energy_rapl_msr_component"
+        psu_energy_ac_mcp_machine:
+          threshold: 0.01 # 1%
+          type: stddev_rel
+        psu_power_ac_mcp_machine:
+          threshold: 0.01 # 1%
+          type: stddev_rel
+        cpu_power_rapl_msr_component:
+          threshold: 0.01 # 1%
+          type: stddev_rel
+        cpu_energy_rapl_msr_component:
+          threshold: 0.01 # 1%
+          type: stddev_rel
+        network_total_cgroup_container:
+          threshold: 10000 # 10 kB
+          type: stddev
 
 machine:
   id: 1
@@ -76,22 +87,22 @@ machine:
 
 measurement:
   full_docker_prune_whitelist:
-    - gcr.io/kaniko-project/executor
-  metric-providers:
+    - martizih/kaniko:slim
+  metric_providers:
     linux:
-      cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
-        sampling_rate: 100
-      cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
-        sampling_rate: 100
-      memory.total.cgroup.container.provider.MemoryTotalCgroupContainerProvider:
-        sampling_rate: 100
-      cpu.time.cgroup.container.provider.CpuTimeCgroupContainerProvider:
-        sampling_rate: 100
+      cpu_utilization_cgroup_container:
+        sampling_rate: 99
+      cpu_energy_rapl_msr_component:
+        sampling_rate: 99
+      memory_used_cgroup_container:
+        sampling_rate: 99
+      cpu_time_cgroup_container:
+        sampling_rate: 99
     # ...
 
 admin:
   notification_email: False
-  notification_email_bcc: False
+  email_bcc: False
   error_file: False
   error_email: False
 
@@ -125,22 +136,33 @@ See [Machine Baseline Checks →]({{< relref "/docs/cluster/machine-baseline-che
 
 ### measurement
 
-- `full_docker_prune_whitelist`  **[list]**: A list of image names (without tag) or image IDs (short form) that will be whitelisted when `--full-docker-prune` is active. Images listed here will not be pruned. Useful for cluster installations where non security critical images shall be kept that take long to download.
-- `metric-providers`:
+- `full_docker_prune_whitelist`  **[list]**: A list of images that will be whitelisted when `--full-docker-prune` is active. Images listed here will not be pruned. Useful for cluster installations where non security critical images shall be kept that take long to download.
+    + Every entry is matched as a *substring* against the `repository:tag` of each local image, so a tag may be included to whitelist only a specific version. Image IDs do not work.
+- `metric_providers`:
     + `linux`/`macos`/`common` **[string]**: Specifies under what system the metric provider can run. Common implies it could run on either.
         * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
         * `METRIC_PROVIDER_NAME.sampling_rate` **[integer]**: sampling rate in ms
 
+The name of a metric provider is a flat snake_case key like `cpu_energy_rapl_msr_component`. GMT derives
+the module and the class to load from that name, so the older dotted class-path notation
+(`cpu.energy.RAPL.MSR.component.provider.CpuEnergyRaplMsrComponentProvider`) is no longer valid and
+will fail on import.
+
+All keys below a metric provider are passed to it as configuration parameters, so only supply keys
+that the provider actually accepts.
+
 Some metric providers have unique configuration params:
 
-- PsuEnergyAcXgboostSystemProvider
+- `psu_energy_ac_xgboost_machine`
+    + Requires `HW_CPUFreq`, `CPUChips`, `CPUThreads`, `TDP` and `HW_MemAmountGB`. Optional are `CPUCores`, `Hardware_Availability_Year` and `VHost_Ratio`.
+    + This provider does not sample, so it accepts **no** `sampling_rate` key. Supplying one will make the run fail.
     + Please look at the always current documentation to understand what values to plug in here: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
 
 Also note that some providers are deactivated by default, because they either need
 additional configuration parameters, extra hardware or a specially configured system.
 
 Once you have set them up you can uncomment the line. In this example for instance
-the line `psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider` and all
+the line `psu_energy_ac_xgboost_machine` and all
 the lines directly below it.
 
 ### admin
@@ -149,7 +171,7 @@ The `admin` key provides no configuration for essential configurations like for 
 email behaviour if configured
 
 - `notification_email` **[str|bool]**: This address will get an email, for any error or new project added etc.
-- `notification_email_bcc` **[str|bool]**: This email will always get a copy of every notification email sent, even for user-only mails like the "Your report is ready" mail.
+- `email_bcc` **[str|bool]**: This email will always get a copy of every notification email sent, even for user-only mails like the "Your report is ready" mail.
 - `error_file` **[str|bool]**: Takes a file path to log all the errors to it. This is disabled if False
 - `error_email` **[str|bool]**: Sends an error notification also via email. This is disabled if False
 
@@ -188,11 +210,14 @@ electricity_maps_token: 'MY_TOKEN'
 Settings that are specifc to a user and apply to all machines that you are measuring on equally are to be configured via the Dashboard.
 For local installations these are to be found under [https://metrics.green-coding.internal:9142/settings.html](https://metrics.green-coding.internal:9142/settings.html). If you use our [Hosted Service](https://metrics.green-coding.io/) you find it at [https://metrics.green-coding.io/settings.html](https://metrics.green-coding.io/settings.html)
 
-- `disabled_metric_providers` **[list]**: Providers to disable in CamelCase format.
-    + Example: *NetworkConnectionsProxyContainerProvider*
-- `flow-process-duration` **[integer]**: Max. duration in seconds for how long one flow should take. Timeout-Exception is thrown if exceeded.
-- `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
-- `dev-no-sleeps` **[integer]**: Does not sleep in between phases and for cool-down periods. Beware that this will speed up runs on the cluster but render them invalid.
-- `dev-no-optimizations` **[integer]**: De-activates running the optimizations after a measurement.
+- `disabled_metric_providers` **[list]**: Providers to disable even if they are configured on the machine. Only these two values are accepted:
+    + *network_connections_tcpdump_system*
+    + *network_connections_proxy_container*
+- `flow_process_duration` **[integer]**: Max. duration in seconds for how long one process in a flow should take. Timeout-Exception is thrown if exceeded.
+- `total_duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
+- `dev_no_sleeps` **[bool]**: Does not sleep in between phases and for cool-down periods. Beware that this will speed up runs on the cluster but render them invalid.
+- `skip_optimizations` **[bool]**: De-activates running the optimizations after a measurement.
+
+The equivalent when running the `runner.py` directly are the [runner.py switches →]({{< relref "runner-switches" >}}).
 
 <center><img style="width: 600px;" src="/img/dashboard-settings.webp" alt="Dashboard Settings for GMT Measurements"></center>

@@ -25,7 +25,7 @@ It can be used for system monitoring and tracking background processes such as t
   - `-s`: cgroup name strings separated by commas
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100 -s org.gnome.Shell@wayland.service,session-2.scope
@@ -35,13 +35,17 @@ By default the measurement interval is 100 ms.
 
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
 
-`TIMESTAMP READING CGROUP-NAME`
+`TIMESTAMP RECEIVED TRANSMITTED CGROUP-NAME`
 
 Where:
 
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The amount of network bytes (sent and received), in bytes, during the time interval
+- `RECEIVED`: The cumulative amount of bytes received, as reported by the interface counters
+- `TRANSMITTED`: The cumulative amount of bytes transmitted, as reported by the interface counters
 - `CGROUP-NAME`: The cgroup name that this reading is for
+
+The values are the raw counters. The amount of traffic during an interval is calculated as the
+difference between two consecutive readings when the log file is parsed.
 
 Any errors are printed to Stderr.
 

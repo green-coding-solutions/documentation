@@ -70,22 +70,25 @@ On macOS you have two options for metric provider setups:
 
 
 
-You will need to disable all providers and enable the:
+The metric providers are partitioned by architecture in the `config.yml`, so only the providers under the `macos:` and
+`common:` keys are loaded on a Mac. There is no need to disable the Linux providers.
+
+Under `macos:` you can enable:
 
 ```yml
-powermetrics.provider.PowermetricsProvider:
-    sampling_rate: 100
+powermetrics:
+    sampling_rate: 199 # If you set this value too low powermetrics will not be able to accommodate the timing. We recommend no lower than 199 ms
 ```
 
 Or to use the model approach use:
 
 ```yml
-  cpu.utilization.mach.system.provider.CpuUtilizationMachSystemProvider:
+  cpu_utilization_mach_system:
     sampling_rate: 99
-# and either one of the model providers
-psu.energy.ac.xgboost.machine.provider.PsuEnergyAcXgboostMachineProvider:
+# and either one of the model providers, which live under the 'common:' key
+psu_energy_ac_xgboost_machine:
     # ... including its configuration options
-psu.energy.ac.sdia.machine.provider.PsuEnergyAcSdiaMachineProvider:
+psu_energy_ac_sdia_machine:
     # ... including its configuration options
 ```
 
@@ -99,7 +102,7 @@ None of the providers provide insights into the Docker VM directly. Only host le
 You can now connect to the db directly on port 9573, which is exposed to your host system.\
 This exposure is not strictly needed for the green metrics tool to run, but is useful if you want to access the db directly. If you do not wish to do so, just remove the `9573:9573` entry in the `compose.yml` file.
 
-The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install.sh` run, and can be found in the `compose.yml` file.
+The database name is `green-coding`, user is `postgres`, and the password is what you have specified during the `install_mac.sh` run, and can be found in the `compose.yml` file.
 
 ### Dockerfiles architecture explanation:
 

@@ -14,7 +14,12 @@ You can run it like this:
 bash uninstall.sh
 ```
 
-The script will remove all installed python libraries, all docker containers and optional
+The script will remove all installed python libraries, all docker containers and images and optional
 also the pre-install requirements like docker etc.
 
-It has the option to keep your data by leaving *PostgreSQL* and it's *docker volume* installed
+It has the option to keep your data: The *PostgreSQL* container and image are always removed, but the
+*docker volume* that holds your measurement data is only removed if you confirm the prompt.
+
+{{< callout context="caution" icon="outline/alert-triangle" >}}
+As its very last step the script deletes the whole repository directory it is run from (`rm -fR`). Make sure you have copied out anything you want to keep, for example your `config.yml`, before running it.
+{{< /callout >}}

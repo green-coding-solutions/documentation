@@ -58,7 +58,7 @@ This provider uses `statvfs()` which is the POSIX-compliant version of filesyste
 
 #### Free space calculation
 
-The provider uses `f_bfree` (free blocks available to superuser) rather than `f_bavail` (free blocks available to non-privileged users) to calculate free space. This means the "used" calculation includes space reserved for the superuser, providing a more accurate representation of actual disk utilization.
+The provider uses `f_bfree` (free blocks available to superuser) rather than `f_bavail` (free blocks available to non-privileged users) to calculate free space. Since `f_bfree` counts the superuser-reserved blocks as free, the "used" calculation excludes that reserve and reports only the blocks actually consumed, providing a more accurate representation of actual disk utilization. Using `f_bavail` instead would report the untouched superuser reserve as used.
 
 #### Root filesystem monitoring
 

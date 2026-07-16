@@ -166,6 +166,9 @@ GRANT UPDATE ON public.carbondb_sources TO manager;
 GRANT UPDATE ON public.carbondb_tags TO manager;
 GRANT UPDATE ON public.carbondb_types TO manager;
 
+-- to insert errors
+GRANT USAGE, SELECT ON SEQUENCE jobs_id_seq TO manager;
+GRANT SELECT, INSERT ON TABLE jobs TO manager;
 ```
 
 To complement the configuration you need also have a different `config.yml` file present to read the credentials from.
@@ -201,6 +204,35 @@ We recommend NOT to have SMTP credentials on the machines and also connect to th
 ```sql
 CREATE USER client WITH PASSWORD 'YOUR_PASSWORD';
 
+
+GRANT SELECT,INSERT,DELETE ON TABLE jobs TO client;
+GRANT USAGE, SELECT ON SEQUENCE jobs_id_seq TO client;
+GRANT UPDATE(state) ON TABLE jobs TO client;
+
+GRANT SELECT,INSERT ON TABLE client_status TO client;
+GRANT USAGE, SELECT ON SEQUENCE client_status_id_seq TO client;
+
+GRANT SELECT(id) ON TABLE network_intercepts TO client;
+GRANT INSERT ON TABLE network_intercepts TO client;
+GRANT USAGE, SELECT ON SEQUENCE network_intercepts_id_seq TO client;
+
+GRANT SELECT, INSERT ON TABLE measurement_metrics TO client;
+GRANT USAGE, SELECT ON SEQUENCE measurement_metrics_id_seq TO client;
+
+GRANT SELECT, INSERT ON TABLE measurement_values TO client;
+GRANT USAGE, SELECT ON SEQUENCE measurement_values_id_seq TO client;
+
+GRANT INSERT ON TABLE notes TO client;
+GRANT USAGE, SELECT ON SEQUENCE notes_id_seq TO client;
+
+GRANT SELECT,INSERT ON TABLE phase_stats TO client;
+GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
+
+GRANT INSERT on cluster_changelog to client;
+GRANT SELECT, USAGE on cluster_changelog_id_seq to client;
+
+GRANT SELECT,INSERT on warnings to client;
+GRANT SELECT, USAGE on warnings_id_seq to client;
 
 GRANT SELECT ON TABLE runs TO client; -- only needs a full select if optimizations are run on the measurement machines. Otherwise can be locked down
 

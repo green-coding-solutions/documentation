@@ -14,7 +14,7 @@ Currently the following distributions have been tested and are fully supported:
 
 - Ubuntu 24.04 (Desktop and Server)
 - Ubuntu 22.04 (Desktop and Server)
-- Fedora 38
+- Fedora 43 (Desktop and Server)
 
 For the server variants we recommend installing with the *minimal* option set for a low overhead system with best reproducability of measurements and apply [NOP Linux]({{< relref "/docs/cluster/nop-linux" >}}) enhancements after.
 
@@ -25,7 +25,7 @@ The following distributions have been tested, but require manual work:
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "/docs/cluster/installation" >}}) has different names for timers)
 
 {{< callout context="note" icon="outline/info-circle" >}}
-If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-mac/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>
+If you want to develop on macOS or Windows please use the appropriate installation description: <ul><li><a href='/docs/installation/installation-macos/'>Installation on Mac</a></li><li><a href='/docs/installation/installation-windows/'>Installation on Windows (WSL)</a></li></ul>
 {{< /callout >}}
 
 ## Downloading and installing required packages
@@ -208,7 +208,7 @@ is running on port `80` or `443`
 Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`.
 
 {{< callout context="note" icon="outline/info-circle" >}}
-Note for ARM systems: Please use the '-r' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems.
+Note for ARM systems: Please use the '-R' flag, which will tell the script to not install the 'msr-tools' package. A tool that is only available on Intel and AMD systems.
 {{< /callout >}}
 
 What you might want to add:
@@ -298,7 +298,7 @@ Only a limited subset is activated by default, which are know to work guaranteed
 This is done by un-commenting the respective lines in the `config.yml`. To activate the RAPL CPU energy provider you would have to uncomment these two lines for instance:
 
 ```yml
-cpu.energy.rapl.msr.component.provider.CpuEnergyRaplMsrComponentProvider:
+cpu_energy_rapl_msr_component:
   sampling_rate: 99
 ```
 
@@ -308,7 +308,7 @@ Also - Some metric providers need extra setup before they work:
 
 ### LM-Sensors
 
-The required libraries are installed automatically via the `install-linux.sh` call. Some modifications need to be made to your `config.yml`  file though, which are detailed in the lm-sensors metric provider [documentation →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}), along with further details regarding prerequisites.
+The required libraries are installed automatically via the `install_linux.sh` call. Some modifications need to be made to your `config.yml`  file though, which are detailed in the lm-sensors metric provider [documentation →]({{< relref "/docs/measuring/metric-providers/lm-sensors" >}}), along with further details regarding prerequisites.
 
 ### XGBoost
 
@@ -371,7 +371,7 @@ The change is done in the `/docker/compose.yml` file.
 green-coding-nginx:
     [...]
     ports:
-      - 9142:80 # change this to 80:80
+      - 9142:9142 # change this to 80:9142
 ```
 
 ### SSL

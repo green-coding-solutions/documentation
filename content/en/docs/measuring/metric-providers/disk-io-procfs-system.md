@@ -57,16 +57,17 @@ The provider:
   - SCSI CD-ROM (major 11)
   - ALSA sound devices (major 116)
   - Xen virtual block devices (major 202)
-- only counts whole disk devices (minor number divisible by 16), skipping partitions
+  - Static Device Mapper devices, e.g. LVM or cryptsetup (majors 251 - 254)
+- only counts whole disk devices, skipping partitions
 - outputs statistics for each qualifying disk device
 
 #### Device filtering
 
-The provider filters out virtual and non-disk devices to focus on actual physical disk devices that consume energy. Partition devices (minor number not divisible by 16) are also skipped to avoid double-counting, as the whole disk statistics already include all partition activity.
+The provider filters out virtual and non-disk devices to focus on actual physical disk devices that consume energy. A device is detected as a partition by checking whether `/sys/dev/block/<major>:<minor>/partition` exists. Partitions are skipped to avoid double-counting, as the whole disk statistics already include all partition activity.
 
 #### Sectors vs Bytes
 
-The output is in sectors rather than bytes. To convert to bytes, multiply by the sector size (typically 512 bytes for most devices, but can vary). The sector size can be obtained from `/sys/block/<device>/queue/logical_block_size`.
+The output is in sectors rather than bytes. To convert to bytes, multiply by the sector size (typically 512 bytes for most devices, but can vary). The provider reads the sector size from `/sys/block/<device>/queue/hw_sector_size`.
 
 #### System-wide monitoring
 

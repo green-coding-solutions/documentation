@@ -27,17 +27,17 @@ Now you can choose between two modes:
 
 ## 1) Systemd Service - Client mode
 
-The `tools/client.py` program is a script that should constantly be running and that periodically checks the database if a new job has been queued for this certain machine. If no job can be retried it sleeps for a certain amount of time set in the configuration file `config.yml`:
+The `cron/client.py` program is a script that should constantly be running and that periodically checks the database if a new job has been queued for this certain machine. If no job can be retried it sleeps for a certain amount of time set in the configuration file `config.yml`:
 
 ```yml
-client:
-  sleep_time_no_job: 300
-  sleep_time_after_job: 300
+cluster:
+  client:
+    sleep_time_no_job: 300
 ```
 
-You can also set a time that the script should wait after a job has finished execution to give the system time to cool down. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune this value.
+There is no fixed cooldown time after a job. Instead the client checks the machine temperature before every job and holds the queue until the machine is back at its baseline: if the machine is hotter than `base_temperature_value` it sleeps 60 seconds and retries, and if it is 10° or more below it warms the machine up before retrying. See [Machine Baseline Checks →]({{< relref "machine-baseline-checks" >}}) for details. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune the `base_temperature_value`.
 
-After running a job the client program executes the `tools/cluster/maintenance.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the `maintenance.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
@@ -78,9 +78,11 @@ systemctl --user status green-coding-client # check status
 
 You should now see the client reporting it's status on the server. It is important to note that only the client ever talks to the server (polling). The server never tries to contact the client. This is to not create any interrupts while a measurement might be running.
 
-After running a job the client program executes the `tools/cluster/maintenance.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the maintenance script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
-This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. We recommend the following:
+The script lives in the repository as `tools/cluster/maintenance_original.py`. The installer copies it to `/usr/local/bin/green-metrics-tool/maintenance.py` and makes it owned by root, and that is the path the client actually executes.
+
+This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. The installer deliberately does *not* add this entry for you, as it is only needed in cluster mode. We recommend the following:
 
 ```bash
 echo "${USER} ALL=(ALL) NOPASSWD:$(realpath /usr/bin/python3) -I -B -S /usr/local/bin/green-metrics-tool/maintenance.py" | sudo tee /etc/sudoers.d/green-coding-cluster-maintenance
@@ -96,13 +98,15 @@ The Green Metrics Tool comes with an implemented queueing and locking mechanism.
 
 You can install a cronjob on your system to periodically call:
 
-- `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project` to measure projects in database queue
-- `python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py email` to send all emails in the database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py run` to measure runs in database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py email` to send all emails in the database queue
+
+Calling `jobs.py run` will print a deprecation warning, as this mode is only intended for CLI testing. Use the *client mode* above for production.
 
 The `jobs.py` uses the *Python* faulthandler mechanism and will also report to *STDERR* in case of a segfault.
 When running the cronjob we advice you to append all the output combined to a log file like so:
 
-`* * * * * python3 -u PATH_TO_GREEN_METRICS_TOOL/tools/jobs.py project &>> /var/log/green-metrics-jobs.log`
+`* * * * * python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py run &>> /var/log/green-metrics-jobs.log`
 
 Be sure to give the `green-metrics-jobs.log` file write access rights.
 
@@ -184,7 +188,7 @@ $ sudo nano /etc/default/grub
 
 # Change this line
 # GRUB_CMDLINE_LINUX_DEFAULT=""
-# to 
+# to
 # GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=disable acpi=force"
 
 $ sudo update-grub
