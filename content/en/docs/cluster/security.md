@@ -59,7 +59,7 @@ GRANT SELECT ON TABLE phase_stats TO manager;
 GRANT SELECT ON TABLE machines TO manager;
 
 -- to insert errors
-GRANT USAGE, SELECT ON SEQUENCE jobs_new_id_seq TO manager;
+GRANT USAGE, SELECT ON SEQUENCE jobs_id_seq TO manager;
 GRANT SELECT, INSERT ON TABLE jobs TO manager;
 ```
 
@@ -123,8 +123,11 @@ GRANT SELECT(id) ON TABLE network_intercepts TO client;
 GRANT INSERT ON TABLE network_intercepts TO client;
 GRANT USAGE, SELECT ON SEQUENCE network_intercepts_id_seq TO client;
 
-GRANT SELECT, INSERT ON TABLE measurements TO client;
-GRANT USAGE, SELECT ON SEQUENCE stats_id_seq TO client;
+GRANT SELECT, INSERT ON TABLE measurement_metrics TO client;
+GRANT USAGE, SELECT ON SEQUENCE measurement_metrics_id_seq TO client;
+
+GRANT SELECT, INSERT ON TABLE measurement_values TO client;
+GRANT USAGE, SELECT ON SEQUENCE measurement_values_id_seq TO client;
 
 GRANT INSERT ON TABLE notes TO client;
 GRANT USAGE, SELECT ON SEQUENCE notes_id_seq TO client;
@@ -132,8 +135,8 @@ GRANT USAGE, SELECT ON SEQUENCE notes_id_seq TO client;
 GRANT SELECT,INSERT ON TABLE phase_stats TO client;
 GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
 
-GRANT INSERT on changelog to client;
-GRANT SELECT, USAGE on changelog_id_seq to client;
+GRANT INSERT on cluster_changelog to client;
+GRANT SELECT, USAGE on cluster_changelog_id_seq to client;
 
 GRANT SELECT,INSERT on warnings to client;
 GRANT SELECT, USAGE on warnings_id_seq to client;

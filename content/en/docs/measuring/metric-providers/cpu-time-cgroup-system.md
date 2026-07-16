@@ -32,7 +32,7 @@ Unlike the other cgroup system metric providers, this metric provider does not c
 - args
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100 

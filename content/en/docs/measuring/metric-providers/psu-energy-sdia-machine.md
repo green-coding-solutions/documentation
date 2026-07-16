@@ -40,7 +40,7 @@ In the `config.yml` file also the *CpuUtilizationProcfsSystemProvider* must be a
 The provider cannot be run directly, it only works in conjunction with a run
 of the Green Metrics Tool.
 
-The provider reads the `/tmp/green-metrics-tool/cpu_utilization_procfs_system.log` file
+The provider reads the `/tmp/green-metrics-tool/metrics/cpu_utilization_procfs_system.log` file
 from the *CpuUtilizationProcfsSystemProvider* in order to keep overhead low and
 not to double query the utilization from the system.
 
@@ -48,7 +48,7 @@ not to double query the utilization from the system.
 
 Since this provider should not be run directly there it has no direct output.
 
-The resulting data however is the wattage for the whole machine (AC Power) in Watts.
+The resulting data however is the energy of the whole machine (AC Power) in micro Joules.
 
 This value has the same granularity as the one configured in the `config.yml` for the
 *CpuUtilizationProcfsSystemProvider*

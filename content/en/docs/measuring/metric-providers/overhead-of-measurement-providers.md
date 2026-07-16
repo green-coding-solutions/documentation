@@ -35,12 +35,12 @@ The script produces a lot of output, but what you want to look out for is:
 
 Configured reporters
 
-- PsuEnergyAcMCPMachineProvider: 99 ms sampling_rate
+- PsuEnergyAcMcpMachineProvider: 99 ms sampling_rate
 - NetworkIoCgroupContainerProvider: 99 ms sampling_rate
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
-- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- MemoryUsedCgroupContainerProvider: 99 ms sampling_rate
 - CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
 - LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
@@ -95,7 +95,7 @@ Configured reporters
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
-- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- MemoryUsedCgroupContainerProvider: 99 ms sampling_rate
 - CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
 - LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
@@ -132,7 +132,7 @@ Configured reporters
 
 ### Summary:
 
-- Used reporter for CPU energy was [MCP]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
+- Used reporter for CPU energy was [RAPL]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
 - Effective CPU energy overhead in a loaded system is **0.65 %**
 - Idle CPU energy overhead in an idle system is **126 %**
   - As stated before, use this value only for debugging in low power systems
@@ -142,12 +142,12 @@ Configured reporters
 
 Configured reporters
 
-- PsuEnergyAcMCPMachineProvider: 99 ms sampling_rate
+- PsuEnergyAcMcpMachineProvider: 99 ms sampling_rate
 - NetworkIoCgroupContainerProvider: 99 ms sampling_rate
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
-- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- MemoryUsedCgroupContainerProvider: 99 ms sampling_rate
 - CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
 - LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
@@ -198,7 +198,7 @@ Configured reporters
 - CpuEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - MemoryEnergyRaplMsrComponentProvider: 99 ms sampling_rate
 - CpuUtilizationProcfsSystemProvider: 99 ms sampling_rate
-- MemoryTotalCgroupContainerProvider: 99 ms sampling_rate
+- MemoryUsedCgroupContainerProvider: 99 ms sampling_rate
 - CpuUtilizationCgroupContainerProvider: 99 ms sampling_rate
 - LmsensorsTemperatureComponentProvider: 99 ms sampling_rate
 
@@ -235,7 +235,7 @@ Configured reporters
 
 ### Summary:
 
-- Used reporter for CPU energy was [MCP]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
+- Used reporter for CPU energy was [RAPL]({{< relref "/docs/measuring/metric-providers/cpu-energy-RAPL-MSR-component" >}})
 - The effective CPU energy overhead in a loaded system is **0.9 %**
 - The idle CPU energy overhead in an idle system is **153 %**
   - As stated before, use this value only for debugging in low power systems

@@ -37,6 +37,8 @@ Alternatively in the future we might consider running GMT as a module command (`
   - Includes DB migrations in *SQL* format to run after upgrading from one version to another
 - `optimization_providers`
   - Includes the modular *optimization providers*
+- `templates`
+  - Includes the ready-made `usage_scenario` templates for websites and AI models, the re-usable compose partials (e.g. the *Playwright* helpers) and the email templates
 - `tests`
   - Includes the *Python* unit- and E2E-tests
 - `tools`

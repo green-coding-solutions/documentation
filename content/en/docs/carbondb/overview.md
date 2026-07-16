@@ -84,7 +84,7 @@ Cronjobs are all placed in the `/cron` directory of GMT and are de-activated by 
 
 The following cron jobs are used to maintain the data in CarbonDB:
 
-- **carbondb_copy_over_and_remove_duplicates.py**: This cron job copies data from other sources (e.g., `hog_simplified_measurements`, `ci_measurements`) into the `carbondb_data_raw` table. It also backfills missing carbon intensity data.
+- **carbondb_copy_over_and_remove_duplicates.py**: This cron job copies data from other sources (e.g., `hog_simplified_measurements`, `ci_measurements`) into the `carbondb_data_raw` table. It also de-duplicates the data and validates that the copied over data is complete.
 - **carbondb_compress.py**: This cron job compresses the raw data in `carbondb_data_raw` into daily sums. It also normalizes the data by transforming text fields into integers and storing them in separate tables.
 - **backfill_geo.py**: This cron job will backfill geo information for IPs. They are needed to backfill carbon intensity which works on Geo coordinates.
   + The cron job only backfills IP data up to 30 days. Then it considers information to be outdate

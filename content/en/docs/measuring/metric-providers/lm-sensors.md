@@ -62,7 +62,7 @@ Core 3:        +29.0°C  (high = +100.0°C, crit = +100.0°C)
 Your config could be:
 
 ```bash
-lmsensors.temperature.provider.LmsensorsTempComponentProvider:
+lmsensors_temperature_component:
     sampling_rate: 100
     chips: ['coretemp-isa-0000']
     features: ['Package id 0', 'Core 0', 'Core 1', 'Core 2', 'Core 3']
@@ -73,7 +73,7 @@ As the matching is open ended you could also only use `'Core'` instead of naming
 ### Classname
 
 - `LmsensorsFanComponentProvider`
-- `LmsensorsTempComponentProvider`
+- `LmsensorsTemperatureComponentProvider`
 
 these both extend the `LmsensorsProvider` which makes it very easy to add new specific providers. We need to separate
 fan and temperature because they both come in different units. Temp in °C or °F and fan speeds in RPM.
@@ -81,7 +81,7 @@ fan and temperature because they both come in different units. Temp in °C or °
 ### Metric Name
 
 - `lmsensors_fan_component`
-- `lmsenors_temp_component`
+- `lmsensors_temperature_component`
 
 ### Input Parameters
 
@@ -99,7 +99,7 @@ when configuring.
 
 The tool also accepts more general parameters:
 
-- `-i`: interval in milliseconds. By default the measurement interval is 100 ms.
+- `-i`: interval in milliseconds. By default the measurement interval is 1000 ms.
 
 - `-s`: it is possible to pass in a `lm-sensors` config file if you don't want to use the system one.
 

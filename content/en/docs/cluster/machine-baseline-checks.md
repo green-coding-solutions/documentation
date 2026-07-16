@@ -50,7 +50,7 @@ Also see [Accuracy Control →]({{< relref "accuracy-control" >}}).
 
 ## RAPL Power Capping
 
-Verifies that RAPL power limits are at or below the values you have locked on the machine. Ensures a consistent thermal envelope across cluster nodes.
+Verifies that the RAPL power limits locked on the machine are **exactly equal** to the values you configure. Ensures a consistent thermal envelope across cluster nodes.
 
 ```yaml
 machine:
@@ -60,12 +60,21 @@ machine:
     psys: 65       # Watts — platform-wide limit (if available)
 ```
 
-Each sub-key is independent; omit any you do not want to enforce. Values are compared against the `constraint_0_power_limit_uw` sysfs files under `/sys/devices/virtual/powercap/intel-rapl/`.
+Each sub-key is independent; omit any you do not want to enforce. The configured Watt value is converted to microwatts and compared for exact equality against **every** limit the domain exposes — both the long-term (`constraint_0`) and the short-term (`constraint_1`) limit, wherever present. This transitively also catches the two limits disagreeing with each other, which is why we recommend setting both to the same value.
+
+Domains are discovered under `/sys/devices/virtual/powercap/intel-rapl/`, including nested ones such as `intel-rapl:0:1` for DRAM. Each domain's `name` file classifies it as `package`, `dram` or `psys`, and its `constraint_N_name` files identify which constraint is the long- and which the short-term limit. Domains that expose only a long-term limit — typical for `dram` and `psys` — are checked on that limit alone.
 
 To read the current limits on your machine:
 
 ```sh
-cat /sys/devices/virtual/powercap/intel-rapl/intel-rapl:*/constraint_0_power_limit_uw
+for name in /sys/devices/virtual/powercap/intel-rapl/intel-rapl:*/name \
+            /sys/devices/virtual/powercap/intel-rapl/intel-rapl:*/*/name; do
+    domain=$(dirname "$name")
+    echo "$(basename "$domain") ($(cat "$name")):"
+    for constraint in "$domain"/constraint_*_name; do
+        echo "    $(cat "$constraint") = $(cat "${constraint%_name}_power_limit_uw") uW"
+    done
+done
 ```
 
 Also see [Power Saving →]({{< relref "power-saving#power-capping-machines" >}}) for how to make these limits persistent across reboots via a systemd service.
@@ -213,12 +222,13 @@ The following three checks need **no** `config.yml` entry at all — they always
 
 The [NOP Linux script →]({{< relref "nop-linux" >}}) auto-prepares a machine so that all three of these pass: it disables/masks system and user `systemd` timers, deletes all cron files, and zeroes out the kernel watchdog sysctls, in addition to disabling NTP and removing swap-adjacent packages. Run it once on a fresh cluster machine instead of doing the steps below by hand.
 
-### System-wide Systemd Timers
+### Systemd Timers
 
-Runs as root and warns when any active system-wide `systemd` timer is detected. Timers can wake the system and create measurement noise. To inspect active timers:
+Warns when any active `systemd` timer is detected. Both scopes are checked: system-wide timers (read via the root helper) and timers in the invoking user's own `systemd` scope. Timers can wake the system and create measurement noise. To inspect active timers:
 
 ```sh
-systemctl --all list-timers
+sudo systemctl --all list-timers    # system-wide scope
+systemctl --user --all list-timers  # user scope
 ```
 
 ### Cron Files

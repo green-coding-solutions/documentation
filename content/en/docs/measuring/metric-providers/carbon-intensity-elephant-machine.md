@@ -44,7 +44,7 @@ The provider must be configured in the `config.yml`:
 
 ```yml
 measurement:
-  metric-providers:
+  metric_providers:
     common:
       carbon_intensity_elephant_machine:
         region: 'DE'
@@ -83,8 +83,8 @@ Each row consists of:
 - `detail_name`: The name of the Elephant carbon provider that produced the value
   (e.g. `bundesnetzagentur_de`). For carbon simulation runs this is the simulation UUID.
 
-Any errors that occur while talking to the Elephant service are appended to the provider's stderr
-buffer and can be inspected in the run details in the frontend.
+The provider does not have a stderr buffer. Any error that occurs while talking to the Elephant
+service is raised as an exception and aborts the run.
 
 ### How it works
 
@@ -95,8 +95,7 @@ are read at the end of the run it issues a single HTTP GET request to
 <protocol>://<host>:<port>/carbon-intensity/history
 ```
 
-with the configured `region`, the start/end times of the run, the `provider` filter, and
-`update=true` so that Elephant re-fetches stale data from its upstream sources before responding.
+with the configured `region`, the start/end times of the run and the `provider` filter.
 The response is a list of `{time, carbon_intensity, provider}` entries which are sorted, rounded
 to integer values and expanded to the configured `sampling_rate`.
 

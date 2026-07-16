@@ -16,7 +16,7 @@ NTP.
 The goal is to keep the system still very close to a production / user setup, but remove invariances from the system without
 decreasing idle power draw and skewing results.
 
-Please further note that you must execute certain service still periodically. The [client.py](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/cron/client.py) cluster service will periodically run [a cleanup script](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/tools/cluster/cleanup_original.py)
+Please further note that you must execute certain service still periodically. The [client.py](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/cron/client.py) cluster service will periodically run [a maintenance script](https://github.com/green-coding-solutions/green-metrics-tool/blob/main/tools/cluster/maintenance_original.py)
 
 ```bash
 #!/bin/bash

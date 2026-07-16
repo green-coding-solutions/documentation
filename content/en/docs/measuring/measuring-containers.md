@@ -54,8 +54,3 @@ We currently have a beta feature to be launched in Summer 2025 that utilizes AMD
 The GMT will utilize a `taskset` to pin the container to a distinct core. Since no other processes are running on your benchmarking systems in [Green Metrics Tool Cluster Hosted Service →]({{< relref "/docs/measuring/measuring-service" >}}) the values are very reliable.
 
 Private beta opens Summer 2025. If you are interested shoot us an email to [info@green-coding.io](mailto:info@green-coding.io)
-
-- The energy of the browser is measured to display and render the page
-- The network transfer energy is measured that was needed to download the HTML and page assets
-
-To isolate this as best as possible GMT orchestrates a reverse proxy, warms up the cache by pre-loading the full page once and only then does the final measurement.

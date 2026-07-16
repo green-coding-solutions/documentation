@@ -75,7 +75,7 @@ References:
 To be able to access the frontend and the API of the GMT, you have to add the URLs to the hosts file on your Windows host system: `C:\Windows\System32\drivers\etc\hosts`
 
 ```plain
-127.0.0.1 green-coding-postgres-container
+127.0.0.1 green-coding-postgres-container green-coding-redis-container
 127.0.0.1 api.green-coding.internal metrics.green-coding.internal
 ```
 
@@ -109,23 +109,23 @@ With WSL hardware-near metric providers like RAPL are not available.
 However, for testing your usage scenarios you can use at least the following metric providers by uncommenting them in the `config.yml:
 
 - System CPU utilization via procfs
-    - Config: `cpu.utilization.procfs.system.provider.CpuUtilizationProcfsSystemProvider`
+    - Config: `cpu_utilization_procfs_system`
     - Documentation: [Measuring/Metric Providers/CPU % - procfs - system]({{< relref "/docs/measuring/metric-providers/cpu-utilization-procfs-system" >}})
 - Container CPU utilization via cgroupv2
-    - Config: `cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider`
+    - Config: `cpu_utilization_cgroup_container`
     - Documentation: [Measuring/Metric Providers/CPU % - cgroup - container]({{< relref "/docs/measuring/metric-providers/cpu-utilization-cgroup-container" >}})
 - Container memory usage via cgroupv2
-    - Config: `memory.used.cgroup.container.provider.MemoryUsedCgroupContainerProvider`
+    - Config: `memory_used_cgroup_container`
     - Documentation: [Measuring/Metric Providers/Memory Used - cgroup - container]({{< relref "/docs/measuring/metric-providers/memory-used-cgroup-container" >}})
 - Container network I/O via cgroupv2
     - **only available with native Docker installation, not Docker Desktop for Windows**
-    - Config: `network.io.cgroup.container.provider.NetworkIoCgroupContainerProvider`
+    - Config: `network_io_cgroup_container`
     - Documentation: [Measuring/Metric Providers/Network IO - cgroup - container]({{< relref "/docs/measuring/metric-providers/network-io-cgroup-container" >}})
 - Container disk I/O via cgroupv2
-    - Config: `disk.io.cgroup.container.provider.DiskIoCgroupContainerProvider`
+    - Config: `disk_io_cgroup_container`
     - Documentation: tbd.
 - Machine energy consumption via XGBoost (ML-based estimation)
-    - Config: `psu.energy.ac.xgboost.machine.provider.PsuEnergyAcXgboostMachineProvider`
+    - Config: `psu_energy_ac_xgboost_machine`
     - Documentation: [Measuring/Metric Providers/PSU Energy - AC - XGBoost - Machine]({{< relref "/docs/measuring/metric-providers/psu-energy-xgboost-machine" >}})
 
 You have to disable all other providers in your `config.yml`.

@@ -38,16 +38,20 @@ Please look at [RAPL installation]({{< relref "/docs/installation/installation-l
 
 - Args:
   - i: specifies interval in milliseconds between measurements
+  - p: measure the *PSYS* domain instead of the CPU package
+
+Without `-p` the binary measures the CPU package. The Green Metrics Tool always adds this switch, so
+when calling the binary directly you have to supply it yourself:
 
 ```bash
-./metric-provider-binary -i 100
+./metric-provider-binary -i 100 -p
 ```
 
 ### Output
 
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
 
-`TIMESTAMP ENERGY_OUTPUT`
+`TIMESTAMP ENERGY_OUTPUT PSYS_ID`
 
 Where:
 
@@ -70,11 +74,15 @@ Any errors are printed to Stderr.
 
 We use a modified version of the open source code found here: ([github](https://github.com/deater/uarch-configure/blob/master/rapl-read/rapl-read.c))
 
-First we check if the CPU is compatible by reading the cpu info from `/proc/cpuinfo` and checking against the following list of supported CPUs:
+First we check if the CPU is compatible by reading the cpu info from `/proc/cpuinfo`. The check accepts *Intel* CPUs of family 6 as well as *AMD* CPUs of family 17h / 19h. Any other vendor or family aborts the provider.
+
+The source knows the following CPU models, which are used to determine which RAPL domains a chip exposes:
 
 ```txt
-CPU_SANDYBRIDGE, CPU_SANDYBRIDGE_EP, CPU_IVYBRIDGE, CPU_IVYBRIDGE_EP, CPU_HASWELL, CPU_HASWELL_ULT, CPU_HASWELL_GT3E, CPU_HASWELL_EP, CPU_BROADWELL, CPU_BROADWELL_GT3E, CPU_BROADWELL_EP, CPU_BROADWELL_DE, CPU_SKYLAKE, CPU_SKYLAKE_HS, CPU_SKYLAKE_X, CPU_KNIGHTS_LANDING, CPU_KNIGHTS_MILL, CPU_KABYLAKE_MOBILE, CPU_KABYLAKE, CPU_ATOM_SILVERMONT, CPU_ATOM_AIRMONT, CPU_ATOM_MERRIFIELD, CPU_ATOM_MOOREFIELD, CPU_ATOM_GOLDMONT, CPU_ATOM_GEMINI_LAKE, CPU_TIGER_LAKE
+CPU_SANDYBRIDGE, CPU_SANDYBRIDGE_EP, CPU_IVYBRIDGE, CPU_IVYBRIDGE_EP, CPU_HASWELL, CPU_HASWELL_ULT, CPU_HASWELL_GT3E, CPU_HASWELL_EP, CPU_BROADWELL, CPU_BROADWELL_GT3E, CPU_BROADWELL_EP, CPU_BROADWELL_DE, CPU_SKYLAKE, CPU_SKYLAKE_HS, CPU_SKYLAKE_X, CPU_KNIGHTS_LANDING, CPU_KNIGHTS_MILL, CPU_KABYLAKE_MOBILE, CPU_KABYLAKE, CPU_ATOM_SILVERMONT, CPU_ATOM_AIRMONT, CPU_ATOM_MERRIFIELD, CPU_ATOM_MOOREFIELD, CPU_ATOM_GOLDMONT, CPU_ATOM_GEMINI_LAKE, CPU_ATOM_DENVERTON, CPU_TIGER_LAKE, CPU_AMD_FAM17H
 ```
+
+Passing the CPU check does not guarantee that the *PSYS* domain is actually present, as it is read from the Intel `MSR_PLATFORM_ENERGY_STATUS` register. The provider therefore verifies on startup that the register returns a plausible value and aborts if it does not.
 
 It reads the values from `/dev/cpu/%d/msr`
 
