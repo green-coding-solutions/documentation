@@ -39,7 +39,6 @@ GRANT INSERT ON
     carbondb_data_raw,
     ip_data,
     hog_top_processes,
-    client_status,
     carbon_intensity,
     system_logs,
 TO server;
@@ -51,7 +50,6 @@ GRANT USAGE, SELECT ON SEQUENCE watchlist_id_seq to SERVER;
 GRANT USAGE, SELECT ON SEQUENCE carbondb_data_raw_id_seq to SERVER;
 GRANT USAGE, SELECT ON SEQUENCE ip_data_id_seq to SERVER;
 GRANT USAGE, SELECT ON SEQUENCE hog_top_processes_id_seq to SERVER;
-GRANT USAGE, SELECT ON SEQUENCE client_status_id_seq to SERVER;
 GRANT USAGE, SELECT ON SEQUENCE carbon_intensity to SERVER;
 GRANT USAGE, SELECT ON SEQUENCE system_logs to SERVER;
 
@@ -217,6 +215,8 @@ REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public FROM client;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM client;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON SEQUENCES FROM client;
 
+GRANT DELETE on TABLE jobs TO client;
+
 GRANT INSERT ON jobs TO client;
 GRANT INSERT ON measurement_metrics TO client;
 GRANT INSERT ON measurement_values TO client;
@@ -228,6 +228,8 @@ GRANT INSERT ON runs TO client;
 GRANT INSERT ON system_logs TO client;
 GRANT INSERT ON warnings TO client;
 GRANT INSERT ON machines TO client;
+GRANT INSERT ON client_status to client;
+GRANT INSERT ON cluster_changelog to client;
 
 GRANT USAGE, SELECT ON SEQUENCE jobs_id_seq TO client;
 GRANT USAGE, SELECT ON SEQUENCE measurement_metrics_id_seq TO client;
@@ -239,9 +241,9 @@ GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
 GRANT USAGE, SELECT ON SEQUENCE system_logs_id_seq TO client;
 GRANT USAGE, SELECT ON SEQUENCE warnings_id_seq TO client;
 GRANT USAGE, SELECT ON SEQUENCE machines_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE client_status_id_seq to client;
+GRANT USAGE, SELECT ON SEQUENCE cluster_changelog_id_seq to client;
 
-
-GRANT SELECT (branch, carbon_simulation, category_ids, commit_hash, created_at, filename, id, machine_id, message, name, run_id, state, type, updated_at, url, usage_scenario_variables, user_id) ON jobs TO client; -- no email
 GRANT SELECT ON TABLE runs TO client; -- only needs a full select if optimizations are run on the measurement machines. Otherwise can be locked down
 
 
@@ -256,7 +258,7 @@ GRANT SELECT ON phase_stats TO client;
 GRANT SELECT ON runs TO client;
 GRANT SELECT ON users TO client;
 GRANT SELECT ON warnings TO client;
-
+GRANT SELECT jobs TO client; -- currently needs email as it is sending the customer mail - improvement for future to decouple
 
 GRANT UPDATE (capabilities) ON users TO client;
 GRANT UPDATE (containers, container_dependencies, end_measurement, failed, gmt_hash, logs, machine_id, machine_specs, measurement_config, phases, start_measurement, usage_scenario, usage_scenario_variables) ON runs TO client;
