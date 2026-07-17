@@ -22,11 +22,13 @@ REVOKE ALL PRIVILEGES ON DATABASE "green-coding" FROM server;
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM server;
 REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM server;
 REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public FROM server;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM server;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON SEQUENCES FROM server;
 
 GRANT DELETE ON
-    jobs,
-    system_logs,
-    watchlist
+    jobs, -- clear old jobs
+    system_logs, -- delete system_logs in cluster-status
+    watchlist -- delete watchlist item via API
  TO server;
 
 GRANT INSERT ON
@@ -108,10 +110,14 @@ REVOKE ALL PRIVILEGES ON DATABASE "green-coding" FROM manager;
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM manager;
 REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM manager;
 REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public FROM manager;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM manager;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON SEQUENCES FROM manager;
+
 
 GRANT TEMPORARY ON DATABASE "green-coding" TO manager;
 
-GRANT DELETE ON carbondb_data_raw TO manager;
+GRANT DELETE ON carbondb_data_raw TO manager; -- carbondb compress
+GRANT DELETE ON TABLE measurement_metrics, measurement_values to manager; -- delete expired data
 
 GRANT INSERT ON carbon_intensity TO manager;
 GRANT INSERT ON carbondb_data TO manager;
@@ -158,13 +164,13 @@ GRANT SELECT ON users TO manager;
 GRANT SELECT ON warnings TO manager;
 
 
-GRANT UPDATE ON public.carbondb_data TO manager;
-GRANT UPDATE ON public.carbondb_data_raw TO manager;
-GRANT UPDATE ON public.carbondb_machines TO manager;
-GRANT UPDATE ON public.carbondb_projects TO manager;
-GRANT UPDATE ON public.carbondb_sources TO manager;
-GRANT UPDATE ON public.carbondb_tags TO manager;
-GRANT UPDATE ON public.carbondb_types TO manager;
+GRANT UPDATE ON carbondb_data TO manager;
+GRANT UPDATE ON carbondb_data_raw TO manager;
+GRANT UPDATE ON carbondb_machines TO manager;
+GRANT UPDATE ON carbondb_projects TO manager;
+GRANT UPDATE ON carbondb_sources TO manager;
+GRANT UPDATE ON carbondb_tags TO manager;
+GRANT UPDATE ON carbondb_types TO manager;
 
 GRANT UPDATE (latitude, longitude, carbon_intensity_g, carbon_ug) ON ci_measurements TO manager;
 GRANT UPDATE (latitude, longitude, carbon_intensity_g, operational_carbon_ug) ON hog_simplified_measurements TO manager;
@@ -204,58 +210,59 @@ We recommend NOT to have SMTP credentials on the machines and also connect to th
 ```sql
 CREATE USER client WITH PASSWORD 'YOUR_PASSWORD';
 
-
-GRANT SELECT ON TABLE runs TO client; -- only needs a full select if optimizations are run on the measurement machines. Otherwise can be locked down
-
 REVOKE ALL PRIVILEGES ON DATABASE "green-coding" FROM client;
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM client;
 REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM client;
 REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public FROM client;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM client;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON SEQUENCES FROM client;
 
-GRANT INSERT ON public.jobs TO client;
-GRANT INSERT ON public.measurement_metrics TO client;
-GRANT INSERT ON public.measurement_values TO client;
-GRANT INSERT ON public.network_intercepts TO client;
-GRANT INSERT ON public.notes TO client;
-GRANT INSERT ON public.optimizations TO client;
-GRANT INSERT ON public.phase_stats TO client;
-GRANT INSERT ON public.runs TO client;
-GRANT INSERT ON public.system_logs TO client;
-GRANT INSERT ON public.warnings TO client;
+GRANT INSERT ON jobs TO client;
+GRANT INSERT ON measurement_metrics TO client;
+GRANT INSERT ON measurement_values TO client;
+GRANT INSERT ON network_intercepts TO client;
+GRANT INSERT ON notes TO client;
+GRANT INSERT ON optimizations TO client;
+GRANT INSERT ON phase_stats TO client;
+GRANT INSERT ON runs TO client;
+GRANT INSERT ON system_logs TO client;
+GRANT INSERT ON warnings TO client;
+GRANT INSERT ON machines TO client;
 
-GRANT USAGE, SELECT ON SEQUENCE jobs_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE measurement_metrics_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE measurement_values_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE network_intercepts_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE notes_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE optimizations_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE runs_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE system_logs_id_sql TO client;
-GRANT USAGE, SELECT ON SEQUENCE warnings_id_sql TO client;
-
-
-GRANT SELECT (branch, carbon_simulation, category_ids, commit_hash, created_at, filename, id, machine_id, message, name, run_id, state, type, updated_at, url, usage_scenario_variables, user_id) ON public.jobs TO client; -- no email
-
-
-GRANT SELECT ON public.categories TO client;
-GRANT SELECT ON public.machines TO client;
-GRANT SELECT ON public.measurement_metrics TO client;
-GRANT SELECT ON public.measurement_values TO client;
-GRANT SELECT ON public.network_intercepts TO client;
-GRANT SELECT ON public.notes TO client;
-GRANT SELECT ON public.optimizations TO client;
-GRANT SELECT ON public.phase_stats TO client;
-GRANT SELECT ON public.runs TO client;
-GRANT SELECT ON public.users TO client;
-GRANT SELECT ON public.warnings TO client;
+GRANT USAGE, SELECT ON SEQUENCE jobs_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE measurement_metrics_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE measurement_values_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE network_intercepts_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE notes_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE optimizations_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE phase_stats_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE system_logs_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE warnings_id_seq TO client;
+GRANT USAGE, SELECT ON SEQUENCE machines_id_seq TO client;
 
 
-GRANT UPDATE (capabilities) ON public.users TO client;
-GRANT UPDATE (usage_scenario_dependencies, containers, end_measurement, failed, gmt_hash, logs, machine_id, machine_specs, measurement_config, phases, start_measurement, usage_scenario) ON public.runs TO client;
-GRANT UPDATE (state) ON public.jobs TO client;
-GRANT UPDATE ON public.machines TO client;
-GRANT UPDATE ON public.phase_stats TO client;
+GRANT SELECT (branch, carbon_simulation, category_ids, commit_hash, created_at, filename, id, machine_id, message, name, run_id, state, type, updated_at, url, usage_scenario_variables, user_id) ON jobs TO client; -- no email
+GRANT SELECT ON TABLE runs TO client; -- only needs a full select if optimizations are run on the measurement machines. Otherwise can be locked down
+
+
+GRANT SELECT ON categories TO client;
+GRANT SELECT ON machines TO client;
+GRANT SELECT ON measurement_metrics TO client;
+GRANT SELECT ON measurement_values TO client;
+GRANT SELECT ON network_intercepts TO client;
+GRANT SELECT ON notes TO client;
+GRANT SELECT ON optimizations TO client;
+GRANT SELECT ON phase_stats TO client;
+GRANT SELECT ON runs TO client;
+GRANT SELECT ON users TO client;
+GRANT SELECT ON warnings TO client;
+
+
+GRANT UPDATE (capabilities) ON users TO client;
+GRANT UPDATE (containers, container_dependencies, end_measurement, failed, gmt_hash, logs, machine_id, machine_specs, measurement_config, phases, start_measurement, usage_scenario, usage_scenario_variables) ON runs TO client;
+GRANT UPDATE (state) ON jobs TO client;
+GRANT UPDATE ON machines TO client;
+GRANT UPDATE ON phase_stats TO client;
 
 ```
 
