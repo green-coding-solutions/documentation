@@ -258,6 +258,7 @@ GRANT SELECT ON phase_stats TO client;
 GRANT SELECT ON runs TO client;
 GRANT SELECT ON users TO client;
 GRANT SELECT ON warnings TO client;
+GRANT SELECT ON client_status TO client;
 GRANT SELECT jobs TO client; -- currently needs email as it is sending the customer mail - improvement for future to decouple
 
 GRANT UPDATE (capabilities) ON users TO client;
