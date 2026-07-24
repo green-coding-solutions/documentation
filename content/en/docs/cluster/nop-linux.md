@@ -113,12 +113,6 @@ EOT
 # Disable NTP - we trigger it one-off in the cluster service
 sudo timedatectl set-ntp false
 
-# Disable the kernel watchdogs
-echo 0 | sudo tee /proc/sys/kernel/soft_watchdog
-echo 0 | sudo tee /proc/sys/kernel/nmi_watchdog
-echo 0 | sudo tee /proc/sys/kernel/watchdog
-echo 0 | sudo tee /proc/sys/kernel/watchdog_thresh
-
 # Removes the large header when logging in
 sudo rm -f /etc/update-motd.d/*
 
