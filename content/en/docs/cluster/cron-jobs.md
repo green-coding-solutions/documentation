@@ -19,7 +19,7 @@ SHELL=/bin/bash
 ## Deprecated! We do not recommend to use the cron feature to schedule jobs
 #*\/5    *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/tools/jobs.py project &>> /var/log/green-metrics-jobs.log
 
-## We recommend to trigger the email job every 2 minutes
+## We recommend to trigger the email job every 2-3 minutes
 ## You can trigger it more often, as it has a locking mechanism. The mechanism is however not fully parallel safe and email processing is not done in a transaction which might lead to race conditions if multiple connections to the DB in parallel try to set the DB lock.
 */2     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/jobs.py email-simple &>> /var/log/green-metrics-jobs.log
 */3     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/jobs.py email-report &>> /var/log/green-metrics-jobs.log
@@ -34,6 +34,16 @@ SHELL=/bin/bash
 ## Beware that this job is costly and can run up to multiple minutes if you have a large database
 20      *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/carbondb_compress.py &>> /var/log/green-metrics-jobs.log
 9       *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/carbondb_copy_over_and_remove_duplicates.py &>> /var/log/green-metrics-jobs.log
+*/3     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/backfill_geo.py 2>&1 | logger -t gmt-cronjobs
+*/10     *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/backfill_carbon_intensity.py 2>&1 | logger -t gmt-cronjobs
+
+## Maintenance and clear-up jobs
+## Many come from the GMT helpers repo at https://github.com/green-coding-solutions/gmt-helpers
+28       *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT/cron/delete_expired_data.py 2>&1 | logger -t gmt-cronjobs
+35      *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT_HELPERS/cron/check_jobs_queue.py 3 2>&1 | logger -t gmt-cronjobs
+30       0       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT_HELPERS/nginx/send_log_report.py 2>&1 | logger -t gmt-cronjobs
+22       7,16       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT_HELPERS/db/check_consistency.py 2>&1 | logger -t gmt-cronjobs
+*/5       *       *       *       *       PATH_TO_GMT/venv/bin/python3 PATH_TO_GMT_HELPERS/db/run_maintenance.py 2>&1 | logger -t gmt-cronjobs
 
 ```
 
@@ -41,3 +51,12 @@ Be sure to create and give the `green-metrics-jobs.log` file write access rights
 
 Also be aware that our example for the cronjob assumes your crontab is using `bash`.
 Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
+
+Many files uses the *Python* faulthandler mechanism and will also report to *STDERR* in case of a segfault.
+When running the cronjob we advice you to append all the output combined to a log file like shown above with the `&>>` operator.
+
+
+## Queuing / Locking
+
+The Green Metrics Tool comes with an implemented queueing and locking mechanism. No two cron jobs can run at the same time
+and no extra guarding must be done.
