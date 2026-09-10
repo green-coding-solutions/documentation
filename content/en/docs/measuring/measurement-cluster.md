@@ -55,8 +55,8 @@ Machines marked **[PREMIUM]** are only available in our paid plans.
 
 ---
 
-- **Machine ID 12 — GUI Applications - TX1330 M3 [PREMIUM]**
-    + Use Case: For profiling of a GUI / Desktop software that uses X11 or Wayland window management systems
+- **Machine ID 12 — GUI Benchmarking - TX1330 M3 [PREMIUM]**
+    + Use Case: For benchmarking of a GUI / Desktop software that uses X11 or Wayland window management systems
     + Vendor: Fujitsu TX1330 M3
     + OS: Ubuntu 24.04 (default) with Wayland Window manager
     + Type: Single-Tenant Server
@@ -68,10 +68,10 @@ Machines marked **[PREMIUM]** are only available in our paid plans.
 
 ---
 
-- **Machine ID 15 — GUI High Performance - TX1330 M4 [PREMIUM]**
-    + Use Case: For GUI / Desktop software that needs more cores, a higher clock rate or more memory than the TX1330 M3
+- **Machine ID 15 — GUI High Performance Benchmarking - TX1330 M4 [PREMIUM]**
+    + Use Case: For benchmarking GUI / Desktop software that needs more cores, a higher clock rate or more memory than the TX1330 M3 and uses a virtual X window
     + Vendor: Fujitsu TX1330 M4
-    + OS: Ubuntu 24.04
+    + OS: Ubuntu 24.04 without active window manager but active X-Libraries for virtual / containerized X-Windows
     + Type: Single-Tenant Server
     + CPU: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
