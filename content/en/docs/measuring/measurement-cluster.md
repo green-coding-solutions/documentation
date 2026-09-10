@@ -19,150 +19,89 @@ detailed machine configuration of every machine can always be looked up there.
 
 Machines marked **[PREMIUM]** are only available in our paid plans.
 
-- **Machine ID 7 — CO2 Profiling (DVFS ON, TB ON, HT ON) - Esprimo P956**
+- **Machine ID 7 — CO2 Profiling - Esprimo P956**
     + Use Case: For profiling of a software to get a value for an off-the-shelf Ubuntu system with default configuration
     + Vendor: Fujitsu ESPRIMO P956
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server
     + CPU: Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz
-    + Cores: 4
-    + Threads: 4
-    + Hyper-Threading: N/A (not supported by this CPU, despite the *HT ON* in the machine name)
-    + Turbo Boost: On
-    + DVFS: On (`powersave` governor on the `intel_pstate` scaling driver)
-    + C-States: All
-    + Memory: 16 GB
-    + RAPL Package Power Cap: 65 W
-    + Host Reservation: 1 CPU core / 2 GB memory
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=21c0bdb2-4013-423b-9939-8197ed5d5780)
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
     + Special: **Blue Angel compatible** for Server applications
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ---
 
-- **Machine ID 14 — CO2 Benchmarking 2.0 (DVFS OFF, TB OFF, HT OFF) - TX1330 M2 [PREMIUM]**
+- **Machine ID 14 — CO2 Benchmarking 2.0 - TX1330 M2 [PREMIUM]**
     + Use Case: For benchmarking of a software where configuration is tuned for reproducability
     + Vendor: Fujitsu TX1330 M2
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server
     + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
-    + Cores: 4
-    + Threads: 4
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 2.1 GHz)
-    + C-States: All
-    + Memory: 8 GB
-    + RAPL Package Power Cap: 25 W
-    + Host Reservation: 1 CPU core / 2 GB memory
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=85141bec-dc4a-4a47-8714-ac83d9f5a8a9)
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
     + Special: **Blue Angel compatible** for Client-Server and Server applications
     + This machine replaces the former *CO2 Benchmarking* machine (Machine ID 5), see [Old Machines](#old-machines)
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ---
 
-- **Machine ID 6 — Micro Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2 [PREMIUM]**
+- **Machine ID 6 — Micro Benchmarking - TX1330 M2 [PREMIUM]**
     + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 2 ms sampling_rate and limited to RAPL CPU / Memory as well as network I/O per cgroup
     + Vendor: Fujitsu TX1330 M2
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server
     + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
-    + Cores: 4
-    + Threads: 4
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 2.1 GHz)
-    + C-States: C0-C1
-    + Memory: 8 GB
-    + RAPL Package Power Cap: 25 W
-    + Host Reservation: 1 CPU core / 2 GB memory
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=262f1df0-ac6c-4e74-8d08-9c13c0b25293)
     + Metrics Provider for Machine Power: None
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ---
 
-- **Machine ID 12 — GUI Applications (DVFS OFF, TB OFF, HT OFF) - TX1330 M3 [PREMIUM]**
+- **Machine ID 12 — GUI Applications - TX1330 M3 [PREMIUM]**
     + Use Case: For profiling of a GUI / Desktop software that uses X11 or Wayland window management systems
     + Vendor: Fujitsu TX1330 M3
     + OS: Ubuntu 24.04 (default) with Wayland Window manager
     + Type: Single-Tenant Server
     + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
-    + Cores: 4
-    + Threads: 4
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 3.0 GHz)
-    + C-States: All
-    + Memory: 16 GB
-    + RAPL Package Power Cap: 72 W
-    + Host Reservation: 1 CPU core / 3 GB memory
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=854c7722-3598-4b45-99db-f48433046ebe)
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
     + Special: **Blue Angel compatible** for Client-Server, Server and Desktop applications
     + Special: External VGA Monitor connected to fully measure GPU Output overhead
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ---
 
-- **Machine ID 15 — GUI High Performance (DVFS OFF, TB OFF, HT OFF) - TX1330 M4 [PREMIUM]**
+- **Machine ID 15 — GUI High Performance - TX1330 M4 [PREMIUM]**
     + Use Case: For GUI / Desktop software that needs more cores, a higher clock rate or more memory than the TX1330 M3
     + Vendor: Fujitsu TX1330 M4
     + OS: Ubuntu 24.04
     + Type: Single-Tenant Server
     + CPU: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
-    + Cores: 6
-    + Threads: 6
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 3.7 GHz)
-    + Memory: 32 GB
-    + RAPL Package Power Cap: 75 W
-    + Host Reservation: 1 CPU core / 2 GB memory
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=a60c03ea-5017-4f64-ae13-15b469ebb2e7)
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ---
 
-- **Machine ID 11 — ML/AI Profiling (DVFS ON, TB ON, HT OFF) - GTX-1080 - [PREMIUM]**
+- **Machine ID 11 — ML/AI Benchmarking - GTX-1080 - [PREMIUM]**
     + Use Case: For GPU measurements and AI training measurements
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Desktop-PC (MSI MS-7B98)
     + CPU: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
-    + Cores: 6
-    + Threads: 6
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 3.7 GHz)
-    + Memory: 32 GB
-    + RAPL Package Power Cap: 255 W
-    + Host Reservation: 1 CPU core / 2 GB memory
     + Graphics: GeForce GTX 1080 (NVIDIA GP104)
         * VRAM: 8 GB
         * Installed *NVIDIA* kernel driver packages: 535.309.01 and 580.173.02
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=2028c7b1-5065-4b74-a634-07f191e9fb5a)
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
     + Metrics Provider for GPU Energy: [NVIDIA NVML]({{< relref "metric-providers/gpu-energy-nvidia-nvml-component" >}})
     + Special: **Blue Angel compatible** for Server applications
-    + Note: The machine name still carries the historic *DVFS ON, TB ON* suffix. The machine is currently configured with a locked 3.7 GHz clock rate and Turbo Boost disabled
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ---
 
-- **Machine ID 13 — High Performance (DVFS OFF, TB OFF, HT OFF) - TX1330 M4 [PREMIUM]**
+- **Machine ID 13 — High Performance Benchmarking - TX1330 M4 [PREMIUM]**
     + Use Case: For workloads with higher CPU count, higher clock frequency or high memory requirements
     + Vendor: Fujitsu TX1330 M4
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server
     + CPU: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
-    + Cores: 6
-    + Threads: 6
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 3.7 GHz)
-    + Memory: 64 GB
-    + RAPL Package Power Cap: 75 W
-    + Host Reservation: 1 CPU core / 2 GB memory
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=1c410441-ebfc-4398-b1eb-ed47f4681d1b)
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ### Old Machines
 
