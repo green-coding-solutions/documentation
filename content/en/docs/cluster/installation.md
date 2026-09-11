@@ -99,7 +99,8 @@ The Green Metrics Tool comes with an implemented queueing and locking mechanism.
 You can install a cronjob on your system to periodically call:
 
 - `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py run` to measure runs in database queue
-- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py email` to send all emails in the database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py email-simple` to send all text based emails in the database queue
+- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py email-report` to send all HTML based / styled emails in the database queue
 
 Calling `jobs.py run` will print a deprecation warning, as this mode is only intended for CLI testing. Use the *client mode* above for production.
 
