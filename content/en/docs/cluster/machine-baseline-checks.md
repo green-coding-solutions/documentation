@@ -50,7 +50,7 @@ Also see [Accuracy Control →]({{< relref "accuracy-control" >}}).
 
 ## RAPL Power Capping
 
-Verifies that the RAPL power limits locked on the machine are **exactly equal** to the values you configure. Ensures a consistent thermal envelope across cluster nodes.
+Verifies that the RAPL power limits locked on the machine are **exactly equal** to the values you configure.
 
 ```yaml
 machine:
