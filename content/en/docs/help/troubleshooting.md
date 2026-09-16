@@ -245,4 +245,4 @@ does not work that well when orchestrating multiple containers and polling the d
 - Add the `--debug` switch to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
 - Add `--allow-unsafe` to the call to `runner.py` and *ports* to your [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
 - Rebuild the containers with `docker compose down -v` and then `docker compose up -d`
-- Re-run the install script for your OS (`install_linux.sh` / `install_mac.sh` / `install_windows.ps1`) to get new configuration changes that you maybe have not yet applied after an update
+- Re-run the install script for your OS to get new configuration changes that you maybe have not yet applied after an update

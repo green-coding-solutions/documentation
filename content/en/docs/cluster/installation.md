@@ -35,7 +35,7 @@ cluster:
     sleep_time_no_job: 300
 ```
 
-There is no fixed cooldown time after a job. Instead the client checks the machine temperature before every job and holds the queue until the machine is back at its baseline: if the machine is hotter than `base_temperature_value` it sleeps 60 seconds and retries, and if it is 10° or more below it warms the machine up before retrying. See [Machine Baseline Checks →]({{< relref "machine-baseline-checks" >}}) for details. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune the `base_temperature_value`.
+There is no fixed cooldown time after a job. Instead the client checks the machine temperature before every job and holds the queue until the machine is back at its baseline. See [Machine Baseline Checks →]({{< relref "machine-baseline-checks" >}}) for details. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune the `base_temperature_value`.
 
 After running a job the client program executes the `maintenance.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
