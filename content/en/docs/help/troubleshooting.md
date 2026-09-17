@@ -110,6 +110,12 @@ Easiest fix: Just try the run again. The error happens seldomly and is random.
 
 [Please consult this ticket for current status of the bugfix](https://github.com/green-coding-solutions/green-metrics-tool/issues/286)
 
+## invalid hardlink target
+
+This error can occur with docker's legacy `overlay2` storage driver.
+
+Please switch docker to the `containerd` snapshotter as described in the [Containerd snapshotter →]({{< relref "/docs/installation/installation-linux#containerd-snapshotter" >}}) section of the Linux installation guide.
+
 ## Submodule issues
 
 If you run into any conflicts just deinit and reinit the submodule in question:

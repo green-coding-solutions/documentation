@@ -11,27 +11,104 @@ toc: true
 
 Our Measurement Cluster runs on [NOP Linux changes →]({{< relref "nop-linux" >}}) and is the driver behind our [Hosted Service]({{< relref "measuring-service" >}}).
 
-We have the following machines available for running measurements in our cluster:
+We have the following machines available for running measurements in our cluster. The **Machine ID**
+is the number shown in the *ID* column of our
+[Cluster Status page](https://metrics.green-coding.io/cluster-status.html) and is the identifier used
+in the API and when a job is dispatched to a specific machine. The live availability, queue state and
+detailed machine configuration of every machine can always be looked up there.
 
-- **CO2 Profiling (DVFS ON, TB ON, HT ON) - Esprimo P956**
+Machines marked **[PREMIUM]** are only available in our paid plans.
+
+- **Machine ID 7 — CO2 Profiling - Esprimo P956**
     + Use Case: For profiling of a software to get a value for an off-the-shelf Ubuntu system with default configuration
     + Vendor: Fujitsu ESPRIMO P956
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Single-Tenant Server
     + CPU: Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz
-    + Cores: 4
-    + Threads: 4
-    + Hyper-Threading: N/A
-    + Turbo Boost: Off
-    + DVFS: On
-    + C-States: All
-    + Memory: 16 GB
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
     + Special: **Blue Angel compatible** for Server applications
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
 
 ---
 
-- **CO2 Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2**
+- **Machine ID 14 — CO2 Benchmarking 2.0 - TX1330 M2 [PREMIUM]**
+    + Use Case: For benchmarking of a software where configuration is tuned for reproducability
+    + Vendor: Fujitsu TX1330 M2
+    + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
+    + Type: Single-Tenant Server
+    + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    + Special: **Blue Angel compatible** for Client-Server and Server applications
+    + This machine replaces the former *CO2 Benchmarking* machine (Machine ID 5), see [Old Machines](#old-machines)
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
+
+---
+
+- **Machine ID 6 — Micro Benchmarking - TX1330 M2 [PREMIUM]**
+    + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 2 ms sampling_rate and limited to RAPL CPU / Memory as well as network I/O per cgroup
+    + Vendor: Fujitsu TX1330 M2
+    + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
+    + Type: Single-Tenant Server
+    + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
+    + Metrics Provider for Machine Power: None
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
+
+---
+
+- **Machine ID 12 — GUI Benchmarking - TX1330 M3 [PREMIUM]**
+    + Use Case: For benchmarking of a GUI / Desktop software that uses X11 or Wayland window management systems
+    + Vendor: Fujitsu TX1330 M3
+    + OS: Ubuntu 24.04 (default) with Wayland Window manager
+    + Type: Single-Tenant Server
+    + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    + Special: **Blue Angel compatible** for Client-Server, Server and Desktop applications
+    + Special: External VGA Monitor connected to fully measure GPU Output overhead
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
+
+---
+
+- **Machine ID 15 — GUI High Performance Benchmarking - TX1330 M4 [PREMIUM]**
+    + Use Case: For benchmarking GUI / Desktop software that needs more cores, a higher clock rate or more memory than the TX1330 M3 and uses a virtual X window
+    + Vendor: Fujitsu TX1330 M4
+    + OS: Ubuntu 24.04 without active window manager but active X-Libraries for virtual / containerized X-Windows
+    + Type: Single-Tenant Server
+    + CPU: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
+
+---
+
+- **Machine ID 11 — ML/AI Benchmarking - GTX-1080 - [PREMIUM]**
+    + Use Case: For GPU measurements and AI training measurements
+    + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
+    + Type: Desktop-PC (MSI MS-7B98)
+    + CPU: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
+    + Graphics: GeForce GTX 1080 (NVIDIA GP104)
+        * VRAM: 8 GB
+        * Installed *NVIDIA* kernel driver packages: 535.309.01 and 580.173.02
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    + Metrics Provider for GPU Energy: [NVIDIA NVML]({{< relref "metric-providers/gpu-energy-nvidia-nvml-component" >}})
+    + Special: **Blue Angel compatible** for Server applications
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
+
+---
+
+- **Machine ID 13 — High Performance Benchmarking - TX1330 M4 [PREMIUM]**
+    + Use Case: For workloads with higher CPU count, higher clock frequency or high memory requirements
+    + Vendor: Fujitsu TX1330 M4
+    + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
+    + Type: Single-Tenant Server
+    + CPU: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
+    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
+    + ⚙️ Detailed machine specs and configuration like CPU Cores, Memory, TurboBoost etc. are always up to date on the (ℹ︎) icon in the [Cluster Machine Listing](https://metrics.green-coding.io/cluster-status.html)
+
+### Old Machines
+
+These machines are no longer available for measurements. They are listed here because older runs in our
+database still reference them.
+
+- **Machine ID 5 — CO2 Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2 - (Phased out Late 2025)**
     + Use Case: For benchmarking of a software where configuration is tuned for reproducability
     + Vendor: Fujitsu TX1330 M2
     + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
@@ -46,81 +123,11 @@ We have the following machines available for running measurements in our cluster
     + Memory: 8 GB
     + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=9784422b-f4c6-42f3-addd-9e4c0833da74)
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}})
-    + Special: **Blue Angel compatible** for Client-Server and Server applications
+    + Replaced by *CO2 Benchmarking 2.0* (Machine ID 14)
 
 ---
 
-- **Micro Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M2**
-    + Use Case: For micro benchmarking of a software where configuration is tuned for reproducability. Reporters are set to 2 ms sampling_rate and limited to RAPL CPU / Memory as well as network I/O per cgroup
-    + Vendor: Fujitsu TX1330 M2
-    + Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
-    + Type: Single-Tenant Server
-    + CPU: Intel(R) Xeon(R) CPU E3-1240L v5 @ 2.10GHz
-    + Cores: 4
-    + Threads: 4
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 2.1 GHz)
-    + C-States: C0-C1
-    + Memory: 8 GB
-    + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=262f1df0-ac6c-4e74-8d08-9c13c0b25293)
-    + Metrics Provider for Machine Power: None
-
----
-
-- **GUI/Desktop Applications (DVFS OFF, TB OFF, HT OFF) - TX1330 M3**
-    + Use Case: For profiling of a GUI / Desktop software that uses X11 or Wayland window management systems
-    + Vendor: Fujitsu TX1330 M3
-    + OS: Ubuntu 24.04 (default) with Wayland Window manager
-    + Type: Single-Tenant Server
-    + CPU: Intel(R) Xeon(R) CPU E3-1220 v6 @ 3.00GHz
-    + Cores: 4
-    + Threads: 4
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + DVFS: Off (Fixed to 3.0 GHz)
-    + C-States: All
-    + Memory: 16 GB
-    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) / [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
-    + Special: **Blue Angel compatible** for Client-Server, Server and Desktop applications
-    + Special: External VGA Monitor connected to fully measure GPU Output overhead
-
----
-
-- **ML/AI Profiling (DVFS ON, TB ON, HT OFF) - GTX-1080 - [PREMIUM]**
-    + Use Case: For GPU measurements and AI training measurements
-    + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
-    + Type: Desktop-PC
-    + CPU: Intel(R) Core(TM) i5-9600K CPU @ 3.70GHz
-    + Cores: 6
-    + Threads: 6
-    + Hyper-Threading: N/A
-    + Turbo Boost: On
-    + Memory: 32 GB
-    + Graphics: GeForce GTX 1080
-        * Installed *CUDA* version: 12.2
-        * *NVIDIA* kernel driver version 535.274.02
-        * VRAM: 8 GB
-    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
-    + Special: **Blue Angel compatible** for Server applications
-
----
-
-- **High Performance Benchmarking (DVFS OFF, TB OFF, HT OFF) - TX1330 M4 - [PREMIUM]**
-    + Use Case: For workloads with higher CPU count, higher clock frequency or high memory requirements
-    + OS: Ubuntu 24.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
-    + Type: Single-Tenant Server
-    + CPU: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
-    + Cores: 6
-    + Threads: 6
-    + Hyper-Threading: Off
-    + Turbo Boost: Off
-    + Memory: 64 GB
-    + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
-
-### Old Machines
-
-- **Palit GPU - (Phased out Early 2025)**
+- **Machine ID 8 — Palit GPU - (Phased out Early 2025)**
     + Use Case: For GPU measurements and AI training measurements
     + OS: Ubuntu 22.04 ([NOP Linux](https://www.green-coding.io/blog/nop-linux/))
     + Type: Desktop-PC
@@ -134,10 +141,11 @@ We have the following machines available for running measurements in our cluster
         * Installed *CUDA* version: 12
         * *NVIDIA* kernel driver version 390
     + Metrics Provider for Machine Power: [MCP39F511N]({{< relref "metric-providers/psu-energy-ac-mcp-machine" >}}) & [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
+    + Replaced by *ML/AI Profiling - GTX-1080* (Machine ID 11)
 
 ---
 
-- **Quanta Leopard-DDR3 - (Phased out Early 2025)**
+- **Machine ID 2 — Quanta Leopard-DDR3 - (Phased out Early 2025)**
     + Use Case: Heavy parallelized workloads / HPC
     + Type: 48-Thread Multi-Tenant Server
     + OS: Ubuntu 22.04 (default)
@@ -150,6 +158,16 @@ We have the following machines available for running measurements in our cluster
     + [Sample measurement with machine specs](https://metrics.green-coding.io/stats.html?id=72596fdf-b393-4cef-bb98-45679ae928f5)
     + Metrics Provider for Machine Power: [IPMI]({{< relref "metric-providers/psu-energy-ac-ipmi-machine" >}})
     + Special: **SoftAWERE compatible**
+
+---
+
+- **Machine ID 3 — Fujitsu Esprimo P956 (Blue Angel compatible)**
+    + Predecessor of the current *CO2 Profiling* machine (Machine ID 7)
+
+---
+
+- **Machine ID 10 — MacBook Pro 13" - 2015 (Premium)**
+    + Use Case: macOS measurements
 
 ## How to choose
 

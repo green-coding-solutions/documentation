@@ -112,6 +112,36 @@ sudo systemctl start docker
 You can check if everything is working fine by running `docker stats`. It should connect to the docker daemon and output a view with container-id, name, and stats, which should all be empty for now. You can also run
 `sudo docker run hello-world` which will run a little welcome container.
 
+### Containerd snapshotter
+
+We recommend moving docker to use the `containerd` snapshotter instead of the legacy `overlay2` storage driver.
+
+{{< callout context="caution" icon="outline/alert-triangle" >}}
+If you do not switch to the `containerd` snapshotter you might see **"invalid hardlink target"** errors.
+{{< /callout >}}
+
+To activate it add the following to your `daemon.json`:
+
+```json
+{
+  "features": {
+    "containerd-snapshotter": true
+  }
+}
+```
+
+The file is located in different places depending on if you are running root or rootless mode:
+
+- Root mode: `/etc/docker/daemon.json`
+- Rootless mode: `~/.config/docker/daemon.json`
+
+After editing the file restart the docker daemon:
+
+- Root mode: `sudo systemctl restart docker`
+- Rootless mode: `systemctl --user restart docker`
+
+You can verify that the `containerd` snapshotter is active by running `docker info` and checking for `driver-type: io.containerd.snapshotter.v1` in the output.
+
 ### Root mode (default)
 
 Since `v0.20` the Green Metrics Tool supports docker in it's default root mode.

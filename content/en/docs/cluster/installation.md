@@ -23,9 +23,7 @@ To enable *USER* linger do:
 sudo loginctl enable-linger $(whoami)
 ```
 
-Now you can choose between two modes:
-
-## 1) Systemd Service - Client mode
+## Systemd Service - Client mode
 
 The `cron/client.py` program is a script that should constantly be running and that periodically checks the database if a new job has been queued for this certain machine. If no job can be retried it sleeps for a certain amount of time set in the configuration file `config.yml`:
 
@@ -90,29 +88,9 @@ echo "${USER} ALL=(ALL) NOPASSWD:$(realpath /usr/bin/python3) -I -B -S /usr/loca
 sudo chmod 500 /etc/sudoers.d/green-coding-cluster-maintenance
 ```
 
-## 2) Cronjob (DEPRECATED)
+## Cron Jobs
 
-⚠️ We do not recommend using the cronjob implementation in production as it does not support temperature checking or system cleanups. This mode should only be used for local quick testing setups, when you cannot use NOP Linux. ⚠️
-
-The Green Metrics Tool comes with an implemented queueing and locking mechanism. In contrast to the NOP Linux implementation this way of checking for jobs doesn't poll with a process all the time but relies on cron which is not available on NOP Linux.
-
-You can install a cronjob on your system to periodically call:
-
-- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py run` to measure runs in database queue
-- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py email-simple` to send all text based emails in the database queue
-- `python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py email-report` to send all HTML based / styled emails in the database queue
-
-Calling `jobs.py run` will print a deprecation warning, as this mode is only intended for CLI testing. Use the *client mode* above for production.
-
-The `jobs.py` uses the *Python* faulthandler mechanism and will also report to *STDERR* in case of a segfault.
-When running the cronjob we advice you to append all the output combined to a log file like so:
-
-`* * * * * python3 -u PATH_TO_GREEN_METRICS_TOOL/cron/jobs.py run &>> /var/log/green-metrics-jobs.log`
-
-Be sure to give the `green-metrics-jobs.log` file write access rights.
-
-Also be aware that our example for the cronjob assumes your crontab is using `bash`.
-Consider adding `SHELL=/bin/bash` to your crontab if that is not the case.
+Please see sub-page [Cron Jobs →]({{< relref "cron-jobs" >}})
 
 ## General settings
 
