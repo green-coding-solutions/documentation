@@ -28,31 +28,31 @@ ie. `cpu.utilization.cgroup.container`
 
 ### Setup and Structure
 
-To use the metrics provider, the C source must be compiled. This can be done easily for all metrics providers by running the `install.sh` script in the project's root directory, or individually by running the `Makefile` in each provider's subdirectory. This will create a binary file in each metric's subdirectory.
+To use the metrics provider, the C source must be compiled. This can be done easily for all metrics providers by running the platform install script in the project's root directory (`install_linux.sh`, `install_mac.sh` or `install_windows.ps1`), or individually by running the `Makefile` in each provider's subdirectory. This will create a binary file in each metric's subdirectory.
 
 Each metric providers to be attached and used during a run are defined in our `config.yml` file:
 
 ```yml
 measurement:
-  metric-providers:
+  metric_providers:
     linux:
-      cpu.utilization.cgroup.container.provider.CpuUtilizationCgroupContainerProvider:
+      cpu_utilization_cgroup_container:
         sampling_rate: 100
-      cpu.energy.RAPL.MSR.system.provider.CpuEnergyRaplMsrSystemProvider:
+      cpu_energy_rapl_msr_component:
         sampling_rate: 100
-#      psu.energy.ac.xgboost.system.provider.PsuEnergyAcXgboostSystemProvider:
-#        sampling_rate: 100
+#      psu_energy_ac_xgboost_machine:
          # This is a default configuration. Please change this to your system!
 #        CPUChips: 1
 #        HW_CPUFreq: 3100
 #        CPUCores: 28
+#        CPUThreads: 56
 #        TDP: 150
 #        HW_MemAmountGB: 16
 ```
 
 The dimension of the sampling_rate is milliseconds. Change this number to have a smaller or larger time window between measurements for that specific provider.
 
-The metric providers are written as C programs with a Python wrapper, and live under `metric_providers/` in the subdirectory that matches the `config.yml`. The directory contains the following files:
+Most metric providers are written as C programs with a Python wrapper, and live under `metric_providers/` in the subdirectory that matches the `config.yml`. The directory contains the following files:
 
 ```txt
 - <metric-providers-path>:
@@ -62,6 +62,8 @@ The metric providers are written as C programs with a Python wrapper, and live u
 ```
 
 The `source.c` is the main sourcecode for the metric provider, the `Makefile` can be used to generate the needed binary, and the `provider.py` is the python wrapper.
+
+Not every provider has a `source.c` though. Providers that read from an API (`carbon_intensity_*_machine`), that wrap an external command (`lmsensors_*_component`, `psu_energy_ac_ipmi_machine`) or that derive their values from another provider's data (`psu_energy_ac_xgboost_machine`) only ship a `provider.py`.
 
 ### How to Use
 
@@ -73,7 +75,7 @@ To activate a metric provider simply uncomment the line where it's name appears.
 
 #### C
 
-After building the metric provider binary via the `Makefile` or `install.sh` script, simply run it.
+After building the metric provider binary via the `Makefile` or the platform install script, simply run it.
 
 It will begin reading the metrics and printing them to Stdout.
 
@@ -93,13 +95,13 @@ Some special providers may register additional output fields, that are considere
 
 ```
 
-The timestamp will always be a UNIX timestamp, down to the microsecond. The metric_reading output and units are specific to each metric, and the container-id will also only be shown if the metric reads on a container level (otherwise it should say SYSTEM).
+The timestamp will always be a UNIX timestamp, down to the microsecond. The metric_reading output and units are specific to each metric, and the container-id will only be shown if the metric reads on a container level. Providers that read system-wide simply omit the third column.
 
 #### Python
 
 To use the Python wrapper, call the `start_profiling` method when you wish to begin the profiling, and then `stop_profiling` when you wish to stop.
 
-You may pass in a container-id into `start_profiling` if needed. It writes the output of the metrics to `/tmp/green-metrics-tool/{self._metric_name}.log"`, which can be read programmatically with the `read_metrics function`.
+`start_profiling` takes no arguments. The containers to be profiled are passed into the provider's constructor instead. It writes the output of the metrics to `/tmp/green-metrics-tool/metrics/{self._metric_name}.log"`, which can be read programmatically with the `read_metrics function`.
 
 ### Writing your own metric provider
 

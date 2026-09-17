@@ -56,7 +56,7 @@ Check in `sudo dmesg` if the kernel module could correctly be lodaded and then v
 - args
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100
@@ -66,13 +66,15 @@ By default the measurement interval is 100 ms.
 
 This metric provider prints to Stdout a continuous stream of data. The format of the data is as follows:
 
-`TIMESTAMP READING`
+`TIMESTAMP READING CARD-NAME`
 
 Where:
 
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The energy used by the GPU in milliWatts (Ex: 12230 for 12.23 Watts)
-- `CARD NAME`: The name of the graphics card as reported by the driver
+- `READING`: The current power draw of the GPU in milliWatts (Ex: 12230 for 12.23 Watts)
+- `CARD-NAME`: The name of the graphics card as reported by the driver
+
+The power values are converted to energy in micro Joules when the log file is parsed.
 
 Any errors are printed to Stderr.
 

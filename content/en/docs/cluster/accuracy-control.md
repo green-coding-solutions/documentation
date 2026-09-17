@@ -23,7 +23,7 @@ cluster:
       name: "Measurement control Workload"
       uri: "https://github.com/green-coding-solutions/measurement-control-workload"
       filename: "usage_scenario.yml"
-      branch: "main"
+      branch: "event-bound"
       comparison_window: 5
       phase: "004_[RUNTIME]"
       metrics:
@@ -39,10 +39,7 @@ cluster:
         cpu_energy_rapl_msr_component:
           threshold: 0.01 # 1%
           type: stddev_rel
-        cpu_energy_rapl_msr_component:
-          threshold: 0.01 # 1%
-          type: stddev_rel
-        psu_co2_ac_mcp_machine:
+        psu_carbon_ac_mcp_machine:
           threshold: 0.01 # 1%
           type: stddev_rel
         network_total_cgroup_container:

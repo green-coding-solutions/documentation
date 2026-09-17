@@ -6,7 +6,7 @@ weight: 213
 ---
 
 {{< callout context="caution" icon="outline/alert-triangle" >}}
-This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
+This provider does not ship with the Green Metrics Tool anymore. The code has been removed and this page is only kept as a reference for old versions. Nothing described below can be configured or run on a current installation.
 {{< /callout >}}
 
 ## What it does

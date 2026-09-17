@@ -42,7 +42,7 @@ After that just plug it into your USB and please use Channel 1.
 
 ### Input Parameters
 
-- `-i`: interval in milliseconds. By default the measurement interval is 100 ms.
+- `-i`: interval in milliseconds. By default the measurement interval is 1000 ms.
 - `-e`: Output energy instead of power
 - `-o`: One-Shot mode. Ouput only one reading (In case `-e` is also supplied the first value is non-sensical and will be 0. Only subsequent calls are useful)
 - `-x`: Dump Range1 (0x00AE) and Range2 (0x00BE) register contents and

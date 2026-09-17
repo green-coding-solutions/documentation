@@ -27,7 +27,7 @@ It can be used for system monitoring and tracking background processes such as t
   - `-s`: cgroup name strings separated by commas
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100 -s org.gnome.Shell@wayland.service,session-2.scope
@@ -42,7 +42,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 Where:
 
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The estimated % CPU used
+- `READING`: The estimated % CPU used. The unit is a *Ratio*, so the value is multiplied with 10000 to be expressed as an integer
 - `CGROUP-NAME`: The cgroup name that this reading is for
 
 Any errors are printed to Stderr.

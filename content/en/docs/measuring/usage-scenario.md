@@ -8,11 +8,12 @@ weight: 415
 The `usage_scenario.yml` consists of these main blocks:
 
 - Start of the file with some basic root level keys
-- `services` - Handles the orchestration of containers
+- `services` - (optional) Handles the orchestration of containers
 - `flow` - Handles the interaction with the containers
 - `compose-file` - (optional) A compose file to include
 - `relations` - (optional) Additional repositories to check out
 - `networks` - (optional) Handles the orchestration of networks
+- `volumes` - (optional) Named volumes to inspect the size of
 - `custom_metrics` - (optional) Handles Custom Metrics and SCI
 
 Its format is an extended subset of the [Docker Compose Specification](https://docs.docker.com/compose/compose-file/), which means that we keep the same format, but disallow some options and also add some exclusive options to our tool. However, keys that have the same name are also identical in function - thought potentially with some limitations.
@@ -34,9 +35,11 @@ description: This is just an example usage_scenario ...
 - `name` **[str]**: Name of the scenario
 - `description` **[str]**: Detailed description of the scenario
 - `author` **[str]**: Author of the scenario
-- `architecture` **[str]** *(optional)*: If your *usage_scenario* runs only on a specific architecture you can instruct the GMT to check if the architecture of the machine matches. You can specify **Linux**, **Windows** and **Darwin**. Omit this key if your scenario has no architecture restriction.
+- `architecture` **[str]** *(optional)*: If your *usage_scenario* runs only on a specific architecture you can instruct the GMT to check if the architecture of the machine matches. You can specify **Linux**, **Windows** and **macOS**. Omit this key if your scenario has no architecture restriction.
+    + The value is compared case-insensitively. Note that macOS must be given as **macOS** and not as *Darwin*, otherwise the check will always fail.
     + Note: Windows with WSL2 and Linux containers would be **Linux** as architecture
 - `ignore-unsupported-compose` **[bool]** *(optional)*: Ignore unsupported [Docker Compose](https://docs.docker.com/compose/compose-file) features and still run usage_scenario
+- `version` **[str|int|float]** *(optional)*: Part of the Docker Compose specification. Accepted, but ignored by GMT as it is non-functional.
 
 Please note that when running the measurement you can supply an additional name,
 which can and should be different from the name in the `usage_scenario.yml`.
@@ -63,15 +66,19 @@ services:
     setup-commands:
       - command: sleep 20
     volumes:
-      - /LOCAL/PATH:/PATH/IN/CONTAINER
+      - /LOCAL/PATH:/PATH/IN/CONTAINER:ro
     networks:
       - wordpress-mariadb-data-green-coding-network
+    mem_limit: 2G
+    cpus: 2
+    shm_size: 256M
     healthcheck:
       test: curl -f http://nc
       interval: "30s"
       timeout: "10s"
       retries: 10
       start_period: "10s"
+      start_interval: "5s"
       disable: False
   gcb-wordpress-apache:
     # ...
@@ -84,16 +91,22 @@ services:
       - gcb-wordpress-mariadb
 ```
 
-- `services` **[dict]**: (Dictionary of container dictionaries for orchestration)
+- `services` **[dict]** *(optional)*: (Dictionary of container dictionaries for orchestration)
+    + A `usage_scenario.yml` without `services` is valid. This is the case when you want to benchmark containers that are already running on your host.
     + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container/service
     + `image:` **[str]** Docker image identifier. If `build` is not provided the image needs to be accessible locally on Docker Hub. If `build` is provided it is used as identifier for the image.
     + `build:` **[str]** *(optional)* Path to build context. See `context` for restrictions. Default for `dockerfile` is `Dockerfile`. Alternatively, you can provide more detailed build information with:
         - `context:` **[str]** *(optional)* Path to the build context. Needs to be in the path or repo that is passed with `--uri` to `runner.py`. Default: `.`.
         - `dockerfile:` **[str]** *(optional)* Path to Dockerfile. Needs to be in `context`. Default: `Dockerfile`.
+        - `args:` **[list]** *(optional)* Build arguments that are passed to the build as `--build-arg`. Supply them as a list of single key-value dictionaries, e.g. a list item in the format: *- MY_ARG: my_value*. The other forms of the *Docker Compose Specification* (a plain dict, or list items in the format *- MY_ARG=my_value*) are currently not supported.
     + `container_name:` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
     + `environment:` **[dict|list]** *(optional)*
         - Either Key-Value pairs for ENV variables inside the container
         - Or list items with strings in the format: *MYSQL_PASSWORD=123*
+    + `labels:` **[dict|list]** *(optional)*
+        - Either Key-Value pairs for Docker labels set on the container
+        - Or list items with strings in the format: *my.label=123*
+        - Without `--allow-unsafe` the key must match `^[A-Za-z_]+[A-Za-z0-9_.]*$` and the value may be at most 1024 characters long
     + `ports:` **[int:int]** *(optional)*
         - Docker container portmapping on host OS to be used with `--allow-unsafe` flag.
     + `init:` **[boolean]**
@@ -107,13 +120,22 @@ services:
         - List of commands to be run before actual load testing. Mostly installs will be done here. Note that your docker container must support these commands and you cannot rely on a standard linux installation to provide access to /bin
         - `command:` **[str]**
         * The command to be executed
+        - `detach:` **[bool]** *(optional, default: `false`)*
+        * When the command is detached it will get sent to the background and the setup will continue with the next command. The process is terminated at the end of the run.
         - `shell:` **[str]** *(optional)*
         * Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
         ** Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
     - `volumes:` **[list]**  *(optional)*
-        - List of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
-    - `networks:` **[list]**  *(optional)*
+        - List of volumes to be mapped in the format `source:target[:ro]`.
+        - This key is always read. The `--allow-unsafe` flag does not gate it, but *relaxes* how it is handled:
+        * In **safe mode** (the default) only read-only mounts are allowed, so the `:ro` (or `:readonly`) option is mandatory, and the source is resolved relative to the folder of your `usage_scenario.yml`. An exception are mounts that are listed in the `allowed_volume_mounts` capability of your user, which may be read-write and may be absolute paths or named volumes.
+        * With **`--allow-unsafe`** the volume spec is handed to `docker run -v` as given, so read-write mounts and absolute host paths are possible.
+        - Note that `--skip-unsafe` has no effect on volumes. It only applies to `ports`, `environment` and `labels`.
+    - `networks:` **[list|dict]**  *(optional)*
         - The networks to put the container into. If no networks are defined throughout the `usage_scenario.yml` the container will be put into the default network will all others in the file.
+        - When given as a dict you can supply network modifiers per network:
+        * `aliases:` **[list]** *(optional)* Additional DNS names the container is reachable under inside that network
+        - Joining the Docker `host` network is restricted and needs `--allow-unsafe`
     - `healthcheck:` **[dict]** *(optional)*
         - Please see the definition of these arguments and how healthcheck works in the official docker compose definition. We just copy them over: [Docker compose healthcheck specification](https://docs.docker.com/compose/compose-file/compose-file-v3/#healthcheck)
         - `test:` **[str|list]**
@@ -121,16 +143,18 @@ services:
         - `timeout:` **[str]**
         - `retries:` **[integer]**
         - `start_period:` **[str]**
+        - `start_interval:` **[str]** Time between health checks during the *start period*
         - `disable:` **[boolean]**
     - `folder-destination`: **[str]** *(optional)*
         - Specify where the project that is being measured will be mounted inside of the container
         - Defaults to `/tmp/repo`
-    - `command:` **[str]** *(optional)*
+    - `command:` **[str|list]** *(optional)*
         - Command to be executed when container is started. When container does not have a daemon running typically a shell is started here to have the container running like `bash` or `sh`.
-    - `entrypoint:` **[str]** *(optional)*
+        - Can be given as a string, which is split shell-like, or as a list of arguments.
+    - `entrypoint:` **[str|list]** *(optional)*
         - Declares the default entrypoint for the service container. This overrides the ENTRYPOINT instruction from the service's Dockerfile.
-        - The value of `entrypoint` can either be an empty string (ENTRYPOINT instruction will be ignored) or a single word (helpful to provide a script).
-        - If you need an entrypoint that consists of multiple commands/arguments, either provide a script (e.g. `entrypoint.sh`) or set it to an empty string and provide your commands via `command`.
+        - The value of `entrypoint` can be an empty string (ENTRYPOINT instruction will be ignored), a string, or a list of arguments.
+        - When a string is given it is split shell-like. The first element becomes the entrypoint, all remaining elements are prepended to `command`.
     - `log-stdout:` **[boolean]** *(optional, default: `true`)*
         - Will log the *stdout* of the container and make it available through the frontend in the *Logs* tab.
         - Please see the [Best Practices →]({{< relref "best-practices" >}}) for when to disable the logging.
@@ -144,10 +168,29 @@ services:
         - Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
     - `docker-run-args:` **[list]** *(optional)*
         - A list of string that should be added to the `docker run` command of that container.
-        - The argument needs to be listed in the `user.capabilities` json under `measurement:orchestrators:docker:allow-args`. The string in the `user.capabilities` can be a regex. Opening this up could be a potential security issue!
+        - The argument needs to be listed in the `user.capabilities` json under `measurement:orchestrators:docker:allowed_run_args`. The string in the `user.capabilities` can be a regex and must match the whole argument. Opening this up could be a potential security issue!
+        - Running with `--allow-unsafe` bypasses this allow list entirely and every argument is accepted.
+    - `mem_limit:` **[str|int]** *(optional)*
+        - The memory limit of the container, e.g. `2G`. If not set, GMT auto-assigns a value.
+        - Can also be given as `deploy.resources.limits.memory`. If both are given they must be identical.
+    - `cpus:` **[str|int|float]** *(optional)*
+        - The number of CPUs the container may use. If not set, GMT auto-assigns all assignable cores.
+        - Can also be given as `deploy.resources.limits.cpus`. If both are given they must be identical.
+    - `shm_size:` **[str|int]** *(optional)*
+        - Size of `/dev/shm` for the container, passed to `docker run --shm-size`.
+    - `restart:` **[str]** *(optional)*
+        - Part of the Docker Compose specification. Accepted, but ignored, as GMT does its own orchestration.
+    - `expose:` **[list]** *(optional)*
+        - Part of the Docker Compose specification. Accepted, but ignored, as it is non-functional.
 
 Please note that every key below `services` will serve as the name of the
 container later on. You can overwrite the container name with the key `container_name`.
+
+Also see [Resource Limits →]({{< relref "resource-limits" >}}) for how `mem_limit` and `cpus` are
+auto-assigned and enforced.
+
+The `cmd` key is not supported anymore. If your file still uses it you will get an error asking you
+to migrate to `command`.
 
 ### Relations
 
@@ -190,11 +233,40 @@ Example:
 
 ```yaml
 networks:
-  name: wordpress-mariadb-data-green-coding-network
+  wordpress-mariadb-data-green-coding-network:
+  gmt-test-network:
+    internal: true
 ```
 
-- `networks:` **[dict]** (Dictionary of network dictionaries for orchestration)
-    + `name: [NETWORK]` **[a-zA-Z0-9_]** The name of the network with a trailing colon. No value required.
+- `networks:` **[dict|list]** (Dictionary of network dictionaries for orchestration, or a plain list of network names)
+    + `[NETWORK]:` **[a-zA-Z0-9_-]** The key is the name of the network. No value is required.
+        - `internal:` **[bool]** *(optional)* Creates the network with `--internal`, so containers in it have no external connectivity.
+    + The pre-defined Docker networks `host`, `bridge` and `none` cannot be created here. They already exist and can only be joined.
+
+Networks defined here are created before the containers are started and are removed again after the run.
+Put a container into a network with the `networks` key of the service.
+
+### Volumes
+
+Example:
+
+```yaml
+volumes:
+  my-named-volume:
+```
+
+- `volumes:` **[dict|str]** *(optional)* (Dictionary of named volumes, or a single volume name)
+    + `[VOLUME]:` **[a-zA-Z0-9_-]** The key is the name of the volume. No value is required.
+
+Contrary to the *Docker Compose Specification* GMT does **not** create named volumes from this key.
+The volume must already exist on the machine. GMT only inspects the listed volumes and reports their
+size as *Container Volume Sizes* in the *Machine* tab of the Dashboard.
+
+The inspection only runs when all of the following are true:
+
+- `runner.py` is executed with `--allow-unsafe` (volume information reveals host filesystem paths)
+- `--skip-volume-inspect` is **not** set
+- the run is on Linux (the inspection is skipped on macOS and Windows)
 
 ### Flow
 
@@ -220,7 +292,7 @@ flow:
     container: database-container
     commands:
       - type: console
-      command: killall postgres
+        command: killall postgres
 ```
 
 - `flow:` **[list]** (List of flows to interact with containers)

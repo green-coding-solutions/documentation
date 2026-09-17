@@ -24,7 +24,7 @@ This metric provider calculates an estimate of the % total CPU usage based of th
 - args
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100
@@ -45,12 +45,17 @@ Any errors are printed to Stderr.
 
 ### How it works
 
-The provider reads all the entries of the first line of the [`/proc/stat` file](https://www.kernel.org/doc/html/latest/filesystems/proc.html) and
-uses the argument the same way `htop` does it. This means that CPU Utilization is
+The provider reads the aggregate `cpu` line of the [`/proc/stat` file](https://www.kernel.org/doc/html/latest/filesystems/proc.html). CPU Utilization is
 calcuated as:
 
-`user_time+nice_time+system_time+irq_time+softirq_time+steal_time / wait_time,iowait_time+user_time+nice_time+system_time+irq_time+softirq_time+steal_time`
+`user_time+nice_time+system_time / user_time+nice_time+system_time+idle_time+iowait_time+irq_time+softirq_time`
 
-**io_wait** and **wait** are counted both as idle.
+Only **user**, **nice** and **system** are counted as compute time. **idle**, **iowait**, **irq** and
+**softirq** are all counted as non-compute time. This differs from `htop`, which counts **irq** and
+**softirq** as busy.
+
+**steal** is not read at all. It is zero on non-virtualized systems, and in a virtualized environment
+we make the case that this is time spent outside of the system we are looking at, so it is not work
+this reporter should capture.
 
 Since we want the output as a ratio that can be expressed as an integer, we multiply with 10000.
