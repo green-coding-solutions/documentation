@@ -40,6 +40,7 @@ cluster:
   cors_allowed_origins:
     - __API_URL__
     - __METRICS_URL__
+  github_api_token: null
   client:
     sleep_time_no_job: 300
     jobs_processing: "random"
@@ -106,6 +107,13 @@ Only the following three variables are important for a local installation:
 - `api_url` **[str]**: URL including schema where the API is locates
 - `metrics_url` **[str]**: URL including schema where the API is locates
 - `cors_allowed_orgins` **[list]**: Allowed URLs for CORS requests to the API. It should at least include your chosen `api_url` and `metrics_url`
+
+If users submit GitHub repositories through the Dashboard or the API, you can also set the following key.
+
+- `github_api_token` **[str|null]**: Token that GMT sends as Bearer token to `api.github.com`. GMT queries this API when it validates a submitted repository, when it reads the latest commit or tag for a commit or tag schedule and when it polls the watchlist. With a token GitHub allows 5000 instead of 60 requests per hour. A fine-grained token without any extra permissions is enough for public repositories. The token is only sent to `api.github.com` and never to GitLab or other Git hosts. Leave it `null` to send unauthenticated requests.
+
+If GitHub answers the repository validation of a submission with a 403 rate limit response, GMT logs an error that recommends setting `cluster.github_api_token` and skips the validation, so the submission is still accepted.
+GMT masks the token when it stores the cluster configuration together with a run.
 
 For the rest please see [installation →]({{< relref "/docs/cluster/installation" >}})
 
@@ -194,5 +202,7 @@ For local installations these are to be found under [https://metrics.green-codin
 - `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
 - `dev-no-sleeps` **[integer]**: Does not sleep in between phases and for cool-down periods. Beware that this will speed up runs on the cluster but render them invalid.
 - `dev-no-optimizations` **[integer]**: De-activates running the optimizations after a measurement.
+- `ssh_private_key` **[str]**: OpenSSH private key that the runner uses to clone private Git repositories. It is stored encrypted and never shown again after saving. See [Private repositories →]({{< relref "/docs/cluster/private-repositories.md" >}})
+- `docker_credentials` **[list]**: Logins for private Docker registries. Each entry has a `registry`, a `username` and a `password`. The runner uses them to pull private images and private base images in builds. They are stored encrypted, and saving replaces all stored entries. See [Private Docker images →]({{< relref "/docs/cluster/private-repositories.md#private-docker-images" >}})
 
 <center><img style="width: 600px;" src="/img/dashboard-settings.webp" alt="Dashboard Settings for GMT Measurements"></center>
