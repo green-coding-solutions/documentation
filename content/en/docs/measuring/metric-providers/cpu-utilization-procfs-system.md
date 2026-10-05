@@ -22,7 +22,7 @@ This metric provider calculates an estimate of the % total CPU usage based of th
 ### Input Parameters
 
 - args
-  - `-i`: interval in milliseconds
+    - `-i`: interval in milliseconds
 
 By default the measurement interval is 1000 ms.
 
@@ -50,9 +50,7 @@ calcuated as:
 
 `user_time+nice_time+system_time / user_time+nice_time+system_time+idle_time+iowait_time+irq_time+softirq_time`
 
-Only **user**, **nice** and **system** are counted as compute time. **idle**, **iowait**, **irq** and
-**softirq** are all counted as non-compute time. This differs from `htop`, which counts **irq** and
-**softirq** as busy.
+Only **user**, **nice** and **system** are counted as compute time. **idle**, **iowait**, **irq** and **softirq** are all counted as non-compute time. This differs from `htop`, which counts **irq** and **softirq** as busy and was changed to align with the `cgroup` reporters which do also not include **irq** times in their compute time.
 
 **steal** is not read at all. It is zero on non-virtualized systems, and in a virtualized environment
 we make the case that this is time spent outside of the system we are looking at, so it is not work
