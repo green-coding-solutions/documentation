@@ -27,9 +27,7 @@ proxy program and then adds the corresponding values to the `network_intercepts`
 
 ### Metric Name
 
-- `network_connections_proxy_container_dockerproxy`
-
-The key to enable the provider in the `config.yml` is `network_connections_proxy_container`.
+- `network_connections_proxy_container`
 
 ### How it works
 
