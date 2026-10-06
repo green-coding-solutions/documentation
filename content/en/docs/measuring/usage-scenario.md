@@ -8,7 +8,7 @@ weight: 415
 The `usage_scenario.yml` consists of these main blocks:
 
 - Start of the file with some basic root level keys
-- `services` - (optional) Handles the orchestration of containers
+- `services` - Handles the orchestration of containers
 - `flow` - Handles the interaction with the containers (or with the host, see [Flows on the host](#flows-on-the-host))
 - `compose-file` - (optional) A compose file to include
 - `relations` - (optional) Additional repositories to check out
@@ -63,7 +63,7 @@ services:
     setup-commands:
       - command: sleep 20
     volumes:
-      - ./LOCAL/PATH:/PATH/IN/CONTAINER:ro
+      - /LOCAL/PATH:/PATH/IN/CONTAINER
     networks:
       - wordpress-mariadb-data-green-coding-network
     healthcheck:
@@ -84,15 +84,13 @@ services:
       - gcb-wordpress-mariadb
 ```
 
-- `services` **[dict]** *(optional)*: (Dictionary of container dictionaries for orchestration)
-    + Can be omitted if all flows run on the host. See [Flows on the host](#flows-on-the-host).
+- `services` **[dict]**: (Dictionary of container dictionaries for orchestration)
     + `[CONTAINER]:` **[a-zA-Z0-9_]** The name of the container/service
     + `image:` **[str]** Docker image identifier. If `build` is not provided the image needs to be accessible locally on Docker Hub. If `build` is provided it is used as identifier for the image.
     + `build:` **[str]** *(optional)* Path to build context. See `context` for restrictions. Default for `dockerfile` is `Dockerfile`. Alternatively, you can provide more detailed build information with:
         - `context:` **[str]** *(optional)* Path to the build context. Needs to be in the path or repo that is passed with `--uri` to `runner.py`. Default: `.`.
         - `dockerfile:` **[str]** *(optional)* Path to Dockerfile. Needs to be in `context`. Default: `Dockerfile`.
         - `target:` **[str]** *(optional)* Name of the stage in a multi-stage Dockerfile that shall be built and used as the image of the service. It is passed to Kaniko as `--target`. Allowed characters are `[A-Za-z0-9_.-]` and the name must start with a letter or digit.
-        - `args:` **[list]** *(optional)* Build arguments. Each one is passed to Kaniko as `--build-arg=KEY=VALUE`. Write every argument as a single-key mapping in a list, for example `- MY_ARG: my_value`. The Docker Compose mapping form (`args: {MY_ARG: my_value}`) and the string form (`- MY_ARG=my_value`) pass the validation but make the build fail.
         - All images that GMT builds in one run share a Kaniko layer cache. Services that use the same base image or the same stages of a Dockerfile can therefore reuse already built layers. The cache is a Docker volume that GMT removes at the start and at the end of every run, unless `runner.py` is called with `--dev-cache-build`.
     + `container_name:` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
     + `environment:` **[dict|list]** *(optional)*
@@ -118,12 +116,7 @@ services:
         - `shell-options:` **[str|list]** *(optional)*
         * Replaces the default options `-o errexit -o nounset -o pipefail` for this command. Can only be used together with `shell`. See [Strict shell options](#strict-shell-options).
     - `volumes:` **[list]**  *(optional)*
-        - List of volumes to be mapped in the format `SOURCE:TARGET` or `SOURCE:TARGET:ro`.
-        - By default (without `--allow-unsafe`) the following rules apply:
-            * `SOURCE` must be a relative path that exists inside the repository. It is resolved relative to the folder of the `usage_scenario.yml`.
-            * The volume must be read-only, so it must end in `:ro` (or `:readonly`). Otherwise the run aborts with *We only allow readonly (ro) as parameter in volume mounts in safe mode*.
-            * Writable volumes, absolute host paths and named Docker volumes are only possible if they are listed in the `measurement.allowed_volume_mounts` capability of the user. See [User Management →]({{< relref "/docs/cluster/user-management.md" >}}). Allow-listed host paths must be absolute and must exist on the machine. Allow-listed named volumes must already exist, as GMT does not create them. This capability is applied to runs from the job queue. `runner.py` does not read it, so on the command line you need `--allow-unsafe` for these volumes.
-        - With `--allow-unsafe` every volume is handed to `docker run -v` as written. Relative source paths are resolved against the folder of the `usage_scenario.yml` and must exist. Such volumes are writable unless you append `:ro`.
+        - List of volumes to be mapped. Only read if `runner.py` is executed with `--allow-unsafe` flag
     - `networks:` **[list]**  *(optional)*
         - The networks to put the container into. If no networks are defined throughout the `usage_scenario.yml` the container will be put into the default network will all others in the file.
     - `healthcheck:` **[dict]** *(optional)*
