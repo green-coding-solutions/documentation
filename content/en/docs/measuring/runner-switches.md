@@ -8,6 +8,8 @@ toc: false
 
 Apart from the `config.yml` some additional configuration is possible when manually running with the `runner.py`.
 
+If you want to measure a single shell command directly on the host without writing a `usage_scenario.yml`, use `shell.py` instead. See [Shell mode →]({{< relref "/docs/measuring/shell-mode.md" >}}).
+
 - `--name` A name which will be stored to the database to discern this run from others
 - `--uri` The URI to get the usage_scenario.yml from.
     + If given a URL starting with `http(s)` the tool will try to clone a remote repository to `/tmp/green-metrics-tool/repo`
@@ -21,6 +23,7 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--variable` A key-value pair with a variable to be replaced in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
     + e.g.: `--variable '__GMT_VAR_MY_VALUE_=cats are cool'`
     + Can be used multiple times if more than one variable shall be submitted
+    + Variables named `__GMT_VAR_SECRET_*__` are treated as secrets. Their plaintext is never stored or displayed. If an encryption key is configured they are stored encrypted, otherwise they are stored as `*****GMT-REDACTED*****`. See [Secret variables →]({{< relref "/docs/measuring/usage-scenario#secret-variables" >}}) and [Private repositories →]({{< relref "/docs/cluster/private-repositories.md" >}}) for the encryption key setup.
 - `--iterations` Specify how many times each scenario should be executed (Default: 1)
     + With multiple files (see `--filename`), all files are processed sequentially, then the entire sequence is repeated N times
         * Example: with files A.yml, B.yml and `--iterations 2`, the execution order is A, B, A, B.
@@ -44,6 +47,9 @@ Apart from the `config.yml` some additional configuration is possible when manua
 - `--full-docker-prune` Stop and remove all containers, build caches, volumes and images on the system
 - `--docker-prune` Prune all unassociated build caches, networks volumes and stopped containers on the system
 - `--print-phase-stats PHASE_NAME` Prints the stats of the given phase to the CLI. Typical argument would be "\[RUNTIME\]" to see all runtime phases combined
+- `--print-phase-stats-table [PHASE_NAME]` Same as `--print-phase-stats`, but prints the stats as an aligned table that also contains the max and min values
+    + Without a value the "\[RUNTIME\]" phase is printed
+    + Pass an empty string (`--print-phase-stats-table ''`) to print all phases
 - `--print-logs` Prints the container and process logs to stdout
 
 #### Development switches without side effects
