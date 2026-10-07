@@ -143,12 +143,7 @@ See [Machine Baseline Checks →]({{< relref "/docs/cluster/machine-baseline-che
         * `METRIC_PROVIDER_NAME` **[string]**: Key specifies the Metric Provider. [Possible Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
         * `METRIC_PROVIDER_NAME.sampling_rate` **[integer]**: sampling rate in ms
 
-The name of a metric provider is a flat snake_case key like `cpu_energy_rapl_msr_component`. GMT derives
-the module and the class to load from that name, so the older dotted class-path notation
-(`cpu.energy.RAPL.MSR.component.provider.CpuEnergyRaplMsrComponentProvider`) is no longer valid and
-will fail on import.
-
-All keys below a metric provider are passed to it as configuration parameters, so only supply keys
+The name of a metric provider is a flat snake_case key like `cpu_energy_rapl_msr_component`. All keys below a metric provider are passed to it as configuration parameters, so only supply keys
 that the provider actually accepts.
 
 Some metric providers have unique configuration params:
