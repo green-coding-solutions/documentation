@@ -60,14 +60,15 @@ The provider:
   - SCSI CD-ROM (major 11)
   - ALSA sound devices (major 116)
   - Xen virtual block devices (major 202)
-- only counts whole disk devices (minor number divisible by 16)
+  - Static Device Mapper devices, e.g. LVM or cryptsetup (majors 251 - 254)
+- only counts whole disk devices, skipping partitions
 - sums up the read and write bytes across all real disk devices
 
 #### Device filtering
 
 The provider filters out virtual and non-disk devices to focus on actual disk I/O operations that consume energy. It checks the major device numbers against a list of known virtual devices and excludes them from the calculations.
 
-If partition devices are encountered (minor number not divisible by 16), the provider will exit with an error as this should not happen in a properly configured container environment.
+A device is detected as a partition by checking whether `/sys/dev/block/<major>:<minor>/partition` exists. If a partition is encountered, the provider will exit with an error as this should not happen in a properly configured container environment.
 
 #### Attribution of disk I/O
 

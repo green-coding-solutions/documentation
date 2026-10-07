@@ -25,17 +25,17 @@ sudo loginctl enable-linger $(whoami)
 
 ## Systemd Service - Client mode
 
-The `tools/client.py` program is a script that should constantly be running and that periodically checks the database if a new job has been queued for this certain machine. If no job can be retried it sleeps for a certain amount of time set in the configuration file `config.yml`:
+The `cron/client.py` program is a script that should constantly be running and that periodically checks the database if a new job has been queued for this certain machine. If no job can be retried it sleeps for a certain amount of time set in the configuration file `config.yml`:
 
 ```yml
-client:
-  sleep_time_no_job: 300
-  sleep_time_after_job: 300
+cluster:
+  client:
+    sleep_time_no_job: 300
 ```
 
-You can also set a time that the script should wait after a job has finished execution to give the system time to cool down. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune this value.
+There is no fixed cooldown time after a job. Instead the client checks the machine temperature before every job and holds the queue until the machine is back at its baseline. See [Machine Baseline Checks →]({{< relref "machine-baseline-checks" >}}) for details. Please use the [calibrate script]({{< relref "/docs/installation/calibration" >}}) to fine tune the `base_temperature_value`.
 
-After running a job the client program executes the `tools/cluster/maintenance.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the `maintenance.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
 To make sure that the client is always running you can create a service that will start at boot and keep running.
 
@@ -76,9 +76,11 @@ systemctl --user status green-coding-client # check status
 
 You should now see the client reporting it's status on the server. It is important to note that only the client ever talks to the server (polling). The server never tries to contact the client. This is to not create any interrupts while a measurement might be running.
 
-After running a job the client program executes the `tools/cluster/maintenance.py` script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
+After running a job the client program executes the maintenance script that does general house keeping on the machine. This is done in a batch fashion to not run when a benchmark is currently run.
 
-This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. We recommend the following:
+The script lives in the repository as `tools/cluster/maintenance_original.py`. The installer copies it to `/usr/local/bin/green-metrics-tool/maintenance.py` and makes it owned by root, and that is the path the client actually executes.
+
+This script is run as root and thus needs to be in the `/etc/sudoers` file or subdirectories somewhere. The installer deliberately does *not* add this entry for you, as it is only needed in cluster mode. We recommend the following:
 
 ```bash
 echo "${USER} ALL=(ALL) NOPASSWD:$(realpath /usr/bin/python3) -I -B -S /usr/local/bin/green-metrics-tool/maintenance.py" | sudo tee /etc/sudoers.d/green-coding-cluster-maintenance
@@ -165,7 +167,7 @@ $ sudo nano /etc/default/grub
 
 # Change this line
 # GRUB_CMDLINE_LINUX_DEFAULT=""
-# to 
+# to
 # GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=disable acpi=force"
 
 $ sudo update-grub

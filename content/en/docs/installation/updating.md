@@ -41,11 +41,14 @@ changed, then they need to be installed with:
 
 ```bash
 python3 -m pip install -r ~/green-metrics-tool/requirements.txt
+python3 -m pip install -r ~/green-metrics-tool/docker/requirements.txt
+python3 -m pip install -r ~/green-metrics-tool/metric_providers/psu/energy/ac/xgboost/machine/model/requirements.txt
 ```
 
 ## Re-Run the install script
 
-After every new `git pull` you should run the `install.sh` script to get the  
+After every new `git pull` you should re-run the install script for your platform  
+(`install_linux.sh`, `install_mac.sh` or `install_windows.ps1`) to get the  
 newest binaries and configuration params for the Green Metrics Tool.
 
 It will ask you for the database password every time. If you want to keep the database  
@@ -64,7 +67,7 @@ To run a migration either paste the SQL code directly to the DB or use the `impo
 Example:
 
 ```bash
-python3 tools/import_data.py ./migrations/2023_07_08_indices.sql
+python3 tools/import_data.py ./migrations/2026_07_07_remove_phase_padding.sql
 ```
 
 ## Read the GitHub release notes

@@ -36,9 +36,9 @@ boot.
 
 You might then see a message like:
 
-- **Container 'test-container' exited during runtime phase**
+- **Container 'test-container' exited during [RUNTIME] (exit code: 0)**
 - or
-- **Container 'test-container' exited during runtime phase**
+- **Container 'test-container' failed during [RUNTIME] with exit code 137**
 
 In order to properly your container you must instrument it to *just* instantiate and not start anything than *daemons* or background processes.
 
@@ -240,8 +240,9 @@ sudo apt install libglib2.0-dev
 ```
 
 However, if the error is still present after this command, it might be that  
-it is not possible to use `lm-sensors` on your system. Comment out the section of the  
-install script that mentions it and comment it out of your `config.yml`.
+it is not possible to use `lm-sensors` on your system. Add the `-S` flag to the  
+install script to skip installing `lm_sensors` and comment it out of your `config.yml`.  
+Note that cluster mode and temperature reporters will not work then.
 
 ## General tips
 
@@ -250,4 +251,4 @@ does not work that well when orchestrating multiple containers and polling the d
 - Add the `--debug` switch to your local calls to the `runner.py` to enter the stepping debug mode of the tool.
 - Add `--allow-unsafe` to the call to `runner.py` and *ports* to your [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) to access containers through your browser in the host OS to check if the containers are delivering the expected output.
 - Rebuild the containers with `docker compose down -v` and then `docker compose up -d`
-- Re-run the `install.sh` script to get new configuration changes that you maybe have not yet applied after an update
+- Re-run the install script for your OS to get new configuration changes that you maybe have not yet applied after an update

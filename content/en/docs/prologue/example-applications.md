@@ -29,7 +29,7 @@ Please check out our [repository of example applications on GitHub](https://gith
 ## Demoing the example application (optional)
 
 ```bash
-docker compose
+docker compose up
 ```
 
 See in the `README.md` where to view output if present and how to trigger the application.

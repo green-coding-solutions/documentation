@@ -24,7 +24,7 @@ monitoring system-wide network usage independent of containers.
 - args
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100

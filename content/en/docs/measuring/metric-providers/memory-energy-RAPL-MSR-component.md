@@ -8,9 +8,9 @@ weight: 170
 ---
 ### What it does
 
-This metric provider reads the DRAM energy from the Running Average Power Limit (RAPL) interface via a machine specific registers (MSR) that is present on most modern Intel processers. In depth information about RAPL can be found in the [Intel Software Developer Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
+This metric provider reads the DRAM energy from the Running Average Power Limit (RAPL) interface via a machine specific registers (MSR). Unlike the CPU package domain, the DRAM domain is only exposed by a subset of Intel processers. AMD processors do not expose it at all and the provider will refuse to start on them. In depth information about RAPL can be found in the [Intel Software Developer Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
-This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the energy used by all the domains.
+This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the DRAM domain (`MSR_DRAM_ENERGY_STATUS`, `0x619`), which gives you the energy used by the memory controller and the attached DIMMs.
 
 ### Setup
 
@@ -64,11 +64,13 @@ Any errors are printed to Stderr.
 
 We use a modified version of the open source code found here: ([github](https://github.com/deater/uarch-configure/blob/master/rapl-read/rapl-read.c))
 
-First we check if the DRAM is compatible by reading the cpu info from `/proc/cpuinfo` and checking against the following list of supported CPUs:
+First we detect the CPU by reading the cpu info from `/proc/cpuinfo`. The detected model is then checked against the list of CPUs that expose a DRAM domain:
 
 ```txt
-CPU_SANDYBRIDGE, CPU_SANDYBRIDGE_EP, CPU_IVYBRIDGE, CPU_IVYBRIDGE_EP, CPU_HASWELL, CPU_HASWELL_ULT, CPU_HASWELL_GT3E, CPU_HASWELL_EP, CPU_BROADWELL, CPU_BROADWELL_GT3E, CPU_BROADWELL_EP, CPU_BROADWELL_DE, CPU_SKYLAKE, CPU_SKYLAKE_HS, CPU_SKYLAKE_X, CPU_KNIGHTS_LANDING, CPU_KNIGHTS_MILL, CPU_KABYLAKE_MOBILE, CPU_KABYLAKE, CPU_ATOM_SILVERMONT, CPU_ATOM_AIRMONT, CPU_ATOM_MERRIFIELD, CPU_ATOM_MOOREFIELD, CPU_ATOM_GOLDMONT, CPU_ATOM_GEMINI_LAKE, CPU_TIGER_LAKE
+CPU_SANDYBRIDGE_EP, CPU_IVYBRIDGE_EP, CPU_HASWELL, CPU_HASWELL_ULT, CPU_HASWELL_GT3E, CPU_HASWELL_EP, CPU_BROADWELL, CPU_BROADWELL_GT3E, CPU_BROADWELL_EP, CPU_SKYLAKE, CPU_SKYLAKE_HS, CPU_SKYLAKE_X, CPU_KNIGHTS_LANDING, CPU_KNIGHTS_MILL, CPU_KABYLAKE_MOBILE, CPU_KABYLAKE, CPU_ATOM_GOLDMONT, CPU_ATOM_GEMINI_LAKE, CPU_ATOM_DENVERTON
 ```
+
+Models that the provider knows but that are not in this list — the non-EP *Sandy Bridge* / *Ivy Bridge*, *Broadwell DE*, the *Silvermont*, *Airmont*, *Merrifield* and *Moorefield* Atoms, *Tiger Lake* and AMD family 17h / 19h — have no DRAM domain configured. The provider will exit with *DRAM not available for your processer* on them.
 
 It reads the values from `/dev/cpu/%d/msr`
 

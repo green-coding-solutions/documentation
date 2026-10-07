@@ -9,7 +9,7 @@ weight: 110
 
 ### What it does
 
-This metric provider reads the energy of the CPU Package from the Running Average Power Limit (RAPL) interface via a machine specific register (MSR) that is present on most modern Intel processors. In depth information about RAPL can be found in the [Intel Software Developer Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
+This metric provider reads the energy of the CPU Package from the Running Average Power Limit (RAPL) interface via a machine specific register (MSR) that is present on most modern Intel and AMD processors. In depth information about RAPL can be found in the [Intel Software Developer Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html).
 
 This MSR keeps a running count of the energy used in a specified domain in microJoules. This metric provider specifically reads from the `energy-pkg` domain, which gives you the cumulatove energy used by the domains `energy-cores`, `energy-gpu` and some extra parts like the voltage regulator and such that also reside on the package.
 
@@ -65,10 +65,12 @@ Any errors are printed to Stderr.
 
 We use a modified version of the open source code found here: ([github](https://github.com/deater/uarch-configure/blob/master/rapl-read/rapl-read.c))
 
-First we check if the CPU is compatible by reading the cpu info from `/proc/cpuinfo` and checking against the following list of supported CPUs:
+First we check if the CPU is compatible by reading the cpu info from `/proc/cpuinfo`. Supported are Intel CPUs of family 6 and AMD CPUs of family 17h / 19h. On AMD the RAPL MSRs live at different addresses, which the provider selects automatically.
+
+The following CPU models are known to the provider:
 
 ```txt
-CPU_SANDYBRIDGE, CPU_SANDYBRIDGE_EP, CPU_IVYBRIDGE, CPU_IVYBRIDGE_EP, CPU_HASWELL, CPU_HASWELL_ULT, CPU_HASWELL_GT3E, CPU_HASWELL_EP, CPU_BROADWELL, CPU_BROADWELL_GT3E, CPU_BROADWELL_EP, CPU_BROADWELL_DE, CPU_SKYLAKE, CPU_SKYLAKE_HS, CPU_SKYLAKE_X, CPU_KNIGHTS_LANDING, CPU_KNIGHTS_MILL, CPU_KABYLAKE_MOBILE, CPU_KABYLAKE, CPU_ATOM_SILVERMONT, CPU_ATOM_AIRMONT, CPU_ATOM_MERRIFIELD, CPU_ATOM_MOOREFIELD, CPU_ATOM_GOLDMONT, CPU_ATOM_GEMINI_LAKE, CPU_TIGER_LAKE
+CPU_SANDYBRIDGE, CPU_SANDYBRIDGE_EP, CPU_IVYBRIDGE, CPU_IVYBRIDGE_EP, CPU_HASWELL, CPU_HASWELL_ULT, CPU_HASWELL_GT3E, CPU_HASWELL_EP, CPU_BROADWELL, CPU_BROADWELL_GT3E, CPU_BROADWELL_EP, CPU_BROADWELL_DE, CPU_SKYLAKE, CPU_SKYLAKE_HS, CPU_SKYLAKE_X, CPU_KNIGHTS_LANDING, CPU_KNIGHTS_MILL, CPU_KABYLAKE_MOBILE, CPU_KABYLAKE, CPU_ATOM_SILVERMONT, CPU_ATOM_AIRMONT, CPU_ATOM_MERRIFIELD, CPU_ATOM_MOOREFIELD, CPU_ATOM_GOLDMONT, CPU_ATOM_GEMINI_LAKE, CPU_ATOM_DENVERTON, CPU_TIGER_LAKE, CPU_AMD_FAM17H
 ```
 
 It reads the values from `/dev/cpu/%d/msr`

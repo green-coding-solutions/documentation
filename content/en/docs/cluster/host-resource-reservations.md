@@ -27,8 +27,8 @@ machine:
 
 #### Specifications
 
-- `host_reserved_cpus` **[integer]** (Default 1): Value between 1 and CPU_MAX. CPU_MAX is the amount of available compute threads on the system.
-- `host_reserved_memory` **[integer]** (Default 0): Value between 0 and MEMORY_MAX. MEMORY_MAX is the amount of available physical memory on the system.
+- `host_reserved_cpus` **[integer]** (Default 1): Value between 1 and CPU_MAX, where CPU_MAX itself is excluded. CPU_MAX is the amount of compute threads Docker reports as available (`docker info --format '{{.NCPU}}'`). At least one thread must be left assignable to containers, so reserving all of them fails.
+- `host_reserved_memory` **[integer]** (Default 0): Value between 0 and MEMORY_MAX, where MEMORY_MAX itself is excluded. MEMORY_MAX is the memory Docker reports as available (`docker info --format '{{.MemTotal}}'`), which is not necessarily the physical memory of the host — under Docker Desktop it is the VM's memory. At least one byte must be left assignable to containers, so reserving all of it fails.
 
 ## How to choose good values
 

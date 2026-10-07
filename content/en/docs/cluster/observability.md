@@ -13,7 +13,7 @@ GMT provides two approaches to get insights into the cluster operations.
 
 ## Status Page
 
-Under the `/status.html` page of your GMT installation you can find a status page that contains:
+Under the `/cluster-status.html` page of your GMT installation you can find a status page that contains:
 
 - Currently configured machines in the cluster
 - Current temperature, installed GMT version and measurement configuration of the machines in the cluster

@@ -64,7 +64,7 @@ A metric provider should always have:
 
 - **metric-provider-binary** - A binary or script that captures metrics from somewhere in the host system (for instance procfs for CPU utilization)
     - This file should **always** work standalone and not require a running GMT. Very often this is a native compiled C files.
-    - See also the `libs/c` directory for some convenience library files that ship with GMT.
+    - See also the `lib/c` directory for some convenience library files that ship with GMT.
 - **provider.py** - File containing Python class derived from *BaseMetricProvider* which implements how data is ingested into GMT
 - **README.md** - An info file specifying what is the ouput of the metric provider in terms of unit and dimension as well as how to execute it on a CLI and what arguments exist.
 
@@ -95,4 +95,4 @@ It is the easiest and also the only way to add back-office functionality to the 
 ## Core functionality
 
 - All API code lives in /api and is typically divided by functionality. Every tool of the suite (Eco CI, ScenarioRunner etc.) has it's own file.
-- Optimizations live under optimizations. Look at the example file to create a new one. It will be automatically loaded
+- Optimizations live under `optimization_providers`. Look at the example file to create a new one. It will be automatically loaded

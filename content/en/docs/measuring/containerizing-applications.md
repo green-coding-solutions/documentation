@@ -213,7 +213,7 @@ networks:
   example-network:
 
 services:
-# There is no container_name directive. All services keys act directly as container names
+# The container_name directive is optional. If you omit it the service key acts as the container name
   db-container:
 # If you build your file with docker compose in the example above this image name should be the one you have now locally      
     image: demo_app_db

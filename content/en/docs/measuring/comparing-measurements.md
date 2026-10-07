@@ -33,7 +33,7 @@ Comparison is currently possible for measurements that are:
 
 The tool will let you know if you try to compare measurements that can't be compared.
 
-To trigger a comparison in the frontend just tick the boxes of the runs you wish to compare and click the *Compare Runs* button.
+To trigger a comparison in the frontend just tick the boxes of the runs you wish to compare and click the *Compare: N Run(s)* button.
 
 <img class="ui centered rounded bordered" src="/img/measuring/triggering_compare_mode.webp" alt="Triggering Compare mode">
 
@@ -51,7 +51,7 @@ Graphs will also include the confidence interval.
 
 Comparing measurements should help raise awareness of software energy use over time.
 
-## Expert compare mode
+## Forcing a comparison mode
 
 In some instances the GMT will not allow certain comparisons. For instance when you compare different machines and also
 different repositories.
@@ -60,15 +60,16 @@ A comparion like this *sounds unreasonable* for the GMT as machine and comparing
 But still there might be instances when you want to force a certain comparison type. For instance when the repository
 is basically the same as the old one, just has been renamed. GMT does not understand repository renaming currently.
 
-In that or similar cases you can override the default *comparison mode auto detection* and use the *Export Mode*.
+In that or similar cases you can override the default *comparison mode auto detection*.
 
-Navigate to *Settings* and toggle *Expert compare mode*.
+As soon as you tick at least one run a *Mode* dropdown appears next to the *Compare* button. It defaults to *Auto*, which
+is the comparison mode auto detection. To force a mode set it to one of *Branches*, *Commits*, *Machines*,
+*Usage Scenarios*, *Variables*, *Repos* or *Simple Table*. Your selection is remembered for the next comparison.
 
-A new box will appear when comparing settings where you can force a mode. For instance treating runs from different
-repositories and branches with different commits, which however have run on the same machine as a *Machine* comparison
-will effectively compare them as being just repeated runs on the same machine.
+For instance treating runs from different repositories and branches with different commits, which however have run on the
+same machine as a *Machines* comparison will effectively compare them as being just repeated runs on the same machine.
 
-<img class="ui centered rounded bordered" src="/img/measuring/expert_compare_mode.webp" alt="Expert compare mode">
+<img class="ui centered rounded bordered" src="/img/measuring/expert_compare_mode.webp" alt="Forcing a comparison mode">
 
 Your runs must in any case have one common demoniator, that has at max two values. For instance:
 
@@ -82,13 +83,17 @@ Your runs must in any case have one common demoniator, that has at max two value
 When running a comparison between different commits, different machines etc. the GMT will
 also compute a *T-test* for the two samples.
 
-It will calculate the *T-test* for the means of two independent samples of scores assuming even independent variances. (Some might know this test also as *Welch’s t-test* or *Welch test*)
+It will calculate the *T-test* for the means of two independent samples of scores without assuming equal variances. (Some might know this test also as *Welch’s t-test* or *Welch test*)
 
 If the *p-value* is lower than **0.05** GMT will show the result as significant.
 
 GMT will provide the *p-value* directly in the API output of the comparison.
-In the frontend it will be shown with a green / red indicator for the significance. Green meaning significant.
-Or it will tell you if a comparison could not be made in case there where too many missing values or the metric was not present in all runs.
+In the frontend the *Significant (T-Test)* column will read *Significant*, or *not significant / no-test*. The latter also
+covers the case that no test could be made because there where too many missing values or the metric was not present in
+all runs.
+
+Note that the green / red coloring is not an indicator for significance. It is applied to the *Change* column only and
+merely tells you if the value went up (red) or down (green).
 
 <img class="ui centered rounded bordered" src="/img/measuring/gmt_t_test_two_samples.webp" alt="Green Metrics Tool T-test comparison showing statistical significance indicators">
 
@@ -102,5 +107,6 @@ This question is very typical as you will have a set of a couple of runs once me
 If the *p-value* is lower than **0.05** GMT will show the result as significant.
 
 GMT will provide the *p-value* directly in the API output of the comparison.
-In the frontend it will be shown with a green / red indicator for the significance. Green meaning significant.
-Or it will tell you if a comparison could not be made in case there where too many missing values or the metric was not present in all runs.
+
+Since repeated runs have no second key to compare against, the detailed metrics table in the frontend has no
+*Significant (T-Test)* column in this case. The *p-value* is only available through the API.

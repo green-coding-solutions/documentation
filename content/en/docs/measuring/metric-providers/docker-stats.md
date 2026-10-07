@@ -1,5 +1,15 @@
+---
+title: "Docker Stats"
+description: "Reference note on how Docker calculates its own CPU and memory statistics"
+date: 2022-06-23T08:49:15+00:00
+draft: false
+images: []
+weight: 101
+---
 
-# Docker Stats
+{{< callout context="caution" icon="outline/alert-triangle" >}}
+There is no Docker Stats provider in the Green Metrics Tool. This page is only kept as a reference note on how `docker stats` itself calculates its values.
+{{< /callout >}}
 
 Here the calculation of CPU and memory is shown:
 

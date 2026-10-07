@@ -27,7 +27,7 @@ It can be used for system monitoring and tracking background processes such as t
   - `-s`: cgroup name strings separated by commas
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100 -s org.gnome.Shell@wayland.service,session-2.scope
