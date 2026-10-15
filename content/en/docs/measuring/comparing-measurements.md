@@ -31,7 +31,9 @@ Comparison is currently possible for measurements that are:
 * Different machines
   - Understand how the software behaves on different hardware configurations
 
-The tool will let you know if you try to compare measurements that can't be compared.
+If the tool cannot determine which of these you want to compare, for instance because your runs differ in several of
+them at once, it falls back to the [Simple Table comparison](#simple-table-comparison), which shows the runs side by
+side.
 
 To trigger a comparison in the frontend just tick the boxes of the runs you wish to compare and click the *Compare: N Run(s)* button.
 
@@ -53,9 +55,9 @@ Comparing measurements should help raise awareness of software energy use over t
 
 ## Forcing a comparison mode
 
-In some instances the GMT will not allow certain comparisons. For instance when you compare different machines and also
-different repositories.
-A comparion like this *sounds unreasonable* for the GMT as machine and comparing should not be changed simultaneusly.
+In some instances the comparison mode auto detection cannot find a single attribute to compare on. For instance when
+you compare different machines and also different repositories. In this case the GMT shows the
+[Simple Table comparison](#simple-table-comparison) instead.
 
 But still there might be instances when you want to force a certain comparison type. For instance when the repository
 is basically the same as the old one, just has been renamed. GMT does not understand repository renaming currently.
@@ -71,10 +73,35 @@ same machine as a *Machines* comparison will effectively compare them as being j
 
 <img class="ui centered rounded bordered" src="/img/measuring/expert_compare_mode.webp" alt="Forcing a comparison mode">
 
-Your runs must in any case have one common demoniator, that has at max two values. For instance:
+For all modes except *Simple Table* your runs must have one common denominator that has at max two values. For instance:
 
 - Different repositories and branches but run on one machine
 - Many different machines and branches, but only two different repositories
+
+## Simple Table comparison
+
+The *Simple Table* mode shows the selected runs side by side in one table, with the mean value of every metric for every
+run. It does not have the requirements of the other modes. It works for any set of runs, even for completely different
+software or hardware setups, because every run is shown on its own and nothing is grouped.
+
+You get to the Simple Table in two ways:
+
+- Select *Simple Table* in the *Mode* dropdown next to the *Compare* button.
+- Leave the mode on *Auto*. If the auto detection cannot find a single attribute that distinguishes the runs, it falls
+  back to the Simple Table and shows a warning. If you selected exactly two runs, the auto detection instead compares
+  these two runs directly against each other.
+
+On the Simple Table page you can:
+
+- choose the phase to compare, which defaults to *Runtime*
+- filter the metrics that are shown
+- swap the axes, so that the runs are shown as rows and the metrics as columns
+- colorize the cells per metric from green (lowest value) to red (highest value)
+- show or hide the *Source* and *Detail* columns
+
+Since machine, repository, branch etc. can differ between the runs, some metrics and phases might not be present in all
+runs. Also keep in mind that such a comparison is harder to interpret, because several factors may have changed at
+once. The Simple Table does not compute a standard deviation or a T-test.
 
 ## Statistical significance
 

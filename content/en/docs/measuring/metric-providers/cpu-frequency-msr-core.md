@@ -9,7 +9,7 @@ weight: 120
 
 ### What it does
 
-This metric provider measures the actual CPU frequency for every core on **x86 CPUs** by reading
+This metric provider measures the actual CPU frequency for every core on **Intel x86 CPUs** by reading
 the hardware APERF and MPERF performance counters via the Linux MSR (Model Specific Register) interface.
 
 ### Classname
@@ -88,8 +88,8 @@ binary is installed with the setuid-root bit set.
   core-to-core.
 - For most users the per-core detail will be noise rather than actionable data. We recommend
   looking at the aggregate or only enabling this provider when debugging frequency-related behaviour.
-- This provider only works on **x86 CPUs**. The APERF/MPERF MSRs are architectural on both Intel and
-  AMD, but are not available on ARM processors.
+- This provider is only supported on **Intel x86 CPUs**. AMD CPUs expose APERF/MPERF at the same MSR
+  addresses, but the provider has not been tested on AMD. ARM processors do not have these MSRs.
 - It cannot be used on most VMs or in containers where MSR access is blocked.
 
 ### Troubleshooting

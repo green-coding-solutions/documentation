@@ -1,7 +1,7 @@
 ---
 title: "CPU % - mach - system"
 description: "Documentation of CpuUtilizationMachSystemProvider for the Green Metrics Tool"
-date: 2026-07-16T08:49:15+00:00
+date: 2026-10-15T00:00:00+00:00
 draft: false
 images: []
 weight: 143
@@ -27,8 +27,8 @@ It is the macOS equivalent of the
 
 - `Ratio`
 
-Since we want the output as a ratio that can be expressed as an integer, the percentage is
-multiplied by 100. A reading of `4250` therefore means 42.50 % CPU utilization.
+Since we want the output as a ratio that can be expressed as an integer, the ratio is multiplied
+by 10000. A reading of `4250` therefore means 42.50 % CPU utilization.
 
 ### Configuration
 
@@ -55,7 +55,7 @@ Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}}) f
     - `-c`: check/test mode — queries the CPU info once and exits
     - `-h`: prints usage and exits
 
-By default the measurement interval is 1000 ms.
+If `-i` is not given, the binary uses an interval of 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100
@@ -73,7 +73,7 @@ This metric provider prints to *Stdout* a continuous stream of data. The format 
 Where:
 
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The CPU utilization across all CPUs, in percent multiplied by 100
+- `READING`: The CPU utilization across all CPUs as a ratio multiplied by 10000 (see [Unit](#unit))
 
 Any errors are printed to Stderr.
 
@@ -91,18 +91,20 @@ total  = in_use + d(IDLE)
 util   = in_use / total
 ```
 
-The per-CPU ratios are summed, divided by the number of CPUs, and multiplied by 100 * 100 to give
-an integer percentage with two decimals of resolution.
+The per-CPU ratios are averaged over all CPUs and multiplied by 10000, as described under
+[Unit](#unit).
 
 The previous sample buffer is released with `vm_deallocate()` on every iteration, so the binary
 does not leak the Mach-allocated arrays.
 
 ### Caveats
 
-- The **first** reading has no previous sample to compare against. It therefore uses the absolute
-  counters, which have been accumulating since boot, and reports the average utilization since
-  boot rather than the utilization of the interval. Only the second and later readings represent
-  the configured interval.
+- The **first** reading is printed right at startup, before the binary sleeps for the first time.
+  It has no previous sample to compare against. It therefore uses the absolute counters, which have
+  been accumulating since boot, and reports the average utilization since boot. Only the second and
+  later readings represent the configured interval. In a Green Metrics Tool run this does not
+  affect the results, because the metric providers are started before the `[BASELINE]` phase and
+  the first reading is not part of any phase.
 - The value is a system-wide average across all CPUs. It includes everything running on the
   machine, not just the measured workload.
 - `NICE` time is counted as in-use, `IDLE` is counted as idle.

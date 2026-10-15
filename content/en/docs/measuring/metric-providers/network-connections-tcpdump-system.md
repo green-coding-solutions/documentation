@@ -1,7 +1,7 @@
 ---
 title: "Network Connections - tcpdump - system"
 description: "Documentation of NetworkConnectionsTcpdumpSystemProvider for the Green Metrics Tool"
-date: 2026-07-16T08:49:15+00:00
+date: 2026-10-15T00:00:00+00:00
 draft: false
 images: []
 weight: 191

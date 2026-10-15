@@ -1,7 +1,7 @@
 ---
 title: "Powermetrics"
 description: "Documentation of PowermetricsProvider for the Green Metrics Tool"
-date: 2026-07-16T08:49:15+00:00
+date: 2026-10-15T00:00:00+00:00
 draft: false
 images: []
 weight: 230
@@ -77,7 +77,7 @@ sometimes triggers output on Stderr, which the tool treats as a provider failure
 
 ### Output
 
-`powermetrics` writes a stream of binary plist documents, separated by null bytes (`\x00`), which
+`powermetrics` writes a stream of XML plist documents, separated by null bytes (`\x00`), which
 the provider parses at the end of the run. Rather than one time series, it produces several metrics
 at once:
 
@@ -165,7 +165,10 @@ raised, because a `powermetrics` that did not flush cleanly may have produced tr
   running the Green Metrics Tool, or override with `--dev-no-system-checks`.
 - **`powermetrics had to be killed with kill -9. Values can not be trusted!`** — the process did not
   terminate within 60 seconds. The run's data should be discarded.
-- **`There was an error parsing the powermetrics data!`** — a plist chunk could not be decoded. The
-  iteration count and the offending chunk are printed to help locate the problem.
+- **`There was an error parsing the powermetrics data!`** — a plist chunk in the middle of the
+  stream could not be decoded. The iteration count and the offending chunk are printed to help
+  locate the problem. A broken or empty *last* chunk does not raise this error. It happens when
+  `powermetrics` is stopped while it is still writing, and the provider silently drops it. The other
+  providers always drop their last line for the same reason.
 - Empty measurements — check that the run was long enough for `powermetrics` to produce at least
   one sample.

@@ -1,7 +1,7 @@
 ---
 title: "CPU Energy - RAPL - Scaphandre - component"
 description: "Documentation of CpuEnergyRaplScaphandreComponentProvider for the Green Metrics Tool"
-date: 2026-07-16T08:49:15+00:00
+date: 2026-10-15T00:00:00+00:00
 draft: false
 images: []
 weight: 111
@@ -19,14 +19,11 @@ counterpart to the Linux [CPU Energy RAPL MSR provider]({{< relref "cpu-energy-R
 
 ### Metric Name
 
-- `cpu_energy_rapl_msr_component`
+- `cpu_energy_rapl_scaphandre_component`
 
-Please note that the metric name is **not** `cpu_energy_rapl_scaphandre_component`. The provider
-deliberately registers itself under the same metric name as the Linux MSR provider so that runs
-made on Windows and on Linux carry the same metric and can be compared directly.
-
-The name you use in the `config.yml` (`cpu_energy_rapl_scaphandre_component`) is therefore
-different from the metric name that ends up in the database (`cpu_energy_rapl_msr_component`).
+The metric name is the same as the key in the `config.yml`. It differs from the metric name of the
+Linux provider (`cpu_energy_rapl_msr_component`), so runs made on Windows and on Linux show up as
+separate metrics.
 
 ### Unit
 
@@ -34,7 +31,8 @@ different from the metric name that ends up in the database (`cpu_energy_rapl_ms
 
 ### Configuration
 
-The provider lives in the `windows` architecture section of the `config.yml`:
+The provider lives in the `windows` architecture section of the `config.yml`. It is commented out
+by default, because it only works once the ScaphandreDrv driver is installed and running.
 
 ```yaml
 measurement:
@@ -133,12 +131,12 @@ The ScaphandreDrv kernel driver must be installed and running before the provide
 
 ### Caveats
 
-- The metric name in the database is `cpu_energy_rapl_msr_component`, not the config key. See
-  [Metric Name](#metric-name) above.
 - Only CPU index 0 is read. On multi-socket machines the other packages are not measured.
-- The `cpu_gpu` domain reports a minimum of 2 uJ when the real delta is 0. This is done to avoid a
-  resolution underflow error while keeping the time series gap-free, so a constant 2 uJ on
-  `cpu_gpu` should be read as "no measurable GPU energy", not as an actual measurement.
+- The `cpu_gpu` domain reports 2 uJ whenever the real delta is 1 uJ or less. The integrated GPU
+  often reports 0 uJ for single intervals when it is idle. Dropping these samples would leave gaps
+  in the time series, and reporting 0 would trigger the resolution underflow check. A constant
+  2 uJ on `cpu_gpu` should therefore be read as "no measurable GPU energy", not as an actual
+  measurement.
 - Domains that are inactive at startup are dropped for the whole run. A domain that only becomes
   active later will not appear.
 - RAPL is an on-chip model, not a physical power meter at the wall. See the
