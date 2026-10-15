@@ -32,7 +32,8 @@ Here is an example cURL request:
 
 This route returns the capabilities of the user the token belongs to. They also contain the user's settings.
 
-**Important:** If no *X-Authentication* header is supplied the API will still authenticate *USER 1* by default.
+**Important:** If no *X-Authentication* header is supplied, the API authenticates with the token *DEFAULT*. As long as *USER 1* still has this value as token, such requests are authenticated as *USER 1*.
+To turn this behaviour off you only have to change the token of *USER 1*. Requests without a header then fail with HTTP status 401. See [Deactivating the Default User →]({{< relref "/docs/cluster/security#visibility--deactivating-the-default-user" >}})
 
 ## Features of User Management
 
@@ -76,7 +77,7 @@ You can read the capabilities of your own user with the cURL request from [Authe
 
 ### Host execution
 
-`measurement.orchestrators.host` allows flows that run their commands directly on the host instead of inside a container. These are flows whose `container` key is set to `null` or left empty, see [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario.md" >}}).
+`measurement.orchestrators.host` allows flows that run their commands directly on the host instead of inside a container. These are flows whose `container` key is set to `null` or left empty, see [Flows on the host →]({{< relref "/docs/measuring/host-flows.md" >}}).
 `shell.py` runs its command the same way and needs the same capability, see [Shell mode →]({{< relref "/docs/measuring/shell-mode.md" >}}).
 
 The key only has to be present. Its value is an empty object.

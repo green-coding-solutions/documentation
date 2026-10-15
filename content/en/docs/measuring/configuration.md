@@ -202,7 +202,7 @@ For local installations these are to be found under [https://metrics.green-codin
 - `total-duration` **[integer]**: Max. duration in seconds for how long the whole run  may take. Including building containers, baseline, idle, runtime and removal phases.
 - `dev-no-sleeps` **[integer]**: Does not sleep in between phases and for cool-down periods. Beware that this will speed up runs on the cluster but render them invalid.
 - `dev-no-optimizations` **[integer]**: De-activates running the optimizations after a measurement.
-- `ssh_private_key` **[str]**: OpenSSH private key that the runner uses to clone private Git repositories. It is stored encrypted and never shown again after saving. See [Private repositories →]({{< relref "/docs/cluster/private-repositories.md" >}})
-- `docker_credentials` **[list]**: Logins for private Docker registries. Each entry has a `registry`, a `username` and a `password`. The runner uses them to pull private images and private base images in builds. They are stored encrypted, and saving replaces all stored entries. See [Private Docker images →]({{< relref "/docs/cluster/private-repositories.md#private-docker-images" >}})
+- `ssh_private_key` **[str]**: OpenSSH private key that the runner uses to clone private Git repositories. It is stored encrypted and never shown again after saving. See [Private repositories and registries →]({{< relref "/docs/cluster/private-repositories-and-registries.md" >}})
+- `docker_credentials` **[list]**: Logins for private Docker registries. Each entry has a `registry`, a `username` and a `password`. The runner uses them to pull private images and private base images in builds. They are stored encrypted, and saving replaces all stored entries. See [Private Docker images →]({{< relref "/docs/cluster/private-repositories-and-registries.md#private-docker-images" >}})
 
 <center><img style="width: 600px;" src="/img/dashboard-settings.webp" alt="Dashboard Settings for GMT Measurements"></center>

@@ -100,7 +100,7 @@ GMT applies strict shell options so that errors in your command do not go unnoti
 - **PowerShell** (`powershell` or `pwsh`): The command is called with `-NoProfile -NonInteractive -Command`. GMT puts `$ErrorActionPreference = 'Stop'` and `Set-StrictMode -Version Latest` in front of your command. PowerShell has no equivalent for `pipefail`.
 - **cmd**: The command is called as `cmd /d /s /c COMMAND`. cmd cannot express these options, so none are applied.
 
-`shell.py` has no switch to change these options. If your shell does not support them, the run fails with an error message that explains this and notes that your command was possibly not executed at all. If you need different options, write a small `usage_scenario.yml` with a host flow and set `shell-options` for the command (see [Host flows in a usage_scenario.yml](#host-flows-in-a-usage_scenarioyml)).
+`shell.py` has no switch to change these options. If your shell does not support them, the run fails with an error message that explains this and notes that your command was possibly not executed at all. If you need different options, write a small `usage_scenario.yml` with a host flow and set `shell-options` for the command. See [Flows on the host →]({{< relref "/docs/measuring/host-flows.md" >}}).
 
 If the command exits with a non-zero exit code, GMT marks the run as failed.
 
@@ -225,37 +225,4 @@ See [User Management →]({{< relref "/docs/cluster/user-management.md" >}}) for
 
 ## Host flows in a usage_scenario.yml
 
-Shell mode is only a shortcut. You can also run flows directly on the host in a normal `usage_scenario.yml` by setting `container: null` for a flow.
-
-```yaml
-name: Host Execution
-author: Jane Doe
-description: Runs flow commands directly on the host instead of inside a container
-
-flow:
-  - name: Host Echo
-    container: null
-    commands:
-      - type: console
-        command: echo "hello from the host"
-        note: Running echo on the host
-
-  - name: Host Shell
-    container: null
-    commands:
-      - type: console
-        command: echo "hello" && echo "world"
-        shell: bash
-```
-
-The same rules as in shell mode apply.
-
-- The user needs the `host` orchestrator capability
-- Host flows only support commands of type `console`
-- With `shell` the command runs in that shell with the strict shell options described above. You can change them with `shell-options`
-- Without `shell` the command is split into its arguments and executed directly without a shell
-- GMT stores a warning that the commands are not sandboxed and that the data is not directly comparable to fully containerized runs
-- Notes and logs of host flows are shown under the name `[HOST]`
-- If the scenario has no `services`, all `*_container` metric providers are disabled
-
-Host flows and container flows can be mixed in the same scenario. See [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario.md" >}}) for the full syntax.
+Shell mode is only a shortcut. You can also run flows directly on the host in a normal `usage_scenario.yml` by setting `container: null` for a flow. This also lets you set `shell-options`, mix host and container flows and run more than one command. See [Flows on the host →]({{< relref "/docs/measuring/host-flows.md" >}}).

@@ -1,6 +1,6 @@
 ---
-title: "Private repositories"
-description: "Configure user supplied SSH keys, repository URL credentials and Docker registry credentials for private measurements"
+title: "Private repositories and registries"
+description: "Configure user supplied SSH keys, repository URL credentials and Docker registry credentials"
 date: 2026-04-27T00:00:00+00:00
 weight: 1006
 ---

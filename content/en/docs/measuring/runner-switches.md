@@ -23,7 +23,7 @@ If you want to measure a single shell command directly on the host without writi
 - `--variable` A key-value pair with a variable to be replaced in the [usage_scenario.yml →]({{< relref "usage-scenario" >}})
     + e.g.: `--variable '__GMT_VAR_MY_VALUE_=cats are cool'`
     + Can be used multiple times if more than one variable shall be submitted
-    + Variables named `__GMT_VAR_SECRET_*__` are treated as secrets. Their plaintext is never stored or displayed. If an encryption key is configured they are stored encrypted, otherwise they are stored as `*****GMT-REDACTED*****`. See [Secret variables →]({{< relref "/docs/measuring/usage-scenario#secret-variables" >}}) and [Private repositories →]({{< relref "/docs/cluster/private-repositories.md" >}}) for the encryption key setup.
+    + Variables named `__GMT_VAR_SECRET_*__` are treated as secrets. Their plaintext is never stored or displayed. If an encryption key is configured they are stored encrypted, otherwise they are stored as `*****GMT-REDACTED*****`. See [Secret variables →]({{< relref "/docs/measuring/usage-scenario#secret-variables" >}}) and [Private repositories and registries →]({{< relref "/docs/cluster/private-repositories-and-registries.md" >}}) for the encryption key setup.
 - `--iterations` Specify how many times each scenario should be executed (Default: 1)
     + With multiple files (see `--filename`), all files are processed sequentially, then the entire sequence is repeated N times
         * Example: with files A.yml, B.yml and `--iterations 2`, the execution order is A, B, A, B.

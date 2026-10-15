@@ -9,7 +9,7 @@ The `usage_scenario.yml` consists of these main blocks:
 
 - Start of the file with some basic root level keys
 - `services` - Handles the orchestration of containers
-- `flow` - Handles the interaction with the containers (or with the host, see [Flows on the host](#flows-on-the-host))
+- `flow` - Handles the interaction with the containers (or with the host, see [Flows on the host →]({{< relref "/docs/measuring/host-flows.md" >}}))
 - `compose-file` - (optional) A compose file to include
 - `relations` - (optional) Additional repositories to check out
 - `networks` - (optional) Handles the orchestration of networks
@@ -232,7 +232,7 @@ flow:
     + `name:` **[\.\s0-9a-zA-Z_\(\)-]+** An arbitrary name, that helps you distinguish later on where the load happend in the chart
     + `container:` **\[a-zA-Z0-9\]\[a-zA-Z0-9_.-\]+|null** The name of the container in which you want to run the flow
         - The value must be the name of a container defined in `services`. This is the `container_name` of the service if it is set, otherwise the key of the service. GMT validates this before the run and aborts if the flow references an unknown container.
-        - Set it to `null` (or leave the value empty) to run the flow directly on the host. See [Flows on the host](#flows-on-the-host).
+        - Set it to `null` (or leave the value empty) to run the flow directly on the host. See [Flows on the host →]({{< relref "/docs/measuring/host-flows.md" >}}).
     + `hidden:` **true** Minimizes a flow set in the frontend
     + `commands:` **[list]**
     + `type:` **[console|playwright]**
@@ -264,28 +264,6 @@ flow:
         - This is helpful if you have a long running command that does multiple steps and you want to log every step.
         - Note that `log-stdout` has to be enabled (it is the default).
         - Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
-
-#### Flows on the host
-
-A flow with `container: null` (or an empty `container:` key) runs its commands directly on the host system instead of inside a container.
-
-```yaml
-flow:
-  - name: Compile on host
-    container: null
-    commands:
-      - type: console
-        command: make -j4
-        shell: bash
-```
-
-- Host flows only support commands of type `console`.
-- The user that runs the measurement needs the `measurement.orchestrators.host` capability. Otherwise the run aborts with a `PermissionError`. On a fresh installation the DEFAULT user (id 1) has this capability. See [User Management →]({{< relref "/docs/cluster/user-management.md" >}}).
-- GMT adds a warning to the run, because the commands are not sandboxed and the measurement data is not directly comparable to fully containerized runs.
-- Without `shell` the command is split like a command line and executed directly. With `shell` it is executed in that shell with the [strict shell options](#strict-shell-options).
-- `services` is optional. If the `usage_scenario.yml` has no services, GMT disables all metric providers that need containers (the ones ending in `_container`, for example `cpu_utilization_cgroup_container`) and adds a warning for each of them.
-
-If you only want to measure a single command on the host you do not need a `usage_scenario.yml` at all. See [Shell mode →]({{< relref "/docs/measuring/shell-mode.md" >}}).
 
 #### Strict shell options
 
@@ -326,10 +304,7 @@ flow:
 
 `shell-options` can only be used together with `shell`. In flows it is only allowed for commands of type `console`. GMT rejects the `usage_scenario.yml` otherwise.
 
-For [flows on the host](#flows-on-the-host) the options depend on the shell:
-
-- `powershell` and `pwsh` have no such switches. GMT prepends `$ErrorActionPreference = 'Stop'` and `Set-StrictMode -Version Latest` as statements to the command instead. There is no equivalent for `pipefail`. If you set `shell-options` for PowerShell, a string is prepended as one statement and a list as one statement per entry.
-- `cmd` has no way to express these options. GMT sets none and aborts the run if you configure non-empty `shell-options`.
+For flows on the host the options depend on the shell, because PowerShell and cmd do not support them. See [Flows on the host →]({{< relref "/docs/measuring/host-flows.md#shell-options-on-the-host" >}}).
 
 ### compose-file:
 
@@ -464,7 +439,7 @@ Variables whose name matches `__GMT_VAR_SECRET_[\w]+__`, for example `__GMT_VAR_
 - When you run `runner.py` on a machine without an encryption key, the secret is stored as `*****GMT-REDACTED*****` instead and GMT prints a warning.
 - The API refuses secret variables with HTTP status 422 if encryption is not configured on the server.
 
-How to set up the encryption keys is described in [Private repositories →]({{< relref "/docs/cluster/private-repositories.md" >}}).
+How to set up the encryption keys is described in [Private repositories and registries →]({{< relref "/docs/cluster/private-repositories-and-registries.md" >}}).
 
 ### Custom Metrics
 
