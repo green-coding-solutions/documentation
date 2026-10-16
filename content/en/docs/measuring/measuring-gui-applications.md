@@ -106,7 +106,7 @@ If you are running GMT unattended in cluster mode you must ensure two things:
 
 Add `xhost +local:docker` to `~/.xprofile`
 
-Example: `$ xhost +" >> ~/.xprofile`
+Example: `$ echo "xhost +local:docker" >> ~/.xprofile`
 
 #### Wayland autostart file
 

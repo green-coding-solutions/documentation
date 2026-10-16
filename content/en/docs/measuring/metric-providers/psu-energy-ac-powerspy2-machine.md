@@ -61,10 +61,12 @@ To make the tool as useful as possible it takes multiple filter parameters:
 - `--device`: The filesystem endpoint that should be used for communication. Please make sure it is readable and
   writeable by the calling process.
 - `--interval`: Measurement interval in number of ms. Defaults to 1 second.
-- `--unit`: Specify the unit, which should be one of: mW, W, mJ, J. Defaults to mW
+- `--unit`: Specify the unit, which should be one of: mW, W, mJ, uJ, J. Defaults to mW. The names are
+  case-sensitive, so `mj` will raise an error. The Green Metrics Tool always calls the provider with
+  `uJ`.
 
 ```bash
-> python3 metric-provider.py --unit mj --interval 250
+> python3 metric-provider.py --unit uJ --interval 250
 ```
 
 ### Output

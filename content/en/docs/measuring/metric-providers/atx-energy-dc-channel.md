@@ -8,7 +8,7 @@ weight: 100
 ---
 
 {{< callout context="caution" icon="outline/alert-triangle" >}}
-This is a legacy provider and is not maintained anymore. It is only used in an old version of the Green Metrics Tool!
+This provider does not ship with the Green Metrics Tool anymore and this page is only kept as a reference for old versions. The importer script `tools/dc_converter.py` described below does however still exist in the repository.
 {{< /callout >}}
 
 ## What it does
@@ -40,7 +40,7 @@ The script will detect the measurement resolution automatically though if you al
 ### Example call
 
 ```bash
-python3 tools/dc_converter.py filename project_id db_host db_pw
+python3 tools/dc_converter.py filename run_id db_host db_pw
 ```
 
 ### Software

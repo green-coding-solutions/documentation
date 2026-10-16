@@ -80,8 +80,11 @@ sci:
     EL: 4 # means 4 years of usage
     RS: 1 # means we use 1/1 = 100% of the machine. Bare metal. No virtualization
     TE: 181000 # Example value for a laptop taken from https://dataviz.boavizta.org/terminalimpact. Value is in g
-    I: 334 # The number 334 that comes as default is for Germany from 2024. Value in gCO2e/kWh
 ```
+
+The grid carbon intensity (*I*) is **not** configured here. It is supplied by a dedicated carbon intensity
+metric provider, which lets you choose between a static value and live grid data on a per-run basis.
+See [Grid Carbon Intensity →]({{< relref "grid-carbon-intensity" >}}) for how to activate and configure one.
 
 ## Display
 
@@ -103,7 +106,8 @@ The components of the SCI are attributed by the GMT as follows:
         - If none is activated machine energy will be excluded from the SCI.
     - A *Network IO* provider must be activated to populate this value with the network energy.
     - If none is activated network energy will be excluded from the SCI.
-- *I:* Configured in the `config.yml`. Set the intensity of your used grid location
+- *I:* Supplied by a *carbon intensity* metric provider, which sets the intensity of your used grid location. You can choose between a static value and live grid data. See [Grid Carbon Intensity →]({{< relref "grid-carbon-intensity" >}})
+    - If none is activated no carbon can be attributed and the SCI will not be calculated.
 - *M:* Configured in the `config.yml`. Set the embodied carbon of your used machine
 
 ## Example applications

@@ -51,7 +51,7 @@ if our logic does not resolve a correct ip on Linux.
 
 ```yml
 common:
-  network.proxy.proxy_provider.ProxyMetricsProvider:
+  network_connections_proxy_container:
     host_ip: 192.168.1.2
 ```
 

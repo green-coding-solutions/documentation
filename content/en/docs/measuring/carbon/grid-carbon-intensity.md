@@ -24,7 +24,7 @@ In the [Software Carbon Intensity (SCI)]({{< relref "sci" >}}) metric this value
 
 ## Carbon Intensity Providers
 
-You select how the grid carbon intensity is determined by activating one of the carbon intensity providers in the `metric-providers` section of your `config.yml`. The following providers are available:
+You select how the grid carbon intensity is determined by activating one of the carbon intensity providers in the `metric_providers` section of your `config.yml`. The following providers are available:
 
 - **Static** (`CarbonIntensityStaticMachineProvider`) — Uses a fixed value you configure. This is the direct replacement for the old `sci.I` value and gives you **reproducible measurements** and **fair comparisons** (every run on the same machine uses the same baseline).
 - **Electricity Maps** ([CarbonIntensityElectricitymapsMachineProvider]({{< relref "../metric-providers/carbon-intensity-electricitymaps-machine" >}})) — Fetches the real grid carbon intensity for your region and measurement window from the [Electricity Maps API](https://www.electricitymaps.com/).
@@ -32,11 +32,11 @@ You select how the grid carbon intensity is determined by activating one of the 
 
 ### Configuration
 
-The static provider is the most common choice if you want a stable baseline. You configure it under `measurement.metric-providers.common` in your `config.yml`:
+The static provider is the most common choice if you want a stable baseline. You configure it under `measurement.metric_providers.common` in your `config.yml`:
 
 ```yml
 measurement:
-  metric-providers:
+  metric_providers:
     common:
       carbon_intensity_static_machine:
         # Static carbon intensity in gCO2e/kWh. Replaces the former SCI 'I' value.

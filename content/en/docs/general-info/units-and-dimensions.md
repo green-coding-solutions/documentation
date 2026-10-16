@@ -45,9 +45,17 @@ Identical for Utilization where 0.01 is the smallest value.
 
 ## CarbonDB
 
-CarbonDB stores all values as 64-bit floating point values. Respectively:
+CarbonDB stores energy and carbon as 64-bit floating point values. Respectively:
 
-- Carbon - micro-Grams (64-bit double precision)
-- Energy - micro-Joules (64-bit double precision)
+- Carbon - Kilograms [kg] (64-bit double precision)
+- Energy - Kilowatt-hours [kWh] (64-bit double precision)
+
+The carbon intensity is stored next to them as a plain integer in gCO2e/kWh, so its smallest resolution is 1 gCO2e/kWh.
+
+Note that this is only the storage scheme, and that it differs from what the API accepts:
+
+- Energy is submitted in micro-Joules [uJ] and converted to kWh on ingest.
+- The carbon intensity is submitted in gCO2e/kWh and stored as-is.
+- Carbon is never submitted. It is derived on ingest as `energy_kWh * carbon_intensity_g / 1000`. If no intensity was supplied it stays empty until it is backfilled.
 
 Thus the lowest resolution is directly derived from the storage scheme and to keep it brief: It is absurdly large, as well as absurdly small :)

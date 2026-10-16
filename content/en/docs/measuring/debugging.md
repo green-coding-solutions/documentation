@@ -22,7 +22,7 @@ the *usage scenario* without having to go through all previous steps. It will al
 Please note that this only works with a local repository. If your repository is online only atm clone it first to your local filesystem. This allows for editing files while running a *usage scenario*
 
 A typical call looks like this:
-`python3 --uri MY_LOCAL_PATH --name Testing --allow-unsafe --dev-no-metrics --dev-no-sleeps --dev-cache-build --dev-flow-timetravel`
+`python3 runner.py --uri MY_LOCAL_PATH --name Testing --allow-unsafe --dev-no-metrics --dev-no-sleeps --dev-cache-build --dev-flow-timetravel`
 
 ### --debug flag
 
@@ -83,4 +83,3 @@ Typically when a *flow command* does not end it is because the process is really
 We recommend you check if the container ran into configured memory / cpu limits of the docker orchestrator. Either through linux system tools or through *docker stats* if you have system access.
 
 If you are using the **GMT Cluster / SaaS** you can let the process run into the maximum time limit to see the metrics timelines to understand memory and CPU usage and possible limits hit.
->>>>>>> main

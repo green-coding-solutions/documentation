@@ -13,15 +13,15 @@ to prune the database of these failed measurements.
 Please run:
 
 ```bash
-python3 tools/prune_db.py
+python3 tools/prune_db.py failed-runs
 ```
 
 ## Removing all measurements in the CLI
 
-If you instead want to remove all measurements you can use the `--all` switch:
+If you instead want to remove all measurements you can use the `all` mode:
 
 ```bash
-python3 tools/prune_db.py --all
+python3 tools/prune_db.py all
 ```
 
 ## Why is there no function in the online interface?

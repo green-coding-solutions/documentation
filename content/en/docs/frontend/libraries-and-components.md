@@ -38,8 +38,9 @@ The sidebar is done in flexbox.
 - All library files which live in `/frontend/dist/`
   + In the `site.min.css` from Fomantic UI where we removed the @import statement for the external fonts.
   + We removed the `emoji.min.css` because it contained external imports
-  + We removed the `flags.min.css` because it contained external imports
   + We then concatenated all the minified file into a `semantic_reduced.min.css`
+  + The `flag.min.css` is not part of that concatenation. It ships as a separate file and is only loaded on the pages
+    that need it (currently `simulation-yearly.html`)
 - The JS files from Fomantic UI are all included separately, since we don't need most of the components
 - We use the standard theme for Fomantic UI
 
@@ -51,8 +52,8 @@ On the website you can select a custom build by only including the needed charts
 
 Our selection was:
 
-- Only Bar, Line, Pie and Radar chart
-- Only Grid coordinate system
+- Only Bar, Line, Pie, Radar and Candlestick chart
+- Only Grid and Polar coordinate systems
 - All Components included
 - Utilities included
 - Code Compression

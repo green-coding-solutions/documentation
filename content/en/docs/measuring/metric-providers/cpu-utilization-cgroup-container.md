@@ -24,7 +24,7 @@ This metric provider calculates an estimate of the % total CPU usage based on th
   - `-s`: container-ids separated by commas
   - `-i`: interval in milliseconds
 
-By default the measurement interval is 100 ms.
+By default the measurement interval is 1000 ms.
 
 ```bash
 ./metric-provider-binary -i 100 -s 7f38a4c25fb8f9d5f8651d6ed986b3658dba20d1f5fec98a1f71c141c2b48f4b,c3592e1385d63f9c7810470b12aa00f7d6f7c0e2b9981ac2bdb4371126a0660a
@@ -39,7 +39,7 @@ This metric provider prints to Stdout a continuous stream of data. The format of
 Where:
 
 - `TIMESTAMP`: Unix timestamp, in microseconds
-- `READING`: The estimated % CPU used
+- `READING`: The estimated % CPU used. The unit is a *Ratio*, so the value is multiplied with 10000 to be expressed as an integer
 - `CONTAINER-ID`: The container ID that this reading is for
 
 Any errors are printed to Stderr.
@@ -54,7 +54,7 @@ The provider reads from two files. To get the number of microseconds spent in th
 /sys/fs/cgroup/user.slice/user-<USER-ID>.slice/user@<USER-ID>.service/user.slice/docker-<CONTAINER-ID>.scope/cpu.stat
 ```
 
-To get the total time spent by the cpu during that time interval, in Jiffies, you read from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq**, **steal** (see definitions in [CPU stats documentation](https://www.idnt.net/en-US/kb/941772)), add them together, divide by _SC_CLK_TCK_ (typically 100 Hz). The percentage of the cgroup time divided by this sum is the total percentage of CPU time spent by the container.
+To get the total time spent by the cpu during that time interval, in Jiffies, you read from `/proc/stat`. We collect **user**, **nice**, **system**, **idle** **iowait**, **irq**, **softirq** (see definitions in [CPU stats documentation](https://www.idnt.net/en-US/kb/941772)), add them together, divide by `_SC_CLK_TCK` (typically 100 Hz). The percentage of the cgroup time divided by this sum is the total percentage of CPU time spent by the container. **steal** is deliberately not collected, as it is time spent outside of the measured system.
 
 Then it calculates the % cpu used via this formula: `container_reading * 10000 / main_cpu_reading`
 

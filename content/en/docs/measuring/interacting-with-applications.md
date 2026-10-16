@@ -38,14 +38,15 @@ This is the resulting `usage_scenario.yml` file:
 ```yaml
 name: Stress Container One Core 5 Seconds
 author: Arne Tarara
+description: Stresses one core for 5 seconds
 architecture: linux
 services:
   simple-load-container:
     image: alpine
     setup-commands:
       - command: apk add stress-ng
- 
- flow:
+
+flow:
   - name: Stress
     container: simple-load-container
     commands:
@@ -81,6 +82,10 @@ on your system and application.
 The names in this example follow the naming in the example from [containerizing applications →]({{< relref "containerizing-applications" >}})
 
 ```yaml
+name: Wordpress Example Flow
+author: Arne Tarara
+description: Browses some sample subsites of the Wordpress demo application
+
 networks:
   example-network:
 services:

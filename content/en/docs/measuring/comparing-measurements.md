@@ -31,9 +31,11 @@ Comparison is currently possible for measurements that are:
 * Different machines
   - Understand how the software behaves on different hardware configurations
 
-The tool will let you know if you try to compare measurements that can't be compared.
+If the tool cannot determine which of these you want to compare, for instance because your runs differ in several of
+them at once, it falls back to the [Simple Table comparison](#simple-table-comparison), which shows the runs side by
+side.
 
-To trigger a comparison in the frontend just tick the boxes of the runs you wish to compare and click the *Compare Runs* button.
+To trigger a comparison in the frontend just tick the boxes of the runs you wish to compare and click the *Compare: N Run(s)* button.
 
 <img class="ui centered rounded bordered" src="/img/measuring/triggering_compare_mode.webp" alt="Triggering Compare mode">
 
@@ -51,29 +53,55 @@ Graphs will also include the confidence interval.
 
 Comparing measurements should help raise awareness of software energy use over time.
 
-## Expert compare mode
+## Forcing a comparison mode
 
-In some instances the GMT will not allow certain comparisons. For instance when you compare different machines and also
-different repositories.
-A comparion like this *sounds unreasonable* for the GMT as machine and comparing should not be changed simultaneusly.
+In some instances the comparison mode auto detection cannot find a single attribute to compare on. For instance when
+you compare different machines and also different repositories. In this case the GMT shows the
+[Simple Table comparison](#simple-table-comparison) instead.
 
 But still there might be instances when you want to force a certain comparison type. For instance when the repository
 is basically the same as the old one, just has been renamed. GMT does not understand repository renaming currently.
 
-In that or similar cases you can override the default *comparison mode auto detection* and use the *Export Mode*.
+In that or similar cases you can override the default *comparison mode auto detection*.
 
-Navigate to *Settings* and toggle *Expert compare mode*.
+As soon as you tick at least one run a *Mode* dropdown appears next to the *Compare* button. It defaults to *Auto*, which
+is the comparison mode auto detection. To force a mode set it to one of *Branches*, *Commits*, *Machines*,
+*Usage Scenarios*, *Variables*, *Repos* or *Simple Table*. Your selection is remembered for the next comparison.
 
-A new box will appear when comparing settings where you can force a mode. For instance treating runs from different
-repositories and branches with different commits, which however have run on the same machine as a *Machine* comparison
-will effectively compare them as being just repeated runs on the same machine.
+For instance treating runs from different repositories and branches with different commits, which however have run on the
+same machine as a *Machines* comparison will effectively compare them as being just repeated runs on the same machine.
 
-<img class="ui centered rounded bordered" src="/img/measuring/expert_compare_mode.webp" alt="Expert compare mode">
+<img class="ui centered rounded bordered" src="/img/measuring/expert_compare_mode.webp" alt="Forcing a comparison mode">
 
-Your runs must in any case have one common demoniator, that has at max two values. For instance:
+For all modes except *Simple Table* your runs must have one common denominator that has at max two values. For instance:
 
 - Different repositories and branches but run on one machine
 - Many different machines and branches, but only two different repositories
+
+## Simple Table comparison
+
+The *Simple Table* mode shows the selected runs side by side in one table, with the mean value of every metric for every
+run. It does not have the requirements of the other modes. It works for any set of runs, even for completely different
+software or hardware setups, because every run is shown on its own and nothing is grouped.
+
+You get to the Simple Table in two ways:
+
+- Select *Simple Table* in the *Mode* dropdown next to the *Compare* button.
+- Leave the mode on *Auto*. If the auto detection cannot find a single attribute that distinguishes the runs, it falls
+  back to the Simple Table and shows a warning. If you selected exactly two runs, the auto detection instead compares
+  these two runs directly against each other.
+
+On the Simple Table page you can:
+
+- choose the phase to compare, which defaults to *Runtime*
+- filter the metrics that are shown
+- swap the axes, so that the runs are shown as rows and the metrics as columns
+- colorize the cells per metric from green (lowest value) to red (highest value)
+- show or hide the *Source* and *Detail* columns
+
+Since machine, repository, branch etc. can differ between the runs, some metrics and phases might not be present in all
+runs. Also keep in mind that such a comparison is harder to interpret, because several factors may have changed at
+once. The Simple Table does not compute a standard deviation or a T-test.
 
 ## Statistical significance
 
@@ -82,13 +110,17 @@ Your runs must in any case have one common demoniator, that has at max two value
 When running a comparison between different commits, different machines etc. the GMT will
 also compute a *T-test* for the two samples.
 
-It will calculate the *T-test* for the means of two independent samples of scores assuming even independent variances. (Some might know this test also as *Welch’s t-test* or *Welch test*)
+It will calculate the *T-test* for the means of two independent samples of scores without assuming equal variances. (Some might know this test also as *Welch’s t-test* or *Welch test*)
 
 If the *p-value* is lower than **0.05** GMT will show the result as significant.
 
 GMT will provide the *p-value* directly in the API output of the comparison.
-In the frontend it will be shown with a green / red indicator for the significance. Green meaning significant.
-Or it will tell you if a comparison could not be made in case there where too many missing values or the metric was not present in all runs.
+In the frontend the *Significant (T-Test)* column will read *Significant*, or *not significant / no-test*. The latter also
+covers the case that no test could be made because there where too many missing values or the metric was not present in
+all runs.
+
+Note that the green / red coloring is not an indicator for significance. It is applied to the *Change* column only and
+merely tells you if the value went up (red) or down (green).
 
 <img class="ui centered rounded bordered" src="/img/measuring/gmt_t_test_two_samples.webp" alt="Green Metrics Tool T-test comparison showing statistical significance indicators">
 
@@ -102,5 +134,6 @@ This question is very typical as you will have a set of a couple of runs once me
 If the *p-value* is lower than **0.05** GMT will show the result as significant.
 
 GMT will provide the *p-value* directly in the API output of the comparison.
-In the frontend it will be shown with a green / red indicator for the significance. Green meaning significant.
-Or it will tell you if a comparison could not be made in case there where too many missing values or the metric was not present in all runs.
+
+Since repeated runs have no second key to compare against, the detailed metrics table in the frontend has no
+*Significant (T-Test)* column in this case. The *p-value* is only available through the API.

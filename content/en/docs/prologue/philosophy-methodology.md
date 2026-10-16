@@ -46,8 +46,9 @@ Such splittings can be theoretically done as for instance [Scaphandre](https://g
 
  These values, although theoretically intriguing, have multiple caveats attached like for instance speculative execution, out of order execution, instable instruction counting etc. that make the non-exact and still only an approximation to what the process / container is actually in energy.
 
- Therefore we decided for the moment of not going the route of splitting the energy per container for the moment until a gold-standard has emerged that makes sense to use.
- Our philosphy is rather that if a machine is executing a piece of software everything on that box should be attributed to the energy cost of the software.
+ Because of these caveats we do not treat any per-container value as a ground truth. Our philosphy is rather that if a machine is executing a piece of software everything on that box should be attributed to the energy cost of the software, and the machine-wide value therefore stays our headline number.
+
+ On top of that we do offer a per-container drill-down, which splits the machine energy proportionally to each container's CPU utilization share. We report it *in addition to* the machine-wide value and label it explicitly as an estimation. It is opt-in in the sense that it requires a PSU as well as a system-level and a container-level CPU utilization [Metric Provider →]({{< relref "/docs/measuring/metric-providers" >}}) to be activated. See [Estimating Containers →]({{< relref "/docs/measuring/measuring-containers" >}}) for the exact splitting method and its limitations.
 
  Our Measurement Cluster uses dedicated machines so small that they represent a typical VM that you would also use in the cloud to give a realistic and comparable picture of what your software might also be using in a final cloud setup. Furthermore we will offer soon the support to for instance separate two logical and physical disjunct components onto two machines.
 

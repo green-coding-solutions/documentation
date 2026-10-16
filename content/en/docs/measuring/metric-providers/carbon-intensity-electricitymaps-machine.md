@@ -53,7 +53,7 @@ The provider must be configured in the `config.yml`:
 
 ```yml
 measurement:
-  metric-providers:
+  metric_providers:
     common:
       carbon_intensity_electricitymaps_machine:
         region: 'DE'
@@ -84,8 +84,8 @@ Each row consists of:
 - `value`: The carbon intensity at that point in time in `gCO2e/kWh` as an integer.
 - `detail_name`: Always `electricity_maps` to indicate the data source.
 
-Any errors that occur while talking to the API are appended to the provider's stderr buffer and can
-be inspected in the run details in the frontend.
+The provider does not have a stderr buffer. Any error that occurs while talking to the API is
+raised as an exception and aborts the run.
 
 ### How it works
 
@@ -124,7 +124,7 @@ underlying exception.
   this provider will not work. Use the [Elephant carbon intensity provider]({{< relref "carbon-intensity-elephant-machine" >}})
   in that case, which can be hosted locally.
 - The free Electricity Maps token is rate-limited. If you run a large number of measurements you
-  may hit the limit and the provider will record an error and skip data for that run.
+  may hit the limit, in which case the provider raises an error and the run fails.
 - The smallest temporal granularity supported by this provider is 5 minutes. Short-running
   benchmarks (under a few minutes) will usually have only a single carbon intensity value
   associated with them.

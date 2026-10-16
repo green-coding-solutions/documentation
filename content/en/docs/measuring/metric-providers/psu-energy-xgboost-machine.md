@@ -38,16 +38,27 @@ The provider must be configured in the `config.yml`. It must be supplied with th
 
 - CPUChips
 - HW_CPUFreq
-- CPUCores
+- CPUThreads
 - TDP
 - HW_MemAmountGB
+
+The following parameters are optional:
+
+- CPUCores
+- Hardware_Availability_Year
+- VHost_Ratio
 
 You can find these parameters in your data sheet of the used machine. In case you are using a VM please check
 [this repository](https://github.com/green-coding-solutions/carbondb-agent) for an example how to derive the values.
 
 Please see [Configuration →]({{< relref "/docs/measuring/configuration" >}}) for further info.
 
-In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be activated for the *PsuEnergyAcXgboostMachineProvider* to work.
+In the `config.yml` file also a system CPU utilization provider must be activated for the
+*PsuEnergyAcXgboostMachineProvider* to work. Depending on the operating system this is one of:
+
+- *CpuUtilizationProcfsSystemProvider* (`cpu_utilization_procfs_system`) on Linux
+- *CpuUtilizationMachSystemProvider* (`cpu_utilization_mach_system`) on macOS
+- *CpuUtilizationWin32SystemProvider* (`cpu_utilization_win32_system`) on Windows
 
 ### Input Parameters
 
@@ -57,17 +68,21 @@ In the `config.yml` file the *CpuUtilizationProcfsSystemProvider* must also be a
 If you want to run the provider directly we advise that you rather check
 out it's main repository: [XGBoost SPECPower Model documentation](https://github.com/green-coding-solutions/spec-power-model)
 
-The provider reads the `/tmp/green-metrics-tool/cpu_utilization_procfs_system.log` file
-from the *CpuUtilizationProcfsSystemProvider* in order to keep overhead low and
-not to double query the utilization from the system.
+The provider reads the log file of the system CPU utilization provider from the metrics folder of the
+run (`/tmp/green-metrics-tool/metrics/` on Linux and macOS) in order to keep overhead low and not to
+double query the utilization from the system. It uses the first of these files that exists:
+
+- `cpu_utilization_procfs_system.log`
+- `cpu_utilization_mach_system.log`
+- `cpu_utilization_win32_system.log`
 
 ### Output
 
 Since this provider should not be run directly there it has no direct output.
 
-The resulting data however is the wattage for the whole machine (AC Power) in Watts.
+The resulting data however is the energy of the whole machine (AC Power) in micro Joules.
 
 This value has the same granularity as the one configured in the `config.yml` for the
-*CpuUtilizationProcfsSystemProvider*
+system CPU utilization provider.
 
 Any errors are printed to Stderr.
