@@ -9,7 +9,7 @@ The `usage_scenario.yml` consists of these main blocks:
 
 - Start of the file with some basic root level keys
 - `services` - (optional) Handles the orchestration of containers
-- `flow` - Handles the interaction with the containers
+- `flow` - Handles the interaction with the containers (or with the host, see [Flows on the host →]({{< relref "/docs/measuring/host-flows.md" >}}))
 - `compose-file` - (optional) A compose file to include
 - `relations` - (optional) Additional repositories to check out
 - `networks` - (optional) Handles the orchestration of networks
@@ -99,6 +99,8 @@ services:
         - `context:` **[str]** *(optional)* Path to the build context. Needs to be in the path or repo that is passed with `--uri` to `runner.py`. Default: `.`.
         - `dockerfile:` **[str]** *(optional)* Path to Dockerfile. Needs to be in `context`. Default: `Dockerfile`.
         - `args:` **[list]** *(optional)* Build arguments that are passed to the build as `--build-arg`. Supply them as a list of single key-value dictionaries, e.g. a list item in the format: *- MY_ARG: my_value*. The other forms of the *Docker Compose Specification* (a plain dict, or list items in the format *- MY_ARG=my_value*) are currently not supported.
+        - `target:` **[str]** *(optional)* Name of the stage in a multi-stage Dockerfile that shall be built and used as the image of the service. It is passed to Kaniko as `--target`. Allowed characters are `[A-Za-z0-9_.-]` and the name must start with a letter or digit.
+        - All images that GMT builds in one run share a Kaniko layer cache. Services that use the same base image or the same stages of a Dockerfile can therefore reuse already built layers. The cache is a Docker volume that GMT removes at the start and at the end of every run, unless `runner.py` is called with `--dev-cache-build`.
     + `container_name:` **[a-zA-Z0-9_]** *(optional)* With this key you can overwrite the name of the container. If not given, the defined service name above is used as the name of the container.
     + `environment:` **[dict|list]** *(optional)*
         - Either Key-Value pairs for ENV variables inside the container
@@ -125,6 +127,9 @@ services:
         - `shell:` **[str]** *(optional)*
         * Will execute the `setup-commands` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
         ** Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
+        * GMT runs the command as `SHELL -o errexit -o nounset -o pipefail -c COMMAND`. The command thus fails on the first failing sub-command, on unset variables and on failures inside a pipe. See [Strict shell options](#strict-shell-options) for details.
+        - `shell-options:` **[str|list]** *(optional)*
+        * Replaces the default options `-o errexit -o nounset -o pipefail` for this command. Can only be used together with `shell`. See [Strict shell options](#strict-shell-options).
     - `volumes:` **[list]**  *(optional)*
         - List of volumes to be mapped in the format `source:target[:ro]`.
         - This key is always read. The `--allow-unsafe` flag does not gate it, but *relaxes* how it is handled:
@@ -297,11 +302,13 @@ flow:
 
 - `flow:` **[list]** (List of flows to interact with containers)
     + `name:` **[\.\s0-9a-zA-Z_\(\)-]+** An arbitrary name, that helps you distinguish later on where the load happend in the chart
-    + `container:` **\[a-zA-Z0-9\]\[a-zA-Z0-9_.-\]+** The name of the container specified on `setup` which you want the run the flow
+    + `container:` **\[a-zA-Z0-9\]\[a-zA-Z0-9_.-\]+|null** The name of the container in which you want to run the flow
+        - The value must be the name of a container defined in `services`. This is the `container_name` of the service if it is set, otherwise the key of the service. GMT validates this before the run and aborts if the flow references an unknown container.
+        - Set it to `null` (or leave the value empty) to run the flow directly on the host. See [Flows on the host →]({{< relref "/docs/measuring/host-flows.md" >}}).
     + `hidden:` **true** Minimizes a flow set in the frontend
     + `commands:` **[list]**
     + `type:` **[console|playwright]**
-        - `console` will execute a shell command inside the container
+        - `console` will execute a shell command inside the container (or on the host for flows with `container: null`)
         - `playwright` will execute the playwright command in the container. See the [documentation](/docs/measuring/playwright/) for more details.
     + `command:` **[str]**
         - The command to be executed. If type is `console` then piping or moving to background is not supported.
@@ -315,6 +322,9 @@ flow:
     + `shell:` **[str]** *(optional)*
         - Will execute the `command` in a shell. Use this if you need shell-mechanics like redirection `>` or chaining `&&`.
         - Please use a string for a shell command here like `sh`, `bash`, `ash` etc. The shell must be available in your container
+        - For `console` commands GMT runs the command as `SHELL -o errexit -o nounset -o pipefail -c COMMAND`. See [Strict shell options](#strict-shell-options) for details.
+    + `shell-options:` **[str|list]** *(optional)*
+        - Replaces the default shell options for this command. Can only be used together with `shell` and only for commands of type `console`. See [Strict shell options](#strict-shell-options).
     + `log-stdout:` **[boolean]** *(optional, default: `true`)*
         - Will log the *stdout* of the command and make it available through the frontend in the *Logs* tab.
         - Please see the [Best Practices →]({{< relref "best-practices" >}}) for when to disable the logging.
@@ -326,6 +336,47 @@ flow:
         - This is helpful if you have a long running command that does multiple steps and you want to log every step.
         - Note that `log-stdout` has to be enabled (it is the default).
         - Format specification is documented below in section [Read-notes-stdout format specification →]({{< relref "#read-notes-stdout-format-specification" >}}).
+
+#### Strict shell options
+
+Every `console` command and every setup-command that has a `shell` is started with these options by default:
+
+```bash
+SHELL -o errexit -o nounset -o pipefail -c COMMAND
+```
+
+- `errexit` stops the command at the first sub-command that fails
+- `nounset` treats the use of an unset variable as an error
+- `pipefail` makes a pipe fail if any command in it fails, not only the last one
+
+This way errors in your commands cannot go unnoticed.
+
+Some shells do not support all of these options. A common case is `dash`, which is `/bin/sh` in Debian and Ubuntu based images and has no `pipefail`. GMT then aborts the run and tells you that the used shell does not support the shell options. See [Troubleshooting →]({{< relref "/docs/help/troubleshooting#the-used-shell-does-not-support-the-shell-options" >}}). Either use a shell that supports them, like `bash`, or set `shell-options` for the command.
+
+`shell-options` replaces the default options for a single command:
+
+- A string is split like a command line, for example `-o errexit -o pipefail`
+- A list is used as it is, for example `['-o', 'errexit']`
+- An empty list (`shell-options: []`) disables all options. Errors in your command may then go unnoticed.
+
+```yaml
+flow:
+  - name: Stress
+    container: test-container
+    commands:
+      - type: console
+        command: stress-ng -c 1 -t 1 -q
+        shell: bash
+        shell-options: -o errexit -o pipefail
+      - type: console
+        command: echo 1
+        shell: sh
+        shell-options: []
+```
+
+`shell-options` can only be used together with `shell`. In flows it is only allowed for commands of type `console`. GMT rejects the `usage_scenario.yml` otherwise.
+
+For flows on the host the options depend on the shell, because PowerShell and cmd do not support them. See [Flows on the host →]({{< relref "/docs/measuring/host-flows.md#shell-options-on-the-host" >}}).
 
 ### compose-file:
 
@@ -449,7 +500,18 @@ python3 runner.py --uri PATH_TO_SCENARIO --variable "__GMT_VAR_DURATION__=1"
 
 See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches" >}})
 
-The API accepts these variables as arguments also to the `/v1/software/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.
+The API accepts these variables also in the `usage_scenario_variables` field of the `/v1/runs/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.
+
+### Secret variables
+
+Variables whose name matches `__GMT_VAR_SECRET_[\w]+__`, for example `__GMT_VAR_SECRET_API_TOKEN__`, hold secrets like passwords or tokens. They are replaced into the `usage_scenario.yml` like every other variable, but GMT never stores or displays their plaintext:
+
+- The value is encrypted before it is stored. The database and the dashboard only contain the encrypted form. The runner decrypts it only in memory to replace the variable.
+- The plaintext is redacted from everything GMT prints or saves, like the logged commands, the container and process logs, warnings and error messages.
+- When you run `runner.py` on a machine without an encryption key, the secret is stored as `*****GMT-REDACTED*****` instead and GMT prints a warning.
+- The API refuses secret variables with HTTP status 422 if encryption is not configured on the server.
+
+How to set up the encryption keys is described in [Private repositories and registries →]({{< relref "/docs/cluster/private-repositories-and-registries.md" >}}).
 
 ### Custom Metrics
 

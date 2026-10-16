@@ -99,6 +99,7 @@ See also *1.* on [Helper Tools →]({{< relref "helper-tools" >}}) for more info
 
 - If you just copied your `docker-compose.yml` and wanted to reuse it but do not need the functionality, then consider using the `--skip-unsafe` flag.
 - If you need the functionality then consider the `--allow-unsafe` flag
+- Volumes that point to a relative path inside the repository and end in `:ro` work without `--allow-unsafe`. If you get *We only allow readonly (ro) as parameter in volume mounts in safe mode*, append `:ro` to the volume. See the **volumes** option in [usage_scenario.yml →]({{< relref "/docs/measuring/usage-scenario" >}}) for all rules.
 
 ## Run on macOS fails
 
@@ -173,6 +174,24 @@ Or, if you can, also ditch the quotes:
 ```yaml
 command: grep asd /tmp/myfile
 ```
+
+Also note that GMT runs commands with a `shell` using `-o errexit -o nounset -o pipefail`. A sub-command that fails in the middle of your command, for example before a `;` or inside a pipe, therefore makes the whole command fail, even if the last sub-command succeeds. See [Strict shell options →]({{< relref "/docs/measuring/usage-scenario#strict-shell-options" >}}).
+
+## The used shell does not support the shell options
+
+The error looks something like this:
+
+```log
+Process [...] could not be run. The used shell does not support the shell options (errexit nounset pipefail) that were set for this command. Please note that your command was possibly not executed at all!
+GMT sets '-o errexit -o nounset -o pipefail' by default so that errors in your commands cannot go unnoticed.
+```
+
+GMT runs every `console` command and every setup-command that has a `shell` with `-o errexit -o nounset -o pipefail`. Not every shell knows all of these options. A common case is `dash`, which is `/bin/sh` in Debian and Ubuntu based images and does not support `pipefail`.
+
+- Use a shell that supports the options, for instance `shell: bash`
+- Or override the options for this command with `shell-options`, for example `shell-options: -o errexit -o nounset`. An empty list (`shell-options: []`) disables them completely, but then errors in your command may go unnoticed.
+
+See [Strict shell options →]({{< relref "/docs/measuring/usage-scenario#strict-shell-options" >}}) for details.
 
 ## Process had bad return code: 137
 
