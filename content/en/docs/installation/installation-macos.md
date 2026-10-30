@@ -12,7 +12,7 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 
 We have tested the tool on Intel as well as on Apple Silicon chips. Results may vary.
 
-GMT requires Python 3.11 or newer. Please make sure that `python3 --version` reports at least 3.11 before running the install script.
+GMT requires Python 3.12 or newer. Please make sure that `python3 --version` reports at least 3.12 before running the install script.
 
 ## Downloading and installing required packages
 

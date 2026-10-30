@@ -8,7 +8,7 @@ toc: true
 
 If you ever get stuck during this installation, be sure to reboot the machine once. It may help to correctly load some configurations and/or daemons.
 
-To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 (GMT requires Python 3.11 or newer) including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
+To get correct measurements, the tool requires a linux distribution as foundation, a webserver (instructions only given for NGINX, but any webserver will do), python3 (GMT requires Python 3.12 or newer) including some packages, and docker installed (rootless optional). In this manual we are assuming you are running a Debian/ Ubuntu flavour of Linux.
 
 Currently the following distributions have been tested and are fully supported:
 
@@ -20,9 +20,9 @@ For the server variants we recommend installing with the *minimal* option set fo
 
 The following distributions have been tested, but require manual work:
 
-- Ubuntu 18.04 (works, but Python3 has to be updated to 3.11, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html) and *libsensors* has to be updated to *libsensors 3.6.0* to support [SENSORS_SUBFEATURE_POWER_MIN](https://github.com/lm-sensors/lm-sensors/commit/dcf23676cc264927ad58ae7960f518689372741a))
-- Ubuntu 20.04 (works, but Python3 has to be updated to 3.11, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html))
-- Ubuntu 22.04 (works, but Python3 has to be updated to 3.11 as Ubuntu 22.04 ships with Python 3.10)
+- Ubuntu 18.04 (works, but Python3 has to be updated to 3.12, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html) and *libsensors* has to be updated to *libsensors 3.6.0* to support [SENSORS_SUBFEATURE_POWER_MIN](https://github.com/lm-sensors/lm-sensors/commit/dcf23676cc264927ad58ae7960f518689372741a))
+- Ubuntu 20.04 (works, but Python3 has to be updated to 3.12, *glib2* has to be manually updated to *glib2 2.68* to support [g_string_replace](https://docs.gtk.org/glib/method.String.replace.html))
+- Ubuntu 22.04 (works, but Python3 has to be updated to 3.12 as Ubuntu 22.04 ships with Python 3.10)
 - Ubuntu 22.10 (works for development, but [cluster installation]({{< relref "/docs/cluster/installation" >}}) has different names for timers)
 
 {{< callout context="note" icon="outline/info-circle" >}}
