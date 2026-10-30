@@ -20,7 +20,7 @@ You need the following installed on your Windows host before running the install
 
 1. Git for Windows
 2. Docker Desktop for Windows (with Linux containers)
-3. Python 3.10+ (from the Microsoft Store)
+3. Python 3.11+ (from the Microsoft Store)
 4. The Microsoft Visual C++ compiler (`cl.exe`)
 5. The `windows-rapl-driver` from hubblo-org
 6. Administrator access to a PowerShell session (for the install script)
@@ -65,7 +65,7 @@ docker compose version
 
 ## Step 3 — Install Python from the Microsoft Store
 
-Install Python 3.12 (or any supported 3.10+ release) from the Microsoft Store. The Store build is published by the Python Software Foundation and ships with the full standard library — including `venv`, which GMT's installer uses to create `venv\`.
+Install Python 3.12 (or any supported 3.11+ release) from the Microsoft Store. The Store build is published by the Python Software Foundation and ships with the full standard library — including `venv`, which GMT's installer uses to create `.venv\`.
 
 Open the Microsoft Store, search for **"Python"**, and install it. The Store installer automatically puts `python.exe` and `python3.exe` on your `PATH` and handles updates for you.
 
@@ -140,7 +140,7 @@ Open PowerShell **as Administrator** (Administrator is required so the installer
 
 The installer will:
 
-1. Verify Git, Docker, and Python 3.10+ are available.
+1. Verify Git, Docker, and Python 3.11+ are available.
 2. Ask whether to enable the ScenarioRunner, Eco CI, CarbonDB, and PowerHOG modules.
 3. Ask for API / dashboard URLs, timezone, Postgres password, and optional SSL certificates.
 4. Patch `docker/compose.yml`, `config.yml`, nginx configs, and `frontend/js/helpers/config.js` with your answers.
@@ -151,7 +151,7 @@ The installer will:
     127.0.0.1 api.green-coding.internal metrics.green-coding.internal
     ```
 
-6. Create a Python virtual environment in `venv\`, install all Python requirements, and drop a `gmt-lib.pth` file so the `lib/` package is importable.
+6. Create a Python virtual environment in `.venv\`, install all Python requirements, and drop a `gmt-lib.pth` file so the `lib/` package is importable.
 7. Compile `metric-provider-binary.exe` via `cl.exe` (see Step 4).
 8. Build and pull the Docker containers.
 
@@ -168,7 +168,7 @@ Run `.\install_windows.ps1 -?` (or read the `param(...)` block at the top of the
 Every new shell needs the venv activated:
 
 ```powershell
-.\venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 ```
 
 Then start Docker Desktop, make sure the RAPL driver is started (`DriverLoader.exe start`), and run a measurement as usual:
@@ -182,7 +182,7 @@ The frontend is reachable at the `metrics_url` you configured (defaults to `http
 ## Troubleshooting
 
 - **"Docker was not found in PATH"** — start Docker Desktop and verify `docker version` runs cleanly in the same PowerShell session.
-- **"Python version is NOT greater than or equal to 3.10"** — activate the correct version with `pyenv global <version>` and open a new shell.
+- **"Python version is NOT greater than or equal to 3.11"** — activate the correct version with `pyenv global <version>` and open a new shell.
 - **"MSVC compiler (cl.exe) not found"** — either rerun the installer from an "x64 Native Tools Command Prompt for VS 2026", or run `build.bat` manually in [metric_providers/cpu/energy/rapl/scaphandre/component/](metric_providers/cpu/energy/rapl/scaphandre/component/).
 - **RAPL provider fails with "device not found"** — the ScaphandreDrv driver is not loaded. Run `DriverLoader.exe start` and check that `\\.\ScaphandreDriver` exists.
 - **Hosts entries missing** — rerun the installer as Administrator, or add the two lines listed in Step 6 to `C:\Windows\System32\drivers\etc\hosts` by hand.

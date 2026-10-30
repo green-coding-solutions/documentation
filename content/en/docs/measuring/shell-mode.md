@@ -27,7 +27,7 @@ For exact and reproducible measurements use [runner.py →]({{< relref "/docs/me
 ## Prerequisites
 
 - A working GMT installation. See [Installation on Linux →]({{< relref "/docs/installation/installation-linux" >}}), [Installation on macOS →]({{< relref "/docs/installation/installation-macos" >}}) or [Installation on Windows →]({{< relref "/docs/installation/installation-windows" >}})
-- The GMT venv must be active. Like `runner.py`, `shell.py` refuses to start outside of it.
+- The GMT virtual environment in `.venv` must be active. Like `runner.py`, `shell.py` refuses to start outside of it.
 - The GMT database must be reachable. `shell.py` reads the permissions of the executing user from the database and stores the results there.
 - The executing user needs the `host` orchestrator capability. The default local user (ID 1) has it. See [Host execution capability](#host-execution-capability) below.
 - Metric providers configured in your `config.yml`. See [Configuration →]({{< relref "/docs/measuring/configuration.md" >}}) and [Metric Providers →]({{< relref "/docs/measuring/metric-providers/metric-providers-overview" >}})
@@ -49,11 +49,11 @@ These providers measure the whole machine and not only your command.
 
 ## Usage
 
-Activate the venv and pass the command after `--`.
+Activate the virtual environment in `.venv` and pass the command after `--`.
 
 ```bash
 cd PATH_TO_GREEN_METRICS_TOOL
-source venv/bin/activate
+source .venv/bin/activate
 ./shell.py -- 'echo "Hello" && sleep 10'
 ```
 
@@ -123,7 +123,7 @@ The output of the command is captured and not streamed live. GMT prints stdout a
     + If the command runs longer, it is stopped and `shell.py` exits with code `124`
     + If omitted, there is no limit
 
-#### Development switches with possible side effects
+### Development switches with possible side effects
 
 These behave like the switches with the same name in [runner.py →]({{< relref "/docs/measuring/runner-switches.md" >}}).
 
