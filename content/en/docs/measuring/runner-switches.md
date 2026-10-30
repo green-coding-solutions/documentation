@@ -25,6 +25,7 @@ If you want to measure a single shell command directly on the host without writi
     + e.g.: `--variable '__GMT_VAR_MY_VALUE__=cats are cool'`
     + The name must match `__GMT_VAR_[\w]+__`, so note the two leading and the two trailing underscores
     + Can be used multiple times if more than one variable shall be submitted
+    + Use `'__GMT_VAR_MY_VALUE__|quote'` in the usage scenario to safely pass values with quotes or other shell characters to a shell command. See [Quoting variables for the shell →]({{< relref "/docs/measuring/usage-scenario#quoting-variables-for-the-shell" >}})
     + Variables named `__GMT_VAR_SECRET_*__` are treated as secrets. Their plaintext is never stored or displayed. If an encryption key is configured they are stored encrypted, otherwise they are stored as `*****GMT-REDACTED*****`. See [Secret variables →]({{< relref "/docs/measuring/usage-scenario#secret-variables" >}}) and [Private repositories and registries →]({{< relref "/docs/cluster/private-repositories-and-registries.md" >}}) for the encryption key setup.
 - `--iterations` Specify how many times each scenario should be executed (Default: 1)
     + With multiple files (see `--filename`), all files are processed sequentially, then the entire sequence is repeated N times

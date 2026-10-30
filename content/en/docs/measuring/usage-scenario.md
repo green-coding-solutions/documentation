@@ -455,7 +455,7 @@ GMT will error in this case. If you do not want that add the `ignore-unsupported
 
 A variable must adhere to the format `__GMT_VAR_[\w]+__`. An example would be `__GMT_VAR_NUMBER__`.
 
-The value of the variable is a string. It will be replaced as is without adding " or ' though.
+The value of the variable is a string. It will be replaced as is without adding " or ' though, unless you use the `|quote` modifier. See [Quoting variables for the shell](#quoting-variables-for-the-shell) below.
 
 Example in a `usage_scenario.yml`:
 
@@ -492,6 +492,8 @@ command: "stress-ng -c 1 -t __GMT_VAR_DURATION__ -q"
 
 The reason being that when your variable contains *YAML* control characters like a *:* you might get into parsing errors.
 
+This advice is for normal variables only. If you use the `|quote` modifier use a *YAML* block scalar instead. See [Quoting variables for the shell](#quoting-variables-for-the-shell).
+
 A run where we want the variable to be *1* as example can be started like this:
 
 ```bash
@@ -501,6 +503,51 @@ python3 runner.py --uri PATH_TO_SCENARIO --variable "__GMT_VAR_DURATION__=1"
 See more details in [Runner switches →]({{< relref "/docs/measuring/runner-switches" >}})
 
 The API accepts these variables also in the `usage_scenario_variables` field of the `/v1/runs/add` endpoint. See the [API documentation →]({{< relref "/docs/api/overview" >}}) for details.
+
+### Quoting variables for the shell
+
+If a variable is used as an argument in a shell command and the value can contain characters like `'`, `"`, `$`, backticks, `;` or `|`, use the `|quote` modifier.
+
+Write `__GMT_VAR_NAME__|quote` instead of `__GMT_VAR_NAME__`. GMT then escapes every single quote `'` in the value as `'"'"'`. This is the same escape that Python's `shlex.quote` uses. Nothing else in the value is changed.
+
+GMT does **not** add the surrounding quotes. You must put single quotes around it yourself: `'__GMT_VAR_PROMPT__|quote'`. A POSIX shell then gets back exactly the original value as one single argument. No shell injection is possible.
+
+Example:
+
+```yml
+flow:
+  - name: Run Inference
+    container: gcb-ai-model
+    commands:
+      - type: console
+        shell: bash
+        command: >-
+          ollama run '__GMT_VAR_MODEL__|quote' '__GMT_VAR_PROMPT__|quote'
+```
+
+A run can be started like this:
+
+```bash
+python3 runner.py --uri PATH_TO_SCENARIO --variable "__GMT_VAR_MODEL__=gemma3:1b" --variable "__GMT_VAR_PROMPT__=This is a \"string for ' me to know."
+```
+
+`__GMT_VAR_PROMPT__` is then `This is a "string for ' me to know.` and the command becomes:
+
+```bash
+ollama run 'gemma3:1b' 'This is a "string for '"'"' me to know.'
+```
+
+*bash* then passes `This is a "string for ' me to know.` as one argument to *ollama*.
+
+Rules to follow:
+
+- **Use a shell**: Single quotes only have a meaning to a shell. Without `shell:` GMT splits a `console` command itself and the quotes would be passed literally to the program. So set `shell: bash` (or `sh`).
+- **Use a YAML block scalar**: The variables are replaced in the raw file text **before** the *YAML* is parsed. So the command must be a block scalar (`>-` or `|`). In a plain scalar it breaks when the value contains `:` or `#`, or when the scalar starts with a quote. It also breaks in *YAML* double-quoted (`"..."`) or single-quoted (`'...'`) scalars, because *YAML* has its own, different quoting rules. So do not put the whole command in quotes as recommended above for normal variables.
+- **No newlines**: Values containing newlines are not supported. The following lines would land outside the indentation of the block scalar and break the *YAML*.
+
+Plain `__GMT_VAR_NAME__` without `|quote` is still replaced as is. You can use both forms of the same variable in one file. Both count as using the variable.
+
+For [secret variables](#secret-variables) the escaped form is also redacted from the logs, just like the plaintext.
 
 ### Secret variables
 
