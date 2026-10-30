@@ -49,7 +49,7 @@ After=docker.target
 [Service]
 Type=simple
 WorkingDirectory=/home/gc/green-metrics-tool/
-ExecStart=/home/gc/green-metrics-tool/venv/bin/python3 -u /home/gc/green-metrics-tool/cron/client.py
+ExecStart=/home/gc/green-metrics-tool/.venv/bin/python3 -u /home/gc/green-metrics-tool/cron/client.py
 Restart=always
 RestartSec=30s
 TimeoutStopSec=600

@@ -12,6 +12,8 @@ If you ever get stuck during this installation, be sure to reboot the machine on
 
 We have tested the tool on Intel as well as on Apple Silicon chips. Results may vary.
 
+GMT requires Python 3.11 or newer. Please make sure that `python3 --version` reports at least 3.11 before running the install script.
+
 ## Downloading and installing required packages
 
 ```bash
@@ -39,11 +41,11 @@ is running on port `80` or `443`
 - Set the database password for the containers
     + By default the script will ask you to provide a password, but you can also pass it in directly with the -p parameter.
 - Initialize and update git submodules
-- Install a python `venv` and activate it
+- Install a python virtual environment in `.venv` and activate it
 - Create the needed `/etc/hosts` entries for development
 - Set needed `/etc/sudoers` entry for running/ killing the `powermetrics` tool
 
-Please note that whenever you run the Green Metrics Tool you have to first activate the python `venv`!
+Please note that whenever you run the Green Metrics Tool you have to first activate the python virtual environment with `source .venv/bin/activate`!
 
 After that you can start the containers:
 
