@@ -510,7 +510,7 @@ If a variable is used as an argument in a shell command and the value can contai
 
 Write `__GMT_VAR_NAME__|quote` instead of `__GMT_VAR_NAME__`. GMT then escapes every single quote `'` in the value as `'"'"'`. This is the same escape that Python's `shlex.quote` uses. Nothing else in the value is changed.
 
-GMT does **not** add the surrounding quotes. You must put single quotes around it yourself: `'__GMT_VAR_PROMPT__|quote'`. A POSIX shell then gets back exactly the original value as one single argument. No shell injection is possible.
+GMT does **not** add the surrounding quotes. You must put single quotes around it yourself: `'__GMT_VAR_PROMPT__|quote'`. A POSIX shell then gets back exactly the original value as one single argument. `|quote` makes values with quotes usable in shell commands. It is not a security measure.
 
 Example:
 
